@@ -1,0 +1,19 @@
+<div class="add-section-wrap p-2">
+  <div class="inner-wrap-pad p-0 p-md-4">
+    <div class="selected-sec-add">
+      <label for="forRoleNameSection" class="form-label"><strong>Section Name</strong></label>
+      <select class="form-select Section-name-select" (change)="onSelectSection($event)" [(ngModel)]="selectedModule">
+        <option *ngFor="let item of selectedSectionTilesList" [value]="item.moduleId" >{{item.name}}</option>
+      </select>
+    </div>
+    <app-assign-control [autoCompleteList]="tilesList" [labelName]="'Tiles'" [selectedList]="selectedTilesList"
+      [placeholderText]="tilesPlaceHolderText" (onSelectData)="onSelectItem($event)"></app-assign-control>
+
+    <div class="big-button-bottom">
+      <ul>
+        <li><button [disabled]="!isTileSelected && selectedTilesList.length === 0" (click)="saveTiles()">SAVE</button></li>
+        <li><button [routerLink]="'/users'">CANCEL</button></li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,194 @@
+<div class="container">
+    <!-- Function Dropdown -->
+    <!-- <div class="col-4">
+    <ng-select id="reportFilter" [(ngModel)]="selectedFunction" (change)="onFunctionChange()" (clear)="onFunctionChange()"
+      [items]="accountList" bindLabel="label" placeholder="Select Function" [searchable]="true" [clearable]="true"
+      [virtualScroll]="true">
+    </ng-select>
+    <span *ngIf="!selectedFunction" class="error-message">
+      Please select function
+    </span>
+  </div> -->
+    
+  
+    <!-- Year Dropdown -->
+    <div class="col-2">
+    <ng-select id="yearFilter" [(ngModel)]="selectedYear" (change)="onYearChange()" [items]="yearList"
+      placeholder="Select Year" [searchable]="false" [clearable]="true">
+    </ng-select>
+    <span *ngIf="!selectedYear" class="error-message">
+      Please select year
+    </span>
+  </div>
+  
+  <div class="col-5" style="display: flex; gap: 10px;">
+    <div class="col" style="display: flex; align-items: center; gap: 10px;">
+      <label class="switch bookmark-label" style="width: 50px; display: flex; align-items: center;">
+        <input type="checkbox" style="width: 43px;" (change)="onQuarterChange()" [(ngModel)]="quarterlyChecked" [checked]="quarterlyChecked">
+        <span class="swtch-toggle round" style="width: 40px;"></span>
+      </label>
+      <span class="bookmark-label-text">Quarterly</span>
+    </div>
+    
+    <div class="col" style="display: flex; align-items: center; gap: 10px;">
+      <label class="switch bookmark-label" style="width: 50px; display: flex; align-items: center;">
+        <input type="checkbox" style="width: 43px;" (change)="onAddBackChange()" [(ngModel)]="addBackChecked" [checked]="addBackChecked">
+        <span class="swtch-toggle round" style="width: 40px;"></span>
+      </label>
+      <span class="bookmark-label-text">With Add Back</span>
+    </div>
+    <div class="col" style="display: flex; align-items: center; gap: 10px;">
+      <label class="switch bookmark-label" style="width: 50px; display: flex; align-items: center;">
+        <input
+          type="checkbox"
+          style="width: 43px;"
+          [(ngModel)]="OverAllChartViewEnabled"
+          (change)="onOverAllChartViewChange()"
+        />
+        <span class="swtch-toggle round" style="width: 40px;"></span>
+      </label>
+      <span class="bookmark-label-text">View as Chart</span>
+    </div>
+  </div>
+  
+  
+    <!-- <div class="col-1" style="display: flex; justify-content: space-around;">
+      <mat-label style="cursor: pointer;" (click)="onReportChange()" matTooltip="SGA Dashboard Report">
+        <img src="../../../assets/images/excelImage.png" style="width: 30px;height: 30px;margin-top: 4px;"
+          alt="Download Excel">
+      </mat-label>
+    </div> -->
+  </div>
+  
+  <!-- <app-segment-data-table [_overAllData]="overAllData" [quarterlyChecked]="quarterlyChecked"></app-segment-data-table> -->
+   
+  <!-- <app-segment-data-table [_treeData]="treeData" [_pivotColumns]="pivotColumns" [_buSegments]="buSegments" [_buGroups]="buGroups" [quarterlyChecked]="quarterlyChecked"></app-segment-data-table> -->
+
+<!-- Toggle Switch -->
+<!-- <div class="col-5" style="display: flex; gap: 10px;">
+  <div class="col" style="display: flex; align-items: center; gap: 10px;">
+    <label class="switch bookmark-label" style="width: 50px; display: flex; align-items: center;">
+      <input
+        type="checkbox"
+        style="width: 43px;"
+        [(ngModel)]="OverAllChartViewEnabled"
+        (change)="onOverAllChartViewChange()"
+      />
+      <span class="swtch-toggle round" style="width: 40px;"></span>
+    </label>
+    <span class="bookmark-label-text" style="font-size: smaller;">View as Chart</span>
+  </div>
+</div> -->
+
+   <!-- Chart or Table Toggle -->
+<div *ngIf="OverAllChartViewEnabled; else tableView">
+  <!-- Chart View -->
+  <ag-charts-angular [options]="options"></ag-charts-angular>
+</div>
+
+<!-- Table View -->
+<ng-template #tableView>
+  <table>
+    <thead>
+      <tr [ngClass]="'regular-header'">
+        <th rowspan="2" [ngClass]="'regular-header'">Category</th>
+        <ng-container *ngIf="tableData?.length > 0;">
+        <ng-container *ngFor="let bu of buList">
+          <!-- <th colspan="{{quarterList.length + 1}}">{{ bu }}</th> -->
+          <th [attr.colspan]="quarterList.length" 
+          style="text-align: center;" [ngClass]="'regular-header'">{{ bu }}</th>
+        </ng-container>
+      </ng-container>
+        <th rowspan="2" [ngClass]="'regular-header'">ORG Total</th>
+      </tr>
+      <tr>
+        <ng-container *ngIf="tableData?.length > 0;">
+        <ng-container *ngFor="let bu of buList">
+          <th *ngFor="let qtr of quarterList" 
+          [ngClass]="bu.trim() === 'BU Total' ? 'bu-total-header' : 'regular-header'" >{{ qtr }}</th>
+          <!-- <th>BU Total</th> -->
+        </ng-container>
+      </ng-container>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Data Rows if tableData is not empty -->
+  <ng-container *ngIf="tableData?.length > 0; else noDataRow">
+      <tr *ngFor="let row of tableData">
+        <td style="padding: 3px !important;">{{ row.category }}</td>
+        <ng-container *ngFor="let bu of buList">
+          <td *ngFor="let qtr of quarterList">{{ row.values[bu]?.[qtr] != null ? (row.values[bu][qtr] ) : 0 }}</td>
+          <!-- <td>{{ row.values[bu]?.["BU Total"] || 0 }}</td> -->
+        </ng-container>
+        <td>{{ getGrandTotal(row) != null ? (getGrandTotal(row) ) : 0 }}</td>
+      </tr>
+   </ng-container>
+        <!-- Empty State -->
+  <ng-template #noDataRow>
+    <tr>
+      <td [attr.colspan]="1 + (buList.length * quarterList.length) + 1" style="text-align: center; padding: 10px;">
+        No data available
+      </td>
+    </tr>
+  </ng-template>
+    </tbody>
+  </table>
+</ng-template>
+
+  <div class="container">
+    <!-- Function Dropdown -->
+    <div class="col-4">
+    <ng-select id="segmentFilter" [(ngModel)]="selectedSegment" (change)="onSegmentChange()" (clear)="onSegmentChange()"
+      [items]="segmentList" bindLabel="label" placeholder="Select Segment" [searchable]="true" [clearable]="true"
+      [virtualScroll]="true">
+    </ng-select>
+    <span *ngIf="!selectedSegment" class="error-message">
+      Please select segment
+    </span>
+  </div>
+</div>
+
+   <!-- Chart or Table Toggle -->
+   <div *ngIf="OverAllChartViewEnabled; else segmentTableView">
+    <!-- Chart View -->
+    <ag-charts-angular [options]="segment_options"></ag-charts-angular>
+  </div>
+  <!-- Table View -->
+<ng-template #segmentTableView>
+  <table>
+    <thead>
+      <tr>
+        <th [ngClass]="'regular-header'">BU</th>
+        <th [ngClass]="'regular-header'">Category</th>
+        <th *ngFor="let quarter of quarterListByBu" [ngClass]="'regular-header'">{{ quarter }}</th>
+        <th [ngClass]="'regular-header'">Grand Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="buKeys.length > 0; else noDataTemplate">
+      <ng-container *ngFor="let bu of buKeys">
+        <ng-container *ngFor="let category of categoriesByBu[bu]; let i = index">
+          <tr>
+            <!-- Render BU name with rowspan -->
+            <td *ngIf="i === 0" [attr.rowspan]="categoriesByBu[bu].length">{{ bu }}</td>
+            <td>{{ category.category }}</td>
+            <td *ngFor="let quarter of quarterListByBu">
+              {{ category.values[bu]?.[quarter] ?? '' | number: '1.2-2' }}
+            </td>
+            <td>{{ category.grandTotal }}</td>
+          </tr>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <!-- If no data -->
+    <ng-template #noDataTemplate>
+      <tr>
+        <td [attr.colspan]="2 + quarterListByBu.length + 1" style="text-align: center; padding: 40px 0; font-style: italic;">
+          No data available
+        </td>
+      </tr>
+    </ng-template>
+    </tbody>
+  </table>
+</ng-template>

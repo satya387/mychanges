@@ -1,0 +1,358 @@
+.work-border {
+    border: 2px solid #e2dddd;
+    //box-shadow: 6px 3px 6px #00000029;
+    opacity: 1;
+    border-radius: 3px;
+    padding: 20px;
+    //position: relative;
+    margin-top: -3px;
+}
+.project-role{
+background: white;
+border: 2px solid #e2dddd;
+opacity: 1;
+    padding: 12px 24px;
+    margin-bottom: 0px;
+    border-bottom: 0;
+    font-size: 15px;
+}
+.main-heading1{
+font-weight: 500;
+    font-size: 16px;
+}
+
+.role-input .project-detail{
+    border: 1px solid #0D0359;
+    border-radius: 4px;
+    font-weight: 500;
+   width: 100%;
+   font-size: 13px;
+}
+.role-input .project-detail1{
+    border: 1px solid #0D0359;
+    border-radius: 4px;
+    font-weight: 500;
+   width: 100%;
+   //height: 60%;
+   color: #000000 !important;
+}
+.ScrollStyle{
+    max-height: 302px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.role-input .form-select{
+    border: 1px solid #0D0359;
+}
+.form-label input{
+    border-color: #0D0359;
+    border-radius: 0.25rem;
+}
+.form-select{
+    border-color: #0D0359;
+}
+.role-input option :first-child{
+    font-weight: 500;
+    border-radius: 0;
+    color: #e2dddd;
+}
+
+.form-control {
+    //padding: 0rem 0.75rem 3.95rem;
+    border: 1px solid #0D0359;
+}
+.check-fill {
+    display: flex;
+    gap: 7px;
+}
+.main-heading {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000000;
+}
+textarea {
+    resize: vertical;
+    border-radius: 5px;
+    border: 1px solid #0D0359;
+    width: 100%;
+}
+/* -----common----------- */
+// .big-button-bottom ul li {
+//     padding: 0;
+//     list-style: none;
+//     display: flex;
+//     padding: 5px 20px;
+//     align-items: center;
+//     font-weight: 600;
+//     box-shadow: 0px 3px 6px #00000029;
+// border: 1px solid #0D0359;
+//   }
+
+//   .big-button-bottom ul li:first-child {
+//     color: #fff;
+//     font-weight: 400;
+//     font-size: 14px;
+//   }
+
+//   .big-button-bottom ul li:first-child {
+//     font-weight: 600;
+//     font-size: 14px;
+//     text-decoration: none;
+//     background-color: #0fe4bd;
+//     color: #0d0359 !important;
+//     border: none;
+//   }
+//   .big-button-bottom button {
+//     border: none;
+//     background: none;
+//     font-weight: 600;
+//   }
+//   .big-button-bottom ul li:first-child:hover {
+//     box-shadow: -4px 5px #0d0359;
+//   }
+//   .big-button-bottom ul li:hover {
+//     box-shadow: -4px 5px #0fe4bd;
+//   }
+  .banner-anchor {
+    font-size: 17px;
+    font-weight: 400;
+    text-decoration: none;
+    color: #f72265;
+}
+.prefered a{
+color: #000000;
+font-size: 18px;
+font-weight: 600;
+}
+.add-btn{
+background-color: #F72265;
+border: none;
+padding: 8px 17px;
+color: white;
+}
+.form-label input{
+    max-width: 100%;
+    height: 35px;
+    border: 1px solid #0D0359;
+    border-radius: 3px;
+}
+.form-label .project-detail{
+  font-weight: 500;
+}
+/*..............Last section..............*/
+.draft-button{
+    padding-right: 50px;
+}
+.draft{
+  background-color: white;
+  margin-top: 25px;
+  padding: 7px 20px;
+  box-shadow: 0px 3px 6px #00000029;
+border: 1px solid #969698;
+opacity: 1;
+}
+.savebutton{
+  margin-right: 10px!important;
+}
+// .form-select{
+//     padding: 2px 5px 2px 5px!important;
+// }
+.form-check-input:checked {
+    background-color: #0D0359;
+    border-color: #0D0359;
+}
+.form-check-input[type=radio] {
+    border: 1px solid #0D0359;
+    margin-top: 7px;
+}
+// .form-select option{
+//     opacity: 0.2;
+// }
+
+.role-input1 span{
+    margin-left: 3px;
+    color: #F00;
+    font-weight: 500;
+}
+.no-field{
+padding: 4px;
+}
+.steps{
+    color: #000000;
+    font-size: 15px;
+    font-weight: 500;
+}
+.add-edit-head{
+    display: flex;
+    justify-content: space-between;
+}
+// medis starts
+// @media screen and (min-width: 200px) and (max-width: 760px) {
+//     .edit-rr-desktop{
+//         display: none;
+//     }
+// }
+// @media screen and (min-width: 768px) and (max-width: 4608px) {
+//     .edit-rr-mobile{
+//         display: none;
+//     }
+// }
+@media screen and (min-width: 300px) and (max-width: 540px) {
+    .draft {
+    background-color: white;
+    margin-top: 25px;
+    border: 1px solid #969698;
+    padding: 5px 10px 6px 10px;
+    }
+    .draft-button {
+        padding-right: 10px;
+        margin-left: 30px;
+    }
+    .form-check-input{
+       //width: 100%;
+        font-size: 12px;
+    }
+
+    .form-label .project-detail {
+        font-weight: 500;
+        font-size: 12px !important;
+    }
+
+    // .role-input .project-detail1 {
+    //     font-weight: 500;
+    //     font-size: 12px;
+    // }
+    .flex-container{
+        flex-direction: column;
+    }
+    .form-label {
+        font-size: 12px;
+    }
+    .form-select{
+        font-size: 12px;
+        padding: 6px 5px 6px 5px!important;
+    }
+    .main-heading {
+        font-size: 12px;
+        font-weight: 500;
+    }
+    .form-control{
+        font-size: 12px;
+    }
+    .banner-anchor {
+        font-size: 14px;
+    }
+    .form-control {
+        padding: 0.375rem 0.75rem;
+    }
+    .role-input label {
+        font-weight: 500;
+        font-size: 12px;
+    }
+    .draft {
+        font-size: 13px;
+    }
+    .main-heading1 {
+        font-weight: 500;
+        font-size: 13px;
+    }
+    .prefered p{
+        font-size: 13px;
+        }
+        .prefered a{
+            font-size: 13px;
+            }
+            .add-btn {
+                font-size: 12px;
+            }
+
+}
+  @media screen and (min-width: 760px) and (max-width: 1200px) {
+    .project-detail{
+        width: 100%;
+    }
+}
+ @media (min-width: 992px){
+.col-lg-3 {
+    flex: 0 0 auto;
+    width: 24%;
+}
+}
+@media (max-width: 425px){
+.work-border {
+    border: none;
+}
+.project-role{
+    border: none;
+}
+}
+@media (max-width: 768px){
+    .submit-tick {
+        height: 60%;
+    }
+    .adding-margin-to-table {
+        margin-top: 58px;
+        margin-bottom: 0;
+    }
+}
+@media screen and (min-width: 426px) and (max-width: 769px) {
+.role-input .project-detail1{
+    height: 50%;
+    font-size: 14px;
+ }
+//  .role-input input{
+//     font-size: 14px;
+// }
+}
+@media screen and (min-width: 300px) and (max-width: 425px) {
+    .role-input .project-detail1{
+        height: 50%;
+        font-size: 12px;
+     }
+    //  .role-input input{
+    //     font-size: 12px;
+    // }
+    }
+// sucuess popup
+.submit-tick{
+    height: 70%;
+}
+.resource-request{
+padding: 0;
+list-style: none;
+display: flex;
+padding: 5px 20px;
+align-items: center;
+border: 1px solid #0D0359;
+font-weight: 600;
+background-color: white;
+color: #0D0359;
+}
+.submit-para{
+    text-align: center;
+}
+
+.show-first-page{
+  display: block;
+}
+.hide-first-page{
+  display: none !important;
+}
+.show-2nd-page{
+  display: block;
+}
+.hide-2nd-page{
+  display: none;
+}
+.show-3rd-page{
+  display: block;
+}
+.hide-3rd-page{
+  display: none;
+}
+.show-4th-page{
+  display: block;
+}
+.hide-4th-page{
+  display: none;
+}

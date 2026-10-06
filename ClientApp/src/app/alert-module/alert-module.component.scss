@@ -1,0 +1,579 @@
+/* === Global Box Sizing === */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* === Container Styling === */
+.alert-container {
+  background: linear-gradient(145deg, #dff2f0, #e3eef2);
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  padding: 9px;
+  margin: 4px auto;
+  max-width: 100%;
+  transform: translateZ(0);
+  transition: all 0.3s ease;
+  overflow-x: hidden; 
+}
+
+/* === Ultra-Compact Header Bar === */
+.header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  //background-color: #0b075a;
+  color: white;
+  padding: 2px 12px; /* reduced height */
+  border-radius: 10px;
+  flex-wrap: wrap;
+  background: linear-gradient(121deg, #0BBFA0, #0D0359);
+}
+
+.left-section {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* reduced spacing between elements */
+  flex-wrap: wrap;
+}
+
+.module-title {
+  margin: 0;
+  font-size: 16px; /* unchanged */
+  font-weight: 600;
+}
+
+/* Buttons */
+.add-btn,
+.clear-btn {
+  background-color: #0bface;
+  color: #0b075a;
+  font-weight: 700;
+  border: none;
+  border-radius: 5px;
+  padding: 2px 10px; /* compact height */
+  font-size: 12px;   /* unchanged */
+  cursor: pointer;
+  transition: 0.3s;
+  opacity: 0.6; /* for clear-btn default */
+}
+
+.clear-btn.active-clear {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background-color: #0cd8b0;
+}
+
+/* Form Rows (ng-select dropdowns) */
+.form-row ng-select {
+  height: 28px; /* compact height */
+  font-size: 14px;
+}
+
+::ng-deep .ng-select .ng-select-container {
+  min-height: 28px !important;
+  height: 28px !important;
+  font-size: 14px;
+}
+
+::ng-deep .ng-select .ng-value-container {
+  padding: 0 3px !important; /* reduce padding inside dropdown */
+}
+
+::ng-deep .ng-select .ng-arrow-wrapper {
+  height: 28px !important;
+}
+
+/* === Filter Controls === */
+.filter-dropdown {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  font-size: 14px;
+  color: #333;
+  transition: all 0.2s ease;
+}
+
+.filter-dropdown:focus {
+  border-color: #0FE4BD;
+  box-shadow: 0 0 4px #0FE4BD;
+}
+
+.form-row {
+  width: 230px;
+}
+
+/* ng-select panel wrapping text */
+::ng-deep .ng-dropdown-panel .ng-option {
+  white-space: normal !important;
+  word-wrap: break-word !important;
+  width: 100% !important;
+}
+
+/* === Table Container === */
+.table-container {
+  background: #e4f0e9;
+  border-radius: 12px;
+  overflow-x: visible;
+  -webkit-overflow-scrolling: touch;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin-top: 5px;
+  width: 99.7%;
+  min-height: 400px;
+  position: relative;
+}
+
+/* Base table styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #333;
+  table-layout: auto;
+}
+
+table thead {
+  background-color: #3e75a1;
+}
+
+table thead th {
+  background: linear-gradient(to bottom, #eaf7f4, #eaf7f4);
+  border-bottom: 2px solid #ccc;
+  padding: 6px 6px !important;
+  color: #0D0359;
+  font-weight: 600;
+  text-align: left;
+  font-size: 11.7px; /* 13px → 11.7px */
+}
+
+/* ===========================
+   DataTables-specific styling
+   =========================== */
+:host ::ng-deep #vacancyTable.dataTable {
+  table-layout: auto;
+  width: 99.8% !important;
+}
+
+:host ::ng-deep #vacancyTable.dataTable th,
+:host ::ng-deep #vacancyTable.dataTable td {
+  box-sizing: border-box;
+  padding: 4px 5px !important;
+  font-size: 11.7px; /* 13px → 11.7px */
+  border-bottom: 1px solid #e6e6e6;
+  vertical-align: top;
+  line-height: 1.3;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+}
+
+:host ::ng-deep #vacancyTable.dataTable td,
+:host ::ng-deep #vacancyTable.dataTable td a {
+  color: #333 !important;
+  text-decoration: none !important;
+}
+
+:host ::ng-deep #vacancyTable.dataTable tbody tr:hover {
+  background-color: #e6f7ff !important;
+}
+
+:host ::ng-deep #vacancyTable.dataTable tbody tr:nth-child(even) {
+  background-color: #eaf7f4 !important;
+}
+
+/* Description Text PRText */
+:host ::ng-deep #vacancyTable.dataTable tbody td .PRText {
+  display: block;
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  font-size: 11.7px; /* 13px → 11.7px */
+}
+
+:host ::ng-deep #vacancyTable.dataTable tbody td .PRText:hover {
+  white-space: normal;
+  overflow: visible;
+  position: relative;
+  z-index: 10;
+  background: #e4f0e9;
+  padding: 2px 0;
+}
+
+/* Priority Tags */
+:host ::ng-deep #vacancyTable.dataTable .priority {
+  display: inline-block;
+  min-width: 65px;
+  text-align: center;
+  padding: 2px 4px;
+  border-radius: 6px;
+  font-weight: 600;
+  color: black;
+  font-size: 10.8px; /* 12px → 10.8px */
+}
+
+:host ::ng-deep #vacancyTable.dataTable .priority[data-priority="4"] { background:#F2F2F2; }
+:host ::ng-deep #vacancyTable.dataTable .priority[data-priority="3"] { background:  #96DCF8; }
+:host ::ng-deep #vacancyTable.dataTable .priority[data-priority="2"] { background:#FFC524; }
+:host ::ng-deep #vacancyTable.dataTable .priority[data-priority="1"] { background:#FB2166; }
+
+/* Action Buttons */
+:host ::ng-deep #vacancyTable.dataTable .ellipsis-btn {
+  background: none;
+  border: none;
+  font-size: 10.8px; /* 12px → 10.8px */
+  cursor: pointer;
+  color: #0D0359;
+  position: relative;
+}
+
+/* Attachment Column */
+:host ::ng-deep #vacancyTable.dataTable td.Attachment {
+  position: relative;
+  width: 48px;
+  text-align: center;
+}
+
+:host ::ng-deep #vacancyTable.dataTable .attachment-link {
+  display: inline-block;
+  cursor: pointer;
+  color: #0D0359;
+  text-decoration: underline;
+  font-weight: 500;
+  font-size: 11.7px; /* 13px → 11.7px */
+}
+
+:host ::ng-deep #vacancyTable.dataTable .Attachment .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 16px;
+  right: 0;
+  min-width: 160px;
+  z-index: 50;
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+  padding: 6px 0;
+  border-radius: 6px;
+}
+
+:host ::ng-deep #vacancyTable.dataTable td.Attachment.open .dropdown-menu {
+  display: block;
+}
+
+:host ::ng-deep #vacancyTable.dataTable .Attachment .dropdown-item {
+  display: block;
+  padding: 8px 14px;
+  text-decoration: none;
+  color: #222;
+  font-size: 11.7px; /* 13px → 11.7px */
+}
+
+:host ::ng-deep #vacancyTable.dataTable .Attachment .dropdown-item:hover {
+  background: #f5f5f5;
+}
+
+/* === Responsive Design === */
+@media (max-width: 1024px) {
+  .header-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 4px 12px;
+  }
+
+  .left-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    width: 100%;
+  }
+
+  .right-section {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .add-btn {
+    width: 100%;
+  }
+
+  .table-container {
+    overflow-x: visible;
+  }
+
+  table thead th,
+  table tbody td {
+    font-size: 9px; /* 10px → 9px */
+    padding: 5px 6px;
+  }
+}
+
+@media (max-width: 600px) {
+  .table-container {
+    overflow-x: auto;
+  }
+
+  table thead th,
+  table tbody td {
+    font-size: 6.3px; /* 7px → 6.3px */
+    padding: 4px 5px;
+  }
+
+  .PRText {
+    max-width: 150px;
+  }
+
+  .add-btn,
+  .clear-btn {
+    font-size: 11px;
+    padding: 2px 8px;
+  }
+
+  .form-row {
+    width: 160px;
+  }
+
+  ::ng-deep .ng-select .ng-select-container {
+    height: 26px !important;
+    font-size: 11px;
+  }
+}
+
+/* Modal Fix */
+#deleteConfirmModal .modal-dialog {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  margin: 0 !important;
+  z-index: 11000;
+}
+
+.modal-backdrop {
+  z-index: 10990 !important;
+}
+
+@media (max-width: 576px) {
+  #deleteConfirmModal .modal-dialog {
+    max-width: calc(100% - 32px);
+    width: auto;
+  }
+}
+
+/* Action menu wrapper */
+:host ::ng-deep .action-wrapper {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  align-items: center;
+  justify-content: center;
+}
+
+:host ::ng-deep .action-wrapper .action-toggle {
+  background: none;
+  border: 1px solid transparent;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 11.7px; /* 13px → 11.7px */
+  color: #0D0359;
+}
+
+/* Fixed action menu positioning */
+:host ::ng-deep .action-wrapper .action-menu {
+  position: absolute;
+  top: 34px !important;
+  right: 100% !important;
+  left: auto !important;
+  margin-right: 6px;
+  z-index: 9999;
+  min-width: 120px;
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+  padding: 8px;
+  border-radius: 6px;
+  align-items: center;
+  justify-content: center;
+}
+
+:host ::ng-deep .action-wrapper .action-menu .menu-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  padding: 6px 8px;
+  cursor: pointer;
+  font-size: 11.7px; /* 13px → 11.7px */
+  color: #222;
+}
+
+:host ::ng-deep .action-wrapper .action-menu .menu-btn:hover {
+  background: #f5f5f5;
+}
+
+@media (max-width: 600px) {
+  :host ::ng-deep .action-wrapper .action-menu {
+    left: auto;
+    right: 0;
+    top: 36px;
+    min-width: 100px;
+  }
+}
+
+/* DataTables scroll fix for desktop */
+:host ::ng-deep .dataTables_wrapper,
+:host ::ng-deep .dataTables_scrollBody {
+  width: 100% !important;
+  overflow-x: visible !important;
+}
+
+:host ::ng-deep #vacancyTable.dataTable td {
+  font-size: 11.7px !important; /* 13px → 11.7px */
+}
+
+.disabled-link {
+  pointer-events: none;
+  color: transparent;
+  opacity: 0.6;
+  text-decoration: none;
+}
+
+/* === Fix hidden Edit/Delete menu === */
+
+/* Allow action menu to overflow outside table */
+.alert-container,
+.table-container
+//,
+// .dataTables_wrapper,
+// .dataTables_scrollBody 
+{
+    overflow: visible !important;
+}
+
+/* Ensure the "Action" column can show dropdown fully */
+#vacancyTable td:last-child {
+    position: relative !important;
+    overflow: visible !important;
+}
+
+/////////////* Filter & TOOLTIP CSS  STARTS HERE*//////////////
+
+ /*Filter Icon*/
+
+.filter-img-text {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+
+  border-radius: 8px;
+  cursor: pointer;
+
+  background-color: transparent;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* icon styling */
+.filter-img-text img {
+  width: 30px;
+  height: 30px;
+  filter: brightness(0) invert(1); /* makes icon white */
+}
+
+/* hover */
+.filter-img-text:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* active */
+.filter-img-text:active {
+  transform: scale(0.95);
+}
+
+/*TOOLTIP CSS FROM HERE */
+
+/* Tooltip container */
+.filter-img-text[data-tooltip] {
+  position: relative;
+}
+
+/* Tooltip text */
+.filter-img-text[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: 100%;
+  right: 0;                 /* 🔑 KEY CHANGE */
+  margin-top: 6px;
+
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+
+  white-space: nowrap;
+  z-index: 10;
+
+  display: none;
+}
+
+/* Tooltip arrow */
+.filter-img-text[data-tooltip]::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  right: 10px;              /* 🔑 KEY CHANGE */
+
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
+
+  display: none;
+}
+
+/* Show tooltip */
+.filter-img-text[data-tooltip]:hover::after,
+.filter-img-text[data-tooltip]:hover::before {
+  display: block;
+}
+
+/////////////* Filter & TOOLTIP CSS ENDS HERE*//////////////
+
+@media (max-width: 1024px) {
+
+  /* Keep page width stable */
+  .alert-container {
+    overflow-x: hidden !important;
+  }
+
+  /* Allow horizontal scroll for table instead of pushing page */
+  .table-container {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* DataTables must not escape viewport */
+  :host ::ng-deep .dataTables_wrapper,
+  :host ::ng-deep .dataTables_scrollBody {
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: auto !important;
+  }
+
+  /* Prevent table from expanding beyond viewport */
+  #vacancyTable {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}

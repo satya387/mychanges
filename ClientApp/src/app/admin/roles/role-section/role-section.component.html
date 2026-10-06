@@ -1,0 +1,37 @@
+<div class="container adding-margin-to-table mt-3">
+  <div class="add-edit-role-wrap">
+    <div class="topbackbutton">
+    <app-back-button [routerPath]="'/roles'"></app-back-button></div>
+    <div class="add-edit-head">
+      <h1>Role Sections</h1>
+    </div>
+   
+    <div class="my-4 col-lg-4 col-md-12 role-input">
+      <label for="forRoleName" class="form-label">Role Name</label>
+      <input type="text" class="form-control" required id="forRoleName" readonly [value]="roleName">
+    </div>
+
+    <div class="add-section-wrap p-2 p-md-4 ">
+      <div class="inner-wrap-pad p-0 p-md-4">
+        <div class="selected-sec-wrap" *ngIf="selectedSectionList?.length">
+          <label for="forRoleNameList" class="form-label"><strong>Selected Sections</strong>
+            <a (click)="gotoEdit()" class="edit" title="Edit" data-toggle="tooltip"><svg
+                xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-pencil-fill"
+                viewBox="0 0 16 16">
+                <path
+                  d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+              </svg><span> Edit</span></a>
+          </label>
+          <div class="role-list">
+            <ul>
+              <li *ngFor="let item of selectedSectionList">{{item.moduleName}}</li>
+            </ul>
+          </div>
+        </div>
+        <div *ngIf="selectedSectionList?.length === 0">
+          No Sections Selected!
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

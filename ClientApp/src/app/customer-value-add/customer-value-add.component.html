@@ -1,0 +1,121 @@
+<div class="headpart empMHead col-md-12">
+  <div class="filter-container row-md-12">
+    <div class="filter-group">
+      <label for="accountDropdown">Account</label>
+      <select class="form-select project-detail" id="accountDropdown" (change)="onSelectDropdown($event, 'AccountId')">
+        <option value="-1" selected>ALL</option>
+        <option *ngFor="let item of accountList" [value]="item.mastCustID">{{item.mastcustName}}</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="projectDropdown">Project</label>
+      <select class="form-select project-detail" id="projectDropdown" (change)="onSelectDropdown($event,'ProjectId')">
+        <option value="-1" selected>ALL</option>
+        <option *ngFor="let item of ProjectList" [value]="item.projectId">{{item.projectName}}</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="serviceAreaDropdown">Practice</label>
+      <select class="form-select project-detail" id="serviceAreaDropdown" (change)="onSelectDropdown($event,'ServiceAreaId')">
+        <option value="-1" selected>ALL</option>
+        <option *ngFor="let item of ServiceAreaList" [value]="item.id">{{item.value}}</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="statusDropdown">Status</label>
+      <select class="form-select project-detail" id="statusDropdown" (change)="onSelectDropdown($event,'StatusId')">
+        <option value="-1" selected>ALL</option>
+        <option *ngFor="let item of StatusList" [value]="item.processStatus">{{item.customerStatus}}</option>
+      </select>
+    </div>
+
+    <div class="filter-group download-icon" title="Download Customer Value Add Details" style="margin-top: 5px;">
+      <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0,0,256,256"
+        (click)="GetDumpDetails()" style="cursor:pointer">
+        <g fill="#0fe4bd" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+          stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+          font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+          <g transform="scale(5.12,5.12)">
+            <path
+              d="M28.8125,0.03125l-28,5.3125c-0.47266,0.08984 -0.8125,0.51953 -0.8125,1v37.3125c0,0.48047 0.33984,0.91016 0.8125,1l28,5.3125c0.0625,0.01172 0.125,0.03125 0.1875,0.03125c0.23047,0 0.44531,-0.07031 0.625,-0.21875c0.23047,-0.19141 0.375,-0.48437 0.375,-0.78125v-48c0,-0.29687 -0.14453,-0.58984 -0.375,-0.78125c-0.23047,-0.19141 -0.51953,-0.24219 -0.8125,-0.1875zM32,6v7h2v2h-2v5h2v2h-2v5h2v2h-2v6h2v2h-2v7h15c1.10156,0 2,-0.89844 2,-2v-34c0,-1.10156 -0.89844,-2 -2,-2zM36,13h8v2h-8zM6.6875,15.6875h5.125l2.6875,5.59375c0.21094,0.44141 0.39844,0.98438 0.5625,1.59375h0.03125c0.10547,-0.36328 0.30859,-0.93359 0.59375,-1.65625l2.96875,-5.53125h4.6875l-5.59375,9.25l5.75,9.4375h-4.96875l-3.25,-6.09375c-0.12109,-0.22656 -0.24609,-0.64453 -0.375,-1.25h-0.03125c-0.0625,0.28516 -0.21094,0.73047 -0.4375,1.3125l-3.25,6.03125h-5l5.96875,-9.34375zM36,20h8v2h-8zM36,27h8v2h-8zM36,35h8v2h-8z">
+            </path>
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <button class="add-button" (click)="openAddDialog()">Add</button>
+  </div>
+</div>
+
+<div class="box-header" style="overflow:auto">
+  <div class="box" *ngFor="let box of boxes; let i = index" [style.height.px]="box.height"
+    (click)="toggleBoxHeight(box)" [ngClass]="{'light-blue-bg': i % 2 != 0}">
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
+      <div style="width: 22%;"><b>Account Name:</b> <span id="account">{{box.customer.accountName}}</span></div>
+      <div style="width: 25%;"><b>Project Name:</b> <span id="project">{{box.customer.projectName}}</span></div>
+      <div style="width: 20%;"><b>Idea Logged By:</b> <span id="name">{{box.customer.ideaLoggedBy}}</span></div>
+      <div style="width: 15%;"><b>Idea Logged On:</b> <span id="name">{{box.customer.ideaLoggedOn}}</span></div>
+      <div style="width: 13%;"><b>Idea Qualified By DH/DM:</b> <span id="account">{{box.customer.isIdeaApproved}}</span>
+      </div>
+      <div style="width: 5%;"><a (click)="isDisabled ? $event.preventDefault() : openEditDialog(box)" class="edit "
+          title="Edit " data-toggle="tooltip " *ngIf="isCurrentUserIdeaOwner(box)"
+          [ngClass]="{ 'disabled': isDisabled }">
+          <svg xmlns="http://www.w3.org/2000/svg " width="18 " height="18 " fill="currentColor "
+            class="bi bi-pencil-fill " viewBox="0 0 16 16 ">
+            <path
+              d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468
+          7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z " />
+          </svg></a></div>
+
+
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px;margin-top: -17px">
+      <div style="width: 22%;"><b>Planned Completion Date:</b> <span id="project">{{box.customer.processCommittedDate}}</span>
+      </div>
+      <div style="width: 25%;"><b>Implementation Owner:</b> <span id="name">{{box.customer.implementationOwner}}</span>
+      </div>
+      <div style="width: 20%;"><b>Status:</b> <span id="account" style="color:green;">{{box.customer.status}}</span>
+      </div>
+      <div style="width: 15%;"><b>Savings($):</b> <span id="project"> {{convertToMillions(box.customer.savings)}}</span></div>
+      <div style="width: 13%;"><b style="white-space: nowrap;">CCD through (QBR/MSR):</b> <span
+          id="name">{{box.customer.isCustomerCommunicationDone}}</span></div>
+      <div style="width: 5%;"></div>
+
+    </div>
+    <!-- <div class="arrow"></div> -->
+
+
+    <div>
+      <label style="font-weight: 800;margin-left:10px">Customer Need / Problem Statement:</label>
+      <div style="width: 98%; height: 36px; overflow-y: auto; padding: 10px;">
+        <p id="description" style="margin-top: -14px">{{box.customer.problemStatement}}</p>
+      </div>
+    </div>
+    <div>
+      <label style="font-weight: 800;margin-left:10px">Your Idea / Proposed Solution:</label>
+      <div style="width: 98%; height: 36px; overflow-y: auto; padding: 10px;">
+        <p id="description" style="margin-top: -14px">{{box.customer.solutionProposed}}</p>
+      </div>
+    </div>
+    <div>
+      <label style="font-weight: 800;margin-left:10px">Key Benefits To Customer:</label>
+      <div style="width: 98%; height: 36px; overflow-y: auto; padding: 10px;">
+        <p id="description" style="margin-top: -14px">{{box.customer.potentialBenifits}}</p>
+      </div>
+    </div>
+    <div>
+      <label style="font-weight: 800;margin-left:10px">Implementation Plan:</label>
+      <div style="width: 98%; height: 36px; overflow-y: auto; padding: 10px;">
+        <p id="description" style="margin-top: -14px">{{box.customer.actionsImplemented}}</p>
+      </div>
+    </div>
+    <!-- <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
+    <div style="width: 33.33%;"><b>CCD through(QBR/MSR):</b> <span id="name">{{box.customer.isCustomerCommunicationDone}}</span></div>
+  </div> -->
+  </div>
+</div>

@@ -1,0 +1,122 @@
+.role-input input{
+  border: 1px solid #0d0359;
+  border-radius: 4px;
+  font-weight: 500;
+}
+.form-label-input{
+ max-width: 100%;
+ height: 40px;
+}
+.form-select{
+  color: #000000;
+  font-weight: 500;
+}
+.add-edit-head h1 {
+  font-size: 24px;
+  margin-top: 20px;
+  font-weight: 700;
+}
+.add-edit-head svg {
+  margin-right: 20px;
+  width: 30px;
+  height: 30px;
+}
+.role-input select{
+  //font-weight: bold;
+  border-radius: 2;
+  border: 1px solid #0d0359;
+}
+.role-input select:focus{
+box-shadow: none;
+}
+.edit-delete-rr{
+  font-size: 16px;
+  color: #533eed;
+  font-weight: 500;
+  margin-left: 4px;
+}
+// .edit-more{
+//     font-size: 16px;
+//     color: #533EED;
+//     font-weight: 500;
+//     margin-left: 4px;
+// }
+tbody tr td:nth-child(2) {
+  color: #495057 !important;
+  font-weight: 500;
+  padding-left: 1%;
+  cursor: pointer;
+}
+thead tr td:last-child {
+  display: flex;
+  justify-content: center;
+}
+tbody tr th:nth-child(5) {
+  padding-left: 3%;
+}
+.filter-mobile i a {
+  color: #0d0359;
+  font-size: 14px;
+}
+
+// #assign-tab-section{
+//     margin-top: 50px;
+// }
+.role-input label {
+  font-weight: 600;
+}
+.role-input input {
+  width: 100%;
+}
+.filter-rr {
+  display: flex;
+  justify-content: space-between;
+}
+.filter-rr span {
+  color: #0d0359;
+  font-size: 15px;
+  font-weight: 500;
+}
+.filter-rr i {
+  color: #000000;
+  font-size: 15px;
+  font-weight: 500;
+}
+.role-input .project-detail1 {
+  height: 50%;
+  font-size: 12px;
+}
+
+@media (max-width: 475px) {
+  .new-rr a {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  .edit-more {
+    font-size: 12px;
+  }
+  .table > :not(caption) > * > * {
+    padding: 0.5rem 1rem !important;
+    font-size: 13px;
+  }
+  .role-input label {
+    font-weight: 500;
+    font-size: 13px;
+  }
+  .total-roles {
+    margin-bottom: 0;
+  }
+}
+@media only screen and (min-width: 430px) and (max-width: 768px) {
+  // .adding-margin-to-table{
+  //     padding-top: 50px;
+  // }
+}
+
+.mrgn {
+  padding-right: 85px;
+}
+.mrgn1 {
+  padding-right: 60px;
+}

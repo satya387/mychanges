@@ -1,0 +1,166 @@
+
+<div class="container">
+  <div class="add-edit-role-wrap adding-margin-to-table">
+    <app-back-button [routerPath]="'/'"></app-back-button>
+
+    <div class="add-edit-head">
+      <h1>
+        <!-- <img src="./../../assets/images/page-title-icons/assign.svg"> -->
+        <i class="ri-share-forward-fill"></i>
+        Assign
+      </h1>
+    </div>
+
+
+    <!-- ----------tab content switch ---------------- -->
+    <div class="ScrollStyle">
+    <div class="container p-0">
+      <div id="assign-tab-section">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item my-2 my-md-0" (click)="selectedTab = 'firstTab'; requiredAPIsForAssign(selectedTab); ">
+            <a class="nav-link" [ngClass]="selectedTab === 'firstTab' ? 'active' : ''" data-bs-toggle="tab"
+              href="#section-to-role">ADD SECTIONS TO ROLE</a>
+          </li>
+
+          <li class="nav-item my-2 my-md-0" (click)="selectedTab = 'secondTab'; requiredAPIsForAssign(selectedTab); ">
+            <a class="nav-link" [ngClass]="selectedTab === 'secondTab' ? 'active' : ''" data-bs-toggle="tab"
+              href="#add-tile-section">ADD TILES TO SECTION</a>
+          </li>
+
+          <li class="nav-item my-2 my-md-0" (click)=" selectedTab = 'thirdTab'; requiredAPIsForAssign(selectedTab);">
+            <a class="nav-link" [ngClass]="selectedTab === 'thirdTab' ? 'active' : ''" data-bs-toggle="tab"
+              href="#add-role-to-user">ADD ROLES TO USER</a>
+          </li>
+
+          <li class="nav-item my-2 my-md-0" (click)="selectedTab = 'fourthTab'; requiredAPIsForAssign(selectedTab); ">
+            <a class="nav-link" [ngClass]="selectedTab === 'fourthTab' ? 'active' : ''" data-bs-toggle="tab"
+              href="#add-sec-to-user">ADD SECTIONS TO USER</a>
+          </li>
+        </ul>
+        <form class="common-form-field-box" [formGroup]="assignForm" novalidate>
+          <!-- Tab panes -->
+          <div class="tab-content">
+
+            <!-- First tab -->
+            <div id="section-to-role" class="container tab-pane" *ngIf="selectedTab === 'firstTab'"
+              [ngClass]="selectedTab === 'firstTab' ? 'active' : ''">
+              <div class="my-5 my-md-4 col-lg-4 col-md-12 role-input">
+                <select class="form-select" (change)="onSelectRole($event)" formControlName="roleSection">
+                  <option value="null" selected>Select Role</option>
+                  <option *ngFor="let item of rolesList" [value]="item.roleId">{{item.roleName}}</option>
+                </select>
+              </div>
+
+              <div class="tab-pane fade show active my-4" id="nav-role" role="tabpanel" aria-labelledby="nav-role-tab">
+                <div class="add-section-wrap p-2 py-4 py-md-0">
+                  <div class="inner-wrap-pad p-0 p-md-4">
+
+                    <app-assign-control [autoCompleteList]="sectionList" [labelName]="'Sections'"
+                      [selectedList]="selectedSectionList" [placeholderText]="sectionPlaceHolderText"
+                      (onSelectData)="onSelectItem($event)"></app-assign-control>
+
+                    <div class="big-button-bottom">
+                      <ul>
+                        <li><button [disabled]="!isRoleSectionSelected && selectedSectionList?.length === 0"
+                            (click)="saveSectionsToRole()">SAVE SECTIONS</button></li>
+                        <li><button (click)="cancelRedirect(true)">CANCEL</button></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Second tab -->
+            <div id="add-tile-section" class="container tab-pane" *ngIf="selectedTab === 'secondTab'"
+              [ngClass]="selectedTab === 'secondTab' ? 'active' : ''">
+              <div class="my-4 col-lg-4 col-md-12 role-input">
+                <select class="form-select" (change)="onSelectSection($event)" formControlName="tileSection">
+                  <option value="null" selected>Select Section</option>
+                  <option *ngFor="let item of sectionList" [value]="item.moduleId">{{item.moduleName}}</option>
+                </select>
+              </div>
+
+              <div class="add-section-wrap p-2 p-md-4 ">
+                <div class="inner-wrap-pad p-0 p-md-4">
+                  <app-assign-control [autoCompleteList]="tilesList" [labelName]="'Tiles'"
+                    [selectedList]="selectedTilesList" [placeholderText]="tilesPlaceHolderText"
+                    (onSelectData)="onSelectItem($event)"></app-assign-control>
+                  <!-- <p class="add-removetile">Do you want to Add/Remove tiles from the sections?<span class="click">Click
+                      here</span></p> -->
+                </div>
+              </div>
+              <div class="big-button-bottom">
+                <ul>
+                  <li><button [disabled]="!isTileSectionSelected && selectedTilesList?.length === 0"
+                      (click)="saveTilesToSection()">SAVE TILES</button></li>
+                  <li><button (click)="cancelRedirect(false)">CANCEL</button></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Third tab -->
+          <div id="add-role-to-user" class="container tab-pane" *ngIf="selectedTab === 'thirdTab'"
+            [ngClass]="selectedTab === 'thirdTab' ? 'active' : ''">
+            <div class="my-4 col-lg-4 col-md-12 role-input">
+              <select class="form-select" (change)="onSelectUser($event)" formControlName="roleUser">
+                <option value="null" selected>Select User</option>
+                <option *ngFor="let item of usersList" [value]="item.userId">{{item.name}}</option>
+              </select>
+            </div>
+
+            <div class="add-section-wrap p-2 p-md-4 ">
+              <div class="">
+                <div class="inner-wrap-pad p-0 p-md-4">
+                  <app-assign-control [autoCompleteList]="rolesList" [labelName]="'Roles'"
+                    [selectedList]="selectedRolesList" [placeholderText]="rolesPlaceHolderText"
+                    (onSelectData)="onSelectItem($event)"></app-assign-control>
+                </div>
+              </div>
+            </div>
+
+            <div class="big-button-bottom">
+              <ul>
+                <li><button [disabled]="!isRoleUserSelected && selectedRolesList?.length === 0"
+                    (click)="saveRolesToUser()">SAVE ROLES</button></li>
+                <li><button (click)="cancelRedirect(false)">CANCEL</button></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Fourth tab -->
+          <div id="add-sec-to-user" class="container tab-pane" *ngIf="selectedTab === 'fourthTab'"
+            [ngClass]="selectedTab === 'fourthTab' ? 'active' : ''">
+            <div class="my-4 col-lg-4 col-md-12 role-input">
+              <select class="form-select" (change)="onSelectUser($event)" formControlName="sectionUser">
+                <option value="null" selected>Select User</option>
+                <option *ngFor="let item of usersList" [value]="item.userId">{{item.name}}</option>
+              </select>
+            </div>
+
+            <div class="add-section-wrap p-2 p-md-4 ">
+              <div class="inner-wrap-pad p-0 p-md-4">
+                <app-assign-control [autoCompleteList]="sectionList" [labelName]="'Sections'"
+                  [selectedList]="selectedSectionList" [placeholderText]="sectionPlaceHolderText"
+                  (onSelectData)="onSelectItem($event)"></app-assign-control>
+              </div>
+            </div>
+
+            <div class="big-button-bottom">
+              <ul>
+                <li><button [disabled]="!isSectionUserSelected && selectedSectionList?.length === 0"
+                    (click)="saveSectionToUser()">SAVE SECTIONS</button></li>
+                <li><button (click)="cancelRedirect(false)">CANCEL</button></li>
+              </ul>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</div>

@@ -1,0 +1,30 @@
+.cancel-button {
+    background-color: transparent;
+    color: white;
+    border: none;
+    // padding: 8px 25px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-right: 18px;
+}
+.add-text{
+    margin-left: 36px;
+   font-size: 23px; 
+  margin-top: 2px;
+}
+.header {
+    background-color: #0d0357;
+    color: white;
+    // padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+ 
+    width: 100%;
+    margin-left: -24px;
+    position: sticky;
+    z-index: 1;
+    height: 36px;
+    margin-left: 3px;
+ 
+}

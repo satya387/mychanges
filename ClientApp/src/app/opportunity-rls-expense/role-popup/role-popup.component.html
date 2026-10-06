@@ -1,0 +1,503 @@
+<div class="container">
+  <!-- <button class="modal-close-btn" (click)="cancel()">X</button> -->
+  <div class="modal-header">
+    <h2>RLS Details</h2>
+    <button class="modal-close-btn" (click)="cancel()">✕</button>
+  </div>
+
+  <div class="modal-body">
+    <div class="popup-container">
+      <div class="role-input-form rls-section">
+        <form [formGroup]="roleForm" (ngSubmit)="onSubmit()">
+          <div class="rls-details-section">
+            <!-- <h3 class="rls">RLS Details</h3> -->
+
+            <div class="form-grid">
+              <label for="resource">Resource:</label>
+              <select
+                id="resource"
+                formControlName="resource"
+                [ngClass]="{
+                  'is-invalid':
+                    roleForm.get('resource')?.invalid && isAddButtonClicked
+                }"
+              >
+                <option value="">Select</option>
+                <option value="Existing Resource">Existing Resource</option>
+                <option value="Not Yet Assigned">Not Yet Assigned</option>
+              </select>
+
+              <label for="resourceId">Resource Id:</label>
+              <input
+                [ngStyle]="{
+                  'background-color': isResourceNotYetAssigned
+                    ? 'whitesmoke'
+                    : 'white'
+                }"
+                id="resourceId"
+                type="text"
+                [readOnly]="isResourceNotYetAssigned"
+                formControlName="resourceId"
+              />
+
+              <label for="resourceName">Resource Name:</label>
+              <input
+                [ngStyle]="{
+                  'background-color': isResourceNotYetAssigned
+                    ? 'whitesmoke'
+                    : 'white'
+                }"
+                id="resourceName"
+                type="text"
+                [readOnly]="isResourceNotYetAssigned"
+                formControlName="resourceName"
+              />
+
+              <label for="location">Location:</label>
+              <select
+                id="location"
+                formControlName="location"
+                [(ngModel)]="locationDropdown"
+                (change)="onLocationChange($event, 'location')"
+                [ngClass]="{
+                  'is-invalid':
+                    roleForm.get('location')?.invalid &&
+                    isAddButtonClicked &&
+                    roleForm.get('location').value == ''
+                }"
+              >
+                <option
+                  *ngFor="let sfLocation of allSFLocations"
+                  [value]="sfLocation.value"
+                >
+                  {{ sfLocation.value }}
+                </option>
+              </select>
+
+              <label for="role">Role:</label>
+              <select
+                id="role"
+                formControlName="role"
+                [(ngModel)]="roleDropdown"
+                (change)="onRoleChange($event, 'role')"
+                [ngClass]="{
+                  'is-invalid':
+                    roleForm.get('role')?.invalid &&
+                    isAddButtonClicked &&
+                    roleForm.get('role').value == ''
+                }"
+              >
+                <option value="">Select</option>
+                <option
+                  *ngFor="let sfRoles of allSFRoles"
+                  [value]="sfRoles.value"
+                >
+                  {{ sfRoles.value }}
+                </option>
+              </select>
+
+              <label for="primary-skill">Primary Skill:</label>
+              <select
+                id="primary-skill"
+                formControlName="primarySkill"
+                [(ngModel)]="primarySkillDropdown"
+                (change)="onTechnologyChange($event, 'tech')"
+                [ngClass]="{
+                  'is-invalid':
+                    roleForm.get('primarySkill')?.invalid &&
+                    isAddButtonClicked &&
+                    roleForm.get('primarySkill').value == ''
+                }"
+              >
+                <option value="">Select</option>
+                <option
+                  *ngFor="let sfTechnologies of allSFTechnologies"
+                  [value]="sfTechnologies.value"
+                >
+                  {{ sfTechnologies.value }}
+                </option>
+              </select>
+
+              <label for="secondary-skill">Secondary Skill:</label>
+              <select
+                id="secondary-skill"
+                formControlName="secondarySkill"
+                [(ngModel)]="secondarySkillDropdown"
+              >
+                <option value="">Select</option>
+                <option
+                  *ngFor="let sfTechnologies of filteredSFTechnologies"
+                  [value]="sfTechnologies.value"
+                >
+                  {{ sfTechnologies.value }}
+                </option>
+              </select>
+
+              <label for="experience">Experience:</label>
+              <select
+                id="experience"
+                formControlName="experience"
+                [(ngModel)]="experienceDropdown"
+                (change)="onExperienceChange($event, 'exp')"
+                [ngClass]="{
+                  'is-invalid':
+                    roleForm.get('experience')?.invalid &&
+                    isAddButtonClicked &&
+                    roleForm.get('experience').value == ''
+                }"
+              >
+                <option value="">Select</option>
+                <option
+                  *ngFor="let sfExperience of allSFExperience"
+                  [value]="sfExperience.value"
+                >
+                  {{ sfExperience.value }}
+                </option>
+              </select>
+
+              <label for="hire">Hire:</label>
+              <select
+                id="hire"
+                formControlName="hire"
+                [ngClass]="{
+                  'is-invalid':
+                    roleForm.get('hire')?.invalid && isAddButtonClicked
+                }"
+              >
+                <option value="FTE">FTE</option>
+                <option value="Contractor">Contractor</option>
+              </select>
+
+              <label for="resource-type">Resource Type:</label>
+              <select
+                id="resource-type"
+                formControlName="resourceType"
+                (change)="onResourceChange($event)"
+                [ngClass]="{
+                  'is-invalid':
+                    roleForm.get('resourceType')?.invalid && isAddButtonClicked
+                }"
+              >
+                <option value="Billable">Billable</option>
+                <option value="Non-Billable">Non-Billable</option>
+              </select>
+
+              <label for="work-slot">Work Slot:</label>
+              <select
+                id="work-slot"
+                formControlName="workSlot"
+                (change)="onShiftChange($event, 'shift')"
+                [ngClass]="{
+                  'is-invalid':
+                    roleForm.get('workSlot')?.invalid && isAddButtonClicked
+                }"
+              >
+                <option value="Regular">Regular</option>
+                <option value="Morning Shift">Morning Shift</option>
+                <option value="Evening Shift">Evening Shift</option>
+                <option value="Night Shift">Night Shift</option>
+              </select>
+
+              <label for="phase">Phase:</label>
+              <select
+                id="phase"
+                formControlName="phase"
+                [ngClass]="{
+                  'is-invalid':
+                    roleForm.get('phase')?.invalid && isAddButtonClicked
+                }"
+              >
+                <option value="transition">Transition</option>
+                <option value="steadystate">Steady state</option>
+              </select>
+
+              <label for="tracks">Tracks:</label>
+              <select
+                id="tracks"
+                formControlName="tracks"
+                [ngClass]="{
+                  'is-invalid':
+                    roleForm.get('tracks')?.invalid && isAddButtonClicked
+                }"
+              >
+                <option value="track1">Track 1</option>
+                <option value="track2">Track 2</option>
+                <option value="track3">Track 3</option>
+                <option value="track4">Track 4</option>
+                <option value="track5">Track 5</option>
+                <option value="track6">Track 6</option>
+                <option value="track7">Track 7</option>
+                <option value="track8">Track 8</option>
+                <option value="track9">Track 9</option>
+                <option value="track10">Track 10</option>
+                <option value="track11">Track 11</option>
+                <option value="track12">Track 12</option>
+                <option value="track13">Track 13</option>
+                <option value="track14">Track 14</option>
+                <option value="track15">Track 15</option>
+              </select>
+
+              <label for="service-area">Service Area:</label>
+              <select
+                id="service-area"
+                formControlName="serviceArea"
+                [ngClass]="{
+                  'is-invalid':
+                    roleForm.get('serviceArea')?.invalid && isAddButtonClicked
+                }"
+              >
+                <option value="DataEngineering">Data Engineering</option>
+                <option value="IntelligentProcessAutomation">
+                  Intelligent Process Automation
+                </option>
+                <option value="Engineering">Engineering</option>
+                <option value="ConsultingAndPlatforms">
+                  Consulting and Platforms
+                </option>
+                <option value="UXAndDesign">UX and Design</option>
+                <option value="LowCode">Low Code</option>
+              </select>
+
+              <label for="margin">Margin:</label>
+              <input
+                id="margin"
+                formControlName="margin"
+                [(ngModel)]="marginValue"
+                readonly
+                type="number"
+              />
+
+              <label for="resource-code">Resource Code:</label>
+              <input
+                id="resource-code"
+                formControlName="resourceCode"
+                [(ngModel)]="resourceCode"
+                readonly
+                type="text"
+              />
+
+              <label for="remarks">Remarks:</label>
+              <input id="remarks" formControlName="remarks" type="text" />
+
+              <!-- <label for="start-date">Start Date:</label>
+            <input
+              id="start-date"
+              formControlName="roleStartDate"
+              type="month"
+              (keydown)="preventTyping($event)"
+              [ngClass]="{
+                'is-invalid':
+                  roleForm.get('roleStartDate')?.invalid && isAddButtonClicked
+              }"
+            />
+
+            <label for="end-date">End Date:</label>
+            <input
+              id="end-date"
+              formControlName="roleEndDate"
+              type="month"
+              (keydown)="preventTyping($event)"
+              [attr.min]="minEndDate"
+              [ngClass]="{
+                'is-invalid':
+                  roleForm.get('roleEndDate')?.invalid && isAddButtonClicked
+              }"
+            /> -->
+
+              <label for="start-date">Start Date:</label>
+              <input
+                id="start-date"
+                formControlName="roleStartDate"
+                type="month"
+                (keydown)="preventTyping($event)"
+                [attr.min]="formattedProjectStart"
+                
+                [ngClass]="{
+                  'is-invalid':
+                    roleForm.get('roleStartDate')?.invalid && isAddButtonClicked
+                }"
+              />
+              <!-- [attr.max]="formattedProjectEnd" -->
+              <label for="end-date">End Date:</label>
+              <input
+                id="end-date"
+                formControlName="roleEndDate"
+                type="month"
+                (keydown)="preventTyping($event)"
+                [attr.min]="minEndDate || formattedProjectStart"
+                [ngClass]="{
+                  'is-invalid':
+                    roleForm.get('roleEndDate')?.invalid && isAddButtonClicked
+                }"
+              />
+            </div>
+          </div>
+
+          <div class="bill-rate-cost-container">
+            <div class="bill-rate-section">
+              <h3>Bill Rate</h3>
+              <div class="form-grid-section">
+                <label for="standard-bill-rate"
+                  >Standard Bill Rate{{ currencyLabel }}:</label
+                >
+                <input
+                  id="standard-bill-rate"
+                  formControlName="standardBillRate"
+                  [(ngModel)]="standardBillRate"
+                  (change)="changeInBill($event)"
+                  readonly
+                  type="number"
+                />
+
+                <label for="proposed-bill-rate"
+                  >Proposed Bill Rate{{ currencyLabel }}:</label
+                >
+                <input
+                  id="proposed-bill-rate"
+                  formControlName="proposedBillRate"
+                  [(ngModel)]="proposedBillRate"
+                  (change)="changeInBill($event)"
+                  type="number"
+                />
+
+                <label for="deviation-in-rate">Deviation in Rate(%):</label>
+                <input
+                  id="deviation-in-rate"
+                  formControlName="rateDeviation"
+                  [(ngModel)]="deviationInRatePercent"
+                  readonly
+                  type="number"
+                />
+
+                <label for="shift-allowance-bill-rate"
+                  >Shift Allowance Bill Rate{{ currencyLabel }}:</label
+                >
+                <input
+                  id="shift-allowance-bill-rate"
+                  formControlName="shiftAllowanceBillRate"
+                  [(ngModel)]="shiftAllowanceBillRate"
+                  readonly
+                  type="number"
+                />
+
+                <label for="eff-hour-bill-rate"
+                  >Eff. Hourly Bill Rate{{ currencyLabel }}:</label
+                >
+                <input
+                  id="eff-hour-bill-rate"
+                  formControlName="eff_HourlyRate"
+                  [(ngModel)]="eff_HourlyRate"
+                  readonly
+                  type="number"
+                />
+
+                <label for="eff-hour-bill-rate-with-allowance"
+                  >Eff. Monthly Bill Rate with Allowance{{
+                    currencyLabel
+                  }}:</label
+                >
+                <input
+                  id="eff-hour-bill-rate-with-allowance"
+                  [(ngModel)]="eff_MonthlyRateWithAllowance"
+                  formControlName="eff_MonthlyRateWithAllowance"
+                  readonly
+                  type="number"
+                />
+              </div>
+            </div>
+
+            <div class="cost-section">
+              <h3>Cost</h3>
+              <div class="form-grid-section">
+                <label for="standard-cost"
+                  >Standard Cost{{ currencyLabel }}:</label
+                >
+                <input
+                  id="standard-cost"
+                  formControlName="standardCost"
+                  [(ngModel)]="standardCost"
+                  (change)="changeInBill($event)"
+                  readonly
+                  type="number"
+                />
+
+                <label for="proposed-cost"
+                  >Proposed Cost{{ currencyLabel }}:</label
+                >
+                <input
+                  id="proposed-cost"
+                  formControlName="proposedCost"
+                  (change)="changeInBill($event)"
+                  [(ngModel)]="proposedCost"
+                  type="number"
+                />
+
+                <label for="deviation-in-cost">Deviation in Cost(%):</label>
+                <input
+                  id="deviation-in-cost"
+                  formControlName="costDeviation"
+                  readonly
+                  type="number"
+                  [(ngModel)]="deviationInCostPercent"
+                />
+
+                <label for="shift-allowance-cost"
+                  >Shift Allowance Cost{{ currencyLabel }}:</label
+                >
+                <input
+                  id="shift-allowance-cost"
+                  formControlName="shiftAllowanceCost"
+                  [(ngModel)]="shiftAllowanceCost"
+                  readonly
+                  type="number"
+                />
+
+                <label for="eff-hourly-cost"
+                  >Eff. Hourly Cost{{ currencyLabel }}:</label
+                >
+                <input
+                  id="eff-hourly-cost"
+                  formControlName="eff_HourlylyCost"
+                  [(ngModel)]="eff_HourlylyCost"
+                  readonly
+                  type="number"
+                />
+
+                <label for="eff-monthly-cost-with-allowance"
+                  >Eff. Monthly Cost with Allowance{{ currencyLabel }}:</label
+                >
+                <input
+                  id="eff-monthly-cost-with-allowance"
+                  formControlName="eff_MonthlyCostWithAllowance"
+                  [(ngModel)]="eff_MonthlyCostWithAllowance"
+                  readonly
+                  type="number"
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- <div class="add-button">
+      <button type="button" (click)="generateDynamicInputs()">Add</button>
+    </div> -->
+    </div>
+
+    <div class="resource-counts" [hidden]="!resourcesAvailable">
+      <h3>Resource Counts</h3>
+      <div id="dynamic-inputs-section" class="dynamic-inputs"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <!-- <div class="buttons-container"> -->
+  <div class="cancel-button">
+    <button type="button" (click)="cancel()">Cancel</button>
+  </div>
+  <div class="submit-button" [hidden]="!resourcesAvailable">
+    <button type="button" (click)="onSubmit()" [disabled]="isEdit" [ngClass]="{ 'disabled-btn': isEdit }">Save</button>
+  </div>
+  <!-- </div> -->
+</div>

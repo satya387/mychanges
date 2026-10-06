@@ -1,0 +1,158 @@
+<div class="row" style="width: 100%; overflow-x: hidden;">
+  <div class="year-filter-container">
+    <label for="yearDropdown" class="year-filter-label">Select Year:</label>
+    <select id="yearDropdown" class="year-filter-dropdown" [(ngModel)]="selectedYear" (change)="onYearChange($event)">
+      <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+    </select>
+  </div>
+
+  <ul class="nav nav-tabs" id="graphTabs" role="tablist">
+    <li class="nav-item" id="first-nav-item">
+      <a class="nav-link active" id="all-opportunities-tab" data-bs-toggle="tab" href="#all-opportunities" role="tab"
+        aria-controls="all-opportunities" aria-selected="true">
+        <b>All Opportunities</b>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="sold-opportunities-tab" data-bs-toggle="tab" href="#sold-opportunities" role="tab"
+        aria-controls="sold-opportunities" aria-selected="false">
+        <b>Sold Opportunities</b>
+      </a>
+    </li>
+  </ul>
+
+  <div class="tab-content" id="graphTabContent">
+    <!-- All Opportunities Tab -->
+    <div class="tab-pane fade show active" id="all-opportunities" role="tabpanel"
+      aria-labelledby="all-opportunities-tab">
+      <div class="col-md-12 charts-container">
+        <div class="row-md-6 individual-charts" *ngIf="options1">
+          <h3 style="padding: 10px">Opportunity Count & TCV by month</h3>
+
+          <ag-charts-angular id="bar-chart" style="height: 100%" [options]="options1"></ag-charts-angular>
+        </div>
+        <div class="row-md-6 individual-charts" *ngIf="options2">
+          <h3 style="padding: 10px">Opportunity TCV By Status</h3>
+
+          <ag-charts-angular id="bar-chart" style="height: 100%" [options]="options2"></ag-charts-angular>
+        </div>
+      </div>
+
+      <div class="col-md-12 charts-container">
+        <div class="row-md-6 individual-charts">
+          <h3 style="padding: 10px">Opportunity Count by client partner & Status</h3>
+          <div class="table-container">
+            <table class="tabular-chart">
+              <thead>
+                <tr>
+                  <th>Client Partner</th>
+                  <th>Close</th>
+                  <th>Hold</th>
+                  <th>Loses</th>
+                  <th>Opened</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of clientPartnerChart">
+                  <td>{{ row.clientPartner }}</td>
+                  <td>{{ row.closed }}</td>
+                  <td>{{ row.hold }}</td>
+                  <td>{{ row.loses }}</td>
+                  <td>{{ row.opened }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+        <div class="row-md-6 individual-charts" *ngIf="options4">
+          <h3 style="padding: 10px">Open vs Close Opportunities by month</h3>
+          <ag-charts-angular id="bar-chart" style="height: 100%" [options]="options4"></ag-charts-angular>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sold Opportunities Tab -->
+    <div class="tab-pane fade" id="sold-opportunities" role="tabpanel" aria-labelledby="sold-opportunities-tab">
+      <div class="col-md-12 charts-container">
+        <div class="row-md-6 individual-charts" *ngIf="options5">
+          <h3 style="padding: 10px">Top 10 Sold Opportunities by TCV</h3>
+
+          <ag-charts-angular id="bar-chart" style="height: 100%" [options]="options5"></ag-charts-angular>
+        </div>
+        <div class="row-md-6 individual-charts" *ngIf="options6">
+          <h3 style="padding: 10px">Sold Opportunity Count & TCV by month</h3>
+          <ag-charts-angular id="bar-chart" style="height: 100%" [options]="options6"></ag-charts-angular>
+        </div>
+      </div>
+
+      <div class="col-md-12 charts-container">
+        <div class="row-md-6 individual-charts" *ngIf="options7">
+          <h3 style="padding: 10px">Direct Margin - Average by month</h3>
+
+          <ag-charts-angular id="bar-chart" style="height: 100%" [options]="options7"></ag-charts-angular>
+        </div>
+        <div class="row-md-6 individual-charts" *ngIf="options8">
+          <h3 style="padding: 10px">Direct Margin - Shore wise Average By month</h3>
+
+          <ag-charts-angular id="bar-chart" style="height: 100%" [options]="options8"></ag-charts-angular>
+        </div>
+      </div>
+
+      <div class="col-md-12 charts-container">
+        <div class="row-md-6 individual-charts" *ngIf="options9">
+          <h3 style="padding: 10px">Average Bill Rate - Shore wise, By Month</h3>
+
+          <ag-charts-angular id="bar-chart" style="height: 100%" [options]="options9"></ag-charts-angular>
+        </div>
+        <div class="row-md-6 individual-charts" *ngIf="options10">
+          <h3 style="padding: 10px">Average Cost - Shore wise, By Month</h3>
+
+          <ag-charts-angular id="bar-chart" style="height: 100%" [options]="options10"></ag-charts-angular>
+        </div>
+      </div>
+
+      <div class="col-md-12 charts-container">
+        <div class="row-md-6 individual-charts" *ngIf="options11">
+          <h3 style="padding: 10px">FTE Head Count - Shore wise, By Month</h3>
+
+          <ag-charts-angular id="bar-chart" style="height: 100%" [options]="options11"></ag-charts-angular>
+        </div>
+        <div class="row-md-6 individual-charts">
+          <h3 style="padding: 10px">Resource Talent Mix -- By Years of experience</h3>
+          <div class="table-container">
+            <table class="tabular-chart">
+              <thead>
+                <tr>
+                  <th>Primary Skill</th>
+                  <th>Experience</th>
+                  <th>NearShore</th>
+                  <th>OnShore</th>
+                  <th>OffShore</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let mix of resourceTalentMixes">
+                  <td>{{ mix.primarySkill }}</td>
+                  <td>{{ mix.experience }}</td>
+                  <td>{{ mix.nearShore }}</td>
+                  <td>{{ mix.onShore }}</td>
+                  <td>{{ mix.offShore }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12 charts-container-for-one">
+
+        <div class="row-md-12 individual-charts-for-one" *ngIf="options12">
+          <h3 style="padding: 10px">Top Skills by Revenue</h3>
+
+          <ag-charts-angular id="bar-chart" style="height: 100%" [options]="options12"></ag-charts-angular>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

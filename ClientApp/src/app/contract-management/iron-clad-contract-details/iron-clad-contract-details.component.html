@@ -1,0 +1,504 @@
+<div class="dashboard-container">
+
+  <!-- MAIN LAYOUT -->
+  <div class="main-layout">
+    <div class="left-panel">
+      <span>
+        <h6>
+          {{ contract?.documentName }}
+          <ng-container *ngIf="contract?.contractName">
+            - {{ contract?.contractName }}
+          </ng-container>
+        </h6>
+      </span>
+      <div class="activity-box">
+
+        <div class="review-header">
+          <h5>Review in order</h5>
+          <span></span>
+        </div>
+
+        <div class="review-list">
+
+          <div class="review-item" *ngFor="let item of timelineList">
+
+            <div class="review-avatar" [style.background]="getAvatarColor(item.actionTakenBy)">
+              {{ getInitials(item.actionTakenBy) }}
+            </div>
+
+            <div class="review-content">
+
+              <div>
+                <span class="review-name">{{item.actionTakenBy}}</span>
+                <span class="stage-name"> {{item.stageName}}</span>
+
+              </div>
+
+
+
+              <div class="review-comment" *ngIf="item.comments">
+                <b>Comments:</b>
+                {{item.comments}}
+              </div>
+
+            </div>
+
+            <div class="review-status">
+              <span class="approved" *ngIf="item.status=='Created'">
+                Created ✅
+                <i class="bi bi-check-circle-fill"></i>
+              </span>
+              <span class="approved" *ngIf="item.status=='Submitted for Approval'">
+                Submitted for Approval ✅
+                <i class="bi bi-check-circle-fill"></i>
+              </span>
+              <span class="approved" *ngIf="item.status=='Approved'">
+                Approved ✅
+                <i class="bi bi-check-circle-fill"></i>
+              </span>
+
+              <span class="waiting" *ngIf="item.status=='Waiting'">
+                Awaiting review 🕒
+                <i class="bi bi-clock"></i>
+              </span>
+              <span class="Closed" *ngIf="item.status=='Closed'">
+                Closed 🔒
+                <i class="bi bi-clock"></i>
+              </span>
+              <span class="Downloaded" *ngIf="item.status=='Downloaded'">
+                Document Downloaded ⬇️
+                <i class="bi bi-clock"></i>
+              </span>
+
+              <span class="rejected" *ngIf="item.status=='Rejected'">
+                Rejected ❌
+                <i class="bi bi-x-circle-fill"></i>
+              </span>
+              <span class="Secondary" *ngIf="item.status=='Secondary Owner Assigned'">
+                Secondary Owner Assigned 👤
+                <i class="bi bi-x-circle-fill"></i>
+              </span>
+              <span class="Secondary" *ngIf="item.status=='Secondary Owner Changed'">
+                Secondary Owner Changed 🔄
+                <i class="bi bi-x-circle-fill"></i>
+              </span>
+              <span class="waiting" *ngIf="item.status=='Commented'">
+                Commented ✎
+                <i class="bi bi-x-circle-fill"></i>
+              </span>
+              <span class="Downloaded" *ngIf="item.status=='Uploaded'">
+                Document Uploaded ⬆️
+                <i class="bi bi-x-circle-fill"></i>
+              </span>
+                <div class="review-date" *ngIf="item.status !== 'Waiting' && getTimelineDisplayDate(item) as d">
+                 🕒 {{ d.value }}
+                </div>
+            </div>
+
+          </div>
+
+        </div>
+        <div class="timeline-comment-box" *ngIf="documentVersions?.length > 0">
+
+          <div class="comment-header">
+            <label for="timelineComment">Comments</label>
+          </div>
+
+          <div class="comment-input-wrapper">
+
+            <textarea id="timelineComment" class="form-control" rows="3" [(ngModel)]="timelineComment"
+              placeholder="Enter your comments...">
+            </textarea>
+
+            <button type="button" class="btn btn-primary send-comment-btn"
+              [disabled]="!timelineComment?.trim() || isSendingComment" (click)="sendTimelineComment()">
+
+              Send <i class="bi bi-send-fill">➤</i>
+
+            </button>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="property full-width">
+      <!-- DOCUMENTS SECTION -->
+      <div class="documents-section">
+
+        <div class="documents-title">
+          <strong>Documents</strong>
+        </div>
+
+        <div class="documents-wrapper">
+
+          <div *ngFor="let file of documentVersions; let i = index" class="document-card">
+
+            <div class="doc-info">
+
+              <div class="doc-top-row">
+
+                <div class="doc-left">
+
+                  <div class="doc-tag">
+                    {{ file.version }}
+                  </div>
+
+                  <div class="doc-name link" [title]="file.fileName">
+                    {{ file.fileName | slice:0:20 }}
+                  </div>
+
+                </div>
+
+                <div class="doc-actions-right" (click)="openDocument(contract.contractId, file.fileName)">
+
+                  <span *ngIf="i === 0 && (
+                        (contract?.contractAdminStatusId == 1 && (contract?.isCreator || contract?.isAdmin))|| 
+                       (contract?.contractAdminStatusId == 2 && (contract?.isCreator || contract?.isAdmin || contract?.isDraftReviewer)) ||
+                         (contract?.contractAdminStatusId == 3 && contract?.approvalLevel == 1 && (contract?.isPricingApprover || contract?.isAdmin)) ||
+                          (contract?.contractAdminStatusId == 4 && contract?.approvalLevel == 1 && (contract?.isLegalApprover || contract?.isAdmin)) ||
+                           (contract?.contractAdminStatusId == 5 && contract?.approvalLevel == 1 && (contract?.isDeliveryApprover || contract?.isAdmin)) ||
+                        (contract?.contractAdminStatusId == 8 && contract?.approvalLevel == 1 && 
+                        (contract?.isAdmin || (contract?.isCreator || contract?.isDraftReviewer))))">
+                      <button type="button" title="Edit Latest Version">✏️</button>
+                    </span>
+
+                  <span (click)="$event.stopPropagation(); viewPdf(contract.contractId, file.fileName)">
+
+                    <button type="button">
+                      👁
+                    </button>
+
+                  </span>
+
+                </div>
+              </div>
+
+              <div class="doc-bottom-row" *ngIf="getDisplayDate(file) as d">
+                {{ d.label }} {{ d.value }}
+              </div>
+
+            </div>
+
+
+
+          </div>
+
+        </div>
+
+      </div>
+      <div>
+
+        <!-- HEADER -->
+        <div class="properties-header">
+
+         <h4 class="details-title">Details</h4>
+
+          <!-- HEADER ACTION BUTTONS -->
+          <div class="action-buttons">
+
+            <!-- Edit Button -->
+           <button class="edit-btn" (click)="EditContractPage(contract)"
+              *ngIf="contract?.contractAdminStatusId == 1 || contract?.contractAdminStatusId == 2 || 
+                    (contract?.contractAdminStatusId == 8 && contract?.approvalLevel == 1 && (contract?.isAdmin || (contract?.isCreator || contract?.isDraftReviewer)))">
+              ✏️ Edit
+            </button>
+
+            <input #fileUpload type="file" hidden accept=".doc,.docx" (change)="onFileSelected($event)" />
+
+            <!-- Upload Button -->
+            <button type="button" class="edit-btn" (click)="fileUpload.click()"
+              *ngIf="(contract?.contractAdminStatusId == 6 && contract?.approvalLevel == 1 && (contract?.isAdmin || (contract?.isCreator || contract?.isDraftReviewer))) || 
+                    (contract?.contractAdminStatusId == 8 && contract?.approvalLevel == 2 && (contract?.isAdmin || (contract?.isCreator || contract?.isDraftReviewer)))">
+              Upload
+            </button>
+
+            <!-- Approve Button (Allows Admin override during Pricing/Legal/Delivery stages 3, 4, 5) -->
+            <button class="approve" (click)="openApprovalModal(1)"
+              *ngIf="(contract?.isPricingApprover && contract?.contractAdminStatusId == 3) || 
+                    (contract?.isLegalApprover && contract?.contractAdminStatusId == 4) || 
+                    (contract?.isDeliveryApprover && contract?.contractAdminStatusId == 5) || 
+                    (contract?.isAdmin && (contract?.contractAdminStatusId == 3 || contract?.contractAdminStatusId == 4 || contract?.contractAdminStatusId == 5))">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14" />
+                <path d="m10.97 4.97-.02.022-3.473 4.425-2.093-2.094a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05" />
+              </svg> &nbsp; Approve
+            </button>
+
+            <!-- Reject Button (Allows Admin override during Pricing/Legal/Delivery stages 3, 4, 5) -->
+            <button class="reject" (click)="openApprovalModal(2)"
+              *ngIf="(contract?.isPricingApprover && contract?.contractAdminStatusId == 3) || 
+                    (contract?.isLegalApprover && contract?.contractAdminStatusId == 4) || 
+                    (contract?.isDeliveryApprover && contract?.contractAdminStatusId == 5) || 
+                    (contract?.isAdmin && (contract?.contractAdminStatusId == 3 || contract?.contractAdminStatusId == 4 || contract?.contractAdminStatusId == 5))">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#CC4B4C" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14" />
+                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+              </svg> &nbsp; Reject
+            </button>
+
+            <!-- Download Document -->
+            <div class="doc-icon download-btn" title="Download Latest Document" (click)="downloadLatestDocument()"
+              *ngIf="contract?.contractAdminStatusId == 6">
+              <i class="fa fa-download"></i> <span class="download-text">Download</span>
+            </div>
+          </div>
+
+          <!-- LOADING -->
+          <div *ngIf="loading" class="loading">
+            Loading details...
+          </div>
+
+          <!-- ERROR -->
+          <div *ngIf="error" class="error">
+            {{ error }}
+          </div>
+
+
+          <div *ngIf="contract && !loading" class="properties-card">
+
+            <div class="property">
+
+              <span><label>Contract Id</label> : {{ contract.displayId }}</span>
+            </div>
+
+            <div class="property">
+              <span><label>Contract Status</label> : {{ contract.contractStatusName || '-' }}</span>
+            </div>
+
+            <div class="property">
+
+              <span><label>Document Type</label>: {{ contract.documentName }}</span>
+            </div>
+            <div class="property">
+              <span><label>Entity</label> : {{ contract.entityName || '-' }}</span>
+            </div>
+
+            <div class="property">
+              <span><label>Account</label> : {{ contract.accountName || '-' }}</span>
+            </div>
+
+            <div class="property">
+              <span><label>Project</label> : {{ contract.projectName || '-' }}</span>
+            </div>
+
+
+
+
+
+            <div class="property d-none">
+
+              <span><label>Agreement Date</label>: {{ contract.dateOfAggrement | date:'shortDate' }}</span>
+            </div>
+
+            <div class="property">
+
+              <span><label>Start Date</label> : {{ contract.startDate | date:'shortDate' }}</span>
+            </div>
+
+            <div class="property">
+              <span><label>End Date</label> : {{ contract.endDate | date:'shortDate' }}</span>
+            </div>
+
+            <div class="property d-none">
+              <span><label>Mail</label> : {{ contract.groupMailId }}</span>
+            </div>
+
+
+            <div class="property d-none">
+              <span><label>Rate %</label> : {{ contract.rateIncrease }}</span>
+            </div>
+
+            <div class="property d-none">
+              <span><label>Revenue</label> : {{ contract.totalContractValue }}</span>
+            </div>
+
+            <div class="property d-none">
+              <span><label>Margin</label> : {{ contract.blendedMargin }}</span>
+            </div>
+
+            <div class="property">
+              <span [ngClass]="contract?.isActive ? 'active' : 'inactive'"><label>Status</label>
+                : {{ contract?.isActive ? 'Active' : 'Closed' }}
+              </span>
+            </div>
+            <!-- BOTTOM FORM ACTION BUTTONS -->
+            <div class="property d-flex gap-2">
+
+              <!-- + Add Reviewer -->
+             <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#approverModal" 
+                *ngIf="contract?.contractAdminStatusId == 1 && contract?.approvalLevel == 1 && (contract?.isAdmin || contract?.isCreator)">
+                + Add Reviewer
+              </button>
+
+            <!-- Add Another Reviewer -->
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#approverModal"
+              *ngIf="(contract?.contractAdminStatusId == 2 && contract?.approvalLevel == 1 && (contract?.isAdmin ||  contract?.isCreator)) || 
+                    (contract?.contractAdminStatusId == 8 && contract?.approvalLevel == 1 && (contract?.isAdmin ||  contract?.isCreator)) || 
+                    (contract?.contractAdminStatusId == 8 && contract?.approvalLevel == 2 && contract?.isAdmin) || 
+                    (contract?.contractAdminStatusId == 6 && contract?.approvalLevel == 1 && contract?.isAdmin)">
+              Add Another Reviewer
+            </button>
+
+            <!-- Submit for Approval -->
+          <button type="button" class="btn btn-success" (click)="openApprovalModal(1)"
+            *ngIf="(contract?.contractAdminStatusId == 1 && contract?.approvalLevel == 1 && (contract?.isAdmin ||  contract?.isCreator)) || 
+                  (contract?.contractAdminStatusId == 2 && contract?.approvalLevel == 1 && (contract?.isAdmin ||  contract?.isDraftReviewer))">
+            Submit for Approval
+          </button>
+
+              <!-- Close Contract -->
+              <button type="button" class="btn btn-success" (click)="openApprovalModal(3)"
+                *ngIf="(contract?.contractAdminStatusId == 6 && contract?.isAdmin) || 
+                      (contract?.contractAdminStatusId == 8 && contract?.approvalLevel == 2 && contract?.isAdmin)">
+                Close Contract
+              </button>
+
+              <!-- Re-Submit for Approval -->
+              <button type="button" class="btn btn-success" (click)="openApprovalModal(1)"
+                *ngIf="(contract?.contractAdminStatusId == 8 && contract?.approvalLevel == 1 && (contract?.isAdmin ||  (contract?.isCreator || contract?.isDraftReviewer))) || 
+                      (contract?.contractAdminStatusId == 8 && contract?.approvalLevel == 2 && (contract?.isAdmin || (contract?.isCreator || contract?.isDraftReviewer))) || 
+                      (contract?.contractAdminStatusId == 6 && contract?.approvalLevel == 1 && (contract?.isAdmin || (contract?.isCreator || contract?.isDraftReviewer)))">
+                Re-Submit for Approval
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade approver" id="approverModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content approver-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title">
+              {{
+                contract?.contractAdminStatusId == 1 && contract?.approvalLevel == 1 && (contract?.isAdmin || (contract?.isContractTool && contract?.isCreator)) 
+                ? 'Add Reviewer' 
+                : 'Add Approver'
+              }}
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+
+          <div class="modal-body">
+
+            <!-- Assigned To -->
+            <div class="mb-3">
+              <label class="form-label">
+                Assigned To <span class="text-danger">*</span>
+              </label>
+
+              <ng-select [items]="Userlist" bindLabel="commonName" bindValue="empEmidsID" placeholder="Search user"
+                [(ngModel)]="approver.assignedTo" [searchable]="true" [hideSelected]="true" [clearable]="true">
+              </ng-select>
+            </div>
+
+            <!-- Instructions -->
+            <div class="mb-3">
+              <label class="form-label">Comments</label>
+
+              <textarea class="form-control" rows="4" [(ngModel)]="approver.instructions"
+                placeholder="Please review and approve">
+          </textarea>
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="resetApproverForm()">
+              Cancel
+            </button>
+
+            <button type="button" class="btn btn-primary" (click)="openConfirmPopup()">
+              Save
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="approvalModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title">
+              Add Comments
+            </h5>
+
+            <button class="btn-close" data-bs-dismiss="modal">
+            </button>
+          </div>
+
+          <div class="modal-body">
+
+            <!-- <label class="form-label">
+                    Comments
+                </label> -->
+
+            <textarea rows="5" class="form-control" [(ngModel)]="approver.instructions"
+              placeholder="Enter your comments">
+                </textarea>
+
+          </div>
+
+          <div class="modal-footer">
+
+            <button class="btn btn-secondary" data-bs-dismiss="modal">
+              Cancel
+            </button>
+            <button type="button" class="btn btn-primary" [disabled]="isSubmitting" (click)="submitApproval()">
+
+              {{ approvalStatus == 2 ? 'Reject' : 'Submit' }}
+
+            </button>
+            <!-- <button
+                    class="btn btn-primary"
+                    (click)="submitApproval()">
+
+                    {{ approvalStatus == 2 ? 'Reject' : 'Submit' }}
+
+                </button> -->
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="modal fade" id="confirmApproverModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title">Confirmation</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal">
+            </button>
+          </div>
+
+          <div class="modal-body">
+            Please confirm that <strong>{{ getSelectedApproverName() }}</strong> is the correct Reviewer?
+          </div>
+
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-secondary" (click)="closeConfirmModal()">
+              No
+            </button>
+
+            <button type="button" class="btn btn-primary" (click)="confirmSaveApprover()">
+              Yes
+            </button>
+
+          </div>
+
+        </div>
+      </div>
+    </div>

@@ -1,0 +1,34 @@
+<!-- upload icon -->
+<div class="mt-4 col-lg-12 col-md-12 role-input" *ngIf="addIcon">
+  <label for="forRoleName" class="form-label mt-md-4 mt-2">Add Icon</label>
+
+  <button class="upload-files" onclick="document.getElementById('getIcon').click()">Browse File</button>
+  <input type='file' id="getIcon" style="display:none" (change)="onSelectIconFile($event)" alt=""
+    onclick="this.value=null;" title="Browse File">
+  <div class="display-file-text" *ngIf="sectionIcon">
+    <a>Uploaded Icon:</a><span (click)="iconDownload()"><a>{{sectionIcon}}
+        <span (click)="removeImage('icon')"><img src="./assets/images/page-title-icons/cross.png"
+            class="cross-icon img-fluid"></span>
+      </a></span>
+  </div>
+</div>
+
+<!-- upload image -->
+<div class="mt-4 col-lg-5 col-md-12 role-input" *ngIf="!addIcon">
+  <label for="forRoleName" class="form-label">{{label}} Image</label>
+  <div class="dragdrop-wrap">
+    <div class="drag-drop-folder-box">
+      <ngx-dropzone class="drag-drop" (change)="onSelectFile($event, 'drop')">
+        <ngx-dropzone-label>Drag and drop your file here</ngx-dropzone-label>
+      </ngx-dropzone>
+    </div>
+    <div class="or-space"><strong>OR</strong></div>
+    <button onclick="document.getElementById('getFile').click()">Browse File</button>
+    <input type='file' id="getFile" style="display:none" (change)="onSelectFile($event, 'select')" alt=""
+      onclick="this.value=null;" title="Browse File">
+  </div>
+  <div class="display-file-text" *ngIf="imageUrl">
+    <a>Uploaded:</a><span (click)="imageDownload()"><a>{{imageUrl}}<span (click)="removeImage('image')"><img
+            src="./assets/images/page-title-icons/cross.png" class="cross-icon img-fluid"></span></a></span>
+  </div>
+</div>

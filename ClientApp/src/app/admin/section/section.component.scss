@@ -1,0 +1,176 @@
+// .edit-delete a {
+//     display: inline-flex;
+//     width: auto;
+//     color: #d8d8d8;
+//     margin-right: 20px;
+// }
+
+th {
+    color: #000 !important;
+}
+
+// .edit-delete {
+//     display: flex;
+// }
+
+.table> :not(:first-child) {
+    border: 0px;
+}
+
+
+
+/*table tr td:nth-child(2) {
+  padding-left: 5% !important;
+}*/
+
+tr:nth-child(even) {
+    background-color: #F8F9FA;
+}
+
+tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+// .bi-pencil-fill:hover,
+// .bi-trash-fill:hover {
+//     color: #F72265;
+// }
+tbody tr td:nth-child(4) {
+    word-break: break-all;
+    word-wrap:break-word;
+    
+  }
+.form-search {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 0px 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px #f1f1f1;
+}
+
+.form-search svg {
+    color: #737878;
+}
+
+.form-search input {
+    border: none;
+}
+
+.form-search input:focus {
+    box-shadow: none;
+}
+
+.search-row-th th {
+    padding-top: 0px !important;
+}
+
+// .pagination {
+//     float: right;
+//     margin: 0 0 5px;
+// }
+
+// .pagination li a {
+//     border: none;
+//     font-size: 95%;
+//     width: 30px;
+//     height: 30px;
+//     color: #999 !important;
+//     margin: 0 2px;
+//     line-height: 30px;
+//     border-radius: 30px !important;
+//     text-align: center;
+//     padding: 0;
+// }
+
+// .pagination li a:hover {
+//     color: #666;
+// }
+
+// .pagination li.active a {
+//     background: #eef2ff !important;
+// }
+
+// .pagination li.active a:hover {
+//     border: 1px solid #eef2ff;
+// }
+
+// .pagination li.disabled i {
+//     color: #ccc;
+// }
+
+// .pagination li i {
+//     font-size: 16px;
+//     padding-top: 6px
+// }
+
+.hint-text {
+    float: left;
+    margin-top: 6px;
+    font-size: 95%;
+}
+
+.functionality-wrap ul {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+
+.functionality-wrap ul li {
+    float: left;
+    padding-left: 5px;
+}
+
+// .functionality-wrap ul li svg {
+//     width: 24px;
+//     height: 24px;
+
+// }
+
+// .functionality-wrap ul li span {
+//     text-decoration: none;
+//     color: #F72265;
+//     font-size: 16px;
+//     font-weight: bold;
+// }
+
+.functionality-wrap ul li a svg {
+    margin-right: 10px;
+}
+
+.functionality-wrap ul li strong {
+  font-size: 31px;
+  font-weight: 500;
+}
+
+.functionality-wrap ul li:first-child {
+    padding-left: 0px;
+}
+
+/* ------------------------------------------- on off switch css-------------------------------------------- */
+
+.functionality-wrap {
+    margin-bottom: 40px;
+}
+
+tbody tr td:nth-child(2) {
+    color: #533EED !important;
+    font-weight: 500;
+    padding-left: 4%;
+    cursor: pointer;
+}
+
+// .active-switch-wrap ul {
+//     padding: 0;
+//     list-style: none;
+//     display: inline-flex;
+//     width: 60%;
+//     justify-content: space-around;
+// }
+
+// .active-switch-wrap ul li {
+//     display: flex;
+//     align-items: center;
+// }
+

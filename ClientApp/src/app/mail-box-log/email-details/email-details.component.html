@@ -1,0 +1,15 @@
+ <div *ngIf="email" class="container">
+  <div class="back-button" (click)="goBack()" matTooltip="Go Back">
+    <img style="height: 25px;" src="../../../assets/images/left.png" alt="Back">
+  </div>
+
+  <h2>{{ email.subject }}</h2>
+  <div>
+    <p><strong>From:</strong> {{ email.fromEmail }}</p>
+    <p><strong>To:</strong> {{ getToList(email.toList) }}</p>
+    <p><strong>CC:</strong> {{ getCcList(email.ccList) }}</p>
+    <p><strong>Received:</strong> {{ email.emailReceivedDateTime | date: 'short' }}</p>
+  </div>
+  <div class="mail-body" [innerHTML]="email.body"></div>
+</div>
+

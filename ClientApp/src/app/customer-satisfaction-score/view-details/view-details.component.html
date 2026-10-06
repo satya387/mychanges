@@ -1,0 +1,401 @@
+<div class="popup-container">
+  <div class="header">
+    <h6 class="upload-text">View Details</h6>
+    <button class="cancel-button" (click)="onCloseClick()">&#10005;</button>
+  </div>
+  <div class="content">
+    <ng-container *ngFor="let item of viewData">
+      <div class="report-container">
+        <div>
+          <h5>Client and Project Details</h5>
+          <div class="top-section" style="border-color:black">
+
+            <div class="section-a">
+
+              <div class="section-content-a">
+                <div class="item">
+                  <span class="item-label">Cycle:</span>
+                  <span class="item-value">{{ item.cycle }}</span>
+                </div>
+                <div class="item">
+                  <span class="item-label">BU:</span>
+                  <span class="item-value">{{ item.bu }}</span>
+                </div>
+                <div class="item">
+                  <span class="item-label">Account Name:</span>
+                  <span class="item-value">{{ item.accountName }}</span>
+                </div>
+                <div class="item">
+                  <span class="item-label">Program / Project Name:</span>
+                  <span class="item-value">{{ item.programProjectName }}</span>
+                </div>
+                <div class="item">
+                  <span class="item-label">Client Respondent:</span>
+                  <span class="item-value">{{ item.clientRespondent }}</span>
+                </div>
+                <div class="item">
+                  <span class="item-label">Client Respondent Email:</span>
+                  <span class="item-value">{{ item.clientRespondentEmail }}</span>
+                </div>
+                <div class="item">
+                  <span class="item-label">Management Level:</span>
+                  <span class="item-value">{{ item.managementLevel }}</span>
+                </div>
+                <div class="item">
+                  <span class="item-label">Managing Partner:</span>
+                  <span class="item-value">{{ item.buHead }}</span>
+                </div>
+                <div class="item">
+                  <span class="item-label">Client Partner / Account Manager:</span>
+                  <span class="item-value">{{ item.clientPartnerAccountManager }}</span>
+                </div>
+                <div class="item">
+                  <span class="item-label">Focus Ac (Y/N):</span>
+                  <span class="item-value">{{ item.focusAc }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="section-b">
+              <div class="section-content-a">
+
+                <div class="item">
+                  <span class="item-label-b">Delivery Head:</span>
+                  <span class="item-value">{{ item.deliveryHead }}</span>
+                </div>
+                <div class="item">
+                  <span class="item-label-b">Delivery Manager:</span>
+                  <span class="item-value">{{ item.deliveryManager }}</span>
+                </div>
+                <div class="item">
+                  <span class="item-label-b">Project Manager:</span>
+                  <span class="item-value">{{ item.projectManager }}</span>
+                </div>
+                <div class="item">
+                  <span class="item-label-b">Studio Leader:</span>
+                  <span class="item-value">{{ item.studioLeader }}</span>
+                </div>
+                <div class="item">
+                  <span class="item-label-b">Studio:</span>
+                  <span class="item-value">{{ item.studio }}</span>
+                </div>
+                <div class="item">
+                  <span class="item-label-b">Sub Studio:</span>
+                  <span class="item-value">{{ item.subStudio }}</span>
+                </div>
+                <div class="item">
+                  <span class="item-label-b">Project Type (A/B/C):</span>
+                  <span class="item-value">{{ item.projectType }}</span>
+                </div>
+                <div class="item">
+                  <span class="item-label-b">Engagement Type:</span>
+                  <span class="item-value">{{ item.engagementType }}</span>
+                </div>
+                <!-- Add more fields as needed -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bottom-section" style="border-color:black">
+          <div class="section-c">
+            <h5>Feedback and Ratings</h5>
+            <div class="section-content" style="border-color:black">
+              <div class="item">
+                <span class="item-label-b">NPS Score:</span>
+                <span class="item-value">{{ item.npsScore }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label-b">NPS Category:</span>
+                <span class="item-value">{{ item.npsCategory }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label-b">Expectation 1:</span>
+                <span class="item-value">{{ item.expectation1 }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label-b">Exp 1 Rating:</span>
+                <span class="item-value">{{ item.exp1Rating }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label-b">Expectation 2:</span>
+                <span class="item-value">{{ item.expectation2 }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label-b">Exp 2 Rating:</span>
+                <span class="item-value">{{ item.exp2Rating }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label-b">Expectation 3:</span>
+                <span class="item-value">{{ item.expectation3 }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label-b">Exp 3 Rating:</span>
+                <span class="item-value">{{ item.exp3Rating }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="section-d" style="border-color:black">
+            <h5>Comprehensive Client Satisfaction and Performance Evaluation</h5>
+            <div class="section-content-d" style="border-color:black">
+              <div class="item-d">
+                <div class="item-content-d">
+                  <span class="item-label">You are very satisfied with your experience with Emids:</span>
+                  <span class="item-value">{{ item.verySatisfiedWithExperience }}</span>
+                </div>
+              </div>
+              <div class="item-d">
+                <div class="item-content-d">
+                  <span class="item-label">You will definitely choose Emids for your future requirements:</span>
+                  <span class="item-value">{{ item.willChooseForFutureRequirements }}</span>
+                </div>
+              </div>
+              <div class="item-d">
+                <div class="item-content-d">
+                  <span class="item-label">You believe that Emids delivers the best business value for your
+                    money:</span>
+                  <span class="item-value">{{ item.bestBusinessValueForMoney }}</span>
+                </div>
+              </div>
+              <div class="item-d">
+                <div class="item-content-d">
+                  <span class="item-label">Relationship management (business understanding, stakeholder mgmt., customer
+                    centricity):</span>
+                  <span class="item-value">{{ item.relationshipManagement }}</span>
+                </div>
+              </div>
+              <div class="item-d">
+                <div class="item-content-d">
+                  <span class="item-label">Resource management (availability of key resources, managing transition,
+                    knowledge transfer):</span>
+                  <span class="item-value">{{ item.resourceManagement }}</span>
+                </div>
+              </div>
+              <div class="item-d">
+                <div class="item-content-d">
+                  <span class="item-label">Quality of resources (knowledge, personnel, technical expertise):</span>
+                  <span class="item-value">{{ item.qualityOfResources }}</span>
+                </div>
+              </div>
+              <div class="item-d">
+                <div class="item-content-d">
+                  <span class="item-label">Execution excellence (program/project management, governance, coordination of
+                    multiple groups):</span>
+                  <span class="item-value">{{ item.executionExcellence }}</span>
+                </div>
+              </div>
+              <div class="item-d">
+                <div class="item-content-d">
+                  <span class="item-label">Delivering on project/program KPIs (SLA, Scope, Budget, Timelines):</span>
+                  <span class="item-value">{{ item.deliveringOnKPIs }}</span>
+                </div>
+              </div>
+              <div class="item-d">
+                <div class="item-content-d">
+                  <span class="item-label">Automation efforts to increase productivity/ efficiencies:</span>
+                  <span class="item-value">{{ item.automationEfforts }}</span>
+                </div>
+              </div>
+              <div class="item-d">
+                <div class="item-content-d">
+                  <span class="item-label">Quality of deliverables:</span>
+                  <span class="item-value">{{ item.qualityOfDeliverables }}</span>
+                </div>
+              </div>
+              <div class="item-d">
+                <div class="item-content-d">
+                  <span class="item-label">Leveraging agile/ DevOps to increase pace of deployment:</span>
+                  <span class="item-value">{{ item.leveragingAgileDevOps }}</span>
+                </div>
+              </div>
+              <div class="item-d">
+                <div class="item-content-d">
+                  <span class="item-label">Emids has a strong understanding of your industry / domain:</span>
+                  <span class="item-value">{{ item.strongIndustryUnderstanding }}</span>
+                </div>
+              </div>
+              <div class="item-d">
+                <div class="item-content-d">
+                  <span class="item-label">Emids showcases the right technology solutions that are contextual to your
+                    business needs:</span>
+                  <span class="item-value">{{ item.rightTechnologySolutions }}</span>
+                </div>
+              </div>
+              <div class="item-d">
+                <div class="item-content-d">
+                  <span class="item-label">Emids demonstrates the ability to own & deliver end to end programs:</span>
+                  <span class="item-value">{{ item.abilityToOwnDeliverPrograms }}</span>
+                </div>
+              </div>
+              <div class="item-d">
+                <div class="item-content-d">
+                  <span class="item-label">Emids adopts a consultative approach in crafting the right solutions for your
+                    needs :</span>
+                  <span class="item-value">{{ item.consultativeApproach }}</span>
+                </div>
+              </div>
+              <div class="item-d">
+                <div class="item-content-d">
+                  <span class="item-label">Emids actively brings ideas / suggestions to enhance your program outcomes
+                    :</span>
+                  <span class="item-value">{{ item.activelyBringsIdeas }}</span>
+                </div>
+              </div>
+              <div class="item-d">
+                <div class="item-content-d">
+                  <span class="item-label">Emids proactively engages in discussions beyond the contract :</span>
+                  <span class="item-value">{{ item.proactiveEngagements }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="section-e" style="border-color:black">
+            <h5 style="margin-top: 15px;">Comp Details</h5>
+            <div class="section-content" style="border-color:black">
+              <div class="item">
+                <span class="item-label">Comp1:</span>
+                <span class="item-value">{{ item.comp1 }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label">Reason1:</span>
+                <span class="item-value">{{ item.reason1 }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label">Comp2:</span>
+                <span class="item-value">{{ item.comp2 }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label">Reason2:</span>
+                <span class="item-value">{{ item.reason2 }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label">Comp3:</span>
+                <span class="item-value">{{ item.comp3 }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label">Reason3:</span>
+                <span class="item-value">{{ item.reason3 }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="section-f" style="border-color:black">
+            <h5>Differentiation and Strengths</h5>
+            <div class="section-content" style="border-color:black">
+              <div class="item">
+                <span class="item-label">What differentiates Emids:</span>
+                <span class="item-value">{{ item.differentiatesEmids }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label">Areas to strengthen:</span>
+                <span class="item-value">{{ item.areasToStrengthen }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label">Business Priority 1:</span>
+                <span class="item-value">{{ item.businessPriorities1 }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label">Business Priority 2:</span>
+                <span class="item-value">{{ item.businessPriorities2 }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label">Business Priority 3:</span>
+                <span class="item-value">{{ item.businessPriorities3 }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="section-g" style="border-color:black">
+            <h5>Emids Help and Capabilities</h5>
+            <div class="section-content" style="border-color:black">
+              <div class="item">
+                <span class="item-label">Emids Help 1:</span>
+                <span class="item-value">{{ item.emidsHelp1 }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label">Emids Help 2:</span>
+                <span class="item-value">{{ item.emidsHelp2 }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label">Emids Help 3:</span>
+                <span class="item-value">{{ item.emidsHelp3 }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="section-h" style="border-color:black">
+            <h5>Org-Wide Capabilities</h5>
+            <div class="section-content" style="border-color:black">
+              <div class="item">
+                <span class="item-label">Generative AI:</span>
+                <span class="item-value">{{ item.orgWideCapabilitiesGenerativeAI }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label">Product Strategy, Design & Engineering:</span>
+                <span class="item-value">{{ item.orgWideCapabilitiesProductStrategy }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label">Design-Led Engineering:</span>
+                <span class="item-value">{{ item.orgWideCapabilitiesDesignLedEngineering }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label">Modernization (Cloud migration and optimization):</span>
+                <span class="item-value">{{ item.orgWideCapabilitiesModernization }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label">Data Engineering (DI, DQ, DS):</span>
+                <span class="item-value">{{ item.orgWideCapabilitiesDataEngineering }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label">Interoperability:</span>
+                <span class="item-value">{{ item.orgWideCapabilitiesInteroperability }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label">Automation:</span>
+                <span class="item-value">{{ item.orgWideCapabilitiesAutomation }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="section-i" style="border-color:black">
+            <h5>Platform Implementation and Healthcare Capabilities</h5>
+            <div class="section-content" style="border-color:black">
+              <div class="item">
+                <span class="item-label">Platform Implementation:</span>
+                <span class="item-value">{{ item.platformImplementation }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label">Healthcare Core Platforms:</span>
+                <span class="item-value">{{ item.hcDomainCapabilitiesCareManagement }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label">Population Health:</span>
+                <span class="item-value">{{ item.hcDomainCapabilitiesPopulationHealth }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label">Member Experience:</span>
+                <span class="item-value">{{ item.hcDomainCapabilitiesMemberExperience }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label">Revenue Cycle Management:</span>
+                <span class="item-value">{{ item.hcDomainCapabilitiesRevenueCycleManagement }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label">Payment Integrity:</span>
+                <span class="item-value">{{ item.hcDomainCapabilitiesPaymentIntegrity }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label">Claims Management:</span>
+                <span class="item-value">{{ item.hcDomainCapabilitiesClaimsManagement }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label">PBM:</span>
+                <span class="item-value">{{ item.hcDomainCapabilitiesPBM }}</span>
+              </div>
+              <div class="item">
+                <span class="item-label">Clinical Trials:</span>
+                <span class="item-value">{{ item.hcDomainCapabilitiesClinicalTrials }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+</div>

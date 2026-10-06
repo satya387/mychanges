@@ -1,0 +1,32 @@
+
+  <!-- <div class="modal-header">
+  <h4 class="modal-title">{{ title }}</h4>
+    <button type="button" class="close close-modalpopup" aria-label="Close" (click)="dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div> -->
+<!-- popup for deletion starts-->
+  <div class="modal-body text-center">
+    {{ message }}
+
+    <div class="big-button-bottom">
+      <ul class="text-center">
+        <li> <button type="button" (click)="accept()">{{ btnOkText }}</button></li>
+        <li><button type="button" (click)="decline()">{{ btnCancelText }}</button></li></ul>
+    </div>
+  </div>
+<!-- popup for deletion ends-->
+
+<!-- popup for dimensions mismatch -->
+<!-- <div class="modal-body text-center">
+  <p>Image dimensions for <b>test-background.jpg</b> and <b>test-background2.jpg</b> are too large<br/>
+    and could not be uploaded.<br/>please reduce the dimensions and try again.
+  </p>
+
+  <div class="big-button-bottom1">
+    <ul class="text-center">
+      <li> <button type="button" (click)="accept()">{{ btnOkText }}</button></li>
+   
+    </ul>
+  </div>
+</div> -->

@@ -1,0 +1,402 @@
+/* ================= CONTAINER ================= */
+
+.dashboard-container {
+  background-color: #ffffff;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ================= SEARCH SECTION ================= */
+
+.search-filter-section {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 30px;
+}
+
+.search-box {
+  flex: 1;
+  height: 56px;
+  border: 1px solid #d9dde3;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  background: #ffffff;
+}
+
+.search-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  background: transparent;
+  padding: 0 12px;
+}
+
+.search-box input::placeholder {
+  color: #9ca3af;
+}
+
+.search-icon,
+.close-icon {
+  font-size: 18px;
+  color: #6b7280;
+}
+
+.close-icon {
+  cursor: pointer;
+}
+
+/* ================= TOP ACTIONS ================= */
+
+.top-actions {
+  display: flex;
+  align-items: center;
+}
+
+.new-btn {
+  background: #000;
+  color: #fff;
+  border: none;
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.new-btn:hover {
+  background: #0d755f;
+}
+
+/* ================= TABLE SECTION ================= */
+
+.table-section {
+  width: 100%;
+  overflow-x: auto;
+  background: #fff;
+}
+/* ================= TABLE HEADER ================= */
+
+.styled-table thead tr {
+  background-color: #1e0a78 !important;
+}
+
+.styled-table thead th {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  text-align: left !important;
+  padding: 8px 6px !important;   /* reduced */
+  white-space: nowrap !important;
+  font-size: 12px !important;    /* reduced */
+  line-height: 1.2 !important;
+}
+
+/* ================= TABLE BODY ================= */
+
+.styled-table td {
+  padding: 6px 6px !important;   /* reduced from 14px 8px */
+  border-bottom: 1px solid #f3f4f6 !important;
+  font-size: 12px !important;    /* reduced */
+  color: #374151 !important;
+  line-height: 1.2 !important;
+}
+
+/* Compact row height */
+.styled-table tbody tr {
+  height: 32px !important;
+}
+
+.id-column {
+    min-width: 140px;
+    white-space: nowrap;
+}
+
+.id-column span {
+    white-space: nowrap;
+    display: inline-block;
+}
+/* Compact action button */
+.dots-btn {
+  width: 28px !important;
+  height: 28px !important;
+  font-size: 14px !important;
+}
+
+/* Compact action menu icons */
+.menu-item {
+  width: 30px !important;
+  height: 30px !important;
+}
+
+/* Smaller ellipsis cells */
+.ellipsis-cell {
+  max-width: 100px !important;
+}
+
+/* Smaller status text */
+.status {
+  font-size: 12px !important;
+}
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* ================= TABLE HEADER ================= */
+
+.styled-table thead tr {
+  background-color: #1e0a78;
+}
+
+.styled-table thead th {
+  color: #ffffff;
+  font-weight: 600;
+  text-align: left;
+  padding: 12px;
+  white-space: nowrap;
+  font-size: 13px;
+}
+
+/* ================= TABLE BODY ================= */
+
+.styled-table td {
+  padding: 14px 8px;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 14px;
+  color: #374151;
+}
+
+.styled-table tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+/* ================= ELLIPSIS ================= */
+
+.ellipsis-cell {
+  display: inline-block;
+  max-width: 150px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+/* ================= STATUS ================= */
+
+.status.active {
+  color: green;
+  font-weight: 600;
+}
+
+.status.Closed {
+  color: red;
+  font-weight: 600;
+}
+
+/* ================= ACTION COLUMN ================= */
+
+.action-col,
+.actions {
+  text-align: center;
+}
+
+.action-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dots-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: #f2f3f5;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dots-btn:hover {
+  background: #e5e7eb;
+}
+
+/* ================= DROPDOWN MENU ================= */
+
+.action-menu {
+  position: absolute;
+  top: 42px;
+  right: 0;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  padding: 6px;
+  display: flex;
+  gap: 8px;
+  z-index: 1000;
+}
+
+.menu-item {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: #f8f9fa;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.menu-item i {
+  font-size: 16px;
+}
+
+.menu-item.edit i {
+  color: #2563eb;
+}
+
+.menu-item.delete i {
+  color: #dc2626;
+}
+
+.menu-item.edit:hover {
+  background: #eff6ff;
+}
+
+.menu-item.delete:hover {
+  background: #fef2f2;
+}
+
+.menu-item:hover {
+  transform: scale(1.08);
+}
+
+/* ================= PAGINATION ================= */
+
+button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ================= LOADING & ERROR ================= */
+
+.loading,
+.error {
+  padding: 15px;
+  text-align: center;
+}
+
+.error {
+  color: red;
+}
+
+/* ================= DELETE MODAL ================= */
+
+.custom-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.custom-modal {
+  background: #fff;
+  width: 350px;
+  max-width: 90%;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  animation: popupFade 0.2s ease;
+}
+
+.modal-header {
+  background: #160c63;
+  color: #fff;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+}
+
+.modal-body {
+  padding: 16px;
+  font-size: 14px;
+  color: #333;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 12px;
+}
+
+.cancel-btn,
+.delete-btn {
+  border: none;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background: #6b7280;
+}
+
+.cancel-btn:hover {
+  background: #4b5563;
+}
+
+.delete-btn {
+  background: #dc2626;
+}
+
+.delete-btn:hover {
+  background: #b91c1c;
+}
+
+.close-btn {
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.delete-btn:active,
+.cancel-btn:active {
+  transform: scale(0.96);
+}
+
+/* ================= ANIMATION ================= */
+
+@keyframes popupFade {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

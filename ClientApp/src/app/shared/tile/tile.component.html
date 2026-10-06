@@ -1,0 +1,205 @@
+<div class="row" *ngIf="sectionPersonalized">
+  <div class="col-md-10 modified-save-close-btn modified-save-close-btn-section">
+    <ul>
+      <!-- <li><button (click)="savePersonalizedSection()">SAVE</button></li> -->
+      <li><button (click)="cancelPersonalizedSection()">CLOSE</button></li>
+    </ul>
+  </div>
+</div>
+<div class="row mb-4 pb-4" *ngIf="showOnlyBookmark == false">
+  <div class="col-md-6 col-lg-3 col-xl-3 section-mb md-ms-0 mt-0 mb-md-1 mb-2 mb-md-0 m-md-0 d-grid"
+    *ngFor="let item of dataList| filter:moduleSearchText; let i = index">
+    <div class="inner-card-tile" [ngClass]="{
+        'show-tiles': showTiles && selectedSection === item.moduleName,
+        'inner-card-tile1': !sectionPersonalized
+      }">
+      <div class="personalize-tile-wrap" *ngIf="sectionPersonalized">
+        <div class="personalize-tile">
+          <div class="personalize-active-and-order" 
+        >
+          
+            <ul>
+              <li *ngIf="item.isActive" class="activeswitch"></li>
+              <li *ngIf="!item.isActive" class="inactiveswitch"></li>
+              <li>
+                <label class="switch">
+                  <input type="checkbox" checked [(ngModel)]="item.isActive" />
+                  <span class="swtch-toggle round" (click)="statusToggle(item)" data-bs-toggle="tooltip"
+                    placement="bottom"
+                    [ngbTooltip]="item.isActive ? 'Active' : 'InActive'"></span>
+                </label>
+              </li>
+            </ul>
+          </div>
+          <div class="personalize-active-and-order ordd" style="display: none;"  [ngClass]="{'personalize-status': sectionPersonalized && item.tilesCount === 0}">
+            <label style="left: 6px;">Order</label>
+            <select (change)="updateDisplayOrder($event, item)" [(ngModel)]="item.displayOrder">
+              <option *ngFor="let order of dataList; let i = index">
+                {{ i + 1 }}
+              </option>
+            </select>
+          </div>
+          <div class="personalize-active-and-order prpp" *ngIf="item.tilesCount > 0">
+            <a (click)="personalizeTiles(item, i)" title="Click to Personalize Tiles">
+              <img src="./../../assets/images/pencil.png" style="width: 15px;height: 15px;"/>
+            </a>
+        </div>
+        </div>
+      </div>
+      <div class="inner-card-header" (click)="redirectSectionUrl(item)">
+        <ul class="pull-left">
+          <li>
+            <img [src]="item.iconUrl" />
+          </li>
+          <li [ngClass]="{ 'show-tilename': selectedSection === item.moduleName}" class="moduleTile" [title]="item.moduleName">
+            {{ item.moduleName }}
+          </li>
+        </ul>
+
+        <span (click)="onPinIconClick(item, $event)" class="pin-container pull-right"> 
+          <img *ngIf="item.isPinned === false" class="pin" src="./../../assets/images/pin-outline.svg" />
+          <img *ngIf="item.isPinned === true" class="pin" src="./../../assets/images/pin-solid.svg" />
+        </span>
+
+        <p class="badge mb-4 mb-xl-0 pull-right" *ngIf="sectionPersonalized && item.tilesCount > 0"
+          (click)="showAssignedTiles(item, i); $event.stopPropagation()"
+          [ngClass]="{ 'show-tilebox': selectedSection === item.moduleName }"
+          data-bs-toggle="tooltip"
+                    placement="bottom"
+                    ngbTooltip="{{ item.tilesCount}} tiles assigned">
+          <span [ngClass]="{
+              'show-tiles-border': selectedSection === item.moduleName
+            }">&nbsp;&nbsp;&nbsp;&nbsp;{{ item.tilesCount}}&nbsp;&nbsp;&nbsp;&nbsp;
+            <img *ngIf="selectedSection !== item.moduleName" class="arrow-up-down"
+              src="./../../assets/images/home-tile-imgs/section-after-arrow.png" />
+            <img *ngIf="selectedSection === item.moduleName" class="arrow-up-down"
+              src="./../../assets/images/home-tile-imgs/section-up-arrow.png" />
+          </span>
+          
+        </p>
+        <p class="badge mb-4 mb-xl-0  pull-right" *ngIf="!sectionPersonalized && item.activeTileCount > 0"
+          (click)="showAssignedTiles(item, i); $event.stopPropagation()"
+          [ngClass]="{ 'show-tilebox': selectedSection === item.moduleName }"
+          data-bs-toggle="tooltip"
+                    placement="bottom"
+                    ngbTooltip="{{item.activeTileCount}} tiles assigned">
+          <span [ngClass]="{
+              'show-tiles-border': selectedSection === item.moduleName
+            }">&nbsp;&nbsp;&nbsp;&nbsp;{{item.activeTileCount}} &nbsp;&nbsp;&nbsp;&nbsp;
+            <img *ngIf="selectedSection !== item.moduleName" class="arrow-up-down"
+              src="./../../assets/images/home-tile-imgs/section-after-arrow.png" />
+            <img *ngIf="selectedSection === item.moduleName" class="arrow-up-down"
+              src="./../../assets/images/home-tile-imgs/section-up-arrow.png" />
+          </span>
+        </p>
+
+        
+      </div>
+      <div class="inner-card-body" (click)="redirectSectionUrl(item)">
+        <img *ngIf="item.imageUrl" [src]="item.imageUrl" />
+        <img *ngIf="!item.imageUrl" src="../../../assets/images/section_no_image.png" />
+      </div>
+
+      <!-- [ngClass]="{'tile-blue-bg1':item.activeTilesList.Length <= 6, 'tile-blue-bg': item.activeTilesList.length > 6}" -->
+    </div>
+    <div class="tile-blue-bg" *ngIf="item.showTiles && item.activeTilesList.length" [ngClass]="{
+        'tile-blue-bg-six-tiles': item.activeTilesList.length <= 6,
+        'tile-personalise-six':
+          tilesPersonalized && item.activeTilesList.length <= 6,
+        'tile-personalise': tilesPersonalized && item.activeTilesList.length > 6
+      }">
+      <div class="container">
+        <!-- <div class="heading-and-close-icon1" *ngIf="tilesPersonalized"></div> -->
+        <div class="col-12">
+          <div class="heading-and-close-icon">
+            <!--<h3 *ngIf="tilesPersonalized">PERSONALIZE TILES</h3>-->
+            <span class="close-btn" (click)="closeTiles(item)">
+              <i class="ri-close-fill"></i>
+            </span>
+          </div>
+          <div class="row tile-border-wrap">
+            <div class="col-6 col-xxl-2 col-xl-2 col-lg-3 col-md-3 d-flex p-1"
+              *ngFor="let tile of activeTilesList.slice(0, 11); let i = index">
+              <div class="col-12 tile-border tile-border-edit-mode m-0">
+                <div class="personalize-tile" *ngIf="tilesPersonalized" style="width: 95%;">
+                  <div class="personalize-active-and-order" *ngIf="tilesPersonalized">
+                    <ul>
+                      <li *ngIf="tile.isActive" class="activeswitch"></li>
+                      <li *ngIf="!tile.isActive" class="inactiveswitch">
+                        
+                      </li>
+                      <li>
+                        <label class="switch">
+                          <input type="checkbox" checked [(ngModel)]="tile.isActive" />
+                          <!--<span class="swtch-toggle round" (click)="
+                              statusToggleTile(tile); $event.stopPropagation()
+                            "></span>-->
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="personalize-active-and-order" style="display: none;">
+                    <select (change)="updateTileDisplayOrder($event, tile);  $event.stopPropagation();"
+                      [(ngModel)]="tile.displayOrder">
+                      <option *ngFor="let order of activeTilesList; let in = index">
+                        {{ in + 1 }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-12 inside-tile-imgs text-center" (click)="openTileUrl(tile)">
+                  <a class="inside-tile" target="_blank">
+                    <img [src]="tile.iconUrl" />
+                    <p>{{ tile.name }}</p>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-6 col-xxl-2 col-xl-2 col-lg-3 col-md-3 d-flex tile-border1"
+              *ngIf="activeTilesList.length > 11" (click)="navigateToViewAll(item)">
+              <p>View All</p>
+              <!-- <app-view-all-tiles [sectionName]="selectedSection" [tilesList]="activeTilesList"></app-view-all-tiles> -->
+            </div>
+          </div>
+        </div>
+        <div class="row modified-save-close-btn1" *ngIf="tilesPersonalized">
+          <ul>
+            <li><button (click)="closeTiles(item)">CLOSE</button></li>
+            <li><button (click)="closeTiles(item)" style="display: none;">CLOSE</button></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-4 pb-4">
+  <h4>&nbsp;&nbsp;My Bookmarks</h4>
+  <div class="col-md-6 col-lg-3 col-xl-3 section-mb md-ms-0 mt-0 mb-md-1 mb-2 mb-md-0 m-md-0 d-grid" *ngFor="let item of bookmarkList; let i = index">
+    <div class="inner-card-tile bookmark-inner-card-tile">
+      <div class="inner-card-header d-xl-flex justify-content-between" (click)="onbookmarkClick(item)">
+        <ul>
+          <li>
+            <img [src]="item.iconUrl" />
+          </li>
+          <li class="moduleTile" [title]=" item.bookMarkName">
+            {{ item.bookMarkName }}
+          </li>
+        </ul>
+        <div (click)="deleteBookmarkDetails(item.bookMarkId); $event.stopPropagation();" style="float: right; cursor: pointer;" title="Click to delete bookmark">&#10006;</div>
+
+      </div>
+      <div class="inner-card-body" (click)="onbookmarkClick(item)">
+        <img *ngIf="item.storageAccountImagePath" [src]="item.storageAccountImagePath" />
+        <img *ngIf="!item.storageAccountImagePath" src="../../../assets/images/section_no_image.png" />
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngIf="bookmarkList.length == 0">
+    <h6 style="text-indent: 10px;">Currently you do not have any bookmarks added</h6>
+  </ng-container>
+</div>
+
+<!-- --------------------- -->

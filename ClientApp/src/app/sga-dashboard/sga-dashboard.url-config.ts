@@ -1,0 +1,16 @@
+import {environment} from 'src/environments/environment';
+
+const BASE_URL = environment.apiBaseUrl;
+const CONTROLLER_NAME = 'SGADashboard';
+
+export const SGA_URL = {
+    GET_SGA_HTML_REPORT : BASE_URL + CONTROLLER_NAME +'/GetSGAHtmlReport',
+    GET_SGA_ALL_ACCOUNTS_BY_EMP_ID : BASE_URL + CONTROLLER_NAME +'/GetAllAccountsByEmployeeId',
+    GET_SGA_DASHBOARD_DATA_BY_EMPLOYEE_FUNCTION : BASE_URL + CONTROLLER_NAME+ '/GetSGADashboardDataEmployeeLevelByFunction',
+    GET_SGA_DASHBOARD_DATA_BY_GROUP_FUNCTION : BASE_URL + CONTROLLER_NAME+ '/GetSGADashboardDataGroupLevelByFunction',
+    GET_SGA_DASHBOARD_OVERALL_DATA : BASE_URL + CONTROLLER_NAME+ '/GetSGADashboardOverAllData',
+    GET_SGA_ACCESSBY_EMPEMIDS_ID : BASE_URL + CONTROLLER_NAME + '/GetSGAAccessByEmpemidsId',
+    GET_SGA_DASHBOARD_DATAFORGRAPH : BASE_URL + CONTROLLER_NAME + '/GetSGADashboardDataForGraph',
+    GET_SGA_DASHBOARD_DATAGROUPLEVELFORGRAPH : BASE_URL + CONTROLLER_NAME + '/GetSGADashboardDataGroupLevelForGraph',
+    GET_SGA_DASHBOARD_OVER_ALL_DATAFORGRAPH : BASE_URL + CONTROLLER_NAME + '/GetSGADashboardOverAllDataForGraph'
+}

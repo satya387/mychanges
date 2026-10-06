@@ -1,0 +1,32 @@
+body {
+    position: relative;
+}
+
+// .footer-wrapper {
+//     position: absolute;
+//     bottom: 0;
+// }
+.footer {
+    list-style: none;
+    padding: 0;
+    display: inline-block;
+}
+
+.footer li {
+    float: left;
+    padding-right: 20px;
+    color: #0D0359;
+    font-weight: 500;
+    font-size: 10px;
+}
+
+@media(max-width:480px) {
+    .footer {
+        display: grid;
+        justify-content: center;
+        text-align: center;
+    }
+    .footer li {
+        padding-right: 0;
+    }
+}

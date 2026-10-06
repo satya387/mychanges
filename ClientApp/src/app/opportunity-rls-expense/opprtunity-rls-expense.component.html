@@ -1,0 +1,288 @@
+<div *ngIf="createPageValue && !showGraphDashboard" class="secondary-page">
+  <div class="back-button" title="Back" data-toggle="tooltip">
+    <span (click)="goBack()">
+      <svg width="35px" height="35px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" fill="#0fe4bd" stroke="#0fe4bd" stroke-width="0.6719999999999999">
+        <g id="SVGRepo_bgCarrier" stroke-width="0" />
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+        <g id="SVGRepo_iconCarrier">
+          <g id="icomoon-ignore"></g>
+          <path
+            d="M14.389 7.956v4.374l1.056 0.010c7.335 0.071 11.466 3.333 12.543 9.944-4.029-4.661-8.675-4.663-12.532-4.664h-1.067v4.337l-9.884-7.001 9.884-7zM15.456 5.893l-12.795 9.063 12.795 9.063v-5.332c5.121 0.002 9.869 0.26 13.884 7.42 0-4.547-0.751-14.706-13.884-14.833v-5.381z"
+            fill="#0fe4bd"></path>
+        </g>
+      </svg>
+    </span>
+  </div>
+  <div style="margin-top: 50px;">
+  <!-- <app-ssrs-report></app-ssrs-report> -->
+  <app-opportunity></app-opportunity>
+  <app-rls></app-rls>
+  <app-expense></app-expense>
+
+ 
+  <div class="modal-overlay" *ngIf="isContingencyModalOpen" (click)="closeContingencyModal()"></div>
+<div class="modal-container" *ngIf="isContingencyModalOpen">
+  <app-contingency (closeContingencyModalValue)="closeContingencyModal()"></app-contingency>
+  <div class="button-container-contingency">
+  <button [hidden]="!isDiscountEditable" class="modal-save" (click)="saveContingencyModal()">Save</button>
+  <!-- <button class="modal-close" (click)="closeContingencyModal()">Close</button> -->
+</div>
+</div>
+  <!-- <app-contingency class="contingency-modal" *ngIf="isContingencyModalOpen"></app-contingency> -->
+
+  <div *ngIf="isDiscountActive && isDiscountFresh && opportunityValue?.name" class="opportunity-row discount">
+    <label>
+      <strong> Click here to apply discount</strong>
+      <a class="openDiscountModal" (click)="openDiscountModal()">
+        <svg fill="#0d0357" width="18px" height="18px" viewBox="0 0 32 32" version="1.1"
+          xmlns="http://www.w3.org/2000/svg">
+          <g id="SVGRepo_bgCarrier" stroke-width="0" />
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+          <g id="SVGRepo_iconCarrier">
+            <path
+              d="M15.694 13.541l2.666 2.665 5.016-5.017 2.59 2.59 0.004-7.734-7.785-0.046 2.526 2.525-5.017 5.017zM25.926 16.945l-1.92-1.947 0.035 9.007-16.015 0.009 0.016-15.973 8.958-0.040-2-2h-7c-1.104 0-2 0.896-2 2v16c0 1.104 0.896 2 2 2h16c1.104 0 2-0.896 2-2l-0.074-7.056z" />
+          </g>
+        </svg>
+      </a>
+    </label>
+  </div>
+
+  <div class="role-section" *ngIf="!isDiscountFresh">
+    <div class="role-header">
+      <h2>Discount</h2>
+    </div>
+    <div class="panel-content">
+      <div class="row">
+        <div>
+          <label for="discountType">Type:</label>
+          <span class="disc" id="discountType">
+            {{ selectedDiscountType }}
+          </span>
+     
+        </div>
+        <div>
+          <label for="discountPercentage">Percentage:</label>
+          <span class="disc" id="discountPercentage">
+            {{ selectedDiscountPercentage }}
+          </span>
+   
+        </div>
+        <div>
+          <span *ngIf="isDiscountEditable" class="edit-discount" (click)="openDiscountModal()"
+            title="Edit Discount">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil"
+              viewBox="0 0 16 16">
+              <path
+                d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325" />
+            </svg>
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="contingencyEnabled" class="opportunity-row discount">
+    <label>
+      <strong> Bill Rate & Cost Increment / Contingency %</strong>
+      <a class="openContingencyModal" (click)="openContingencyModal()">
+        <svg fill="#0d0357" width="18px" height="18px" viewBox="0 0 32 32" version="1.1"
+          xmlns="http://www.w3.org/2000/svg">
+          <g id="SVGRepo_bgCarrier" stroke-width="0" />
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+          <g id="SVGRepo_iconCarrier">
+            <path
+              d="M15.694 13.541l2.666 2.665 5.016-5.017 2.59 2.59 0.004-7.734-7.785-0.046 2.526 2.525-5.017 5.017zM25.926 16.945l-1.92-1.947 0.035 9.007-16.015 0.009 0.016-15.973 8.958-0.040-2-2h-7c-1.104 0-2 0.896-2 2v16c0 1.104 0.896 2 2 2h16c1.104 0 2-0.896 2-2l-0.074-7.056z" />
+          </g>
+        </svg>
+      </a>
+    </label>
+  </div>
+
+
+
+  <!-- <div *ngIf="contingencyEnabled" class="opportunity-row contingencyPercentage">
+    <label>
+      <strong>Contingency Percentage:</strong>
+    </label>
+    <input type="number" class="contingency" id="contingencyPercentage" [(ngModel)]="selectedContingencyPercentage"
+      min="0" (keydown)="preventKeys($event)" (paste)="preventPaste($event)" [disabled]="!isContingencySaveEnabled"/>
+
+    <a *ngIf="isContingencySaveEnabled" class="contingencyIcon" (click)="saveContingencyPercent()"><svg width="25px" height="25px" viewBox="0 0 24.00 24.00" fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <g id="SVGRepo_bgCarrier" stroke-width="0" />
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+        <g id="SVGRepo_iconCarrier">
+          <path
+            d="M8 20H6C4.89543 20 4 19.1046 4 18V6C4 4.89543 4.89543 4 6 4H9M8 20V14C8 13.4477 8.44772 13 9 13H15C15.5523 13 16 13.4477 16 14V20M8 20H16M16 20H18C19.1046 20 20 19.1046 20 18V8.82843C20 8.29799 19.7893 7.78929 19.4142 7.41421L16.5858 4.58579C16.2107 4.21071 15.702 4 15.1716 4H15M15 4V7C15 7.55228 14.5523 8 14 8H10C9.44772 8 9 7.55228 9 7V4M15 4H9"
+            stroke="#0d0359" stroke-width="1.08" stroke-linecap="round" stroke-linejoin="round" />
+        </g>
+      </svg></a>
+  </div> -->
+
+  <div class="button-container">
+    <!-- <div class="discount-btn">
+        <button *ngIf="isDiscountEnabled" class="discount-button" (click)="openDiscountModal()">Discount</button>
+      </div> -->
+    <div class="submit-btn">
+      <button *ngIf="isSubmitActive" class="submit-button" (click)="submitForApproval()">
+        Submit for Approval
+      </button>
+    </div>
+  </div>
+</div>
+</div>
+<div *ngIf="!createPageValue && !showGraphDashboard" class="main-page">
+  <app-opportunity-landing-page></app-opportunity-landing-page>
+</div>
+
+<div *ngIf="showGraphDashboard">
+  <div class="back-button" title="Back" data-toggle="tooltip">
+    <span (click)="goBack()">
+      <svg width="35px" height="35px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" fill="#0fe4bd" stroke="#0fe4bd" stroke-width="0.6719999999999999">
+        <g id="SVGRepo_bgCarrier" stroke-width="0" />
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+        <g id="SVGRepo_iconCarrier">
+          <g id="icomoon-ignore"></g>
+          <path
+            d="M14.389 7.956v4.374l1.056 0.010c7.335 0.071 11.466 3.333 12.543 9.944-4.029-4.661-8.675-4.663-12.532-4.664h-1.067v4.337l-9.884-7.001 9.884-7zM15.456 5.893l-12.795 9.063 12.795 9.063v-5.332c5.121 0.002 9.869 0.26 13.884 7.42 0-4.547-0.751-14.706-13.884-14.833v-5.381z"
+            fill="#0fe4bd"></path>
+        </g>
+      </svg>
+    </span>
+  </div>
+  <app-dashboard-charts></app-dashboard-charts>
+</div>
+
+<div class="modal" id="confirmSubmitModal" [hidden]="!showSubmitConfirm">
+  <div class="modal-content">
+    <h3>Confirm Submission</h3>
+    <p>Are you sure you want to submit this opportunity for approval?</p>
+    <div class="modal-actions">
+      <button class="btn confirm-btn" (click)="confirmSubmit()">Confirm</button>
+      <button class="btn cancel-btn" (click)="cancelSubmit()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isDiscountModalOpen" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Discount Details</h2>
+      <button class="modal-close-btn" (click)="closeDiscountModal()">x</button>
+    </div>
+
+    <div class="row dropdowns">
+      <div class="col-md-6 discType">
+        <label class="discountLabels" for="discountType">Type:</label>
+        <select class="disc" id="discountType" [(ngModel)]="selectedDiscountType">
+          <option value="Flat">Flat</option>
+          <option value="Staggered">Staggered</option>
+        </select>
+      </div>
+      <!-- <div class="col-md-4"></div> -->
+      <div class="col-md-6 discPer">
+        <label class="discountLabels" for="discountPercentage">Percentage:</label>
+        <input type="number" class="disc" id="discountPercentage" [(ngModel)]="selectedDiscountPercentage" min="0"
+          (keydown)="preventKeys($event)" (paste)="preventPaste($event)" />
+      </div>
+    </div>
+
+    <div class="tooltip-content">
+      <table class="tooltip-table-US">
+        <thead>
+          <!-- <tr>
+          <th style="text-align: center" colspan="9">US</th>
+        </tr> -->
+          <tr>
+            <th>Type</th>
+            <th>Low</th>
+            <th>High</th>
+            <th>Rate</th>
+            <th></th>
+            <th>Type</th>
+            <th>Low</th>
+            <th>High</th>
+            <th>Rate</th>
+            <!-- <th>SlabDisc</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Flat</td>
+            <td>-</td>
+            <td>100,000</td>
+            <td>0%</td>
+            <td></td>
+            <td>Staggered</td>
+            <td>-</td>
+            <td>100,000</td>
+            <td>0%</td>
+            <!-- <td>-</td>
+            <td>-</td> -->
+          </tr>
+          <tr>
+            <td>Flat</td>
+            <td>100,001</td>
+            <td>500,000</td>
+            <td>2%</td>
+            <td></td>
+            <td>Staggered</td>
+            <td>100,001</td>
+            <td>500,000</td>
+            <td>1%</td>
+            <!-- <td>4</td>
+            <td>4</td> -->
+          </tr>
+          <tr>
+            <td>Flat</td>
+            <td>500,001</td>
+            <td>700,000</td>
+            <td>3%</td>
+            <td></td>
+            <td>Staggered</td>
+            <td>500,001</td>
+            <td>700,000</td>
+            <td>2%</td>
+            <!-- <td>4</td>
+            <td>8</td> -->
+          </tr>
+          <tr>
+            <td>Flat</td>
+            <td>700,001</td>
+            <td>900,000</td>
+            <td>4%</td>
+            <td></td>
+            <td>Staggered</td>
+            <td>700,001</td>
+            <td>900,000</td>
+            <td>3%</td>
+            <!-- <td>6</td>
+            <td>14</td> -->
+          </tr>
+          <tr>
+            <td>Flat</td>
+            <td>900,001</td>
+            <td></td>
+            <td>5%</td>
+            <td></td>
+            <td>Staggered</td>
+            <td>900,001</td>
+            <td></td>
+            <td>4%</td>
+            <!-- <td></td>
+            <td></td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="submit-btn modal-actions">
+      <button *ngIf="isDiscountEditable" class="submit-button" (click)="applyDiscount()">
+        Apply Discount
+      </button>
+    </div>
+  </div>
+</div>

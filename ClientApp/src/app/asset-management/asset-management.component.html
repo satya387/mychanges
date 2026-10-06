@@ -1,0 +1,95 @@
+<div class="container-fluid">
+  <div class="row align-items-center" style="padding-top: 15px;">
+    <div class="col-md-3 mb-2">
+      <p class="head">Asset Management</p>
+    </div>
+    <div class="col-md-9 mb-2 d-flex justify-content-end align-items-center">
+      <div class="search me-3">
+        <input 
+          type="text" 
+          class="form-control" 
+          placeholder="Search"  
+          style="border: 2px solid #0BAB8E; height: 34px; width:250px; border-radius: 2px;"
+          [(ngModel)]="searchTerm"  
+          (input)="onSearch()" 
+        >
+      </div>
+      <div class="filte">
+        <div class="custom-select">
+          <div class="dropdown-icon start-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="22" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
+              <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z"/>
+            </svg>
+          </div>
+          <select id="locationFilter" [(ngModel)]="selectedType" (change)="onSearch()">
+            <option value="">All Category</option>
+            <option *ngFor="let type of TypeList" [value]="type.value">{{ type.value }}</option>
+          </select>
+          <div class="dropdown-icon end-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2" style="display: flex; align-items: center; justify-content: flex-end;">
+        <button (click)="onAdd()" class="btn btn-primary" >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16" style="margin-right: 8px;">
+            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+          </svg>
+          Add
+        </button>
+      </div>
+    </div>
+  </div>        
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-md-12">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Asset Number</th>
+                <th>Asset Name</th>
+                <th>Type</th>
+                <th>Category</th>
+                <th>Sub Category</th>
+                <th>Status</th>
+                <th>Owner Name</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let list of AMList | paginate  : {
+                itemsPerPage: limit,
+                currentPage: page,
+                totalItems: totalRecord }; let i = index">
+                <td>{{ list.assetNumber }}</td>
+                <td style="color: inherit ! important; text-decoration: none; cursor: default; text-align: center; ">{{ list.assetName }}</td>
+                <td >{{ list.assetType }}</td>
+                <td>{{ list.assetCategory }}</td>
+                <td >{{ list.assetSubCategory }}</td>
+                <td>{{ list.assetStatus }}</td>
+                <td>{{ list.ownerName }}</td>
+                <td (click)="editAsset(list.id)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0BAB8E" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468
+              7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z " />
+                  </svg>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="container" style="background-color: #F8F9FA;">
+            <span *ngIf="AMList?.length === 0">
+              <p class="text-center no-data">
+                No Data Found!
+              </p>
+            </span>
+          </div>
+        </div>
+        <div class="clearfix pagination-wrap">
+          <pagination-controls previousLabel="" nextLabel="" (pageChange)="onTableDataChange($event)">
+          </pagination-controls>
+        </div>
+    </div>
+</div>
+  

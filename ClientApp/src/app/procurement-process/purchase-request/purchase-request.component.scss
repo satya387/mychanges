@@ -1,0 +1,243 @@
+.btn-new-purchase-request {
+  background: #888;
+  /* Color of the scrollbar handle */
+  background-color: #0d0357;
+  color: white !important;
+  // text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+  padding-bottom: 0px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 14px;
+}
+
+.btn-new-purchase-request>svg {
+  fill: white !important;
+  /* Use the button's text color */
+  margin-right: 4px;
+  /* Add some space between the icon and text */
+}
+
+.btn-new-purchase-request>p {
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.btn-redirect-purchase-order {
+  background: #888;
+  /* Color of the scrollbar handle */
+  background-color: #0fe4bd;
+  color: white !important;
+  // text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+  padding-bottom: 0px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 14px;
+}
+
+.btn-redirect-purchase-order>svg {
+  fill: white !important;
+  /* Use the button's text color */
+  margin-right: 4px;
+  /* Add some space between the icon and text */
+}
+
+.btn-redirect-purchase-order>p {
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.btn-search-purchase-request {
+  background: #888;
+  /* Color of the scrollbar handle */
+  background-color: #0fe4bd;
+  color: white !important;
+  // text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+  padding-bottom: 0px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 14px;
+}
+
+.btn-search-purchase-request>svg {
+  fill: white !important;
+  /* Use the button's text color */
+  margin-right: 4px;
+  /* Add some space between the icon and text */
+}
+
+.btn-search-purchase-request>p {
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.pr-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+}
+
+.pr-table th,
+.pr-table td {
+  padding: 8px;
+  border-bottom: 1px solid #dddddd;
+  text-align: left;
+}
+
+.pr-table th {
+  background-color: #f2f2f2;
+}
+
+.pr-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.pr-table tbody tr td:nth-child(2) {
+  color: black !important;
+}
+
+.pr-table tbody tr:hover {
+  background-color: #e9e9e9;
+}
+
+.pr-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.edit {
+  color: #0fe4bd;
+  cursor: pointer;
+}
+
+.approve {
+  color: #0d0357;
+  cursor: pointer;
+}
+
+.reject {
+  color: red;
+  cursor: pointer;
+}
+
+.new-purchase-order {
+  color: #0d0357;
+  cursor: pointer;
+}
+
+.PRText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 250px;
+  /* Adjust as needed */
+}
+
+.PRText:hover {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: initial;
+}
+
+.check-fill {
+  display: flex;
+  gap: 10px;
+}
+
+.input-container {
+  position: relative;
+}
+
+.input-container input[type="text"] {
+  padding-right: 30px;
+  /* Space for the clear button */
+}
+
+.input-container .clear-button {
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  transform: translateY(-60%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.input-container .clear-button:focus {
+  outline: none;
+}
+
+.input-container .clear-button i {
+  color: #888;
+}
+
+.pr-actions {
+  width: 9rem;
+  display: flex;
+  justify-content: center;
+}
+
+th.search-bar.mrgn {
+  width: 9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.selected-tab {
+  color: white;
+  background-color: #0d0357;
+  border-radius: 4px;
+  min-width: 154px;
+  height: 42px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (min-width: 300px) and (max-width: 720px) {
+  .role-input {
+    width: 100% !important;
+    height: 50% !important;
+    margin-top: 15px;
+  }
+}
+
+@media screen and (min-width: 720px) and (max-width: 1024px) {
+  .role-input {
+    margin-top: 15px;
+  }
+
+  .startDate{
+    margin-left: 65px;
+  }
+
+.space{
+    width: 9%;
+  }
+  .btn-search-purchase-request {
+    height: 100%;
+    width: 185px;
+  }
+}
+@media screen and (min-width: 1000px) and (max-width: 1024px) {
+.space{
+    display: none;
+  }
+
+  .startDate{
+    margin-left: 110px;
+  }
+}

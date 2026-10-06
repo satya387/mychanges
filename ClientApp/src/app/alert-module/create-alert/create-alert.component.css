@@ -1,0 +1,387 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #fafafa;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  margin-top: 18px;
+  display: flex;
+  width: 96%;
+  max-width: 1400px; /* increased width */
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(74, 226, 185, 0.3), 0 4px 10px rgba(74, 226, 125, 0.2);
+  border: 1.5px solid #4a90e2;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  gap: 0;
+}
+
+.container:hover {
+  box-shadow: 0 20px 40px rgba(74, 144, 226, 0.45), 0 8px 20px rgba(74, 144, 226, 0.35);
+  transform: translateY(-5px);
+}
+
+.form-section, .middle-panel, .right-panel {
+  padding: 5px;
+  width: 33%; /* three equal columns */
+  box-sizing: border-box;
+}
+
+.form-section {
+  border-right: 1px solid #ddd;
+}
+
+.middle-panel {
+  border-right: 1px solid #ddd;
+}
+
+/* right-panel has no border-right */
+
+fieldset {
+  border: 1.5px solid #ccc;
+  border-radius: 6px;
+  padding: 10px 10px 10px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  position: relative;
+
+  width: 98%;       /* narrower than full container */
+  max-width: 600px; /* prevents excessive width on large screens */
+}
+
+legend {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #4a90e2;
+  padding: 0 8px;
+  position: absolute;
+  top: -0.7em;          /* Pull it up to overlap the border */
+  left: 1rem;           /* Align horizontally */
+  background: white;    /* Cover border underneath */
+  line-height: 1;
+}
+
+/* Label-control row styling */
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+  gap: 5px;
+}
+
+label {
+  width: 25%;
+  margin: 0;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-align: left;
+  padding-right: 4px;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+input, select, textarea {
+  width: 75%;
+  padding: 3px 5px;
+  border-radius: 4px;
+  border: 1.5px solid #ccc;
+  font-size: 0.85rem;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+textarea {
+  resize: vertical;
+  height: 50px;
+}
+
+button {
+  background: #4a90e2;
+  color: white;
+  border: none;
+  padding: 9px 0;
+  width: 100%;
+  font-weight: 700;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin-top: 10px;
+}
+
+h2 {
+  margin-bottom: 12px;
+  font-weight: 700;
+  color: #4a90e2;
+  font-size: 1rem;
+}
+
+label[for="Description"],
+label[for="ResponsiblePerson"],
+label[for="TargetResolutionDate"],
+label[for="responsiblePersonSelect"],
+label[for="EscalatedBy"],
+label[for="Designation"] {
+  white-space: normal; /* allow wrapping */
+}
+
+.file-upload-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.file-upload-wrapper label {
+  background-color: #007bff;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+
+.file-upload-wrapper label:hover {
+  background-color: #0056b3;
+}
+
+.file-name {
+  font-size: 0.9rem;
+  color: #555;
+  font-style: italic;
+  user-select: none;
+}
+
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    width: 100%;
+    max-width: 480px;
+  }
+
+  .form-section, .middle-panel, .right-panel {
+    width: 100%;
+    padding: 10px 15px;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .right-panel {
+    border-bottom: none;
+  }
+
+  .form-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  label {
+    width: 100%;
+    padding-right: 0;
+    margin-bottom: 4px;
+    white-space: normal;
+  }
+
+  input, select, textarea {
+    width: 100%;
+  }
+
+  button {
+    margin-top: 15px;
+  }
+}
+.header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@media (min-width: 1200px) {
+  .h1, h1
+{
+      font-size: 1.5rem;
+  }
+}
+.form-select, ng-select {
+  background: #fff !important;
+  color: #000 !important;
+  border: 1px solid #ccc;
+}
+
+.ng-select {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  width: -webkit-fill-available;
+  width: 75%;
+  border-radius: 4px;
+  /* font-size: 0.85rem; */
+}
+
+
+/* ng-select must behave EXACTLY like input inside flex row */
+.form-row ng-select {
+  flex: 1 1 auto !important;
+  width: 75% !important;
+  max-width: 75% !important;
+  box-sizing: border-box;
+}
+
+.ng-select .ng-select-container {
+  height: 20px !important;
+  min-height: 20px !important;
+  border: 1.5px solid #ccc !important;
+  border-radius: 4px !important;
+  padding: 0 4px !important;
+  font-size: 0.75rem !important;
+  display: flex !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+}
+
+.ng-select .ng-value-container {
+  padding: 0 4px !important;
+  align-items: center !important;
+}
+
+.ng-select .ng-input {
+  padding: 0 4px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.ng-select .ng-arrow-wrapper {
+  padding-right: 4px !important;
+}
+
+
+.validation-message-container {
+  width: 100%;
+  margin-top: 2px;
+}
+
+.validation-message-container .text-danger {
+  color: #d9534f;
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1.2;
+  display: block;
+  margin: 2px 0;
+}
+
+
+
+.Filecancel {
+ background-color: #fff;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: background-color 0.3s 
+ease;
+}
+.selected-files { margin-top: 8px; }
+.file-item {
+  display: flex;
+  align-items: center;
+}
+.file-meta { overflow: hidden; }
+.file-actions button { margin-left: 6px; }
+/* Input / textarea invalid style */
+.is-invalid {
+  border-color: #d9534f !important;        /* red border */
+  box-shadow: 0 0 0 3px rgba(217,83,79,0.08);
+  outline: none;
+}
+
+/* Make label red too (optional) */
+.is-invalid ~ label,
+label.is-invalid {
+  color: #d9534f;
+}
+
+/* For ng-select: target its container */
+.ng-select.is-invalid .ng-select-container,
+.ng-select.is-invalid .ng-select-container:focus,
+.ng-select.is-invalid .ng-select-container.ng-touched {
+  border-color: #d9534f !important;
+  box-shadow: 0 0 0 3px rgba(217,83,79,0.08) !important;
+}
+
+/* If ng-select renders without the .ng-select wrapper in some cases:
+.ng-select .ng-select-container.is-invalid { ... }
+*/
+
+/* Smaller visual tweak for textareas */
+textarea.is-invalid {
+  min-height: 100px;
+}
+.spanRed{
+  color: #d9534f;
+}
+/* visible outline + red border for invalid focus */
+.is-invalid:focus,
+.ng-select.is-invalid .ng-select-container:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(217,83,79,0.08);
+  border-color: #d9534f !important;
+}
+
+/* ensure ng-select container has pointer/cursor */
+.ng-select .ng-select-container {
+  cursor: text;
+}
+.file-name {
+  display: inline-block;           /* required for width to apply */
+  max-width: 32ch;                 /* approx 10 characters wide */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+/* ensure the existing/.selected styles still apply */
+.file-name.existing { font-weight: 600; }
+
+/* optionally make the tooltip nicer on hover (if you use custom tooltip lib skip this) */
+.file-name:hover {
+  text-decoration: none;
+}
+.small-remove-btn{
+  color: red;
+    font-size: larger;
+    font-weight: 500;
+    margin:5px;
+}
+.char-count {
+  font-size: 12px;
+  color: #666;
+  text-align: right;
+}
+.invalid-feedback {
+  display: block;
+  color: #dc3545; /* bootstrap red */
+  font-size: 0.875rem;
+  margin-top: 4px;
+}

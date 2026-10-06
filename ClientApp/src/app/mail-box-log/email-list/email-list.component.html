@@ -1,0 +1,33 @@
+<div class="container" *ngIf="emails">
+  <div class="table-container mat-elevation-z8">
+    <table mat-table [dataSource]="emails" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="from">
+        <th mat-header-cell *matHeaderCellDef> From </th>
+        <td mat-cell *matCellDef="let mail"> {{ mail.fromEmail }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="subject" style="margin-left: 10px;">
+        <th mat-header-cell *matHeaderCellDef> Subject </th>
+        <td mat-cell *matCellDef="let mail"> {{ mail.subject }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="received">
+        <th mat-header-cell *matHeaderCellDef> Received </th>
+        <td mat-cell *matCellDef="let mail"> {{ mail.emailReceivedDateTime | date: 'short' }} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['from', 'subject', 'received']"></tr>
+      <tr mat-row *matRowDef="let mail; columns: ['from', 'subject', 'received']" (click)="viewMailDetail(mail.id)">
+      </tr>
+    </table>
+    
+     <!-- Set up paginator -->
+    <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
+<div class="button-container">
+  <button mat-icon-button class="excel-download-button" (click)="exportToExcel()" matTooltip="Excel Download">
+    <img src="../../../assets/images/excelImage.png" style="width: 25px; height: 25px;" alt="Download Excel">
+  </button>
+</div>

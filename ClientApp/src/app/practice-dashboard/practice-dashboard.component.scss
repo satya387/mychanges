@@ -1,0 +1,90 @@
+.container {
+    display: flex;
+    // gap: 20px; /* Add space between dropdowns */
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    // font-size: smaller;
+  }
+  
+  .bu-total-header {
+    background-color: #0FE4BD;
+    color: white !important;
+  }
+  
+  .regular-header {
+    background-color: #0d0359;
+    color: white !important;
+  }
+
+  ng-select {
+    width: 80%;
+  }
+  
+  #yearFilter {
+    width: 60%; /* Adjust width for year dropdown */
+  }
+    @media (max-width: 600px) {
+      .container {
+        padding: 15px;
+        max-width: 100%;
+      }
+    
+      select {
+        font-size: 14px;
+      }
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: smaller;
+    }
+    
+    th, td {
+      border: 1px solid #ddd;
+      padding: 4px;
+      text-align: left;
+    }
+    
+    button {
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    
+    // :host ::ng-deep .p-treetable {
+    //   width: 100%;
+    //   border-collapse: collapse;
+    // }
+    
+    // :host ::ng-deep .p-treetable td,
+    // :host ::ng-deep .p-treetable th {
+    //   padding: 8px;
+    //   text-align: left;
+    // }
+    
+    .error-message {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    tbody tr td:nth-child(2) {
+      // color: #533eed !important;
+      // font-weight: 500;
+      // padding-left: 4%;
+      // cursor: pointer;
+      color: inherit !important;   /* Inherit the color from the default */
+      font-weight: normal !important;
+      padding-left: 4px !important;
+      cursor: default !important;
+    }
+
+    // tbody {
+    //   font-size: smaller;
+    // }

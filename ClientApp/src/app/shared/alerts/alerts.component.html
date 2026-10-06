@@ -1,0 +1,36 @@
+
+<div class="notifications">
+  <div *ngIf="alerts?.length <= 0" style="margin-left: 20px; margin-top: 20px; font-size: 18px; font-weight: 500">
+   <!--<p>No Approved Leaves</p>-->
+  </div>
+  <div class="col-lg-12 col-md-12" *ngIf="alerts?.length>0">
+    <p class="notifications-heading my-2"></p>
+  </div>
+  <div class="container-fluid notification-content" *ngFor="let a of alerts">
+
+    <p style="font-weight: 500; padding-top: 1.3rem;">
+      {{a.leaveType}}  applied for &nbsp; {{a.dateOfRequsition|date:'Y-M-d'}}  ( {{a.noOfDays}}  Day(s) ) is {{a.requestStatus}}.
+      <a [href]="MyAreaurl" target="_blank"><i class="ri-share-box-fill"></i></a>
+    </p>
+  </div>
+</div>
+
+<div class="notifications">
+  <div *ngIf="searchResult?.length<=0">
+
+  </div>
+  <div class="col-lg-12 col-md-12" *ngIf="searchResult?.length>0">
+    <!--<p class="notifications-heading my-2">Employee Leaves</p>-->
+  </div>
+  <div class="container-fluid notification-content" *ngFor="let n of searchResult">
+     
+    <p style="font-weight: 400; padding-top: 1.3rem;">
+      {{n.commonName}} has applied for {{n.leaveType}} on &nbsp; {{n.dateOfRequsition|date:'Y-M-d'}} for  {{n.noOfDays}}  Day(s).
+      <a [href]="MyAreaurl" target="_blank"><i class="ri-share-box-fill"></i></a>
+    </p>
+  </div>
+
+</div>
+
+
+

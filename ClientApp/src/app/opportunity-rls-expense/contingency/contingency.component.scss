@@ -1,0 +1,58 @@
+.contingency-section {
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  .contingency-section h2 {
+    font-size: 16px !important;
+    margin: 0;
+  }
+
+  .contingency-header {
+    display: flex;
+    background-color: #3E2FB2;
+    padding: 8px 15px;
+    color: white;
+    border-radius: 6px 6px 0 0;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .contingency-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .contingency-table th,
+  .contingency-table td {
+    border: 1px solid #ddd;
+    padding: 3px;
+    text-align: center;
+  }
+  
+  .contingency-table th {
+    background-color: white;
+    color: white;
+    font-size: 14px;
+  }
+  
+  .contingency-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .contingency-table tr{
+    font-size: 13px;
+  }
+
+  .contingency-table tr:hover {
+    background-color: #ddd;
+  }
+  
+  .contingency-table td[contenteditable="true"] {
+    background-color: #fff;
+    outline: none;
+    cursor: text;
+  }
+  

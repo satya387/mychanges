@@ -1,0 +1,82 @@
+.workflow-container {
+  padding: 20px;
+  background: #fff;
+}
+
+.workflow-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.workflow-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.workflow-row {
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.workflow-row:last-child {
+  border-bottom: none;
+}
+
+.avatar {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: #ab47bc;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  margin-right: 15px;
+}
+
+.workflow-info {
+  flex: 1;
+}
+
+.reviewer-name {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.role {
+  margin-left: 10px;
+  color: #777;
+  font-size: 14px;
+}
+
+.instruction {
+  margin-top: 8px;
+  color: #555;
+}
+
+.status-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.approved {
+  color: green;
+  font-weight: 600;
+}
+
+.pending {
+  color: #666;
+  font-weight: 600;
+}
+
+.menu {
+  cursor: pointer;
+  font-size: 20px;
+}

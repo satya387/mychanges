@@ -1,0 +1,16 @@
+
+
+<h2 *ngIf="action =='approve'" mat-dialog-title>Approve Allowance</h2>
+<h2 *ngIf="action =='reject'" mat-dialog-title>Reject Allowance</h2>
+
+<mat-dialog-content>
+  <mat-form-field class="full-width">
+    <textarea matInput [(ngModel)]="comments" placeholder="Enter your comments" style="width: 100%;"></textarea>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions class="button-container">
+  <button *ngIf="action =='approve'" [disabled]="!comments" mat-button class="approve btn" (click)="onApprove()">Approve</button>
+  <button *ngIf="action =='reject'" [disabled]="!comments" mat-button class="reject btn" (click)="onReject()">Reject</button>
+  <button mat-button class="cancel btn" (click)="onCancel()">Cancel</button>
+</mat-dialog-actions>

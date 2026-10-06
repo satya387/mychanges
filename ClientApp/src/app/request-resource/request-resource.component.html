@@ -1,0 +1,201 @@
+<div class="container table-responsive mt-3 ">
+  <div class="functionality-wrap mb-0">
+    <ul style="margin-bottom:0">
+      <li>
+        <i class="ri-user-search-fill"></i>
+      </li>
+      <li>
+        <strong>Resource Requests</strong>
+      </li>
+      <li>
+        <span (click)="navigateTo()" class="new-rr"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+            height="16" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+            <path
+              d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z" />
+          </svg><a>New Resource Request</a></span>
+      </li>
+    </ul>
+  </div>
+  <p class="total-roles">Total ({{totalRecord}})</p>
+  <div class="filter-mobile d-md-none d-block">
+  <i class="ri-filter-3-fill"></i>&nbsp;  <a>Filter</a></div>
+  <div class="container">
+    <div class="row">
+      <div class="my-2  col-lg-2 col-md-6 col-6 role-input">
+        <label for="forRoleNameSection" class="form-label">By Location</label>
+        <select class="form-select project-detail" (change)="selectFilter('location',$event)">
+          <option selected>All</option>
+          <option *ngFor="let item of countryList">{{item.value}}</option>
+        </select>
+      </div>
+      <div class="my-2 col-lg-2 col-md-6 col-6 role-input">
+        <label for="forRoleNameSection" class="form-label">By BUPractice</label>
+        <select class="form-select" (change)="selectFilter('Practice', $event)">
+          <option selected>All</option>
+          <option *ngFor="let item of buPractiseList">{{item.Name}}</option>
+        </select>
+      </div>
+      <div class="my-2 col-lg-2 col-md-6 col-6 role-input">
+        <label for="forRoleNameSection" class="form-label">By Account</label>
+        <select class="form-select" (change)="selectAccountFilter('Account', $event); onSelectAccount($event);">
+          <option selected>All</option>
+          <option *ngFor="let item of accountList" [value]="item.id">{{item.value}}</option>
+        </select>
+      </div>
+      <div class="my-2 col-lg-2 col-md-6 col-6 role-input">
+        <label for="forRoleNameSection" class="form-label">By Project</label>
+        <select class="form-select" (change)="selectFilter('Project',$event)">
+          <option selected>All</option>
+          <option *ngFor="let item of projectList">{{item.value}}</option>
+        </select>
+      </div>
+      <div class="my-2 col-lg-2 col-md-6 col-6 role-input">
+        <label for="forRoleNameSection" class="form-label">By RR Number</label>
+        <input style="height: 50%;" type="text" id="lname" name="lname" class="form" placeholder="RR Number"
+        [(ngModel)]="rrNumber" (keydown.enter)="configureRequest('RRNumber', undefined, rrNumber)"/>
+      </div>
+      <!-- <div class="my-2 col-lg-2 col-md-12 col-6 role-input">
+        <label for="forRoleNameSection" class="form-label">By Requester</label>
+        <select class="form-select">
+          <option selected>All</option>
+          <option>Admin 1</option>
+          <option>Admin 2</option>
+          <option>Admin 3</option>
+        </select>
+      </div> -->
+
+</div>
+</div></div>
+  <!-- filter -->
+  <div class="container filter-rr mt-3 mb-3 d-md-none d-block d-flex">
+    <span>Filter By</span> <i class="ri-close-fill"></i>
+  </div>
+  <!------------ tab content switch ------------------>
+  <div class="container">
+  <div class="table-responsive mt-1 mt-md-4">
+    <table class="table">
+      <thead>
+        <tr style="background-color: #F8F9FA;">
+          <th class="search-bar mrgn"  style="width:8rem;">
+            RR Number
+          </th>
+          <th class="search-bar mrgn"  style="width:6rem;">
+            Job Title
+          </th>
+          <th class="search-bar mrgn" style="width:8rem;">Department</th>
+          <th class="search-bar mrgn" style="width:8rem;">Location</th>
+          <th class="search-bar mrgn" style="width:8rem;">Proficiency</th>
+          <th class="search-bar mrgn1" style="width:8rem;">Requester</th>
+          <th class="action-field ">Action</th>
+        </tr>
+        <tr class="search-row-th">
+          <th></th>
+          <!-- job title -->
+          <th>
+            <div class="general-search">
+              <div class="row height">
+                <div class="col-lg-9" style="width:11rem;">
+                  <div class="form-search">
+                    <input type="text" class="form-control form-input" [(ngModel)]="jobTitle" placeholder="Job Title"
+                      (keydown.enter)="configureRequest('jobTitle', undefined, jobTitle)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-search" viewBox="0 0 16 16"
+                      (click)="configureRequest('jobTitle', undefined, jobTitle)">
+                      <path
+                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </th>
+
+          <th>
+          </th>
+          <th>
+            <!-- location -->
+            <div class="general-search">
+              <div class="row height">
+                <div class="col-lg-10"  style="width:11rem;">
+                  <div class="form-search">
+                    <input type="text" class="form-control form-input" [(ngModel)]="location" placeholder="Location"
+                      (keydown.enter)="configureRequest('location', undefined, location)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-search" viewBox="0 0 16 16"
+                      (click)="configureRequest('location', undefined, location)">
+                      <path
+                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </th>
+          <th>
+          </th>
+          <th>
+            <!-- requester -->
+            <div class="general-search">
+              <div class="row height">
+                <div class="col-lg-10"  style="width:11rem;">
+                  <div class="form-search">
+                    <input type="text" class="form-control form-input" [(ngModel)]="requester" placeholder="Requester"
+                      (keydown.enter)="configureRequest('requester', undefined, requester)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-search" viewBox="0 0 16 16"
+                      (click)="configureRequest('requester', undefined, requester)">
+                      <path
+                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <!-- ############################  body of table is start here ###########################################-->
+      <tbody>
+        <tr *ngFor="let list of resourceList | paginate  : {
+          itemsPerPage: limit,
+          currentPage: page,
+          totalItems: totalRecord };  let i = index">
+          <td style="width:12rem;">{{list.rrNumber}}</td>
+          <td style="width:12rem;">{{list.jobTitle || '-'}}</td>
+          <td>{{list.department || '-'}}</td>
+          <td>{{list.location || '-'}}</td>
+          <td>{{list.proficiency || '-'}}</td>
+          <td>{{list.requester || '-'}}</td>
+          <td class="edit-delete-rr text-center" (click)="navigateTo(list)" >
+            <a class="edit" title="Edit" data-toggle="tooltip"><svg xmlns="http://www.w3.org/2000/svg"
+                width="18" height="18" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                <path
+                  d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+              </svg></a>
+              <!-- <span class="edit-delete-rr">More Details</span> -->
+            <!-- <a class="edit-more">More Details</a> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="container" style="background-color: #F8F9FA;">
+      <span *ngIf="resourceList?.length === 0">
+        <p class="text-center no-data">
+          No Data Found!
+        </p>
+      </span>
+    </div>
+  </div>
+  <div class="clearfix pagination-wrap">
+    <pagination-controls previousLabel="" nextLabel="" (pageChange)="onTableDataChange($event)">
+    </pagination-controls>
+  </div>
+</div>
+  <!-- mobileview -->
+  <div class="big-button-bottom d-block d-md-none d-flex justify-content-center">
+    <ul>
+      <li><button>APPLY FILTER</button></li>
+    </ul>
+  </div>

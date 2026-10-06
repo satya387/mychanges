@@ -1,0 +1,1 @@
+{"version":3,"file":"Search-Url-config.js","sourceRoot":"","sources":["Search-Url-config.ts"],"names":[],"mappings":";;;AACA,iEAAgE;AAIhE,IAAM,QAAQ,GAAG,yBAAW,CAAC,UAAU,CAAC;AACxC,IAAM,mBAAmB,GAAG,yBAAW,CAAC,iBAAiB,CAAC;AAC7C,QAAA,WAAW,GAAG;IACzB,eAAe,EAAE,QAAQ,GAAG,oBAAoB;IAChD,uBAAuB,EAAE,mBAAmB;CAC7C,CAAA"}

@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="add-edit-role-wrap adding-margin-to-table">
+    <app-back-button [routerPath]="'default-section'"></app-back-button>
+
+    <div class="add-edit-head" style="margin-bottom: 30px;">
+      <h1>   <i _ngcontent-ng-cli-universal-c135="" class="ri-profile-fill"></i>Add Default Sections</h1>
+    </div>
+
+    <div class="add-section-wrap p-2 p-md-4 ScrollStyle1">
+      <div class="inner-wrap-pad p-0 p-md-4">
+
+        <app-assign-control [autoCompleteList]="sectionList" [labelName]="'Sections'" [selectedList]="selectedSectionList"
+          [placeholderText]="placeHolderText" (onSelectData)="onSelectItem($event)"></app-assign-control>
+
+        <div class="big-button-bottom">
+          <ul>
+            <li><button [disabled]="!isSectionSelected && selectedSectionList.length === 0" (click)="addDefaultSections()">SAVE</button></li>
+            <li><button [routerLink]="'/default-section'">CANCEL</button></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>

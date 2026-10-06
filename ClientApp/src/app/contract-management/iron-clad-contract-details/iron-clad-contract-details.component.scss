@@ -1,0 +1,507 @@
+/* ================= LAYOUT ================= */
+
+.main-layout {
+    display: flex;
+    gap: 20px;
+}
+
+.left-panel {
+    flex: 0 0 70%;
+    max-width: 70%;
+    background: #f9fafb;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.right-panel {
+    flex: 0 0 30%;
+    max-width: 30%;
+    background: #fff;
+    border-left: 1px solid #e5e7eb;
+    padding: 20px;
+    overflow: hidden;
+}
+
+/* ================= PROPERTIES ================= */
+
+.properties-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0 15px;
+}
+
+.properties-card {
+    background: #fff;
+    border-radius: 8px;
+}
+
+.property {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+}
+
+.property label {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.property span {
+    font-size: 14px;
+    color: #111827;
+}
+
+/* ================= STATUS ================= */
+
+.active {
+    color: green;
+    font-weight: 600;
+}
+
+.inactive {
+    color: red;
+    font-weight: 600;
+}
+
+/* ================= BUTTONS ================= */
+
+.edit-btn {
+    border: 1px solid #d1d5db;
+    background: linear-gradient(121deg, #0BBFA0, #0D0359);
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #fff;
+}
+
+button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.btn-primary {
+    background-color: #0fe4bd;
+    color: #0d0359 !important;
+    border: none;
+    border-radius: 0;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    box-shadow: -4px 5px #0D0359;
+}
+
+.btn-secondary {
+    border: 1px solid #0d0359;
+    background: #fff;
+    color: #0D0359;
+    border-radius: 0;
+    font-weight: 600;
+    box-shadow: 0 3px 6px #00000029;
+}
+
+.btn-secondary:hover {
+    box-shadow: -4px 5px #0fe4bd;
+}
+
+/* ================= DOCUMENTS ================= */
+
+.documents-section {
+    margin-top: 10px;
+    padding: 15px;
+    border-radius: 10px;
+    background: linear-gradient(121deg, #0BBFA0, #0D0359);
+}
+
+.documents-title {
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.documents-wrapper {
+    max-height: 180px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 6px;
+}
+
+.documents-wrapper::-webkit-scrollbar {
+    width: 8px;
+}
+
+.documents-wrapper::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+}
+
+.documents-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.6);
+    border-radius: 10px;
+}
+
+.documents-wrapper::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.8);
+}
+
+.document-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 12px;
+    margin-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.doc-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.doc-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.doc-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    flex: 1;
+}
+
+.doc-name {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: default;
+}
+
+.doc-tag {
+    font-size: 12px;
+    background: #e5e7eb;
+    padding: 2px 6px;
+    border-radius: 6px;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.doc-bottom-row {
+    margin-top: 6px;
+    text-align: right;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.doc-actions-right {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.doc-actions-right button {
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    padding: 0;
+    margin: 0;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+.doc-actions-right button:hover {
+    background-color: #e5e7eb;
+}
+
+.doc-actions-right button:active {
+    transform: scale(0.95);
+}
+.doc-actions-right span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* ================= REVIEW TIMELINE ================= */
+
+.activity-box {
+    background: #fff;
+    border: 1px solid #e2e5e9;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.review-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 18px 0;
+    border-bottom: 1px solid #ececec;
+}
+
+.review-item:last-child {
+    border-bottom: none;
+}
+
+.review-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.review-content {
+    flex: 1;
+}
+
+.review-name {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.review-comment {
+    margin-top: 6px;
+    color: #555;
+    font-size: 13px;
+}
+
+.review-status {
+    min-width: 150px;
+    text-align: right;
+    font-size: 14px;
+}
+
+.review-status .approved {
+    color: #198754;
+    font-weight: 600;
+}
+
+.review-status .waiting {
+    color: #444;
+    font-weight: 600;
+}
+
+.review-status .rejected {
+    color: #dc3545;
+    font-weight: 600;
+}
+.review-status .Closed {
+    color: #e58628;
+    font-weight: 600;
+}
+.review-status .Downloaded {
+    color: #3575dc;
+    font-weight: 600;
+}
+.review-status .Secondary {
+    color: #198754;
+    font-weight: 600;
+}
+
+.stage-name {
+    padding-left: 7px;
+    font-size: 14px;
+}
+
+/* ================= APPROVE / REJECT ================= */
+
+.approve {
+    cursor: pointer;
+    font-weight: 500;
+   background: linear-gradient(121deg, #0BBFA0, #0D0359);
+   color:white;
+}
+
+.approve:hover {
+    color: #0d0359;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.reject {
+    color: #CC4B4C;
+    cursor: pointer;
+    font-weight: 500;
+    background: linear-gradient(121deg, #0BBFA0, #0D0359);
+    color:white
+}
+
+.reject:hover {
+    color: #f20404;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+/* ================= MODAL ================= */
+
+.approver-content {
+    width: 600px;
+    max-width: 90%;
+    border-radius: 8px;
+}
+
+.modal.show .modal-dialog {
+    position: relative;
+    top: 45px;
+    right: 24px;
+    max-width: 39.2%;
+}
+
+.modal-header {
+    background: linear-gradient(248deg, #0BBFA0, #0D0359);
+    color: #fff;
+}
+
+.properties-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.properties-header h2 {
+    margin: 0 0 12px 0;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 0 0 12px 0;
+}
+
+/* ================= NG-SELECT ================= */
+
+.ng-dropdown-panel .ng-option,
+.ng-dropdown-panel .ng-option span,
+.ng-select .ng-select-container,
+.ng-select input {
+    color: #000 !important;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+    .main-layout {
+        flex-direction: column;
+    }
+
+    .left-panel,
+    .right-panel {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: linear-gradient(121deg, #0BBFA0, #0D0359);
+    color: #fff !important;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.download-btn:hover {
+    background-color: #09997b;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.download-btn:active {
+    transform: scale(0.98);
+}
+
+.download-btn i {
+    font-size: 16px;
+}
+
+.download-btn span {
+    line-height: 1;
+}
+
+.download-text {
+    color: #fff !important;
+}
+.timeline-comment-box {
+    margin-top: 3px;
+    padding: 8px;
+    border: 1px solid #e1e5eb;
+    border-radius: 8px;
+    background: #fff;
+}
+
+
+.comment-header label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+}
+
+.comment-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.comment-input-wrapper textarea {
+    flex: 1;
+    resize: vertical;
+    min-height: 10px !important;
+}
+
+.send-comment-btn {
+    height: 42px;
+    min-width: 85px;
+    flex-shrink: 0;
+}
+
+.send-comment-btn i {
+    margin-right: 5px;
+}
+.comment-input-wrapper textarea {
+    height: 38px;
+    min-height: 38px;
+    padding: 2px 10px;
+}
+
+.review-date {
+  margin-top: 5px;
+  font-size: 15px;
+  color: #777;
+  font-weight: 400;
+}
+.details-title {
+  font-size: 18px;
+}

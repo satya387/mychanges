@@ -1,0 +1,404 @@
+<div class="container-fluid edit-rr-desktop1" style="margin-top:60px;margin-left: 18px;">
+  <!-- <app-back-button [routerPath]="'/purchase-order'"></app-back-button> -->
+
+  <div class="add-edit-role-wrap adding-margin-to-table" style="margin-top:-40px;">
+    <span class="steps d-block d-md-none d-flex justify-content-end">Step 1/3</span>
+    <div class="add-edit-head">
+      <h1 style="margin-top:36px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stack"
+             viewBox="0 0 16 16">
+          <path d="m14.12 10.163 1.715.858c.22.11.22.424 0 .534L8.267 15.34a.598.598 0 0 1-.534 0L.165 11.555a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.66zM7.733.063a.598.598 0 0 1 .534 0l7.568 3.784a.3.3 0 0 1 0 .535L8.267 8.165a.598.598 0 0 1-.534 0L.165 4.382a.299.299 0 0 1 0-.535L7.733.063z" />
+          <path d="m14.12 6.576 1.715.858c.22.11.22.424 0 .534l-7.568 3.784a.598.598 0 0 1-.534 0L.165 7.968a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.659z" />
+        </svg>
+        {{POAction}} Purchase Order
+      </h1>
+
+    </div>
+  </div>
+  <div class="container-fluid edit-rr-desktop" style="margin-top: -22px;">
+    <form [formGroup]="addPOForm">
+    <!-- PR Number Select (only shown once) -->
+    <div  class="row role-input1" style="margin-left: 57px;">
+      <!-- First row with four fields -->
+      <div  class="my-2 col-lg-3 col-md-3 col-3 role-input">
+        <label for="forRoleNameSection" class="form-label main-heading">PR Number</label><span> *</span>
+        <select class="form-select project-detail" formControlName="PRNumber" (change)="onSelect($event)" >
+          <option [ngValue]="null" selected>Select </option>
+          <option *ngFor="let item of PRList" [value]="item.id">{{item.prNumber}}</option>
+        </select>
+        <div class="validation-message-container">
+          <span *ngIf="(addPOForm.controls['PRNumber'].invalid && (addPOForm.controls['PRNumber'].dirty || addPOForm.controls['PRNumber'].touched))">
+            <span *ngIf="addPOForm.controls['PRNumber'].errors.required || !addPOForm.controls['PRNumber'].value" class="text-danger">
+              Please Select PR Number
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+        <label for="forRoleNameSection" class="form-label main-heading">Vendor Name</label><span> *</span>
+        <input type="text" id="lname" name="lname" placeholder="Vendor Name" class="project-detail1 no-field"
+               formControlName="VendorName" style="padding:6px;" />
+        <span *ngIf="(addPOForm.controls['VendorName'].invalid && (addPOForm.controls['VendorName'].dirty || addPOForm.controls['VendorName'].touched))">
+          <span *ngIf="addPOForm.controls['VendorName'].errors.required || !addPOForm.controls['VendorName'].value" class="text-danger">
+            Please Enter Vendor Name
+          </span>
+        </span>
+      </div>
+      <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+        <label for="forRoleNameSection" class="form-label main-heading">Contact Name</label><span> *</span>
+        <input type="text" id="lname" name="lname" placeholder="Contact Name" class="project-detail1 no-field"
+               formControlName="ContactName" style="padding:6px;" />
+        <span *ngIf="(addPOForm.controls['ContactName'].invalid && (addPOForm.controls['ContactName'].dirty || addPOForm.controls['ContactName'].touched))">
+          <span *ngIf="addPOForm.controls['ContactName'].errors.required || !addPOForm.controls['ContactName'].value" class="text-danger">
+            Please Enter Contact Name
+          </span>
+        </span>
+      </div>
+      <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+        <label for="forRoleNameSection" class="form-label main-heading">Phone</label><span> *</span>
+        <input type="text" id="lname" name="lname" placeholder="Phone" class="project-detail1 no-field"
+               formControlName="Phone" style="padding:6px;" (keypress)="onKeyPress($event)"  (input)="onInput($event)"/>
+        <span *ngIf="(addPOForm.controls['Phone'].invalid && (addPOForm.controls['Phone'].dirty || addPOForm.controls['Phone'].touched))">
+          <span *ngIf="addPOForm.controls['Phone'].errors.required || !addPOForm.controls['Phone'].value" class="text-danger">
+            Please Enter Phone Number
+          </span>
+        </span>
+
+      </div>
+    
+     
+    </div>
+      <div class="row role-input1" style="margin-left: 57px;">
+       
+        <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+          <label for="forRoleNameSection" class="form-label main-heading">Email Id</label><span> *</span>
+          <input type="text" id="lname" name="lname" placeholder="Email Id" class="project-detail1 no-field"
+                 formControlName="EmailId" style="padding:6px;" />
+          <span *ngIf="(addPOForm.controls['EmailId'].invalid && (addPOForm.controls['EmailId'].dirty || addPOForm.controls['EmailId'].touched))">
+            <span *ngIf="addPOForm.controls['EmailId'].errors.required || !addPOForm.controls['EmailId'].value" class="text-danger">
+              Please Enter Email Id
+            </span>
+            <div *ngIf="addPOForm.controls['EmailId'].errors.email">Invalid email format.</div>
+
+          </span>
+        </div>
+        <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+          <label for="forRoleNameSection" class="form-label main-heading">
+            {{ LocationId === 2 ? 'W9 / EIN' : 'GST' }}
+          </label>
+          <input type="text" id="lname" name="lname" [placeholder]="LocationId === 2 ? 'W9 / EIN' : 'GST'" class="project-detail1 no-field"
+                 formControlName="GSTIN" style="padding:6px;" />
+                 
+        </div>
+        <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+          <label for="forRoleNameSection" class="form-label main-heading">TIN / TAN</label>
+          <input type="text" id="lname" name="lname" placeholder="TIN / TAN  Number" class="project-detail1 no-field"
+                 formControlName="Tin_Tan" style="padding:6px;" />
+        </div>
+        <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+          <label for="forRoleNameSection" class="form-label main-heading">PAN</label>
+          <input type="text" id="lname" name="lname" placeholder="PAN Number" class="project-detail1 no-field"
+                 formControlName="PAN" style="padding:6px;" />
+        </div>
+        
+      </div>
+      <div class="row mb-0 role-input1" style="margin-left: 57px;">
+        <div class="my-2 col-lg-3 col-md-3 col-3 role-input position-relative" #billingWrapper>
+          <label for="billingAddress" class="form-label main-heading">Billing Address</label><span> *</span>
+        
+          <textarea id="billingAddress" name="billingAddress" rows="4" cols="50"
+                    formControlName="BillingAddress" placeholder="Billing Address"
+                    (focus)="setActiveField('billing')"
+                    (input)="onTextChange($event)"
+                    (click)="updateCursorPosition($event)"
+                    (keyup)="updateCursorPosition($event)"
+                    [(ngModel)]="billingAddressValue"
+                    #billingRef>
+          </textarea>
+          <ul *ngIf="showSuggestions && activeField === 'billing'" class="suggestion-box">
+            <li *ngFor="let suggestion of addressSuggestions" (mousedown)="onSuggestionClick($event, suggestion)">
+              {{ suggestion }}
+            </li>
+          </ul>
+          <span *ngIf="addPOForm.controls['BillingAddress'].invalid && (addPOForm.controls['BillingAddress'].dirty || addPOForm.controls['BillingAddress'].touched)">
+            <span *ngIf="addPOForm.controls['BillingAddress'].errors?.['required'] || !addPOForm.controls['BillingAddress'].value" class="text-danger">
+              Please Enter Billing Address
+            </span>
+          </span>
+        </div>
+        
+        <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+          <label for="forRoleNameSection" class="form-label main-heading">Vendor Address</label><span> *</span>
+          <textarea id="w3review" name="w3review" rows="4" cols="50" formControlName="VendorAddress"
+                    placeholder="Vendor Address">
+        </textarea>
+          <span *ngIf="(addPOForm.controls['VendorAddress'].invalid && (addPOForm.controls['VendorAddress'].dirty || addPOForm.controls['VendorAddress'].touched))">
+            <span *ngIf="addPOForm.controls['VendorAddress'].errors.required || !addPOForm.controls['VendorAddress'].value" class="text-danger">
+              Please Enter Vendor Address
+            </span>
+          </span>
+        </div>
+        <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+          <label for="forRoleNameSection" class="form-label main-heading">Credit Terms</label><span> *</span>
+          <textarea id="w3review" name="w3review" rows="4" cols="50" formControlName="CreditTerms"
+                    placeholder="Credit Terms">
+        </textarea>
+          <span *ngIf="(addPOForm.controls['CreditTerms'].invalid && (addPOForm.controls['CreditTerms'].dirty || addPOForm.controls['CreditTerms'].touched))">
+            <span *ngIf="addPOForm.controls['CreditTerms'].errors.required || !addPOForm.controls['CreditTerms'].value" class="text-danger">
+              Please Enter Credit Terms
+            </span>
+          </span>
+        </div>
+        <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+          <label for="forRoleNameSection" class="form-label main-heading">Termination Clause</label><span> *</span>
+          <textarea id="w3review" name="w3review" rows="4" cols="50" formControlName="TerminationClause"
+                    placeholder="Termination Clause">
+          </textarea>
+          <span *ngIf="(addPOForm.controls['TerminationClause'].invalid && (addPOForm.controls['TerminationClause'].dirty || addPOForm.controls['TerminationClause'].touched))">
+            <span *ngIf="addPOForm.controls['TerminationClause'].errors.required || !addPOForm.controls['TerminationClause'].value" class="text-danger">
+              Please Enter Termination Clause
+            </span>
+          </span>
+        </div>
+        
+      </div>
+   
+      <div class="row role-input1" style="margin-left: 57px;">
+        <!-- First row with Shipping Address as static field -->
+        <div class="my-2 col-lg-3 col-md-3 col-3 role-input shippingAddress ">
+          <div>
+          <label for="shippingAddress" style="white-space: nowrap;" class="form-label main-heading">
+            Shipping Address
+            <label style="font-size:13px;">
+              <input type="checkbox" style="height: auto;" formControlName="flowEnabled" (change)="onFlowCheckboxChange($event)">
+              Same As Billing Address
+            </label>
+          </label>
+          <textarea id="shippingAddress" name="shippingAddress" rows="4" cols="50" formControlName="ShippingAddress" placeholder="Shipping Address"
+          placeholder="Shipping Address"
+          (focus)="setActiveField('shipping')"
+          (input)="onTextChange($event)"
+          (click)="updateCursorPosition($event)"
+          (keyup)="updateCursorPosition($event)"
+          [(ngModel)]="shippingAddressValue"
+          #shippingRef>
+          </textarea>
+          <ul *ngIf="showSuggestions && activeField === 'shipping'" class="suggest-box">
+            <li *ngFor="let suggestion of addressSuggestions" (mousedown)="onSuggestionClick($event, suggestion)">
+              {{ suggestion }}
+            </li>
+          </ul>
+        </div>
+          <!-- <label for="forRoleNameSection" class="form-label main-heading" *ngIf="status">
+            Has Legal Consent: 
+
+            <label>
+              <input type="checkbox" style="height: auto; margin-left: 2px;" formControlName="isLegal" [ngClass]="{ 'disabled': isDisabled }" (change)="onCheckboxChange($event)">
+            </label><br>
+            <span style="color:black">* Please check this box after finishing uploading of all required documents pertaining to this procurement and when it is ready for approval.</span><br>
+
+          </label>
+          <!-- <div>
+            <span *ngIf="(addPOForm.controls['isLegal'].invalid && (addPOForm.controls['isLegal'].dirty || addPOForm.controls['isLegal'].touched))">
+              <span *ngIf="addPOForm.controls['isLegal'].errors.required || !addPOForm.controls['isLegal'].value" class="text-danger">
+                Please select the Legal Consent
+              </span>
+            </span>
+          </div> -->
+          <!-- <label for="forRoleNameSection" class="form-label main-heading" *ngIf="status1" >
+            Has PR consent: 
+            <label>
+              <input type="checkbox" style="height: auto; margin-left: 2px;" formControlName="isPRConsent" (change)="onCheckboxChange($event)" >
+            </label><br>
+            <span style="color:black">*  Please check this box after final QC and when it is ready for approval.</span><br>
+
+          </label> --> 
+          <div >
+            <label for="forRoleNameSection" class="form-label main-heading">Vendor Referred by</label>
+            <input type="text" id="lname" name="lname" placeholder="Vendor was referred by" class="project-detail1 no-field"
+                   formControlName="VendorReferedBy" style="padding:6px;" />
+          </div>
+          <label for="shippingAddress" style="white-space: nowrap;" class="form-label main-heading">
+            Rejection Reason
+          </label>
+          <textarea id="RejectionReason" name="RejectionReason" rows="4" cols="50" formControlName="RejectionReason" placeholder="Rejection Reason" ></textarea>
+        <div >
+                                <label class="main-heading form-label" hidden>Using Standard PO Template
+                                 
+                                </label>
+                                <span hidden>*</span>
+                                <div class="check-fill d-flex">
+                                    <div class="form-check" *ngFor="let item of yesNoValues">
+                                      <input class="form-check-input" type="radio" 
+                                      formControlName="Conditions"
+                                      name="conditions"
+                                      [value]="item.Value" 
+                                      [id]="'condition'+item.Id"
+                                      hidden>                                     
+                               <label class="form-check-label" [for]="'condition'+item.Id" hidden>
+                                 {{ item.Name }}
+                               </label>
+                              
+                                    </div>
+                                    
+                                </div>
+                                <div class="check-fill d-flex">
+                                  <label class="termsconitions"  (click)="openterms(LocationId)">
+                                    View Terms and Conditions
+                                 </label>
+                                </div>
+                               
+                              
+                                <span *ngIf="(addPOForm.controls['Conditions'].invalid && 
+                                       (addPOForm.controls['Conditions'].dirty || 
+                                       addPOForm.controls['Conditions'].touched))" hidden>
+                            <span *ngIf="addPOForm.controls['Conditions'].errors.required" hidden>
+                                Please Select Standard Template 
+                            </span>
+                        </span>
+                              </div>    
+        </div>
+         
+        <div class="col-9 total-section">
+          <!-- Loop for the remaining 9 columns -->
+          <div *ngFor="let data of EditPRList; let i = index" class="row description" style="width:95%;">
+            <div class="my-2 col-lg-4 col-md-4 col-4 role-input">
+              <label for="itemDescription_{{i}}" class="form-label main-heading">Item Description</label><span> *</span>
+              <input type="text" id="itemDescription_{{i}}" name="itemDescription_{{i}}" placeholder="Item Description" style="padding:6px;" [value]="data.itemDescription" class="form-control" disabled />
+            </div>
+            <div class="my-2 col-lg-4 col-md-4 col-4 role-input" style="display: flex; flex-wrap: wrap;">
+              <div style="flex: 1; margin-right: 10px;">
+                <label for="quantity_{{i}}" class="form-label main-heading" >Quantity<span> *</span></label>
+                <input type="text" id="quantity_{{i}}" name="quantity_{{i}}" placeholder="Quantity" class="form-control" style="padding:6px; width: 100%;" [value]="data.quantity" disabled />
+              </div>
+              <div style="flex: 1; margin-right: 10px;">
+                <label for="duration_{{i}}" class="form-label main-heading" >Duration<span> *</span></label>
+                <input type="text" id="duration_{{i}}" name="duration_{{i}}" placeholder="Duration" class="form-control" style="padding:6px; width: 100%;" [value]="data.duration" disabled />
+              </div>
+              <div style="flex: 1; margin-right: 10px;">
+                <label for="serviceDuration_{{i}}" class="form-label main-heading" style="margin-right: 0px;">Duration In</label><span> *</span>
+                <input type="text" id="serviceDuration_{{i}}" name="serviceDuration_{{i}}" placeholder="Duration In" class="form-control" style="padding:6px; width: 100%;" [value]="data.serviceDuration" disabled />
+              </div>
+              <input type="text" id="lineItemId_{{i}}" name="lineItemId_{{i}}" [hidden]="true" [value]="data.lineItemId" />
+              <input type="text" id="linePRValue_{{i}}" name="linePRValue_{{i}}" [hidden]="true" [value]="data.linePRValue" />
+            </div>
+            <div class="my-2 col-lg-4 col-md-4 col-4 role-input" style="display: flex; flex-wrap: wrap;">
+              <div style="flex: 1;margin-right: 10px;" >
+                <label for="tax_{{i}}" class="form-label main-heading">Tax(%)</label>
+                <input type="text" id="tax_{{i}}" *ngIf="button == 0" name="tax_{{i}}" placeholder="Tax" disabled class="form-control" style="padding:6px; width: 100%;" [value]="data.tax"  (keypress)="onPress($event)"  (input)="updateTotal()"/>
+                <input type="text" id="tax_{{i}}" *ngIf="button == 1" name="tax_{{i}}" placeholder="Tax"  class="form-control" style="padding:6px; width: 100%;" [value]="data.tax"  (keypress)="onPress($event)"  (input)="updateTotal()"/>
+              </div>
+              <div style="flex: 1;margin-right: 10px;">
+              <label for="pricePerUnit_{{i}}" class="form-label main-heading"> Price Per {{ data.serviceDuration === 'Days' ? 'Day' : data.serviceDuration === 'Months' ? 'Month' : data.serviceDuration === 'Years' ? 'Year' :'Unit' }}
+              </label><span> *</span>
+              <input type="text" id="pricePerUnit_{{i}}" name="pricePerUnit_{{i}}" placeholder="Price Per Unit" class="form-control" style="padding:6px;" [value]="data.pricePerUnit" disabled />
+            </div>
+          </div>
+
+          </div>
+          <div class="row total" style="width:95%;">
+            <div class="my-2 col-lg-4 col-md-4 col-4 role-input total1">
+              <!-- <label for="forRoleNameSection" class="form-label main-heading" hidden>Tax (%)</label>
+              <input type="text" id="lname" name="lname" placeholder="Tax" class="project-detail1 no-field"
+                     formControlName="Tax" style="padding:6px;" (keypress)="onPress($event)" (input)="onChangeTax($event)" hidden/> -->
+                     <div *ngIf="EditPRList && EditPRList.length > 0">
+                      <label for="currencyType_0" class="form-label main-heading">Currency<span> *</span></label>
+                      <input type="text" id="currencyType_0" name="currencyType_0" placeholder="currency" class="form-control" style="padding:6px; width: 100%;" [value]="EditPRList[0].currencyType" disabled />
+                    </div>
+                     
+              <label for="forRoleNameSection" class="form-label main-heading">Total</label>
+              <input type="text" id="lname" name="lname" placeholder="Total" class="form-control"
+                     formControlName="Total" style="padding:6px;" />
+                     <label for="forRoleNameSection" class="form-label main-heading"> Delivery Date<span>
+                      *</span></label>
+              <div class="col-xs-12 col-12 col-md-4 form-group request-Delivery-Date" style="width:100%;">
+                  <input type="text" placeholder="MM/DD/YYYY" class="form-control" bsDatepicker
+                      formControlName="DeliveryDate" [bsValue]="requestDeliveryDate" [minDate]="today"
+                      [bsConfig]="{ isAnimated: true, dateInputFormat: 'MM/DD/YYYY', showWeekNumbers: false,returnFocusToInput:true }">
+                      
+              </div>
+              <span *ngIf="(addPOForm.controls['DeliveryDate'].invalid && (addPOForm.controls['DeliveryDate'].dirty || addPOForm.controls['DeliveryDate'].touched))">
+                <span *ngIf="addPOForm.controls['DeliveryDate'].errors.required || !addPOForm.controls['DeliveryDate'].value" class="text-danger">
+                  Please Select Delivery Date
+                </span>
+              </span>
+            </div>
+            <div class="my-2 col-lg-4 col-md-4 col-4 role-input">
+              <div>
+                <label for="forRoleNameSection" class="form-label upload main-heading">Upload Documents</label>
+              </div>
+              <div class="file-upload-container">
+                <label for="fileUpload" class="custom-file-upload">
+                  <span class="upload-label" style="color:black;">Choose files</span>
+                  <input id="fileUpload" type="file" multiple (change)="onFileSelected($event)" accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png" formControlName="files" />
+                </label><br>
+                <span style="color:black">* Please upload quotes received from various vendors.</span><br>
+                <span style="color:black">* Please upload any Agreement/MSA/SOW pertaining to the selected vendor.</span>
+              </div>
+
+              <ul *ngIf="selectedFiles && selectedFiles.length > 0">
+                <li *ngFor="let file of selectedFiles; let i = index">
+                  <a href="#" (click)="openFile(file)" style="cursor: pointer;text-overflow: ellipsis;width:100px;white-space: nowrap;
+                overflow: hidden;color:blue;font-size: 12px;font-weight: 500;text-decoration: underline;">{{ truncateFileName(file.name) }}</a>
+                  <label (click)="removeFile(i)">-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path fill="#B0BEC5" d="M64,0C28.656,0,0,28.656,0,64s28.656,64,64,64s64-28.656,64-64S99.344,0,64,0z M64,120 C33.125,120,8,94.875,8,64S33.125,8,64,8s56,25.125,56,56S94.875,120,64,120z"></path> </g> </g> <g> <g> <path fill="#F44336" d="M75.313,64l16.969-16.969c3.125-3.125,3.125-8.195,0-11.313c-3.117-3.125-8.188-3.125-11.313,0L64,52.688 L47.031,35.719c-3.125-3.125-8.195-3.125-11.313,0c-3.125,3.117-3.125,8.188,0,11.313L52.688,64L35.719,80.969 c-3.125,3.125-3.125,8.195,0,11.313c3.117,3.125,8.188,3.125,11.313,0L64,75.313l16.969,16.969c3.125,3.125,8.195,3.125,11.313,0 c3.125-3.117,3.125-8.188,0-11.313L75.313,64z"></path> </g> </g> </g></svg></label>
+                </li>
+              </ul>
+              <ul *ngIf="PRFiles && PRFiles.length > 0">
+                <span style="color:#FB2166">PR Documents</span>
+                <li *ngFor="let file of PRFiles; let i = index">
+                  <a>
+                    <span (click)="openPRDocumnet(EditPRList[0].prNumber, file.name)" style="cursor: pointer;text-overflow: ellipsis; width: 250px;;white-space: nowrap;
+                  overflow: hidden;text-decoration: underline;color: blue;display: inline-block;">{{ file.name }}</span>
+                  </a>
+                  <!-- <label (click)="removeFile(i)"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="65px" height="65px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path fill="#B0BEC5" d="M64,0C28.656,0,0,28.656,0,64s28.656,64,64,64s64-28.656,64-64S99.344,0,64,0z M64,120 C33.125,120,8,94.875,8,64S33.125,8,64,8s56,25.125,56,56S94.875,120,64,120z"></path> </g> </g> <g> <g> <path fill="#F44336" d="M75.313,64l16.969-16.969c3.125-3.125,3.125-8.195,0-11.313c-3.117-3.125-8.188-3.125-11.313,0L64,52.688 L47.031,35.719c-3.125-3.125-8.195-3.125-11.313,0c-3.125,3.117-3.125,8.188,0,11.313L52.688,64L35.719,80.969 c-3.125,3.125-3.125,8.195,0,11.313c3.117,3.125,8.188,3.125,11.313,0L64,75.313l16.969,16.969c3.125,3.125,8.195,3.125,11.313,0 c3.125-3.117,3.125-8.188,0-11.313L75.313,64z"></path> </g> </g> </g></svg></label> -->
+                </li>
+              </ul>
+              <ul *ngIf="savedFiles && savedFiles.length > 0">
+                <span style="color:#FB2166">PO Documents</span>
+                <li *ngFor="let file of savedFiles; let i = index">
+                  <a>
+                    <span (click)="openuploadDocumnet(file.name)" style="cursor: pointer;text-overflow: ellipsis; width: 250px;;white-space: nowrap;
+                  overflow: hidden;text-decoration: underline;color: blue;display: inline-block;">{{ file.name }}</span>
+                  </a>
+                  <!-- <label (click)="removeFile(i)"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="65px" height="65px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path fill="#B0BEC5" d="M64,0C28.656,0,0,28.656,0,64s28.656,64,64,64s64-28.656,64-64S99.344,0,64,0z M64,120 C33.125,120,8,94.875,8,64S33.125,8,64,8s56,25.125,56,56S94.875,120,64,120z"></path> </g> </g> <g> <g> <path fill="#F44336" d="M75.313,64l16.969-16.969c3.125-3.125,3.125-8.195,0-11.313c-3.117-3.125-8.188-3.125-11.313,0L64,52.688 L47.031,35.719c-3.125-3.125-8.195-3.125-11.313,0c-3.125,3.117-3.125,8.188,0,11.313L52.688,64L35.719,80.969 c-3.125,3.125-3.125,8.195,0,11.313c3.117,3.125,8.188,3.125,11.313,0L64,75.313l16.969,16.969c3.125,3.125,8.195,3.125,11.313,0 c3.125-3.117,3.125-8.188,0-11.313L75.313,64z"></path> </g> </g> </g></svg></label> -->
+                </li>
+              </ul>
+            </div>
+            <div class="my-2 col-lg-4 col-md-4 col-4 role-input total1">
+              <label for="forRoleNameSection" class="form-label main-heading">Comments</label>
+              <textarea id="w3review" name="w3review" rows="4" cols="50" formControlName="Comments"
+                        placeholder="Please Enter Comments">
+            </textarea>
+            <label for="forRoleNameSection" class="form-label main-heading">Shipping Charges</label>
+            <input type="text" id="lname" name="lname" placeholder="Shipping Charges" class="project-detail1 no-field"
+            formControlName="ShippingCharges" style="padding:6px;" />
+            </div>
+            <div class="my-2 col-lg-4 col-md-4 col-4 role-input total1">
+             
+            </div>
+          </div>
+        </div>
+      </div>
+      <div  class="row role-input1" style="margin-left: 57px;">
+        <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+        </div>
+       
+      </div>
+      <div class="big-button-bottom"  *ngIf="button == 1" style="float: right;
+    margin-right: 103px;margin-top:-54px;">
+        <ul>
+          <li><button style="font-size:16px;" (click)="onSubmitPOForm()" class="PO_SAVE">{{ buttonText }}</button></li>
+          <li><button [routerLink]="'/purchase-order'">CANCEL</button></li>
+          <!--<li *ngIf = "rejectStatus" style="margin-left:19px;"><button (click)="onSubmitRejectForm()">REJECT</button></li>-->
+        </ul>
+      </div>
+      <div class="big-button-bottom" *ngIf="button == 0" style="float: right;
+      margin-right: 103px;margin-top:-54px;">
+          <ul>
+            <li><button [routerLink]="'/purchase-order'">Close</button></li>
+            <!--<li *ngIf = "rejectStatus" style="margin-left:19px;"><button (click)="onSubmitRejectForm()">REJECT</button></li>-->
+          </ul>
+        </div>
+    </form>
+  </div>
+  </div>

@@ -1,0 +1,650 @@
+<div class="container-fluid edit-rr-desktop">
+  <div class="add-edit-role-wrap adding-margin-to-table">
+    <span class="steps d-block d-md-none d-flex justify-content-end">Step 1/3</span>
+    <app-back-button [routerPath]="'/request-resource'"></app-back-button>
+    <div class="add-edit-head">
+      <h1>{{resourceAction}} Resource Request</h1>
+    </div>
+  </div>
+</div>
+<form class="common-form-field-box edit-rr-desktop" [formGroup]="addRRForm">
+
+  <div class="container-fluid edit-rr-desktop">
+    <div class="row">
+      <div class="my-2 col-lg-2 col-md-6 col-6 role-input">
+        <label for="forRoleNameSection" class="form-label main-heading">Opportunity ID</label><span> *</span>
+        <input type="text" id="lname" name="lname" placeholder="Opportunity ID" class="project-detail1 no-field"
+          formControlName="opportunityID" style="padding:6px;" />
+        <span
+          *ngIf="(addRRForm.controls['opportunityID'].invalid && (addRRForm.controls['opportunityID'].dirty || addRRForm.controls['opportunityID'].touched))">
+          <span *ngIf="addRRForm.controls['opportunityID'].errors.required"> Please enter opportunity ID </span>
+        </span>
+      </div>
+      <div class="my-2 col-lg-2 col-md-6 col-6 role-input">
+        <label for="forRoleNameSection" class="form-label main-heading">Location</label><span> *</span>
+        <select class="form-select project-detail" (change)="onSelectCountry($event)" formControlName="location">
+          <option value="null" selected>Select</option>
+          <option *ngFor="let item of countryList">{{item.value}}</option>
+        </select>
+        <span
+          *ngIf="(addRRForm.controls['location'].invalid && (addRRForm.controls['location'].dirty || addRRForm.controls['location'].touched))">
+          <span *ngIf="addRRForm.controls['location'].errors.required || !addRRForm.controls['location'].value"> Please
+            select Location </span>
+        </span>
+        <!-- <span
+          *ngIf="(addRRForm.controls['location'].value === 'null' && (addRRForm.controls['location'].dirty || addRRForm.controls['location'].touched))">
+          Please select Location
+        </span> -->
+      </div>
+      <div class="my-2 col-lg-2 col-md-6 col-6 role-input">
+        <label for="forRoleNameSection" class="form-label main-heading">Requester</label><span> *</span>
+        <select class="form-select project-detail" formControlName="requester">
+          <option value="null" selected>Select</option>
+          <option *ngFor="let item of requesterList; trackBy: trackElement" [value]="item.value">{{item.value}}</option>
+        </select>
+        <span
+          *ngIf="(addRRForm.controls['requester'].invalid && (addRRForm.controls['requester'].dirty || addRRForm.controls['requester'].touched))">
+          <span *ngIf="addRRForm.controls['requester'].errors.required || !addRRForm.controls['requester'].value">
+            Please select Requester </span>
+        </span>
+      </div>
+      <div class="my-2 col-lg-2 col-md-6 col-6 role-input">
+        <label for="forRoleNameSection" class="form-label main-heading">Role</label><span> *</span>
+        <select class="form-select project-detail" formControlName="role">
+          <option value="null" selected>Select</option>
+          <option *ngFor="let item of rolesList">{{item.value}}</option>
+        </select>
+        <span
+          *ngIf="(addRRForm.controls['role'].invalid && (addRRForm.controls['role'].dirty || addRRForm.controls['role'].touched))">
+          <span *ngIf="addRRForm.controls['role'].errors.required || !addRRForm.controls['role'].value"> Please select
+            Role </span>
+        </span>
+      </div>
+      <div class="my-2 col-lg-2 col-md-6 col-12 role-input">
+        <p class="main-heading">Placement<span> *</span></p>
+        <div class="check-fill">
+          <div class="form-check" *ngFor="let item of placementTypeValues">
+            <input class="form-check-input" type="radio" id="placement" [value]="item.Value" formControlName="placement"
+              (change)="onSelectPlacement(false)" [(ngModel)]="isBackFillSelected" />
+            <label class="form-check-label" for="placement">
+              {{item.Name}}
+            </label>
+          </div>
+          <span
+            *ngIf="(addRRForm.controls['placement'].invalid && (addRRForm.controls['placement'].dirty || addRRForm.controls['placement'].touched))">
+            <span *ngIf="addRRForm.controls['placement'].errors.required"> Please select Placement </span>
+          </span>
+        </div>
+      </div>
+      <div class="my-2 col-lg-2 col-md-6 col-12 role-input">
+        <label [ngClass]="{'disable': !isBackFillSelected}" for="forRoleNameSection"
+          class="form-label main-heading">Backfill For<span> *</span></label>
+        <select class="form-select project-detail" [ngClass]="{'disable': !isBackFillSelected}" id="backFill"
+          formControlName="backfillFor">
+          <option value="null" selected>Select</option>
+          <option *ngFor="let item of requesterList; trackBy: trackElement" [value]="item.value">{{item.value}}</option>
+        </select>
+        <span
+          *ngIf="(addRRForm.controls['backfillFor'].invalid && (addRRForm.controls['backfillFor'].dirty || addRRForm.controls['backfillFor'].touched))">
+          <span *ngIf="addRRForm.controls['backfillFor'].errors.required || !addRRForm.controls['backfillFor'].value">
+            Please select Backfill For
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <!--------------------- project and role details start ----------------->
+  <div class="container-fluid edit-rr-desktop">
+    <div class="row mt-2 mt-md-5">
+      <div class="col-lg-8">
+        <button class="project-role banner-anchor p-0 p-md-4 pb-md-1">Project & Role Details</button>
+        <div class="col-12 work-border p-0 p-md-4 pt-md-2">
+          <div class="row mt-md-2 mt-1">
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label for="forRoleNameSection" class="form-label">Work Location</label><span> *</span>
+              <select class="form-select project-detail" formControlName="workLocation">
+                <option value="null" selected>Select</option>
+                <option *ngFor="let item of workLocationList"
+                  [selected]="item.value === resourceRequestDetail?.workLocation">{{item.value}}</option>
+              </select>
+              <span
+                *ngIf="(addRRForm.controls['workLocation'].invalid && (addRRForm.controls['workLocation'].dirty || addRRForm.controls['workLocation'].touched))">
+                <span
+                  *ngIf="addRRForm.controls['workLocation'].errors?.['required'] || !addRRForm.controls['workLocation'].value ">
+                  Please select Work Location
+                </span>
+              </span>
+            </div>
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label for="forRoleNameSection" class="form-label  mt-md-2 mt-lg-0">Job Title</label><span> *</span>
+              <select class="form-select project-detail" formControlName="jobTitle">
+                <option value="null" selected>Select</option>
+                <option *ngFor="let item of jobTitleList">{{item.value}}</option>
+              </select>
+              <span
+                *ngIf="(addRRForm.controls['jobTitle'].invalid && (addRRForm.controls['jobTitle'].dirty || addRRForm.controls['jobTitle'].touched))">
+                <span *ngIf="addRRForm.controls['jobTitle'].errors.required || !addRRForm.controls['jobTitle'].value">
+                  Please select Job Title </span>
+              </span>
+            </div>
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label for="forRoleNameSection" class="form-label">No of Positions/RRs</label><span> *</span>
+              <input type="number" id="lname" name="lname" class="project-detail no-field type-fild" min="0"
+                (keydown)="preventKeys($event)" [readonly]="resourceRequestDetail?.rrOpportunityId"
+                placeholder="No of Positions/RRs" formControlName="noOfPosition" style="padding: 14px;" />
+              <span
+                *ngIf="(addRRForm.controls['noOfPosition'].invalid && (addRRForm.controls['noOfPosition'].dirty || addRRForm.controls['noOfPosition'].touched))">
+                <span *ngIf="addRRForm.controls['noOfPosition'].errors.required"> Please enter No of Positions/RRs
+                </span>
+              </span>
+            </div>
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label class="form-label"> SOW Signed/ LOI</label><span> *</span>
+              <div class="check-fill">
+                <div class="form-check" *ngFor="let item of yesNoValues">
+                  <input class="form-check-input" type="radio" id="sowSigned" formControlName="sowSigned"
+                    [value]="item.Value" />
+                  <label class="form-check-label" for="sowSigned">
+                    {{item.Name}}
+                  </label>
+                </div>
+
+              </div>
+              <span
+                *ngIf="(addRRForm.controls['sowSigned'].invalid && (addRRForm.controls['sowSigned'].dirty || addRRForm.controls['sowSigned'].touched))">
+                <span *ngIf="addRRForm.controls['sowSigned'].errors.required"> Please select SOW Signed/ LOI </span>
+              </span>
+            </div>
+          </div>
+          <div class="row mt-md-2 mt-1">
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label for="forRoleNameSection" class="form-label">Min Experience (years)<span> *</span></label>
+              <select class="form-select project-detail" formControlName="minExperience">
+                <option value="null" selected>Select</option>
+                <option *ngFor="let item of experienceList">{{item.value}}</option>
+              </select>
+              <span
+                *ngIf="(addRRForm.controls['minExperience'].invalid && (addRRForm.controls['minExperience'].dirty || addRRForm.controls['minExperience'].touched))">
+                <span
+                  *ngIf="addRRForm.controls['minExperience'].errors.required || !addRRForm.controls['minExperience'].value">
+                  Please select Min Experience (years)
+                </span>
+              </span>
+            </div>
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label for="forRoleNameSection" class="form-label">Budgeted Cost/Solid Cost <span> *</span></label>
+              <input type="number" id="lname" name="lname" class="project-detail no-field type-fild" min="0" required
+                (keydown)="preventKeys($event)" formControlName="budgetedCost" placeholder="Budgeted Cost" />
+              <span
+                *ngIf="(addRRForm.controls['budgetedCost'].invalid && (addRRForm.controls['budgetedCost'].dirty || addRRForm.controls['budgetedCost'].touched))">
+                <span *ngIf="addRRForm.controls['budgetedCost'].errors.required"> Please enter Budgeted Cost/Solid Cost
+                </span>
+              </span>
+            </div>
+            <hr class="small-size-line d-md-none d-sm-block my-3">
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label for="forRoleNameSection" class="form-label">Service Type</label><span> *</span>
+              <select class="form-select project-detail" formControlName="serviceType">
+                <option value="0" selected>Select</option>
+                <option *ngFor="let item of serviceTypeList" [value]="item.Id">{{item.Name}}</option>
+              </select>
+              <span
+                *ngIf="(addRRForm.controls['serviceType'].value === 0 && (addRRForm.controls['serviceType'].dirty || addRRForm.controls['serviceType'].touched))">
+                Please select Service Type
+              </span>
+            </div>
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label for="forRoleNameSection" class="form-label">COE</label><span> *</span>
+              <select class="form-select project-detail" formControlName="coe">
+                <option value="0" selected>Select</option>
+                <option *ngFor="let item of COEList" [value]="item.id">{{item.value}}</option>
+              </select>
+              <span
+                *ngIf="(addRRForm.controls['coe'].value === 0 && (addRRForm.controls['coe'].dirty || addRRForm.controls['coe'].touched))">
+                Please select COE
+              </span>
+            </div>
+          </div>
+          <div class="row mt-md-2 mt-1">
+            <div class="col-lg-3 col-6 my-2 role-input ">
+              <label for="forRoleNameSection" class="form-label role-input">Customer Commit Date<span> *</span></label>
+              <div class="col-xs-12 col-12 col-md-4 form-group" style="width:100%;">
+                <input type="text" placeholder="MM/DD/YYYY" class="form-control" bsDatepicker
+                  formControlName="commitDate" [bsValue]="customerCommitDate"
+                  [bsConfig]="{ isAnimated: true, dateInputFormat: 'MM/DD/YYYY', showWeekNumbers: false }">
+                <span
+                  *ngIf="(addRRForm.controls['commitDate'].invalid && (addRRForm.controls['commitDate'].dirty || addRRForm.controls['commitDate'].touched))">
+                  <span *ngIf="addRRForm.controls['commitDate'].errors.required"> Please select Customer Commit Date
+                  </span> </span>
+              </div>
+            </div>
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label for="forRoleNameSection" class="form-label">Proficiency</label><span> *</span>
+              <select class="form-select project-detail" formControlName="proficiency">
+                <option value="0" selected>Select</option>
+                <option *ngFor="let item of proficiencyList" [value]="item.id">{{item.value}}</option>
+              </select>
+              <span
+                *ngIf="( addRRForm.controls['proficiency'].value === 0 && (addRRForm.controls['proficiency'].dirty || addRRForm.controls['proficiency'].touched))">
+                Please select Proficiency
+              </span>
+            </div>
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label for="forRoleNameSection" class="form-label">Employment Type</label><span> *</span>
+              <select class="form-select project-detail" formControlName="employmentType">
+                <option value="null" selected>Select</option>
+                <option *ngFor="let item of employmentTypeList" [value]="item.Name">{{item.Name}}</option>
+              </select>
+              <span
+                *ngIf="(addRRForm.controls['employmentType'].invalid && (addRRForm.controls['employmentType'].dirty || addRRForm.controls['employmentType'].touched))">
+                <span
+                  *ngIf="addRRForm.controls['employmentType'].errors.required || !addRRForm.controls['employmentType'].value">
+                  Please select Employment Type
+                </span>
+              </span>
+            </div>
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label for="forRoleNameSection" class="form-label">Employment Payment</label><span> *</span>
+              <select class="form-select project-detail" formControlName="employmentPayment">
+                <option value="null" selected>Select</option>
+                <option *ngFor="let item of paymentTypeList" [value]="item.Name">{{item.Name}}</option>
+              </select>
+              <span
+                *ngIf="(addRRForm.controls['employmentPayment'].invalid && (addRRForm.controls['employmentPayment'].dirty || addRRForm.controls['employmentPayment'].touched))">
+                <span
+                  *ngIf="addRRForm.controls['employmentPayment'].errors.required || !addRRForm.controls['employmentPayment'].value">
+                  Please select Employment Payment
+                </span>
+              </span>
+            </div>
+          </div>
+          <div class="row mt-md-2 mt-1">
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label for="forRoleNameSection" class="form-label">Account Name</label><span> *</span>
+              <select class="form-select project-detail" formControlName="accountName"
+                (change)="onSelectAccount($event)">
+                <option value="0" selected>Select</option>
+                <option *ngFor="let item of accountList" [value]="item.id">{{item.value}}</option>
+              </select>
+              <span
+                *ngIf="(addRRForm.controls['accountName'].value === 0 && (addRRForm.controls['accountName'].dirty || addRRForm.controls['accountName'].touched))">
+                Please select Account Name
+              </span>
+            </div>
+
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label for="forRoleNameSection" class="form-label">Project Name</label><span> *</span>
+              <select class="form-select project-detail" formControlName="projectName">
+                <option value="0" selected>Select</option>
+                <option *ngFor="let item of projectList" [value]="item.id">{{item.value}}</option>
+              </select>
+              <span
+                *ngIf="(addRRForm.controls['projectName'].value === 0 && (addRRForm.controls['projectName'].dirty || addRRForm.controls['projectName'].touched))">
+                Please select Project Name
+              </span>
+            </div>
+
+            <div class="col-lg-6 col-12 my-2 role-input ">
+              <label for="forRoleName" class="form-label">Role Duration On Project</label><span> *</span>
+              <div class="check-fill d-flex">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="roleDuration1" id="roleDuration"
+                    (change)="onSelectEndDate($event)" [checked]="projectEndDate" />
+                  <label class="form-check-label" for="roleDuration">
+                    Project End Date
+                  </label>
+                </div>
+                <div class="form-check role-input ">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
+                    [checked]="durationDate" (change)="onSelectDuration($event)" />
+                  <div class="col-xs-12 col-12 col-md-4 form-group" style="width:100%;">
+                    <input type="text" placeholder="MM/DD/YYYY" class="form-control" bsDatepicker
+                      formControlName="roleDuration" [bsValue]="roleDurationDate" (bsValueChange)="onSelectDate($event)"
+                      [bsConfig]="{ isAnimated: true, dateInputFormat: 'MM/DD/YYYY', showWeekNumbers: false }">
+                  </div>
+                </div>
+              </div>
+              <span
+                *ngIf="(addRRForm.controls['roleDuration'].dirty || addRRForm.controls['roleDuration'].touched) && (!projectEndDate && !durationDate)">
+                Please select Role Duration On Project
+              </span>
+              <span
+                *ngIf="(addRRForm.controls['roleDuration'].dirty || addRRForm.controls['roleDuration'].touched) && (durationDate && !addRRForm.controls['roleDuration'].value)">
+                Please select Date
+              </span>
+            </div>
+          </div>
+          <div class="row my-4">
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label for="forRoleNameSection" class="form-label">Technology</label>
+              <select class="form-select project-detail" formControlName="technology">
+                <option value="null" selected>Select</option>
+                <option *ngFor="let item of technologyList">{{item.value}}</option>
+              </select>
+            </div>
+            <div class="col-lg-3 col-6 role-input my-2">
+              <label for="forRoleNameSection" class="form-label">RLS Code</label>
+              <input type="text" id="lname" name="lname" class="project-detail no-field type-fild" style="height:50%;"
+                placeholder="RLS Code" formControlName="rlsCode" />
+            </div>
+
+          </div>
+          <div class="row mb-0">
+            <div class="col-lg-6 col-md-6 role-input1">
+              <label class="main-heading1 form-label">Roles & Responsibilities</label><span> *</span>
+              <textarea id="w3review" name="w3review" rows="4" cols="50" formControlName="rolesResponsibilities"
+                placeholder="Enter Role & Responsibilities">
+                </textarea>
+              <span
+                *ngIf="(addRRForm.controls['rolesResponsibilities'].invalid && (addRRForm.controls['rolesResponsibilities'].dirty || addRRForm.controls['rolesResponsibilities'].touched))">
+                <span *ngIf="addRRForm.controls['rolesResponsibilities'].errors.required"> Please enter Roles &
+                  Responsibilities
+                </span>
+              </span>
+            </div>
+            <div class="col-lg-6 col-md-6 role-input1">
+              <label class="main-heading1 form-label">Role Overview</label><span> *</span>
+              <textarea id="w3review" name="w3review" rows="4" cols="50" formControlName="roleOverview"
+                placeholder="Enter Role Overview">
+              </textarea>
+              <span
+                *ngIf="(addRRForm.controls['roleOverview'].invalid && (addRRForm.controls['roleOverview'].dirty || addRRForm.controls['roleOverview'].touched))">
+                <span *ngIf="addRRForm.controls['roleOverview'].errors.required"> Please enter Role Overview
+                </span>
+              </span>
+            </div>
+          </div>
+          <div class="row mb-0">
+            <div class="col-lg-6 col-md-6">
+              <label class="main-heading1 form-label">Project Overview</label>
+              <textarea id="w3review" name="w3review" rows="4" cols="50" formControlName="projectOverview"
+                placeholder="Project Overview">
+
+              </textarea>
+            </div>
+            <div class="col-lg-6 col-md-6">
+              <label class="main-heading1 form-label">Any Other Comments</label>
+              <textarea id="w3review" name="w3review" rows="4" cols="50" formControlName="comments"
+                placeholder="Any Other Comments">
+
+              </textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 mt-2 mt-md-2">
+        <button class="project-role banner-anchor p-0 p-md-4 pb-md-1">Skills & Interviewer Details</button>
+        <div class="col-12 work-border p-1 p-md-4 pt-md-2">
+          <div class="row pt-md-2 pt-2">
+            <div class="prefered role-input">
+              <p><a>Preferred Skills</a> (Minimum 5 Skills are Mandatory)<span> *</span></p>
+            </div>
+            <div class="col-lg-12 mb-md-4">
+              <div class="ScrollStyle col-lg-12">
+                <div formArrayName="preferredSkills">
+                  <div class="row my-3" *ngFor="let item of formData.controls; let i=index" [formGroupName]="i">
+                    <div class="col-lg-1 col-1 skill-enter">{{i + 1}}</div>
+                    <div class="col-lg-6 col-5  form-label role-input error-msg">
+                      <input type="text" class="form-control" list="datalistOptions" placeholder="Enter/Select Skill"
+                        formControlName="skillName" (change)="onSelectItem($event, i)" required>
+
+                      <span
+                        *ngIf="(preferredSkills.controls[i].get('skillName').invalid && (preferredSkills.controls[i].get('skillName').dirty || preferredSkills.controls[i].get('skillName').touched))">
+                        <span *ngIf="preferredSkills.controls[i].get('skillName').errors?.required">
+                          Please select Skill
+                        </span>
+                      </span>
+
+                      <datalist id="datalistOptions">
+                        <option [value]="list.value" *ngFor="let list of preferredSkillsList">
+                      </datalist>
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-5  form-label scroll-forms  role-input">
+                      <select class="form-select project-detail" formControlName="skillOption">
+                        <option value="0" selected>Select</option>
+                        <option>Must have</option>
+                        <option>Good to have</option>
+                      </select>
+                      <span
+                        *ngIf="(preferredSkills.controls[i].get('skillOption').value === '0' && (preferredSkills.controls[i].get('skillOption').dirty || preferredSkills.controls[i].get('skillOption').touched))">
+                        Please select Skill Option
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center">
+                <button class="text-center add-btn mt-2" (click)="addSkillOption(1)">+ ADD</button>
+              </div>
+              <div class="row">
+                <div class="col-lg-9 col-md-8 col-8 my-3 role-input">
+                  <label for="forRoleNameSection" class="form-label">Reporting Manager</label>
+                  <select class="form-select project-detail" formControlName="reportingManager">
+                    <option value="null" selected>Select</option>
+                    <option *ngFor="let item of reportingManagerList; trackBy: trackElement" [value]="item.value">
+                      {{item.value}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="prefered mt-3">
+                  <p><a>Interview</a> (Client)</p>
+                </div>
+                <div class="check-fill">
+                  <div class="form-check" *ngFor="let item of yesNoValues">
+                    <input class="form-check-input" type="radio" id="client" [value]="item.Value"
+                      formControlName="client" />
+                    <label class="form-check-label" for="client">
+                      {{item.Name}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row pt-md-4 pt-2 mb-0 mb-md-5">
+              <div class="col-md-12 col-lg-12">
+                <label class="main-heading1 form-label">Recommended Internal Interviewers</label>
+                <select class="form-select" formControlName="internalInterviewers">
+                  <option value="null" selected>Select</option>
+                  <option *ngFor="let item of requesterList; trackBy: trackElement" [value]="item.value">{{item.value}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="big-button-bottom d-block d-md-none d-flex justify-content-center">
+              <ul>
+                <li><button>BACK</button></li>
+                <li><button>NEXT</button></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ---------------------------  Billing detsils starts -------------------------- -->
+  <div class="container-fluid edit-rr-desktop">
+    <div class="row mt-md-5 mt-0">
+      <div class="col-lg-12">
+        <button class="project-role banner-anchor mt-2 mt-md-0 p-0 p-md-4 pb-md-1">Billing & Travel Details</button>
+        <div class="col-12 work-border p-0 p-md-4 pt-md-2">
+          <div class="row my-2 my-md-4">
+            <div class="col-lg-3 role-input">
+
+              <label for="forRoleNameSection" class="form-label main-heading">Billing Type</label><span> *</span>
+              <div class="check-fill">
+                <div class="form-check" *ngFor="let item of billingTypeList">
+                  <input class="form-check-input" type="radio" id="billingType" formControlName="billingType"
+                    [value]="item.Value" (change)="onSelectBillingType()" />
+                  <label class="form-check-label" for="billingType">
+                    {{item.Name}}
+                  </label>
+                </div>
+              </div>
+              <span
+                *ngIf="(addRRForm.controls['billingType'].invalid && (addRRForm.controls['billingType'].dirty || addRRForm.controls['billingType'].touched))">
+                <span *ngIf="addRRForm.controls['billingType'].errors.required">
+                  Please select Billing Type
+                </span>
+              </span>
+            </div>
+            <div class="col-lg-2 role-input  my-2 my-md-0">
+              <label for="forRoleNameSection" [ngClass]="{'disable': !isBillable}" style="width:13rem"
+                class="form-label main-heading">Billing Frequency &
+                Bill Rate<span> *</span></label>
+              <div class="check-fill">
+                <div class="form-check" *ngFor="let item of billingFrequencyList" [ngClass]="{'disable': !isBillable}">
+                  <input class="form-check-input" type="radio" id="billingFrequency" formControlName="billingFrequency"
+                    required [value]="item.Name" />
+                  <label class="form-check-label" for="billingFrequency">
+                    {{item.Name}}
+                  </label>
+                </div>
+              </div>
+              <span
+                *ngIf="(addRRForm.controls['billingFrequency'].invalid && (addRRForm.controls['billingFrequency'].dirty || addRRForm.controls['billingFrequency'].touched))">
+                <span *ngIf="addRRForm.controls['billingFrequency'].errors.required">
+                  Please select Billing Frequency
+                </span>
+              </span>
+            </div>
+            <div class="col-lg-4 role-input mt-0 mt-md-4">
+              <div class="row">
+                <div class="col-lg-5 col-md-6 role-input  my-2 my-md-0">
+                  <select class="form-select" [ngClass]="{'disable': !isBillable}" formControlName="billingCurrency"
+                    required>
+                    <option value="null" selected>Select</option>
+                    <option *ngFor="let item of currencyList"> {{item.Name}}</option>
+                  </select>
+                  <span
+                    *ngIf="(addRRForm.controls['billingCurrency'].invalid && (addRRForm.controls['billingCurrency'].dirty || addRRForm.controls['billingCurrency'].touched))">
+                    <span *ngIf="addRRForm.controls['billingCurrency'].errors.required">
+                      Please select Billing Currency
+                    </span>
+                  </span>
+                </div>
+                <div class="col-lg-5 col-md-6 role-input main-heading form-label mt-2 mt-lg-0  my-2 my-md-0">
+                  <input type="number" [ngClass]="{'disable': !isBillable}" placeholder="Bill Rate" id="lname"
+                    name="lname" class="project-detail" required (keydown)="preventKeys($event)" min="0"
+                    formControlName="billRate" />
+                  <span
+                    *ngIf="(addRRForm.controls['billRate'].invalid && (addRRForm.controls['billRate'].dirty || addRRForm.controls['billRate'].touched))">
+                    <span *ngIf="addRRForm.controls['billRate'].errors.required"> Please enter Bill Rate
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 role-input my-2 my-md-0">
+              <label for="forRoleNameSection" class="form-label main-heading"
+                [ngClass]="{'disable': addRRForm.controls['location'].value === 'INDIA' }">Work Authorization
+                Status<span> *</span></label>
+              <select class="form-select project-detail"
+                [ngClass]="{'disable': addRRForm.controls['location'].value === 'INDIA' }"
+                formControlName="workAuthorizationStatus">
+                <option value="null" selected>Select</option>
+                <option *ngFor="let item of authorizationStatus">{{item.Name}}</option>
+              </select>
+              <span
+                *ngIf="(addRRForm.controls['workAuthorizationStatus'].invalid && (addRRForm.controls['workAuthorizationStatus'].dirty || addRRForm.controls['workAuthorizationStatus'].touched))">
+                <span
+                  *ngIf="addRRForm.controls['workAuthorizationStatus'].errors.required  || !addRRForm.controls['workAuthorizationStatus'].value">
+                  Please select Work
+                  Authorization Status
+                </span>
+              </span>
+            </div>
+          </div>
+          <div class="row my-2 mt-md-4 mb-md-5 mb-0 ">
+            <div class="col-lg-3 col-md-6 role-input ">
+              <label for="forRoleNameSection" class="form-label main-heading">Remote Working Option
+                Available<span> *</span></label>
+              <div class="check-fill">
+                <div class="form-check" *ngFor="let item of yesNoValues">
+                  <input class="form-check-input" type="radio" id="remoteWork" formControlName="remoteWork"
+                    [value]="item.Value" />
+                  <label class="form-check-label" for="remoteWork">
+                    {{item.Name}}
+                  </label>
+                </div>
+
+              </div>
+              <span
+                *ngIf="(addRRForm.controls['remoteWork'].invalid && (addRRForm.controls['remoteWork'].dirty || addRRForm.controls['remoteWork'].touched))">
+                <span *ngIf="addRRForm.controls['remoteWork'].errors.required">
+                  Please select Remote Working Option Available
+                </span>
+              </span>
+            </div>
+            <div class="big-button-bottom d-block d-md-none d-flex justify-content-center">
+              <ul>
+                <li><button>SUBMIT</button></li>
+                <li><button>CANCEL</button></li>
+              </ul>
+            </div>
+            <div class="col-lg-2 role-input my-2 my-md-0">
+              <label for="forRoleNameSection" class="form-label main-heading">Any Travel Involved<span> *</span></label>
+              <div class="check-fill">
+                <div class="form-check" *ngFor="let item of yesNoValues">
+                  <input class="form-check-input" type="radio" id="travelInvolved" formControlName="travelInvolved"
+                    [value]="item.Value" (change)="onSelectTravel()" />
+                  <label class="form-check-label" for="travelInvolved">
+                    {{item.Name}}
+                  </label>
+                </div>
+              </div>
+              <span
+                *ngIf="(addRRForm.controls['travelInvolved'].invalid && (addRRForm.controls['travelInvolved'].dirty || addRRForm.controls['travelInvolved'].touched))">
+                <span *ngIf="addRRForm.controls['travelInvolved'].errors.required">
+                  Please select Any Travel Involved
+                </span>
+              </span>
+            </div>
+            <div class="col-lg-4 role-input mt-0 mt-md-1 my-2 my-md-0">
+              <div class="row">
+                <div class="col-lg-5 col-md-6 role-input">
+                  <label for="forRoleNameSection" [ngClass]="{'disable': !isTravelInvolved}"
+                    class="form-label main-heading">If Yes, % Of Travel<span> *</span> </label>
+                  <input type="number" id="lname" name="lname" class="type-fild project-detail no-field" min="0"
+                    [ngClass]="{'disable': !isTravelInvolved}" required (keydown)="preventKeys($event)"
+                    style="height:50%;" formControlName="travelValue" placeholder="% Of Travel">
+                </div>
+                <span
+                  *ngIf="(addRRForm.controls['travelValue'].invalid && (addRRForm.controls['travelValue'].dirty || addRRForm.controls['travelValue'].touched))">
+                  <span *ngIf="addRRForm.controls['travelValue'].errors.required">
+                    Please enter Travel Value
+                  </span>
+                </span>
+                <div class="col-lg-6 role-input">
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 role-input my-2 my-md-0">
+              <label for="forRoleNameSection" class="form-label main-heading">Minimum Education Requirement</label>
+              <select class="form-select project-detail" formControlName="minimumEducation">
+                <option value="null" selected>Select</option>
+                <option *ngFor="let item of educationTypeList">{{item.Name}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ---------------------------  Billing detsils ends -------------------------- -->
+</form>
+
+
+<div class="container-fluid sub-cancel-eva edit-rr-desktop">
+  <div class="big-button-bottom d-none d-md-block">
+    <ul class="d-flex mt-4">
+      <li class="savebutton" (click)="onSubmitRRForm()"><button>SUBMIT</button></li>
+      <li><button [routerLink]="'/request-resource'">CANCEL</button></li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- <div class="edit-rr-mobile">
+  <app-add-edit-rr-mobile></app-add-edit-rr-mobile>
+</div> -->

@@ -1,0 +1,298 @@
+<div class="container-fluid edit-rr-desktop1" style="margin-top:60px;margin-left: 18px;">
+    <!-- <app-back-button [routerPath]="'/purchase-order'"></app-back-button> -->
+  
+    <div class="add-edit-role-wrap adding-margin-to-table" style="margin-top:-40px;">
+      <span class="steps d-block d-md-none d-flex justify-content-end">Step 1/3</span>
+      <div class="add-edit-head">
+        <h1 style="margin-top:36px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stack"
+               viewBox="0 0 16 16">
+            <path d="m14.12 10.163 1.715.858c.22.11.22.424 0 .534L8.267 15.34a.598.598 0 0 1-.534 0L.165 11.555a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.66zM7.733.063a.598.598 0 0 1 .534 0l7.568 3.784a.3.3 0 0 1 0 .535L8.267 8.165a.598.598 0 0 1-.534 0L.165 4.382a.299.299 0 0 1 0-.535L7.733.063z" />
+            <path d="m14.12 6.576 1.715.858c.22.11.22.424 0 .534l-7.568 3.784a.598.598 0 0 1-.534 0L.165 7.968a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.659z" />
+          </svg>
+          {{resourceAction}} Allowance
+        </h1>
+  
+      </div>
+    </div>
+    <div class="container-fluid edit-rr-desktop" style="margin-top: -22px;">
+      <form [formGroup]="addAllowanceForm">
+      <!-- PR Number Select (only shown once) -->
+      <div  class="row role-input1" style="margin-left: 57px;">
+        <!-- First row with four fields -->
+        <div  class="my-2 col-lg-3 col-md-3 col-3 role-input">
+          <label for="forRoleNameSection" class="form-label main-heading">Project</label><span> *</span>
+          <select class="form-select project-detail" formControlName="ProjId" (change)="onProjectChange($event)">
+            <option [ngValue]="null">Select</option>
+            <!-- <option [value]="21648">ARC</option> -->
+            <option *ngFor="let item of ProjectList" [value]="item.projectId">{{item.projectName}}</option>
+          </select>
+          <div class="validation-message-container">
+            <span *ngIf="(addAllowanceForm.controls['ProjId'].invalid && (addAllowanceForm.controls['ProjId'].dirty || addAllowanceForm.controls['ProjId'].touched))">
+              <span *ngIf="addAllowanceForm.controls['ProjId'].errors.required || !addAllowanceForm.controls['ProjId'].value" class="text-danger">
+                Please Select Project
+              </span>
+            </span>
+          </div>
+        </div>
+        <div  class="my-2 col-lg-3 col-md-3 col-3 role-input">
+            <label for="forRoleNameSection" class="form-label main-heading">Employee</label><span> *</span>
+            <select class="form-select employee-detail" formControlName="EmployeeId" (change)="onEmployeeChange($event)">
+              <option [ngValue]="null">Select</option>
+              <!-- <option value="INEMP5074">Birundha</option>
+              <option value="INEMP5710">Siva Sankar Palraj</option> -->
+              <option *ngFor="let item of ProjectWiseEmployeeList" [ngValue]="item.employeeId">{{ item.employeeName }} - {{ item.employeeId }}</option>
+            </select>
+            <div class="validation-message-container">
+              <span *ngIf="(addAllowanceForm.controls['EmployeeId'].invalid && (addAllowanceForm.controls['EmployeeId'].dirty || addAllowanceForm.controls['EmployeeId'].touched))">
+                <span *ngIf="addAllowanceForm.controls['EmployeeId'].errors.required || !addAllowanceForm.controls['EmployeeId'].value" class="text-danger">
+                  Please Select Employee
+                </span>
+              </span>
+            </div>
+          </div>
+          <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+            <label for="forRoleNameSection" class="form-label main-heading">Designation</label>
+            <input type="text" id="designation" name="designation" placeholder="Designation" class="project-detail1 no-field"
+                   formControlName="EmpDesignation" style="padding:6px;" readonly [value]="this.EmpDesignation" />
+          </div>
+          <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+            <label for="forRoleNameSection" class="form-label main-heading">Billability</label>
+            <input type="text" id="billability" name="billability" placeholder="Billability" class="project-detail1 no-field"
+                   formControlName="Billability" style="padding:6px;" readonly [value]="this.Billability" />
+          </div>
+       
+      </div>
+        <!-- <div class="row role-input1" style="margin-left: 57px;">
+         
+         <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+            <label for="forRoleNameSection" class="form-label main-heading">Employee Id</label>
+            <input type="text" id="employeeId" name="employeeId" placeholder="Employee Id" class="project-detail1 no-field"
+                   formControlName="EmployeeId" style="padding:6px;" [disabled]="true"  />
+          </div>
+        </div> -->
+        <div class="row mb-0 role-input1" style="margin-left: 57px;">
+
+          
+        </div>
+        <div class="row mb-0 role-input" style="margin-left: 57px;">
+
+            <div class="container-fluid edit-rr-desktop">
+                <div class="row mt-md-5 mt-0">
+                    <div class="col-lg-12">
+                        <button class="project-role banner-anchor mt-2 mt-md-0 p-0 p-md-4 pb-md-1"
+                            style="cursor: default;"><b>Allowance Details</b></button>
+                          <div class="col-12 work-border p-0 p-md-4 pt-md-2">
+                            <div class="row">
+                            <div class="my-2 col-lg-2 col-md-3 col-3 role-input">
+                                <label for="forRoleNameSection" class="form-label main-heading">Year</label><span> *</span>
+                                <select class="form-select employee-detail" formControlName="Year">
+                                  <option [ngValue]="null">Select</option>
+                                  <!-- <option [value]="2025">2025</option>
+                                  <option [value]="2026">2026</option> -->
+                                  <!-- <option *ngFor="let item of filteredYearOptions" [value]="item.value">{{item.label}}</option> -->
+                                  <option *ngFor="let item of filteredYearOptions | async" [ngValue]="item.value"> {{ item.label }} </option>
+                                </select>
+                                <div class="validation-message-container">
+                                  <span *ngIf="(addAllowanceForm.controls['Year'].invalid && (addAllowanceForm.controls['Year'].dirty || addAllowanceForm.controls['Year'].touched))">
+                                    <span *ngIf="addAllowanceForm.controls['Year'].errors.required || !addAllowanceForm.controls['Year'].value" class="text-danger">
+                                      Please Select Year
+                                    </span>
+                                  </span>
+                                </div>
+                              </div>
+                              <div  class="my-2 col-lg-2 col-md-3 col-3 role-input">
+                                <label for="forRoleNameSection" class="form-label main-heading">Month</label><span>*</span>
+                                <select class="form-select employee-detail" formControlName="Month">
+                                  <option [ngValue]="null">Select</option>
+                                  <option [ngValue]="1">January</option>
+                                  <option [ngValue]="2">February</option>
+                                  <option [ngValue]="3">March</option>
+                                  <option [ngValue]="4">April</option>
+                                  <option [ngValue]="5">May</option>
+                                  <option [ngValue]="6">June</option>
+                                  <option [ngValue]="7">July</option>
+                                  <option [ngValue]="8">August</option>
+                                  <option [ngValue]="9">September</option>
+                                  <option [ngValue]="10">October</option>
+                                  <option [ngValue]="11">November</option>
+                                  <option [ngValue]="12">December</option>
+                                  <!-- <option *ngFor="let item of PRList" [value]="item.id">{{item.prNumber}}</option> -->
+                                </select>
+                                <div class="validation-message-container">
+                                  <span *ngIf="(addAllowanceForm.controls['Month'].invalid && (addAllowanceForm.controls['Month'].dirty || addAllowanceForm.controls['Month'].touched))">
+                                    <span *ngIf="addAllowanceForm.controls['Month'].errors.required || !addAllowanceForm.controls['Month'].value" class="text-danger">
+                                      Please Select Month
+                                    </span>
+                                  </span>
+                                </div>
+                              </div>
+                              <div  class="my-2 col-lg-2 col-md-3 col-3 role-input">
+                                <label for="forRoleNameSection" class="form-label main-heading">No. Of Days</label><span> *</span>
+                                <input type="number" placeholder="No. Of Days" id="noOfDays"
+                                        name="noOfDays" class="project-detail" required 
+                                        (keydown)="preventKeys($event)" min="1" max="31" formControlName="NoOfDays" />
+                                <div class="validation-message-container">
+                                  <span *ngIf="(addAllowanceForm.controls['NoOfDays'].invalid && (addAllowanceForm.controls['NoOfDays'].dirty || addAllowanceForm.controls['NoOfDays'].touched))">
+                                    <span *ngIf="addAllowanceForm.controls['NoOfDays'].errors.required || !addAllowanceForm.controls['NoOfDays'].value" class="text-danger">
+                                      Please Enter No. Of Days
+                                    </span>
+                                  </span>
+                                </div>         
+                              </div>
+
+                            <div class="my-2 col-lg-2 col-md-3 col-3 role-input">
+                              <label for="forRoleNameSection" class="form-label main-heading">Shift Worked</label><span> *</span>
+                              <select class="form-select employee-detail" formControlName="ShiftTypeId" (change)="onShiftChange($event)">
+                                <option [ngValue]="null">Select</option>
+                                <!-- <option [value]="1">Morning Shift(4:01 AM - 8:00 AM)</option>
+                                <option [value]="2">Evening Shift(1:00 PM - 11:00 PM)</option>
+                                <option [value]="3">Night Shift(11:01 PM - 4:00 AM)</option>
+                                <option [value]="4">Holidays and Weekly Offs</option> -->
+                                <option *ngFor="let item of ShiftTypeList" [value]="item.shiftTypeId">{{item.shiftName}}</option>
+                              </select>
+                              <div class="validation-message-container">
+                                <span *ngIf="(addAllowanceForm.controls['ShiftTypeId'].invalid && (addAllowanceForm.controls['ShiftTypeId'].dirty || addAllowanceForm.controls['ShiftTypeId'].touched))">
+                                  <span *ngIf="addAllowanceForm.controls['ShiftTypeId'].errors.required || !addAllowanceForm.controls['ShiftTypeId'].value" class="text-danger">
+                                    Please Select Shift Worked
+                                  </span>
+                                </span>
+                              </div>
+                          </div>
+
+                        <div class="my-2 col-lg-2 col-md-3 col-12 role-input">
+                          <label class="main-heading form-label">
+                            Food Allowance <span>*</span>
+                          </label>
+                        
+                          <div class="check-fill">
+                            <div
+                              class="form-check"
+                              *ngFor="let item of yesNoValues; let i = index"
+                            >
+                              <input
+                                class="form-check-input"
+                                type="radio"
+                                [id]="'hasFoodAllowance_' + i"
+                                formControlName="hasFoodAllowance"
+                                name="hasFoodAllowance"
+                                [value]="item.Value"
+                              />
+                        
+                              <label
+                                class="form-check-label"
+                                [for]="'hasFoodAllowance_' + i"
+                              >
+                                {{ item.Name }}
+                              </label>
+                            </div>
+                          </div>
+                          <span *ngIf="(addAllowanceForm.controls['hasFoodAllowance'].invalid && 
+                                       (addAllowanceForm.controls['hasFoodAllowance'].dirty || 
+                                       addAllowanceForm.controls['hasFoodAllowance'].touched))">
+                            <span *ngIf="addAllowanceForm.controls['hasFoodAllowance'].errors.required">
+                                Please Select Food Allowance
+                            </span>
+                          </span>
+                        </div>
+                        
+                          <div class="my-2 col-lg-1 col-md-3 col-3 role-input"></div>
+                          <!-- <div  class="my-2 col-lg-2 col-md-3 col-3 role-input" style="text-align-last: right; padding-right: 150px;">
+                            <label class="switch bookmark-label" style="width: 50px;">
+                              <input type="checkbox" [formControl]="FoodAllowancecontrol" style="width: 43px;"  (change)="onSelectionChange()" [checked]="FoodAllowancecontrol.value">
+                              <span class="swtch-toggle round" style="width: 40px;" ></span>
+                              <span class="bookmark-label-text">Food Allowance</span>
+                            </label>
+                        </div> -->
+                        
+                          </div>
+                          <div class="row">
+
+                            <div class="my-2 col-lg-2 col-md-3 col-3 role-input">
+                                <label for="shiftAllowancePerMonth" class="form-label main-heading">Shift Allowance Pay</label><span></span>
+                                <input type="number" placeholder="Shift Allowance Per Month" id="shiftAllowancePerMonth"
+                                                name="shiftAllowancePerMonth" class="project-detail" required 
+                                                (keydown)="preventKeys($event)" min="0" formControlName="ShiftAllowancePerMonth" readonly />
+                                <!-- <div class="validation-message-container">
+                                <span *ngIf="(addAllowanceForm.controls['ShiftAllowancePerMonth'].invalid && (addAllowanceForm.controls['ShiftAllowancePerMonth'].dirty || addAllowanceForm.controls['ShiftAllowancePerMonth'].touched))">
+                                <span *ngIf="addAllowanceForm.controls['ShiftAllowancePerMonth'].errors.required || !addAllowanceForm.controls['ShiftAllowancePerMonth'].value" class="text-danger">
+                                  Please enter Shift Allowance Pay
+                                </span>
+                                </span>
+                                </div> -->
+                            </div>
+                            <div class="my-2 col-lg-2 col-md-3 col-3 role-input">
+                                <label for="foodAllowancePerMonth" class="form-label main-heading">Food Allowance Pay</label><span></span>
+                                <input type="number" placeholder="Food Allowance Per Month" id="foodAllowancePerMonth"
+                                                name="foodAllowancePerMonth" class="project-detail" required 
+                                                (keydown)="preventKeys($event)" min="0" formControlName="FoodAllowancePerMonth" readonly />
+                            </div>
+                        </div>
+                            <!-- Add button -->
+                            <!-- <div class="col-12 role-input1">
+                                <div class="col-md-3 role-input main-heading form-label">
+                                    <label for="forRoleNameSection" class="form-label main-heading">Total
+                                        Value</label>
+                                    <span> *</span>
+                                    &nbsp;
+                                    <button class="info-button"
+                                        title="INR value is Excluding Tax other values it is Including tax"
+                                        aria-label="Information">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16"
+                                            fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                            <path
+                                                d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                            <path
+                                                d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                                        </svg>
+                                    </button>
+
+                                    <input type="number" [disabled]="true" placeholder="Total Value" id="lname"
+                                        name="lname" class="project-detail" required 
+                                        (keydown)="preventKeys($event)" min="0" formControlName="totalValue" />
+                                </div>
+
+                                <div
+                                    class="col-md-3 role-input main-heading form-label mt-2 mt-lg-0  my-2 my-md-0">
+                                    <div>
+                                        <button class="btn btn-add-line-item" (click)="addLineItem()" *ngIf="button == 1"
+                                            [disabled]="lineItems.length >= 100">ADD LINE ITEM &nbsp;
+
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-plus-circle"
+                                                viewBox="0 0 16 16">
+                                                <path
+                                                    d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                <path
+                                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+
+
+                            </div> -->
+                        </div>
+
+                        
+                    </div>
+                </div>
+
+                <div class="big-button-bottom" style="float: right;margin-right: 40px;margin-top: -10px;">
+                  <ul>
+                    <li><button style="font-size:16px;" (click)="onSubmitAllowanceForm()" class="PO_SAVE">Submit</button></li>
+                    <li><button [routerLink]="'/allowance-module'">CANCEL</button></li>
+                  </ul>
+                </div>
+            </div>
+        </div>
+        <div  class="row role-input1" style="margin-left: 57px;">
+          <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+          </div>
+         
+        </div>
+
+      </form>
+    </div>
+    </div>
+  

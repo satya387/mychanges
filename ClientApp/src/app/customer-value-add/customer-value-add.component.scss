@@ -1,0 +1,279 @@
+
+    .line {
+        border-bottom: 0.5px solid gray; /* Adjust border thickness as needed */
+        width: 100%; /* Adjust width as needed */
+    }
+    .box {
+        width: 100%;
+        height: 100px;
+        overflow-y: auto; /* Add scrollbar when needed */
+        overflow-x: hidden; /* Hide horizontal scrollbar */
+        border: none; /* Remove the black border */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px; /* Add a shadow effect */
+        font-family: Barlow;
+        font-style: normal;
+        font-size:12px;
+        width: 96%;
+        margin-left: 26px;
+        cursor: pointer
+    }
+    .box.expanded {
+    height: 418px; /* Expanded width */
+  }
+    ::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Color of the track */
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #888; /* Color of the scrollbar handle */
+    background-color: #0D0357
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Color of the scrollbar handle on hover */
+  }
+  
+  .box {
+    padding-bottom: 20px; /* Add padding-bottom to the box */
+    overflow: hidden; /* Hide overflow */
+  }
+  .box > div {
+    margin-bottom: 10px; /* Add margin between rows */
+  }
+  .row-scroll {
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 100px; /* Set max height for each row */
+    scrollbar-width: thin; /* Hide scrollbar buttons */
+    scrollbar-color: #888 #f1f1f1; /* Set scrollbar color */
+  }
+//   .box:nth-child(even) {
+//     background-color: #ecfaf7;
+// }
+.empMHead {
+  background: #0D0357;
+  background: -moz-linear-gradient(top, #0D0357 0%, #0D0357 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #0D0357), color-stop(100%, #0D0357));
+  background: -webkit-linear-gradient(top, #0D0357 0%, #0D0357 100%);
+  background: -o-linear-gradient(top, #0D0357 0%, #0D0357 100%);
+  background: -ms-linear-gradient(top, #0D0357 0%, #0D0357 100%);
+  background: linear-gradient(to bottom, #0D0357 0%, #0D0357  100%);
+  color: #fff;
+  border-radius: 6px;
+  padding: 3px 3px 3px 5px;
+  font-weight: bold;
+  margin-bottom: 18px;
+  height: 40px;
+  margin-top: 24px;
+  width: 96%;
+  margin-left: 26px;
+  font-size: 15px;  
+}
+
+// .empMHead input {
+//   margin: 0px;
+// }
+.empMHead{
+  margin-top: 16px;
+    margin-bottom: 17px;
+    margin-left: 19px
+}
+// .filter-container {
+//   display: inline-flex;
+//   vertical-align: top; /* Align children elements */
+//   margin-left: 10px;
+// }
+
+// .filter-group {
+//   display: flex;
+//   margin-right: 20px; /* Adjust margin as needed */
+//   align-items: center;
+// }
+
+.filter-container {
+  display: flex;
+  align-items: flex-start; /* Vertically center items */
+  gap: 16px; /* Add spacing between items */
+  flex-wrap: nowrap; /* Prevent wrapping to the next line */
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: row; /* Stack label and select vertically */
+  gap: 4px; /* Add spacing between label and select */
+  align-items: center;
+}
+
+.download-icon {
+  margin-left: auto; /* Push the download icon to the right */
+}
+
+.add-button {
+  margin-left: 16px; /* Add spacing between the download icon and the button */
+}
+
+/* Styles for labels */
+label {
+  display: inline-block;
+  // margin-bottom: 5px;
+}
+
+/* Styles for select dropdowns */
+select {
+  // padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size:12px;
+  width: 14vw;
+  margin-top: 2px;
+}
+
+.add-button {
+  background-color: #0FE4BD;
+  /* Green background */
+  border: none;
+  color: white;
+  padding: 1px 18px;
+  text-align: center;
+  text-decoration: none;
+  // display: inline-block;
+  font-size: 16px;
+  margin-bottom: 10px; /* Added margin for spacing */
+  cursor: pointer;
+  border-radius: 5px;
+  // vertical-align: top;
+  margin-top: 4.5px;
+  float: right;
+margin-right: 10px;
+  // margin-left: 545px;
+}
+.arrow {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 10px solid black; /* Adjust color and size as needed */
+  transform: translateY(-50%);
+}
+
+// select[_ngcontent-ng-cli-universal-c288] {
+//   padding: 3px;
+//   border-radius: 5px;
+//   border: 1px solid #ccc;
+//   width: 150px;
+//   margin-top: -25px;
+//   margin-left: 67px
+// }
+// .filter-group[_ngcontent-ng-cli-universal-c288] {
+//   display: inline-block;
+//   margin-right: 38px;
+// }
+// .filter-container[_ngcontent-ng-cli-universal-c288] {
+//   display: inline-block;
+//   vertical-align: top;
+//   // margin-left: 36px;
+// }
+label[_ngcontent-ng-cli-universal-c288] {
+  font-weight: 600;
+}
+.light-blue-bg {
+  background-color: #f2f2f2; /* Light sky blue */
+}
+body{
+  overflow:hidden !important;
+}
+.box-header{
+ overflow:auto !important;
+  max-height: 70vh;
+  padding-top: 5px;
+}
+.mat-tooltip {
+  background-color: #333;
+  color: #fff;
+}
+///// dropdown csss
+// .snip1535 {
+//   background-color: #0FE4BD;
+//   border: none;
+//   color: #ffffff;
+//   cursor: pointer;
+//   display: inline-block;
+//   //font-family: 'BenchNine', Arial, sans-serif;
+//   font-size: 1em;
+//   font-size: 17px;
+//   line-height: 1em;
+//   margin-bottom: 10px; /* Added margin for spacing */
+//   cursor: pointer;
+//   // vertical-align: top;
+//   margin-top: 14.5px;
+//   float: right;
+//   margin-right: 72px;
+//   outline: none;
+//   padding: 5px 20px 10px;
+//   position: relative;
+//   text-transform: uppercase;
+//   font-weight: 700;
+// }
+// .snip1535:before,
+// .snip1535:after {
+//   border-color: transparent;
+//   -webkit-transition: all 0.25s;
+//   transition: all 0.25s;
+//   border-style: solid;
+//   border-width: 0;
+//   content: "";
+//   height: 24px;
+//   position: absolute;
+//   width: 24px;
+// }
+// .snip1535:before {
+//   border-color: #0FE4BD;
+//   border-right-width: 2px;
+//   border-top-width: 2px;
+//   right: -5px;
+//   top: -5px;
+// }
+// .snip1535:after {
+//   border-bottom-width: 2px;
+//   border-color: #0FE4BD;
+//   border-left-width: 2px;
+//   bottom: -5px;
+//   left: -5px;
+// }
+// .snip1535:hover,
+// .snip1535.hover {
+//   background-color: #0FE4BD;
+// }
+// .snip1535:hover:before,
+// .snip1535.hover:before,
+// .snip1535:hover:after,
+// .snip1535.hover:after {
+//   height: 100%;
+//   width: 100%;
+// }
+// .disabled {
+//   opacity: 0.5; /* Example styling for disabled state */
+//   pointer-events: none; /* Prevent interactions with disabled elements */
+// }
+//new csss
+.custom-dialog-content {
+  overflow-x: hidden !important;
+}
+.mat-dialog-container {
+  overflow-x: hidden !important;
+}
+.mat-dialog-container::-webkit-scrollbar-track-horizontal {
+  background-color: white; /* Set background color to white */
+}
+
+.mat-dialog-container::-webkit-scrollbar-thumb-horizontal {
+  background-color: white; /* Set thumb color to white */
+}
+
+.mat-dialog-container::-webkit-scrollbar-corner {
+  background-color: white; /* Set corner color to white */
+}

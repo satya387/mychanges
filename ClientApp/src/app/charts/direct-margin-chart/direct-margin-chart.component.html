@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="content" *ngIf="options">
+
+
+    <b style="font-size: x-large;">Direct Margin</b>
+    <img src="../../../assets/images/tooltip.png" alt="Tooltip Icon" class="tooltipImage" title="Direct Margin = (Revenue – Payroll – Project Expenses) / Revenue">
+    <b title="Disclaimer: Since there was a reclassification done on shores, Jan & Feb near-shore numbers would not match with finance published numbers." style="color: red;">&nbsp;*</b>
+    <div class="direct-margin-container">
+      <div class="chart-and-buttons">
+        <ag-charts-angular id="direct-margin-chart" [options]="options"></ag-charts-angular>
+      </div>
+      <div class="button-container">
+        <div class="ytd-card">
+          <div class="card-content">
+            <h2 class="card-heading">YTD - Org</h2>
+            <div class="value-with-indicator">
+              <div class="circular-indicator-cy">
+                <div class="circular-border-cy">
+                  <div class="circular-fill-cy" [style.background-image]="getFillImageCY()"></div>
+                </div>
+              </div>
+              <p class="card-value">{{percentage_org}}%</p>
+            </div>
+          </div>
+        </div>
+        <div class="ytd-card">
+          <div class="card-content">
+            <h2 class="card-heading">YTD - Off Shore</h2>
+            <div class="value-with-indicator">
+              <div class="circular-indicator-off">
+                <div class="circular-border-off">
+                  <div class="circular-fill-off" [style.background-image]="getFillImageOff()"></div>
+                </div>
+              </div>
+              <p class="card-value">{{percentage_off}}%</p>
+            </div>
+          </div>
+        </div>
+        <div class="ytd-card">
+          <div class="card-content">
+            <h2 class="card-heading">YTD - On Shore</h2>
+            <div class="value-with-indicator">
+              <div class="circular-indicator-on">
+                <div class="circular-border-on">
+                  <div class="circular-fill-on" [style.background-image]="getFillImageOn()"></div>
+                </div>
+              </div>
+              <p class="card-value">{{percentage_on}}%</p>
+            </div>
+
+          </div>
+        </div>
+        <div class="ytd-card">
+          <div class="card-content">
+            <h2 class="card-heading">YTD - Near Shore</h2>
+            <div class="value-with-indicator">
+              <div class="circular-indicator-near">
+                <div class="circular-border-near">
+                  <div class="circular-fill-near" [style.background-image]="getFillImageNear()"></div>
+                </div>
+              </div>
+              <p class="card-value">{{percentage_near}}%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,655 @@
+<div class="dashboard-container">
+  <div class="top-header">
+    <div class="page-title">
+      Customer Contract Details
+      <span *ngIf="isEditMode && selectedDocumentType" style="font-weight: normal; color: #d1c0c0; margin-left: 5px;">
+        - {{ selectedDocumentType }}
+      </span>
+    </div>
+  </div>
+
+
+  <!-- FORM CONTAINER -->
+  <div class="table-section">
+    <!-- BODY -->
+    <div class="form-wrapper">
+      <div class="form-grid">
+
+        <!-- Document Type -->
+        <div class="form-group-custom">
+          <label>
+            Document Type<span class="required">*</span>
+          </label>
+          <select class="form-control-custom" [(ngModel)]="model.documentId"
+            (ngModelChange)="validateField('document'); onDocumentChange()" name="documentId" [disabled]="isEditMode">
+
+            <!-- <option [ngValue]="null">Select</option> -->
+            <option *ngFor="let doc of documentList" [ngValue]="doc.id">{{ doc.name }}</option>
+          </select>
+
+          <div *ngIf="errors.document" class="error-text">Document Type is required</div>
+        </div>
+        <div class="form-group-custom">
+          <label>
+            CounterParty Name
+          </label>
+
+          <input type="text" class="form-control-custom" [(ngModel)]="model.contractName" name="contractName"
+            placeholder="Enter CounterParty Name" />
+        </div>
+
+
+        <!-- Entity -->
+        <div class="form-group-custom">
+          <label>
+            Entity<span class="required">*</span>
+          </label>
+          <ng-select [items]="entityList" bindLabel="name" bindValue="id" [(ngModel)]="model.entityId" name="entityId"
+            placeholder="Search Entity" (ngModelChange)="validateField('entity')">
+          </ng-select>
+          <!-- <select
+    class="form-control-custom"
+    [(ngModel)]="model.entityId"
+    name="entityId"
+    (ngModelChange)="validateField('entity')"
+  >
+
+    <option [ngValue]="null">
+      Select
+    </option>
+
+    <option
+      *ngFor="let entity of entityList"
+      [ngValue]="entity.id"
+    >
+      {{ entity.name }}
+    </option>
+
+  </select> -->
+
+          <div *ngIf="errors.entity" class="error-text">
+            Entity is required
+          </div>
+
+        </div>
+
+        <!-- Account -->
+        <div class="form-group-custom">
+          <label>
+            Account
+          </label>
+          <ng-select [items]="accountList" bindLabel="accountName" bindValue="accountId" [(ngModel)]="model.accountId"
+            name="accountId" placeholder="Search Account" [clearable]="true" (change)="onAccountChange()">
+            <ng-template ng-label-tmp let-item="item">
+              <span [title]="item.accountName">
+                {{ item.accountName }}
+              </span>
+            </ng-template>
+            <ng-template ng-option-tmp let-item="item">
+              <span [title]="item.accountName">
+                {{ item.accountName }}
+              </span>
+            </ng-template>
+          </ng-select>
+          
+
+        </div>
+
+
+        <div class="form-group-custom">
+          <label>
+            Project
+          </label>
+          <ng-select [items]="projectList" bindLabel="projectName" bindValue="projectId" [(ngModel)]="model.projectId"
+            name="projectId" placeholder="Search Project" [clearable]="true" [title]="getSelectedProjectName()">
+
+            <ng-template ng-label-tmp let-item="item">
+              <span [title]="item.projectName">
+                {{ item.projectName }}
+              </span>
+            </ng-template>
+            <ng-template ng-option-tmp let-item="item">
+              <span [title]="item.projectName">
+                {{ item.projectName }}
+              </span>
+            </ng-template>
+          </ng-select>
+
+
+
+
+
+
+        </div>
+        <div class="form-group-custom" *ngIf="
+    selectedDocumentType === 'Statement of Work' ||
+    selectedDocumentType === 'Change Order/Amendment'
+  ">
+          <label>Salesforce ID</label>
+
+          <ng-select [items]="salesforceFiles" bindLabel="value" bindValue="id" [(ngModel)]="model.salesforceId"
+            name="salesforceId" placeholder="Search Salesforce ID">
+            <ng-template ng-label-tmp let-item="item">
+              <span [title]="item.value">
+                {{ item.value }}
+              </span>
+            </ng-template>
+            <ng-template ng-option-tmp let-item="item">
+              <span [title]="item.value">
+                {{ item.value }}
+              </span>
+            </ng-template>
+          </ng-select>
+        </div>
+        <!-- Agreement Date -->
+        <div class="form-group-custom d-none">
+          <label>Agreement Date</label>
+          <input type="date" class="form-control-custom" [(ngModel)]="model.dateOfAggrement" name="dateOfAggrement"
+            (keydown)="preventDateTyping($event)">
+        </div>
+        <!-- Start Date -->
+        <div class="form-group-custom">
+          <label>Start Date<span class="required">*</span></label>
+          <input type="date" class="form-control-custom" [(ngModel)]="model.startDate" name="startDate"
+            (ngModelChange)="validateField('startDate')" (keydown)="preventDateTyping($event)">
+
+          <div *ngIf="errors.startDate" class="error-text">
+            Start Date is required
+          </div>
+          <div *ngIf="errors.startDateBeforeAgreement" class="error-text">
+            Start Date cannot be earlier than Agreement Date
+          </div>
+        </div>
+        <!-- End Date -->
+        <div class="form-group-custom">
+          <label>End Date<span class="required">*</span></label>
+          <input type="date" class="form-control-custom" [(ngModel)]="model.endDate" name="endDate"
+            (ngModelChange)="validateField('endDate')" (keydown)="preventDateTyping($event)" [min]="model.startDate">
+
+          <div *ngIf="errors.endDate" class="error-text">
+            End Date is required
+          </div>
+          <div *ngIf="errors.endDateBeforeStart" class="error-text">
+            End Date cannot be earlier than Start Date
+          </div>
+        </div>
+        <!-- Group Mail -->
+        <div class="form-group-custom">
+          <label>Group Mail Id</label>
+
+          <input type="text" class="form-control-custom" placeholder="Group Mail Id" [(ngModel)]="model.groupMailId"
+            name="groupMailId">
+
+
+        </div>
+        <div class="form-group-custom" *ngIf="selectedDocumentType === 'Master Services Agreement'">
+
+          <label>BU</label>
+
+
+          <ng-select [items]="buList" [(ngModel)]="model.BU" name="BU" placeholder="Select BU" [clearable]="true">
+          </ng-select>
+
+        </div>
+        <!-- ================= MSA FIELDS ================= -->
+
+        <ng-container *ngIf="selectedDocumentType === 'Master Services Agreement'">
+
+          <div class="form-group-custom d-none">
+            <label>Credit Period(days)</label>
+
+            <input type="number" class="form-control-custom" placeholder="Credit Period"
+              [(ngModel)]="model.creditPeriod" name="creditPeriod" #creditPeriod="ngModel"
+              (keydown)="preventDecimal($event)" (wheel)="disableScroll($event)" min="0">
+            <div class="text-danger" *ngIf="creditPeriod.touched && model.creditPeriod && model.creditPeriod % 1 !== 0">
+              Only integer values are allowed.
+            </div>
+          </div>
+
+          <div class="form-group-custom">
+            <label>Termination Period(days)</label>
+
+            <input type="number" class="form-control-custom" placeholder="Termination Period"
+              [(ngModel)]="model.terminationPeriod" name="terminationPeriod" #terminationPeriod="ngModel"
+              (keydown)="preventDecimal($event)" (wheel)="disableScroll($event)" min="0">
+            <div class="text-danger"
+              *ngIf="terminationPeriod.touched && model.terminationPeriod && model.terminationPeriod % 1 !== 0">
+              Only integer values are allowed.
+            </div>
+          </div>
+
+          <div class="form-group-custom d-none">
+            <label>Rate Increase</label>
+
+            <input type="number" step="1" class="form-control-custom" placeholder="Rate Increase"
+              [(ngModel)]="model.rateIncrease" name="rateIncrease" #rateIncrease="ngModel"
+              (keydown)="preventDecimal($event)" min="0">
+            <div class="text-danger" *ngIf="rateIncrease.touched && model.rateIncrease && model.rateIncrease % 1 !== 0">
+              Only integer values are allowed.
+            </div>
+          </div>
+
+          <div class="form-group-custom d-none">
+            <label>Indemnity</label>
+
+            <input type="number" step="1" class="form-control-custom" placeholder="Indemnity"
+              [(ngModel)]="model.indemnity" name="indemnity" #indemnity="ngModel" (keydown)="preventDecimal($event)"
+              min="0">
+          </div>
+
+          <div class="form-group-custom d-none">
+            <label>Limitation of Liability</label>
+
+            <input type="text" class="form-control-custom" placeholder="Limitation of Liability"
+              [(ngModel)]="model.limitationOfLiability" name="limitationOfLiability">
+          </div>
+
+          <div class="form-group-custom d-none">
+            <label>Non Solicitation</label>
+
+            <input type="text" class="form-control-custom" placeholder="Non Solicitation"
+              [(ngModel)]="model.nonsolicitation" name="nonsolicitation">
+          </div>
+
+          <div class="form-group-custom d-none">
+            <label>Assignment</label>
+
+            <input type="text" class="form-control-custom" placeholder="Assignment" [(ngModel)]="model.assignment"
+              name="assignment">
+          </div>
+
+        </ng-container>
+        <!-- ================= REVENUE / MARGIN SECTION ================= -->
+        <ng-container *ngIf="
+  selectedDocumentType === 'Statement of Work' ||
+  selectedDocumentType === 'Change Order/Amendment' ||
+  selectedDocumentType === 'Work Order/Purchase Order'
+">
+
+          <div class="form-group-custom credit-period-field d-none">
+            <label>Credit Period(days)</label>
+            <input type="number" class="form-control-custom" placeholder="Credit Period"
+              [(ngModel)]="model.creditPeriod" name="revenueCreditPeriod" (wheel)="disableScroll($event)">
+          </div>
+
+          <div class="form-group-custom termination-period-field">
+            <label>Termination Period(days)</label>
+            <input type="number" class="form-control-custom" placeholder="Termination Period"
+              [(ngModel)]="model.terminationPeriod" name="revenueTerminationPeriod" (wheel)="disableScroll($event)">
+          </div>
+
+          <!-- US & CANADA -->
+          <div class="revenue-row d-none">
+            <div class="form-group-custom">
+              <label>US Revenue</label>
+              <input type="number" class="form-control-custom" placeholder="US Revenue" [(ngModel)]="model.usRevenue"
+                name="usRevenue">
+            </div>
+
+            <div class="form-group-custom d-none">
+              <label>US Margin</label>
+              <input type="number" class="form-control-custom" placeholder="US Margin" [(ngModel)]="model.usMargin"
+                name="usMargin">
+            </div>
+
+            <div class="form-group-custom d-none">
+              <label>Canada Revenue</label>
+              <input type="number" class="form-control-custom" placeholder="Canada Revenue"
+                [(ngModel)]="model.canadaRevenue" name="canadaRevenue">
+            </div>
+
+            <div class="form-group-custom d-none">
+              <label>Canada Margin</label>
+              <input type="number" class="form-control-custom" placeholder="Canada Margin"
+                [(ngModel)]="model.canadaMargin" name="canadaMargin">
+            </div>
+          </div>
+
+          <!-- MEXICO & ARGENTINA -->
+          <div class="revenue-row d-none">
+            <div class="form-group-custom">
+              <label>Mexico Revenue</label>
+              <input type="number" class="form-control-custom" placeholder="Mexico Revenue"
+                [(ngModel)]="model.mexicoRevenue" name="mexicoRevenue">
+            </div>
+
+            <div class="form-group-custom">
+              <label>Mexico Margin</label>
+              <input type="number" class="form-control-custom" placeholder="Mexico Margin"
+                [(ngModel)]="model.mexicoMargin" name="mexicoMargin">
+            </div>
+
+            <div class="form-group-custom d-none">
+              <label>Argentina Revenue</label>
+              <input type="number" class="form-control-custom" placeholder="Argentina Revenue"
+                [(ngModel)]="model.argentinaRevenue" name="argentinaRevenue">
+            </div>
+
+            <div class="form-group-custom d-none">
+              <label>Argentina Margin</label>
+              <input type="number" class="form-control-custom" placeholder="Argentina Margin"
+                [(ngModel)]="model.argentinaMargin" name="argentinaMargin">
+            </div>
+          </div>
+
+          <!-- EAST EUROPE & INDIA -->
+          <div class="revenue-row d-none">
+            <div class="form-group-custom">
+              <label>East Europe Revenue</label>
+              <input type="number" class="form-control-custom" placeholder="East Europe Revenue"
+                [(ngModel)]="model.eastEuropeRevenue" name="eastEuropeRevenue">
+            </div>
+
+            <div class="form-group-custom">
+              <label>East Europe Margin</label>
+              <input type="number" class="form-control-custom" placeholder="East Europe Margin"
+                [(ngModel)]="model.eastEuropeMargin" name="eastEuropeMargin">
+            </div>
+
+            <div class="form-group-custom">
+              <label>India Revenue</label>
+              <input type="number" class="form-control-custom" placeholder="India Revenue"
+                [(ngModel)]="model.indiaRevenue" name="indiaRevenue">
+            </div>
+
+            <div class="form-group-custom">
+              <label>India Margin</label>
+              <input type="number" class="form-control-custom" placeholder="India Margin"
+                [(ngModel)]="model.indiaMargin" name="indiaMargin">
+            </div>
+          </div>
+
+          <div class="form-group-custom">
+            <label>Total Contract Value</label>
+            <input type="number" class="form-control-custom" placeholder="Total Contract Value"
+              [(ngModel)]="model.totalContractValue" name="totalContractValue" (wheel)="disableScroll($event)">
+          </div>
+
+          <div class="form-group-custom">
+            <label>Blended Margin</label>
+            <input type="number" class="form-control-custom" placeholder="Blended Margin"
+              [(ngModel)]="model.blendedMargin" name="blendedMargin" (wheel)="disableScroll($event)">
+          </div>
+
+        </ng-container>
+
+
+        <!-- ================= SOW FIELDS ================= -->
+
+        <ng-container *ngIf="selectedDocumentType === 'Statement of Work'">
+
+          <div class="form-group-custom">
+            <label>Billing Type</label>
+
+            <input type="text" class="form-control-custom" placeholder="Billing Type" [(ngModel)]="model.billingType"
+              name="billingType" (wheel)="disableScroll($event)">
+          </div>
+
+          <div class="form-group-custom">
+            <label>Resource Count</label>
+
+            <input type="number" class="form-control-custom" placeholder="Resource Count"
+              [(ngModel)]="model.resourceCount" name="resourceCount" (wheel)="disableScroll($event)">
+          </div>
+
+        </ng-container>
+
+        <!-- ================= CHANGE ORDER ================= -->
+
+        <ng-container *ngIf="selectedDocumentType === 'Change Order/Amendment'">
+
+          <div class="form-group-custom">
+            <label>Amendment Number</label>
+
+            <input type="text" class="form-control-custom" placeholder="Amendment Number"
+              [(ngModel)]="model.amendmentNumber" name="amendmentNumber">
+          </div>
+
+          <div class="form-group-custom">
+            <label>Change Description</label>
+
+            <input type="text" class="form-control-custom" placeholder="Change Description"
+              [(ngModel)]="model.changeDescription" name="changeDescription">
+          </div>
+
+        </ng-container>
+
+        <!-- ================= WORK ORDER ================= -->
+
+        <ng-container *ngIf="selectedDocumentType === 'Work Order/Purchase Order'">
+
+          <div class="form-group-custom">
+            <label>PO Number</label>
+
+            <input type="number" class="form-control-custom" placeholder="PO Number" [(ngModel)]="model.poNumber"
+              name="poNumber">
+          </div>
+
+          <div class="form-group-custom">
+            <label>PO Amount</label>
+
+            <input type="number" class="form-control-custom" placeholder="PO Amount" [(ngModel)]="model.poAmount"
+              name="poAmount">
+          </div>
+
+        </ng-container>
+
+        <!-- ================= BUSINESS ASSOCIATE AGREEMENT ================= -->
+
+        <ng-container *ngIf="selectedDocumentType === 'Business Associate Agreement'">
+
+          <div class="form-group-custom d-none">
+            <label>Rate Increase</label>
+
+            <input type="number" class="form-control-custom" placeholder="Rate Increase"
+              [(ngModel)]="model.rateIncrease" name="baaRateIncrease">
+          </div>
+
+          <div class="form-group-custom d-none">
+            <label>Indemnity</label>
+
+            <input type="text" class="form-control-custom" placeholder="Indemnity" [(ngModel)]="model.indemnity"
+              name="baaIndemnity">
+          </div>
+
+          <div class="form-group-custom d-none">
+            <label>Limitation of Liability</label>
+
+            <input type="text" class="form-control-custom" placeholder="Limitation of Liability"
+              [(ngModel)]="model.limitationOfLiability" name="baaLimitation">
+          </div>
+
+        </ng-container>
+
+        <!-- ================= CONSULTING AGREEMENT ================= -->
+
+        <ng-container *ngIf="selectedDocumentType === 'Consulting Agreement'">
+
+          <div class="form-group-custom d-none">
+            <label>Credit Period(days)</label>
+
+            <input type="number" class="form-control-custom" placeholder="Credit Period"
+              [(ngModel)]="model.creditPeriod" name="consultingCreditPeriod" (wheel)="disableScroll($event)">
+          </div>
+
+          <div class="form-group-custom d-none ">
+            <label>Termination Period(days)</label>
+
+            <input type="number" class="form-control-custom" placeholder="Termination Period"
+              [(ngModel)]="model.terminationPeriod" name="consultingTerminationPeriod" (wheel)="disableScroll($event)">
+          </div>
+
+        </ng-container>
+
+        <!-- ================= AGREEMENT ================= -->
+
+        <ng-container *ngIf="selectedDocumentType === 'Agreement'">
+
+          <div class="form-group-custom d-none">
+            <label>Credit Period(days)</label>
+
+            <input type="number" class="form-control-custom" placeholder="Credit Period"
+              [(ngModel)]="model.creditPeriod" name="agreementCreditPeriod" (wheel)="disableScroll($event)">
+          </div>
+
+          <div class="form-group-custom">
+            <label>Termination Period(days)</label>
+
+            <input type="number" class="form-control-custom" placeholder="Termination Period"
+              [(ngModel)]="model.terminationPeriod" name="agreementTerminationPeriod" (wheel)="disableScroll($event)">
+          </div>
+
+          <div class="form-group-custom d-none">
+            <label>Rate Increase</label>
+
+            <input type="number" class="form-control-custom" placeholder="Rate Increase"
+              [(ngModel)]="model.rateIncrease" name="agreementRateIncrease">
+          </div>
+
+          <div class="form-group-custom d-none">
+            <label>Indemnity</label>
+
+            <input type="text" class="form-control-custom" placeholder="Indemnity" [(ngModel)]="model.indemnity"
+              name="agreementIndemnity">
+          </div>
+
+          <div class="form-group-custom d-none">
+            <label>Limitation of Liability</label>
+
+            <input type="text" class="form-control-custom" placeholder="Limitation of Liability"
+              [(ngModel)]="model.limitationOfLiability" name="agreementLimitation">
+          </div>
+
+          <div class="form-group-custom d-none">
+            <label>Non solicitation</label>
+
+            <input type="text" class="form-control-custom" placeholder="Non Solicitation"
+              [(ngModel)]="model.nonsolicitation" name="agreementNonSolicitation">
+          </div>
+
+          <div class="form-group-custom d-none">
+            <label>Assignment</label>
+
+            <input type="text" class="form-control-custom" placeholder="Assignment" [(ngModel)]="model.assignment"
+              name="agreementAssignment">
+          </div>
+
+        </ng-container>
+
+        <!-- COMMENTS -->
+
+        <div class="form-group-custom full-width">
+
+          <label>Comments</label>
+
+          <textarea class="form-control-custom" rows="4" placeholder="Comments" [(ngModel)]="model.comments"
+            name="comments"></textarea>
+
+        </div>
+
+        <!-- FILE -->
+        <!-- <div
+  class="form-group-custom full-width"
+  *ngIf="model.isEmidsTemplate === false">
+
+  <label>Browse File<span class="required">*</span></label>
+
+  <input
+    type="file"
+    class="form-control-custom file-input"
+    accept=".doc,.docx"
+    (change)="onFileSelected($event)"
+    (ngModelChange)="validateField('file')">
+
+    <div *ngIf="errors.file" class="error-text">
+      File is required
+  </div>
+</div> -->
+        <div class="form-group-custom full-width" *ngIf="
+    selectedDocumentType === 'Master Services Agreement' ||
+    model.isEmidsTemplate === false
+  ">
+
+          <label>
+            Browse File<span class="required">*</span>
+          </label>
+
+          <input type="file" class="form-control-custom file-input" accept=".doc,.docx"
+            (change)="onFileSelected($event); validateField('file')">
+
+          <div *ngIf="errors.file" class="error-text">
+            File is required
+          </div>
+
+          <div *ngIf="fileValidationMessage" class="error-text">
+            {{ fileValidationMessage }}
+          </div>
+
+        </div>
+        <div class="form-group-custom full-width" *ngIf="selectedDocumentType !== 'Master Services Agreement'">
+
+  <label>Document Source</label>
+
+  <div class="document-source-row">
+
+    <label class="radio-option">
+      <input
+        type="radio"
+        [(ngModel)]="model.isEmidsTemplate"
+        [value]="true"
+        name="documentSource"
+        (ngModelChange)="onDocumentSourceChange()">
+      <span>Emids Template</span>
+    </label>
+
+    <label class="radio-option">
+      <input
+        type="radio"
+        [(ngModel)]="model.isEmidsTemplate"
+        [value]="false"
+        name="documentSource"
+        (ngModelChange)="onDocumentSourceChange()">
+      <span>Upload Document</span>
+    </label>
+    
+  </div>
+
+  <!-- Template Validation Message -->
+  <div *ngIf="templateValidationMessage" class="error-text">
+    {{ templateValidationMessage }}
+  </div>
+
+</div>
+        
+        <!-- ADD THIS BLOCK (SHOW EXISTING FILES IN EDIT MODE) -->
+        <div *ngIf="model?.fileList?.length > 0" class="form-group-custom full-width">
+
+          <label>Uploaded Files</label>
+
+          <div *ngFor="let file of model.fileList" class="file-item">
+
+            <span class="file-name">📄 {{ file }}</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+
+
+    <!-- FOOTER -->
+    <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+
+      <button class="submit-btn" (click)="goBack()">Back</button>
+
+      <button class="submit-btn" (click)="submit()" [disabled]="saving">
+        {{ saving ? 'Saving...' : (isEditMode ? 'UPDATE' : 'SUBMIT') }}
+      </button>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,211 @@
+<div class="container">
+  <div class="add-edit-role-wrap adding-margin-to-table">
+    <app-back-button [routerPath]="'/content'"></app-back-button>
+
+    <div class="add-edit-head">
+      <h1><i class="ri-file-paper-2-fill"></i>{{ contentAction }} Content</h1>
+    </div>
+    <form class="common-form-field-box" [formGroup]="addContentForm" novalidate>
+      <div class="row">
+        <div class="mt-4 col-lg-6 col-md-6 role-input">
+          <label for="forRoleName" class="form-label">Content Name</label>
+          <span> *</span>
+          <input
+            type="text"
+            class="form-control"
+            id="forContentName"
+            placeholder="Enter Content Name"
+            required
+            formControlName="contentName"
+            [minlength]="minLength"
+          />
+          <span
+            *ngIf="
+              addContentForm.controls['contentName'].invalid &&
+              (addContentForm.controls['contentName'].dirty ||
+                addContentForm.controls['contentName'].touched)
+            "
+          >
+            <span
+              *ngIf="addContentForm.controls['contentName'].errors.required"
+            >
+              Please enter content name
+            </span>
+            <span
+              *ngIf="addContentForm.controls['contentName'].errors?.minlength"
+            >
+              Content name must be at least {{ minLength }} characters long
+            </span>
+            <span
+              *ngIf="addContentForm.controls['contentName'].errors?.maxlength"
+            >
+              Content name cannot exceed {{ maxLength }} characters
+            </span>
+          </span>
+        </div>
+        <!-- Country dropdown here........ -->
+        <div class="mt-4 col-lg-2 col-md-2 role-input"></div>
+        <div class="mt-4 col-lg-4 col-md-4 role-input">
+          <label for="countryName" class="form-label">Select Country Name</label
+          ><span> *</span>
+          <select class="form-select project-detail"  formControlName="location">
+            <option value="null" selected>Select</option>
+            <option *ngFor = "let country of countryList ; let i = index">{{country.value}}</option>
+          </select>
+          <span
+          *ngIf="(addContentForm.controls['location'].invalid && (addContentForm.controls['location'].dirty || addContentForm.controls['location'].touched))">
+          <span *ngIf="addContentForm.controls['location'].errors.required || !addContentForm.controls['location'].value"> Please
+            select location </span>
+        </span>
+        </div>
+      </div>
+      <!-- Country dropdown here closed........ -->
+      <div class="role-input">
+        <label for="forRoleName" class="form-label mt-4">Banner image</label>
+        <span> *</span>
+      </div>
+      <div class="container" style="padding-left: 0; padding-right: 0">
+        <div class="dragdrop-wrap">
+          <div class="drag-drop-folder-box mt-3">
+            <ngx-dropzone
+              class="drag-drop"
+              (change)="onSelectFile($event, 'drop')"
+            >
+              <ngx-dropzone-label
+                >Drag and drop your file here</ngx-dropzone-label
+              >
+            </ngx-dropzone>
+          </div>
+          <div class="or-space-banner"><strong>OR</strong></div>
+          <button
+            onclick="document.getElementById('getFile').click()"
+            class="mb-3 mb-md-5"
+          >
+            Browse File
+          </button>
+          <input
+            type="file"
+            id="getFile"
+            multiple
+            style="display: none"
+            onclick="this.value=null;"
+            (change)="onSelectFile($event, 'select')"
+            title="Browse File"
+          />
+        </div>
+        <div class="dragdrop-wrap1 container">
+          <div class="row">
+            <div class="drag-drop-folder col-lg-3 col-md-12 pb-3">
+              <span>Image Dimensions:</span>
+            </div>
+            <div
+              class="drag-drop-folder col-lg-2 col-md-6 my-md-2 my-1"
+              *ngFor="let item of imageAspects"
+            >
+              <p>{{ item.orientation }}</p>
+              <span> {{ item.dimensions }}</span>
+            </div>
+          </div>
+        </div>
+        <!----------------------- after clicking browse file this diaplay starts ------------------->
+        <div class="container" *ngIf="files.length">
+          <div class="row upload-img-files">
+            <div class="col-lg-5 text-left">Uploaded Image Files</div>
+            <div class="col-lg-7 text-left">Image Orientation</div>
+          </div>
+          <div
+            class="row mt-3 mt-md-0 mb-3 mb-md-0 upload-for-devices-change"
+            [ngClass]="{ 'banner-upload-screens': even }"
+            *ngFor="let img of files; let i = index; let even = even"
+          >
+            <div
+              class="col-lg-3 mt-2 mt-md-0 mb-2 mb-md-0 text-left img-name"
+              (click)="getImageUrl(img)"
+            >
+              {{ img.name }}
+            </div>
+            <div
+              class="col-lg-2 mt-2 mt-md-0 mb-2 mb-md-0 text-left"
+              [attr.data-index]="i"
+            >
+              <button
+                class="change-img"
+                onclick="document.getElementById('changeImg').click()"
+                (click)="getCurrentImage(img)"
+              >
+                Change Image
+              </button>
+              <input
+                type="file"
+                id="changeImg"
+                style="display: none"
+                (change)="onChangeImage($event)"
+                alt=""
+                title="Change Image"
+              />
+            </div>
+            <div class="col-lg-4 text-left mb-md-3 mt-md-3">
+              <select
+                class="form-select"
+                (change)="selectOrientation($event, img)"
+              >
+                <option>Select Option</option>
+                <option
+                  *ngFor="let item of imageAspects"
+                  [selected]="img.orientation === item.orientation"
+                >
+                  {{ item.orientation }}
+                </option>
+              </select>
+              <a class="banner-error" *ngIf="img.showError"
+                >This selection does not match the image dimensions</a
+              >
+            </div>
+            <div class="col-lg-3 bin-delete text-right">
+              <i class="ri-delete-bin-6-line" (click)="deleteFile(img)"></i>
+            </div>
+          </div>
+        </div>
+        <div class="role-input">
+          <label for="forRoleName" class="form-label mt-5">Page Content</label>
+          <span> *</span>
+          <div class="container p-0">
+            <!-- <ckeditor [editor]="Editor" formControlName="pageContent" (ready)="onReady($event)"  required></ckeditor> -->
+            <ckeditor
+              [editor]="Editor"
+              formControlName="pageContent"
+              required
+            ></ckeditor>
+            <span
+              *ngIf="
+                addContentForm.controls['pageContent'].invalid &&
+                (addContentForm.controls['pageContent'].dirty ||
+                  addContentForm.controls['pageContent'].touched)
+              "
+            >
+              <span
+                *ngIf="addContentForm.controls['pageContent'].errors.required"
+              >
+                Please enter content
+              </span>
+            </span>
+          </div>
+        </div>
+        <div class="big-button-bottom">
+          <ul>
+            <li>
+              <button
+                (click)="createContent()"
+                [disabled]="!addContentForm.valid"
+              >
+                SAVE
+              </button>
+            </li>
+            <li><button [routerLink]="'/content'">CANCEL</button></li>
+            <!-- <li><button>Preview</button></li> -->
+          </ul>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

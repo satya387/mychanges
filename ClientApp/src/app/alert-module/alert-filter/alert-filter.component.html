@@ -1,0 +1,256 @@
+<div class="filter-center-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- HEADER -->
+            <div class="modal-header">
+                <h5 class="modal-title">Alert Filters</h5>
+                <button type="button" class="btn-close" (click)="modal.dismiss()"></button>
+            </div>
+
+            <!-- BODY -->
+            <div class="modal-body">
+
+                <div class="tabs-wrapper">
+
+                    <ul class="nav nav-tabs nav-justified custom-tabs" role="tablist">
+                        <li class="nav-item">
+                          <button class="nav-link active"
+                                  data-bs-toggle="tab"
+                                  data-bs-target="#tab1">
+                            Account
+                          </button>
+                        </li>
+                      
+                        <li class="nav-item">
+                          <button class="nav-link"
+                                  data-bs-toggle="tab"
+                                  data-bs-target="#tab2">
+                            Project
+                          </button>
+                        </li>
+                      
+                        <li class="nav-item">
+                          <button class="nav-link"
+                                  data-bs-toggle="tab"
+                                  data-bs-target="#tab3">
+                            Type & Category
+                          </button>
+                        </li>
+                      
+                        <li class="nav-item">
+                          <button class="nav-link"
+                                  data-bs-toggle="tab"
+                                  data-bs-target="#tab4">
+                            Priority & Status
+                          </button>
+                        </li>
+                      </ul>
+                      
+                      <span class="tab-indicator"
+                            [style.width.px]="indicatorWidth"
+                            [style.transform]="indicatorTransform">
+                      </span>
+                                                        
+                  </div>
+                                
+
+                <!-- Tabs Content -->
+                <div class="tab-content pt-3">
+                    <!-- TAB 1 -->
+                    <div class="tab-pane fade show active" id="tab1">
+                        <div class="tab-slide tab-vertical-layout" [ngClass]="slideClass">
+                      
+                          <!-- ROW 1: SEARCH -->
+                            <input type="text"
+                                   class="form-control searchInput"
+                                   placeholder="Search Account"
+                                   [(ngModel)]="accountSearchText" />
+
+                      
+                          <!-- ROW 2: CHECKBOX LIST -->
+                          <div class="tab-row list-row">
+                            <div class="checkbox-grid">
+                              <label class="checkbox-item" *ngFor="let acc of filteredAccounts()">
+                                <input type="checkbox"
+                                       [checked]="isAccountSelected(acc)"
+                                       (change)="toggleAccount(acc)" />
+                                <span>{{ acc.AccountName }}</span>
+                              </label>
+                            </div>
+                          </div>
+                      
+                          <!-- ROW 3: SELECTED CHIPS -->
+                          <div class="tab-row chips-row" *ngIf="selectedAccounts.length">               
+                            <div class="selected-chips">
+                              <span class="chip" *ngFor="let acc of selectedAccounts">
+                                {{ acc.AccountName }}
+                                <span class="remove" (click)="removeAccount(acc)">×</span>
+                              </span>
+                            </div>
+                          </div>
+                      
+                        </div>
+                      </div>
+                   
+                      
+
+                    <!-- TAB 2 -->
+                    <div class="tab-pane fade" id="tab2">
+                        <div class="tab-slide tab-vertical-layout" [ngClass]="slideClass">
+                      
+                          <!-- ROW 1: SEARCH -->
+                            <input type="text"
+                                   class="form-control searchInput"
+                                   placeholder="Search Project"
+                                   [(ngModel)]="projectSearchText" />
+
+                      
+                          <!-- ROW 2: CHECKBOX LIST -->
+                          <div class="tab-row list-row">
+                            <div class="checkbox-grid">
+                              <label class="checkbox-item" *ngFor="let proj of filteredProjects()">
+                                <input type="checkbox"
+                                [checked]="isProjectSelected(proj)"
+                                (change)="toggleProject(proj)" />
+                                <span>{{ proj.ProjectName }}</span>
+                              </label>
+                            </div>
+                          </div>
+                      
+                          <!-- ROW 3: SELECTED CHIPS -->
+                          <div class="tab-row chips-row" *ngIf="selectedProjects.length">               
+                            <div class="selected-chips">
+                              <span class="chip"  *ngFor="let proj of selectedProjects">
+                                {{ proj.ProjectName }}
+                                <span class="remove" (click)="removeProject(proj)">×</span>
+                              </span>
+                            </div>
+                          </div>
+                      
+                        </div>
+                    </div>
+                
+
+                    <!-- TAB 3 -->
+                    <div class="tab-pane fade" id="tab3">
+                        <div class="tab-slide" [ngClass]="slideClass">
+                            <!-- <input type="text"
+                                   class="form-control"
+                                   placeholder="" readonly
+                                    /> -->
+                          <!-- LEFT COLUMN -->
+                          <div class="form-section">
+                            <fieldset>
+                              <legend class="filterhearder">Alert Type</legend>
+                      
+                              <div class="checkbox-row">
+                                <label class="checkbox-item" *ngFor="let type of AlertTypeList">
+                                  <input type="checkbox"
+                                         [checked]="filters.alertTypes.includes(type.id)"
+                                         (change)="toggleAlertType(type.id)" />
+                                  <span>{{ type.label }}</span>
+                                </label>
+                              </div>
+                      
+                              <div class="selected-chips mt-2" *ngIf="filters.alertTypes.length">
+                                <span class="chip" *ngFor="let id of filters.alertTypes">
+                                  {{ getAlertTypeName(id) }}
+                                  <span class="remove" (click)="removeAlertType(id)">×</span>
+                                </span>
+                              </div>
+                            </fieldset>
+                          </div>
+                      
+                          <!-- MIDDLE COLUMN -->
+                          <div class="middle-panel">
+                            <fieldset>
+                              <legend class="filterhearder">Category</legend>
+                      
+                              <div class="checkbox-row">
+                                <label class="checkbox-item" *ngFor="let cat of CategoryList">
+                                  <input type="checkbox"
+                                         [checked]="filters.Categories.includes(cat.id)"
+                                         (change)="toggleCategory(cat.id)" />
+                                  <span>{{ cat.label }}</span>
+                                </label>
+                              </div>
+                      
+                              <div class="selected-chips mt-2" *ngIf="filters.Categories.length">
+                                <span class="chip" *ngFor="let id of filters.Categories">
+                                  {{ getCategoryName(id) }}
+                                  <span class="remove" (click)="removeCategory(id)">×</span>
+                                </span>
+                              </div>
+                            </fieldset>
+                          </div>
+                      
+                        </div>
+                      </div>
+                      
+                    <!-- TAB 4 -->
+                    <div class="tab-pane fade" id="tab4">
+                        <div class="tab-slide" [ngClass]="slideClass">
+                      
+                          <div class="form-section">
+                            <fieldset>
+                              <legend class="filterhearder">Priority</legend>
+                      
+                              <div class="checkbox-row">
+                                <label class="checkbox-item" *ngFor="let p of PriorityList">
+                                  <input type="checkbox"
+                                         [checked]="filters.priorities.includes(p.id)"
+                                         (change)="togglePriority(p.id)" />
+                                  <span>{{ p.label }}</span>
+                                </label>
+                              </div>
+                      
+                              <div class="selected-chips mt-2" *ngIf="filters.priorities.length">
+                                <span class="chip" *ngFor="let id of filters.priorities">
+                                  {{ getPriorityName(id) }}
+                                  <span class="remove" (click)="removePriority(id)">×</span>
+                                </span>
+                              </div>
+                            </fieldset>
+                          </div>
+                      
+                          <div class="middle-panel">
+                            <fieldset>
+                              <legend class="filterhearder">Status</legend>
+                      
+                              <div class="checkbox-row">
+                                <label class="checkbox-item" *ngFor="let s of StatusList">
+                                  <input type="checkbox"
+                                         [checked]="filters.statuses.includes(s.id)"
+                                         (change)="toggleStatus(s.id)" />
+                                  <span>{{ s.label }}</span>
+                                </label>
+                              </div>
+                      
+                              <div class="selected-chips mt-2" *ngIf="filters.statuses.length">
+                                <span class="chip" *ngFor="let id of filters.statuses">
+                                  {{ getStatusName(id) }}
+                                  <span class="remove" (click)="removeStatus(id)">×</span>
+                                </span>
+                              </div>
+                            </fieldset>
+                          </div>
+                      
+                        </div>
+                      </div>                                                              
+                </div>
+
+            </div>
+
+            <!-- FOOTER -->
+            <div class="modal-footer footer-flex">
+              <span class="footer-note">*Filtered data will be displayed only after the Apply button is clicked.</span>
+              <div class="footer-actions">
+                <button class="btn btn-outline-danger" (click)="clearAllFilters()">Clear</button>
+                <button class="btn btn-primary" (click)="applyFilterFromTemplate()">Apply</button>
+              </div>
+            </div>
+
+        </div>
+    </div>
+</div>

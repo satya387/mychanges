@@ -1,0 +1,15 @@
+// .functionality-wrap {
+//   margin-bottom: 50px;
+// }
+
+tbody tr td:nth-child(2) {
+  color: #495057 !important;
+  font-weight: 500;
+  padding-left: 1% !important;
+  cursor: pointer;
+}
+
+tbody tr td:nth-child(3) {
+  word-break: break-all;
+  word-wrap: break-word;
+}

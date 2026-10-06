@@ -1,0 +1,83 @@
+@import url("https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css");
+
+.notification-icon{
+    height: 29%;
+    width: 100%;
+}
+// .notifications-box{modal-dialog modal-md
+//     border: 2px solid slategray;
+// }
+.notifications-heading{
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: none;
+    color: #f72265;
+    margin-left: 20px;
+}
+.notifications-text p{
+    font-size: 15x;
+    font-weight: 500;
+    margin-bottom: 0;
+    cursor: pointer;
+}
+.notifications-text span{
+    font-size: 14x;
+    font-weight: 500;
+}
+
+.notifications-text i{
+    font-size: 20px;
+    font-weight: 500;
+    color: #0ab898;
+}
+
+.notification-content{
+    background-color: #f8f9fa;
+    font-size: 14px;
+    cursor: pointer;
+    /* border: 1px solid slategray; */
+}
+.notification-content:hover {
+    background-color: #e9e9e9;
+
+}
+@media (max-width: 564px) {
+    .notifications-text p{
+        font-size: 13x;
+    }
+    .notifications-text span{
+        font-size: 13x;
+        font-weight: 500;
+    }
+    .notifications-text i{
+        font-size: 13px;
+    }
+    .notifications-heading{
+        font-size: 17px;
+    }
+    .notification-icon{
+        height: 24%;
+        width: 100%;
+        min-width: auto;
+    }
+    
+}
+
+.wdth{
+    max-width: 300px;
+}
+.wdth .notification-icon{
+    height: auto;
+    min-width:40px;
+    width: 100%;
+}
+// @media (max-width: 564px){
+// .wdth{
+//     height: auto;
+//     min-width: 40px;
+//     width: 100%;
+    
+//  }}
+// .al1{
+//     display:flex;
+// }

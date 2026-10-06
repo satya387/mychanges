@@ -1,0 +1,196 @@
+<nav class="navbar navbar-expand-xl navbar-light pb-md-2 pt-md-2" id="ARC-nav">
+  <div class="logo-icons">
+    <div class="icon-emids">
+      <!-- <a href="" class="navbar-brand"><img src="../../../assets/images/logo.png"></a> -->
+      <a href="" class="navbar-brand"><img src="../../../assets/images/logo-updated.png"></a>
+
+      <!-- <form class="navbar-form form-inline" name="search-form">
+        <div class="input-group search-box">
+          <input type="text" #searchInput id="search" class="form-control home-page-search" style="border-radius: 0 !important; padding: 0; -webkit-user-select: text;" placeholder="Search" (keyup)="searchall($event)" (keydown.enter)="submitSearch(searchInput.value)">
+          <button class="close-icon" type="reset"></button>
+          <span class="input-group-addon_ home-page-search-icon" (click)="showSearch = !showSearch; submitSearch(searchInput.value);">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="16" height="16" fill="#fff" class="bi bi-search ico-down" viewBox="0 0 16 16">
+              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+            </svg>
+          </span>
+        </div>
+      </form> -->
+
+
+    </div>
+
+    <div class="navbar-nav ml-auto icons-emids">
+      <!-- <a (click)="onBannerBtnClick()" class="nav-link user-action head-icon">
+        <span>
+          <div class="toggle-button-cover">
+            <div class="button-cover">
+              <div class="button r" id="button-1">
+                <input type="checkbox" class="checkbox" />
+                <div class="knobs"></div>
+                <div class="layer"></div>
+              </div>
+            </div>
+          </div>
+        </span>
+      </a> -->
+      <div class="nav-item dropdown support1" *ngIf="isAdmin">
+        <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle user-action head-icon crcl-icon" title="Settings">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear settings-icon-top"
+               viewBox="0 0 16 16">
+            <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
+            <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
+          </svg>
+          <!-- <span class="settings">Settings</span> -->
+          <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down"
+               viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+          </svg> -->
+        </a>
+        <div class="dropdown-menu select-dropdown-menu" id="blue-bg-header">
+          <ul>
+            <li *ngFor="let menu of settingsMenuList">
+              <a class="dropdown-item" fill="currentColor" [routerLink]="menu.routeLink">
+                <span>
+                  <i class="{{menu.remixIcon}}"> </i>
+                  {{menu.name}}
+                </span>
+              </a>
+            </li>
+            <li>
+              <a (click)="navigateTo('adminpdf')" class="dropdown-item">
+                <img class="adminGuide" src="../../../assets/images/Pdf.png" height="15px" width="15px">
+                Admin Guide
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="navbar-nav ml-auto icons-emids" *ngIf="this.hasArcAccess">
+        <div class="people" placeholder="People" title="People">
+          <a (click)="navigateTo('people')" title="people">
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="16" fill="white" viewBox="0 0 35 16">
+              <path d="m14.38,5.64c1.06.67,1.81,1.79,1.94,3.11.43.2.91.32,1.42.32,1.86,0,3.37-1.51,3.37-3.37s-1.51-3.37-3.37-3.37-3.34,1.48-3.37,3.32h0Zm-2.21,6.91c1.86,0,3.37-1.51,3.37-3.37s-1.51-3.37-3.37-3.37-3.37,1.51-3.37,3.37,1.51,3.37,3.37,3.37h0Zm1.43.23h-2.86c-2.38,0-4.32,1.94-4.32,4.32v3.56s.25.08.25.08c2.27.71,4.25.95,5.87.95,3.17,0,5.01-.91,5.13-.96l.22-.11h.02v-3.5c0-2.38-1.94-4.32-4.32-4.32h0Zm5.58-3.48h-2.84c-.03,1.14-.51,2.16-1.28,2.9,2.12.63,3.66,2.59,3.66,4.91v1.08c2.8-.1,4.42-.9,4.53-.95l.23-.11h.02v-3.5c0-2.38-1.94-4.32-4.32-4.32h0Zm-12.93-.23c.66,0,1.27-.19,1.79-.52.17-1.08.74-2.02,1.57-2.66,0-.06,0-.13,0-.19,0-1.86-1.51-3.37-3.37-3.37s-3.37,1.51-3.37,3.37,1.51,3.37,3.37,3.37h0Zm3.03,3.13c-.76-.73-1.25-1.75-1.28-2.88-.11,0-.21-.02-.32-.02h-2.86c-2.38,0-4.32,1.94-4.32,4.32v3.56s.25.08.25.08c1.82.57,3.45.83,4.86.91v-1.06c0-2.32,1.55-4.28,3.67-4.91h0Zm0,0" />
+            </svg>
+            <!-- <span class="Department">People</span> -->
+          </a>
+        </div>
+      </div>
+      <!-- <button [routerLink]="'/request-resource'" > RR </button> -->
+      <a (click)="navigateTo('support')" class="nav-link user-action head-icon support" title="Helpdesk">
+        <img src="../../../assets/images/support-icon.png">
+        <!-- <span> Support Central </span> -->
+      </a>
+
+      <!--<a class="nav-item nav-link notifications support head-icon alrt-icon" (click)="openAlerts()" title="{{count}} Alerts">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell"
+             viewBox="0 0 16 16">
+          <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
+        </svg>
+        <a class="badge">{{count}}</a>--><!--<span> Alerts </span>-->
+      <!--</a>-->
+      
+      <a (click)="openUrl()" class="nav-link user-action head-icon support" title="FAQ">
+        <img src="../../../assets/images/faq-icon.png" style="height: 14px; width: 14px;">
+      </a>
+
+      <div class="nav-item dropdown support" (click)="onMenuClick()">
+        <a data-bs-toggle="dropdown" class="nav-link dropdown-toggle user-action head-icon support">
+          <img [src]="userInfo?.profilePicture" class="profile"
+               onError="this.src='./../../assets/images/home-tile-imgs/profile-photo.jpg'">
+          <span class="userInfoName">{{userInfo?.UserName}}</span> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                   fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                  d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+          </svg>
+        </a>
+        <div class="drop-class dropdown-menu open-profile">
+          <div class="dropdown-profile">
+            <ul>
+              <li>
+                <img [src]="userInfo?.profilePicture"
+                     onError="this.src='./../../assets/images/home-tile-imgs/profile-photo.jpg'">
+              </li>
+              <li class="profile-details">
+                <p><strong>{{userInfo?.UserName}}</strong></p>
+                <p>{{userInfo?.Designation}}</p>
+                <!--<p>{{userInfo?.Roles}}</p>-->
+                <!-- <span *ngIf="isAdmin"> (Admin) </span>  -->
+              </li>
+            </ul>
+          </div>
+
+          <!-- <div class="dropdown-divider"></div> -->
+          <a (click)="$event.stopPropagation();" class="dropdown-item">
+            <label class="switch">
+              <input type="checkbox" (click)="onBannerBtnClick();"  [(ngModel)]="showOnlyBookmark">
+              <span class="swtch-toggle round" style="display: inline-block;"></span>
+              <span style="white-space: nowrap;position: absolute;left: 52px; display: inline-block;">Show Banner</span>
+            </label>
+          </a>
+          <!-- <a (click)="navigateTo('area')" class="dropdown-item" *ngIf="this.hasArcAccess">
+            <i class="ri-user-fill"></i>
+            My Area
+          </a> -->
+          <a (click)="logout()" class="dropdown-item">
+            <i class="ri-login-box-line"></i>
+            Logout
+          </a>
+          <!-- <a (click)="navigateTo('userpdf')" class="dropdown-item">
+            <img class="arcGuide" src="../../../assets/images/Pdf.png" height="15px" width="15px">
+            ARC User Guide
+          </a> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <input type="text" id="search" class="form-control-mobile" *ngIf="showSearch" placeholder="Search"
+    (keydown.enter)="openSearch()">
+</nav>
+<!-- </div> -->
+<!-- after click on searc icon (input)="openSearch()"-->
+ <div class="modal fade Cocpage" id="cocModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-xl coc-modal" style="position: relative;">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <div>
+                    <h4 class="modal-title">
+                        Code of Conduct
+                    </h4>
+                </div>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="pdf-container" #pdfContainer></div>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <div class="form-check me-auto">
+                    <input
+                        class="form-check-input coc-checkbox"
+                        type="checkbox"
+                        id="acceptCoc"
+                        [(ngModel)]="acceptCoc">
+
+                    <label class="form-check-label" for="acceptCoc">
+                        I confirm that I have read, understood, and agree to comply with the Code of Conduct and all related policy requirements.
+                    </label>
+                </div>
+
+                <button
+                    class="btn btn-success px-4"
+                    (click)="submitCodeOfConduct()"
+                    [disabled]="!acceptCoc">
+
+                    Accept
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</div>

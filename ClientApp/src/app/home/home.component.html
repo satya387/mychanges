@@ -1,0 +1,138 @@
+<!-- ########################### Carousel Start  #####################################-->
+<!-- Indicators/dots -->
+
+<div id="arc-slide" class="carousel slide" data-bs-ride="carousel">
+	<div class="carousel-inner" *ngIf="isBannerVisible()">
+	  <div class="carousel-item" [ngClass]="{ active: i === 0 }" *ngFor="let result of bannerList; let i = index"
+		(click)="gotoContentPage(result)">
+		<div *ngFor="let img of result.contentData; let i = index">
+		  <img [src]="img.landscapeImg" *ngIf="img.orientation === 'Tablet (Landscape)'" class="banner-landscape" />
+  
+		  <img [src]="img.portraitImg" *ngIf="img.orientation === 'Tablet (Portrait)'" class="banner-potrait" />
+  
+		  <img [src]="img.mobileImg" *ngIf="img.orientation === 'Mobile'" class="banner-mobile" />
+		  <img [src]="img.desktopImg" *ngIf="img.orientation === 'Desktop'" class="banner-desktop" />
+		</div>
+	  </div>
+	  <!-- Left and right controls/icons starts-->
+	  <div class="carousel-indicators">
+		<button class="carousel-control-prev" type="button" data-bs-target="#arc-slide" data-bs-slide="prev"
+		  id="prev-arrow">
+		  <span class="carousel-control-prev-icon"></span>
+	   
+		</button>
+		<button type="button" data-bs-target="#arc-slide" *ngFor="let result of bannerList; let i = index"
+		  [attr.data-bs-slide-to]="i" [ngClass]="i == 0 ? 'active' : ''" aria-current="true"
+		  [attr.aria-label]="'Slide-' + i + 1"></button>
+		<button class="carousel-control-next" type="button" data-bs-target="#arc-slide" data-bs-slide="next"
+		  id="next-arrow">
+		  <span class="carousel-control-next-icon"></span>
+		</button>
+	  </div>
+	</div>
+  
+	<div class="container ">
+  
+	  	<div class="bookmark-top-section">
+			<form name="search-module">
+				<div class="input-group search-box">
+					<input type="text" id="search" name="search-box" class="form-control search-module-text" style="display: block !important;" placeholder="Search Module" [(ngModel)]="moduleSearchText">
+					<button class="close-icon" type="reset"></button>
+				</div> 
+			</form>
+			<div class="bookmark-container">
+				<label class="switch bookmark-label" style="width: 168px;">
+					<input type="checkbox" style="width: 43px;" [(ngModel)]="showOnlyBookmark">
+					<span class="swtch-toggle round" style="width: 40px;" ></span>
+					<span class="bookmark-label-text">My Bookmarks</span>
+				</label>
+				<label class="bookmark-text bookmark-label" (click)="showBookmarkClick()" data-bs-toggle="modal" data-bs-target="#exampleModal" title="Click here to add bookmark">
+					<span style="white-space: nowrap; font-size: 12px;">
+						<b><i><img src="./../../assets/images/add-bookmark-icon.svg" style="width: 15px;height: 15px;"/></i></b>
+					</span>
+				</label>
+			</div>
+			
+		   
+			<!-- Modal -->
+			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" style="margin: auto;">
+					<form class="common-form-field-box" style="width: 75%;" [formGroup]="addBookMarkForm"  novalidate>
+					<div class="modal-content">
+						<div class="modal-body">
+							<div class="role-input" style="margin-top: 10px;">
+								<label for="forRoleName" class="form-label">Add Bookmark</label>
+								<input type="text" class="form-control bookmark-text-dialog" id="forContentName" placeholder="Enter Bookmark Name" required formControlName="bookMarkName" [minlength]="minLength">
+								<span *ngIf="(addBookMarkForm.controls['bookMarkName'].invalid && (addBookMarkForm.controls['bookMarkName'].dirty || addBookMarkForm.controls['bookMarkName'].touched))">
+									<span *ngIf="addBookMarkForm.controls['bookMarkName'].hasError('whitespace')">Please enter valid data</span>
+									<ng-container *ngIf="!addBookMarkForm.controls['bookMarkName'].hasError('whitespace')">
+										<span *ngIf="addBookMarkForm.controls['bookMarkName'].errors.required"> Please enter bookmark name </span>
+										<span *ngIf="addBookMarkForm.controls['bookMarkName'].errors?.minlength"> Bookmark name must be at least {{minLength}} characters long </span>
+										<span *ngIf="addBookMarkForm.controls['bookMarkName'].errors?.maxlength"> Bookmark name cannot exceed {{maxLength}} characters </span>
+									</ng-container>
+								</span>
+							</div>
+					
+							<div class="role-input" style="margin-top: 14px;">
+								<!-- <label for="forRoleName" class="form-label"></label> -->
+								<!-- <label for="forRoleName" class="form-label">URL</label> <span> *</span> -->
+								<input type="text" class="form-control bookmark-text-dialog" id="forContentUrl" formControlName="bookMarkURL" [pattern]="urlPattern" placeholder="Enter Bookmark Url" required>
+								<span *ngIf="(addBookMarkForm.controls['bookMarkURL'].invalid && (addBookMarkForm.controls['bookMarkURL'].dirty || addBookMarkForm.controls['bookMarkURL'].touched))">
+								<span *ngIf="addBookMarkForm.controls['bookMarkURL'].errors.required"> Please enter bookmark URL</span>
+								<span *ngIf="addBookMarkForm.controls['bookMarkURL'].errors.pattern">Please enter valid URL </span>
+							</span>
+							</div>
+				
+							<div class="role-input"style="margin-top: -5px;">
+								<label for="forRoleName" class="form-label mt-md-4 mt-2">Select Bookmark Image</label>  
+								<div class="row">
+									<div class="custom-bookcol" (click)="onIconClick('musical-waves')" [ngClass]="this.clickedIcon === 'musical-waves' ? 'selectedIcon': '' " title="musical-waves">
+										<img src="../../../assets/images/bookmark-images/musical-waves.png" alt="bookmarkIcon" class="img-fluid bookmarkico ">
+									</div>
+									<div class="custom-bookcol" (click)="onIconClick('premium-vector')" [ngClass]="  this.clickedIcon == 'premium-vector' ? 'selectedIcon': '' " title="premium-vector">
+										<img src="../../../assets/images/bookmark-images/premium-vector.png" alt="bookmarkIcon" class="img-fluid bookmarkico ">
+									</div>
+									<div class="custom-bookcol" (click)="onIconClick('premium-vector-digital')" [ngClass]="  this.clickedIcon == 'premium-vector-digital' ? 'selectedIcon': '' " title="premium-vector-digital">
+										<img src="../../../assets/images/bookmark-images/premium-vector-digital.png" alt="bookmarkIcon" class="img-fluid bookmarkico ">
+									</div>
+									<div class="custom-bookcol" (click)="onIconClick('podcast')" [ngClass]="  this.clickedIcon == 'podcast' ? 'selectedIcon': '' " title="podcast">
+										<img src="../../../assets/images/bookmark-images/podcast.png" alt="bookmarkIcon" class="img-fluid bookmarkico ">
+									</div>
+									<div class="custom-bookcol" (click)="onIconClick('mechanics')" [ngClass]="this.clickedIcon == 'mechanics' ? 'selectedIcon': '' " title="mechanics">
+										<img src="../../../assets/images/bookmark-images/mechanics.png" alt="bookmarkIcon" class="img-fluid bookmarkico ">
+									</div>
+									<div class="custom-bookcol" (click)="onIconClick('coral')" [ngClass]="this.clickedIcon == 'coral' ? 'selectedIcon': '' " title="coral">
+										<img src="../../../assets/images/bookmark-images/coral.png" alt="bookmarkIcon" class="img-fluid bookmarkico ">
+									</div>
+									<div class="custom-bookcol" (click)="onIconClick('coral-spartua')" [ngClass]="this.clickedIcon == 'coral-spartua' ? 'selectedIcon': '' " title="coral-spartua">
+									  <img src="../../../assets/images/bookmark-images/coral-spartua.png" alt="bookmarkIcon" class="img-fluid bookmarkico ">
+									</div>
+									<div class="custom-bookcol" (click)="onIconClick('gigartina')" [ngClass]="this.clickedIcon == 'gigartina' ? 'selectedIcon': '' " title="gigartina">
+										<img src="../../../assets/images/bookmark-images/gigartina.png" alt="bookmarkIcon" class="img-fluid bookmarkico ">
+									</div>
+								</div>
+							</div>
+							<i>Selected icon: {{this.clickedIcon|titlecase}}</i>
+						</div>
+						<div class="modal-footer">
+							<span class="modal-btngap"><button class="modalBookmark" data-bs-dismiss="modal" (click)="createBookMark()" [disabled]="!addBookMarkForm.valid">Add Bookmark</button></span>
+							<button class="cancelBookmark" data-bs-dismiss="modal">CANCEL</button>
+						</div>
+					</div>
+					</form>
+				   </div>
+		  </div>
+			
+		
+			
+		
+		
+		  <div class="d-flex justify-content-end personalize-link py-4" style="margin-top: -18px;padding: 1rem 0 !important; white-space: nowrap;">
+			  <a (click)="personalizeSections()"><span style="font-weight: 600;">Personalize</span><span title="Click here to personalize" style="color: #000;font-weight: 600; font-size: 12px;"> &nbsp; &#9432;</span></a>
+		  </div>
+	  </div>
+	 
+	  <app-tile [sectionList]="sectionList" [activeSectionList]="activeSectionList"
+		[isPersonalized]="isPersonalizedSections" (onChangeStatusAndOrder)="changeSectionStatusOrder($event)" [moduleSearchText]="moduleSearchText" [showOnlyBookmark]="showOnlyBookmark" [showBookmark]="showBookmark"></app-tile>
+	</div>
+  </div>

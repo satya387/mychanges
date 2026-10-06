@@ -1,0 +1,63 @@
+<p>iron-clad-approvals works!</p>
+<div class="workflow-container">
+
+  <div class="workflow-header">
+    <h3>Review</h3>
+
+    <span>
+      2 of 4 Approved
+    </span>
+  </div>
+
+  <div class="workflow-card">
+
+    <div
+      *ngFor="let reviewer of reviewers"
+      class="workflow-row">
+
+      <div class="avatar">
+        {{ reviewer.initials }}
+      </div>
+
+      <div class="workflow-info">
+
+        <div class="reviewer-name">
+          {{ reviewer.name }}
+
+          <span class="role">
+            {{ reviewer.role }}
+          </span>
+        </div>
+
+        <div class="instruction">
+          <strong>Instructions:</strong>
+          {{ reviewer.instruction }}
+        </div>
+
+      </div>
+
+      <div class="status-section">
+
+        <span
+          [ngClass]="reviewer.status === 'Approved'
+            ? 'approved'
+            : 'pending'">
+
+          {{ reviewer.status }}
+        </span>
+
+        <span>
+          {{ reviewer.status === 'Approved' ? '✅' : '🕒' }}
+        </span>
+
+        <span class="menu">
+          ⋮
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

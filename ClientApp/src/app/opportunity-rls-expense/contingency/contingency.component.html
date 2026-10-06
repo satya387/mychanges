@@ -1,0 +1,77 @@
+<div class="contingency-section">
+    <div class="contingency-header">
+      <h2>Bill Rate & Cost Increment / Contingency %</h2>
+      <span style="cursor: pointer;" (click)="closeModal()"> <b>x</b></span>
+    </div>
+    <div class="contingency-content">
+      <table class="contingency-table">
+        <thead>
+          <tr>
+            <th>Location</th>
+            <th>Bill Rate Increment %</th>
+            <th>Cost Increment %</th>
+            <th>Hike Start Year</th>
+            <th>Hike Start Month</th>
+            <th>Contingency %</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of contingencyData">
+            <td>{{ row.location }}</td>
+            <td
+              [attr.contenteditable]="isContingencyEnabledToEdit" 
+              (focus)="startEditing($event, row, 'billing_Inc_Percentage')"
+              (focusout)="finishEditing($event, row, 'billing_Inc_Percentage')"
+              (keypress)="validateNumberInput($event)"
+            >
+              {{ row.billing_Inc_Percentage }}
+            </td>
+            <td
+              [attr.contenteditable]="isContingencyEnabledToEdit" 
+              (focus)="startEditing($event, row, 'cost_Inc_Percentage')"
+              (focusout)="finishEditing($event, row, 'cost_Inc_Percentage')"
+              (keypress)="validateNumberInput($event)"
+            >
+              {{ row.cost_Inc_Percentage }}
+            </td>
+            
+            <td>
+              <select
+                [disabled]="!isContingencyEnabledToEdit"
+                [(ngModel)]="row.hikeStartYear"
+                (focus)="startEditing($event, row, 'hikeStartYear')"
+                (change)="finishEditingSelect($event, row, 'hikeStartYear')"
+              >
+                <option *ngFor="let year of years" [value]="year">
+                  {{ year }}
+                </option>
+              </select>
+            </td>
+            
+            <td>
+              <select
+                [disabled]="!isContingencyEnabledToEdit"
+                [(ngModel)]="row.hikeStartMonth"
+                (focus)="startEditing($event, row, 'hikeStartMonth')"
+                (change)="finishEditingSelect($event, row, 'hikeStartMonth')"
+              >
+                <option *ngFor="let month of months" [value]="month.value">
+                  {{ month.label }}
+                </option>
+              </select>
+            </td>
+
+            <td
+              [attr.contenteditable]="isContingencyEnabledToEdit" 
+              (focus)="startEditing($event, row, 'contingencyPercentage')"
+              (focusout)="finishEditing($event, row, 'contingencyPercentage')"
+              (keypress)="validateNumberInput($event)"
+            >
+              {{ row.contingencyPercentage }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

@@ -1,0 +1,207 @@
+<div *ngIf="data.title === 'PR'" class="popup-container">
+    <div class="popup">
+      <div class="header">
+        <h2 class="add-text" id="Title">PR Details</h2>
+        <button type="button" class="close" (click)="onClose()">✕</button>
+      </div>
+      
+      <table class="details-table" style="font-size: small;">
+        <tr>
+          <td><strong>Project Name:</strong></td>
+          <td>{{ PurchaseRequestDetails.projectName }}</td>
+          &nbsp; &nbsp;
+          <td><strong>Account Name:</strong></td>
+          <td>{{ PurchaseRequestDetails.accountName }}</td>
+          &nbsp; &nbsp;
+          <td><strong>Delivery Head:</strong></td>
+          <td>{{ PurchaseRequestDetails.deliveryHeadName }}</td>
+        </tr>
+        &nbsp; &nbsp;
+        <tr>
+          <td><strong>Country:</strong></td>
+          <td>{{ PurchaseRequestDetails.prLocationName }}</td>
+          &nbsp; &nbsp;
+          <td><strong>City:</strong></td>
+          <td>{{ PurchaseRequestDetails.city }}</td>
+          &nbsp; &nbsp;
+          <td><strong>Requested Delivery Date:</strong></td>
+          <td>{{ PurchaseRequestDetails.requestDeliveryDate | date: 'dd-MM-yyy' }}</td>
+        </tr>
+        &nbsp; &nbsp;
+        <tr>
+          <td><strong>Status:</strong></td>
+          <td>{{ PurchaseRequestDetails.pR_Status }}</td>
+          &nbsp; &nbsp;
+          <td><strong>Currency:</strong></td>
+          <td>{{ PurchaseRequestDetails.currencyType }}</td>
+          &nbsp; &nbsp;
+          <td><strong>Recommended Vendor:</strong></td>
+          <td>{{ PurchaseRequestDetails.recommendedVendor }}</td>
+        </tr>
+        &nbsp; &nbsp;
+        <tr>
+          <td><strong>Is Billable To Client:</strong></td>
+          <td>{{ PurchaseRequestDetails.isBillableToClient ? 'Yes' : 'No' }}</td>
+          &nbsp; &nbsp;
+          <td><strong>Included in RLS:</strong></td>
+          <td>{{ PurchaseRequestDetails.includedinRLS ? 'Yes' : 'No' }}</td>
+          &nbsp; &nbsp;
+          <td><strong>Is Budgeted:</strong></td>
+          <td>{{ PurchaseRequestDetails.isBudgeted ? 'Yes' : 'No' }}</td>
+        </tr>
+        &nbsp; &nbsp;
+        <tr>
+          <td><strong>Has Approved Ratecard:</strong></td>
+          <td>{{ PurchaseRequestDetails.hasApprovedratecard ? 'Yes' : 'No' }}</td>
+          &nbsp; &nbsp;
+          <td><strong>Business Rationale:</strong></td>
+          <td>{{ PurchaseRequestDetails.businessRationale }}</td>
+          &nbsp; &nbsp;
+          <td><strong>Name Of The Requistioner:</strong></td>
+          <td>{{ PurchaseRequestDetails.requestorName }}</td>
+          &nbsp; &nbsp;
+        </tr>
+      </table>
+      <h3 style="color: #0BAB8E ;">Line Items</h3>
+<table class="details-table" style="font-size: small;">
+  <thead>
+    <tr>
+      <th>Item Description</th>
+      <th>Quantity</th>
+      <th>Duration No</th>
+      <th>Price Per Unit</th>
+      <th>PR Value</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of PRItems">
+      <td>{{ item.itemDescription }}</td>
+      <td style="color: inherit ! important; text-decoration: none; cursor: default; text-align: center; ">{{ item.quantity }}</td>
+      <td>{{ item.durationNo }} {{ item.serviceDuration }}</td>
+      <td>{{ item.pricePerUnit }}</td>
+      <td>{{ item.prValue }}</td> 
+    </tr>
+  </tbody>
+</table>
+<table class="details-table" style="font-size: small;">
+    <tr>
+      <td><strong>Total Value:</strong></td>
+      <td>{{ PurchaseRequestDetails.totalPrice}}</td>
+    </tr>
+</table>
+    </div>
+  </div>
+
+  <div *ngIf="data.title === 'PO'" class="popup-container">
+    <div class="popup">
+      <div class="header">
+        <h2 class="add-text" id="Title">P0 Details</h2>
+        <button type="button" class="close" (click)="onClose()">✕</button>
+      </div>
+      
+      <table class="details-table" style="font-size: small;">
+        <tr>
+          <td><strong>PO Number:</strong></td>
+          <td>{{ EditPOList.poNumber}}</td>
+          &nbsp; &nbsp;
+          <td><strong>PR NUmber:</strong></td>
+          <td>{{ EditPOList.pR_Number}}</td>
+          &nbsp; &nbsp;
+          <td><strong>Vendor Name:</strong></td>
+          <td>{{ EditPOList.vendorName}}</td>
+          &nbsp; &nbsp;
+        </tr>
+        &nbsp; &nbsp;
+        <tr>
+          <td><strong>Contact Name:</strong></td>
+          <td>{{ EditPOList.contactName}}</td>
+          &nbsp; &nbsp;
+          <td><strong>Phone:</strong></td>
+          <td>{{ EditPOList.phone }}</td>
+          &nbsp; &nbsp;
+          <td><strong>Email Id:</strong></td>
+          <td>{{ EditPOList.emailId }}</td>
+          &nbsp; &nbsp;
+        </tr>
+        &nbsp; &nbsp;
+        <tr>      
+          <td><strong>GSTIN:</strong></td>
+          <td>{{ EditPOList.gstin }}</td>
+          &nbsp; &nbsp;
+          <td><strong>PAN:</strong></td>
+          <td>{{ EditPOList.pan }}</td>
+          &nbsp; &nbsp;
+          <td><strong>Vendor Referred by:</strong></td>
+            <td>{{ EditPOList.vendorReferedBy }}</td>
+            &nbsp; &nbsp;
+        </tr>
+        &nbsp; &nbsp;
+        <tr>
+
+            <td><strong>Billing Address:</strong></td>
+            <td>{{ EditPOList.billingAddress }}</td>
+            &nbsp; &nbsp;
+          <td><strong>Vendor Address:</strong></td>
+          <td>{{ EditPOList.vendorAddress }}</td>
+          &nbsp; &nbsp;
+          <td><strong>Credit Terms:</strong></td>
+          <td>{{ EditPOList.creditTerms }}</td>
+          &nbsp; &nbsp;
+        </tr>
+        &nbsp; &nbsp;
+        <tr>
+            <td><strong>Termination Clause:</strong></td>
+            <td>{{ EditPOList.terminationClause }}</td>
+            &nbsp; &nbsp;
+          <td><strong>Shipping Address :</strong></td>
+          <td>{{ EditPOList.shippingAddress }}</td>
+          &nbsp; &nbsp;
+          <td><strong>Comments:</strong></td>
+          <td>{{ EditPOList.comments }}</td>
+          &nbsp; &nbsp;
+        </tr>
+        &nbsp; &nbsp;
+        <tr>
+            
+          
+          <td><strong>Delivery Date:</strong></td>
+          <td>{{ EditPOList.deliveryDate | date: 'dd-MM-yyy'}}</td>
+          &nbsp; &nbsp;
+            <td><strong>Rejection Reson:</strong></td>
+            <td>{{ EditPOList.reason }}</td>
+            &nbsp; &nbsp;
+           
+        </tr>
+      </table>
+      <h3 style="color: #0BAB8E ;">Line Items</h3>
+<table class="details-table" style="font-size: small;">
+  <thead>
+    <tr>
+      <th>Item Description</th>
+      <th>Quantity</th> 
+      <th>Duration No</th>
+      <th>Price Per Unit</th>
+      <th>Tax</th>
+      <th>PR Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of EditPRList">
+      <td>{{ item.itemDescription }}</td>
+      <td style="color: inherit ! important; text-decoration: none; cursor: default; text-align: center; ">{{ item.quantity }}</td> 
+      <td>{{ item.duration }} {{ item.serviceDuration }}</td>
+      <td>{{ item.pricePerUnit }}</td>
+      <td>{{ item.tax}}</td>
+      <td>{{ item.linePRValue }}</td>
+    </tr>
+  </tbody>
+</table>
+<table class="details-table" style="font-size: small;">
+    <tr>
+      <td><strong>Total Value:</strong></td>
+      <td>{{ EditPOList.pR_Value}}</td>
+    </tr>
+</table>
+    </div>
+  </div>

@@ -1,0 +1,513 @@
+<!-- first screen starts -->
+<!-- <form class="common-form-field-box edit-rr-desktop" [formGroup]="addRRForm" novalidate> -->
+<div class="" >
+  <div class="container-fluid " [ngClass]="{'hide-first-page':  !showFirstPage}">
+    <div class="add-edit-role-wrap adding-margin-to-table">
+      <span class="steps d-block d-md-none d-flex justify-content-end"></span>
+      <app-back-button [routerPath]="'/request-resource'"></app-back-button>
+      <div class="add-edit-head">
+        <h1>{{resourceAction}} Resource Request</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid" [ngClass]="{'show-first-page': showFirstPage}">
+    <div class="row">
+      <div class="my-2 col-lg-2 col-md-6 col-6 role-input">
+        <label for="forRoleNameSection" class="form-label main-heading">Opportunity ID</label><span> *</span>
+        <input type="text" id="lname" name="lname" placeholder="Opportunity ID" class="project-detail1 no-field"
+          formControlName="opportunityID" style="height: 50%;" />
+      </div>
+      <div class="my-2 col-lg-2 col-md-6 col-6 role-input">
+        <label for="forRoleNameSection" class="form-label main-heading">Location</label><span> *</span>
+        <select class="form-select project-detail" (change)="onSelectCountry($event)" formControlName="location">
+          <option selected>Select</option>
+          <option *ngFor="let item of countryList">{{item.value}}</option>
+        </select>
+      </div>
+      <div class="my-2 col-lg-2 col-md-6 col-6 role-input">
+        <label for="forRoleNameSection" class="form-label main-heading">Requester</label><span> *</span>
+        <select class="form-select project-detail" formControlName="requester">
+          <option selected>Select</option>
+          <option *ngFor="let item of requesterList">{{item.value}}</option>
+        </select>
+      </div>
+      <div class="my-2 col-lg-2 col-md-6 col-6 role-input">
+        <label for="forRoleNameSection" class="form-label main-heading">Role</label><span> *</span>
+        <select class="form-select project-detail" formControlName="role">
+          <option selected>Select</option>
+          <option *ngFor="let item of rolesList">{{item.value}}</option>
+        </select>
+      </div>
+      <div class="my-2 col-lg-2 col-md-6 col-12 role-input">
+        <p class="main-heading">Placement<span> *</span></p>
+        <div class="check-fill">
+          <div class="form-check" *ngFor="let item of placementTypeValues">
+            <input class="form-check-input" type="radio" name="placement1" id="placement" [value]="item.Name"
+              formControlName="placement" (change)="onSelectPlacement($event)" />
+            <label class="form-check-label" for="placement">
+              {{item.Name}}
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="my-2 col-lg-2 col-md-6 col-12 role-input">
+        <label for="forRoleNameSection" class="form-label main-heading">Backfill For</label>
+        <select class="form-select project-detail" formControlName="backfillFor">
+          <option selected>Select</option>
+          <option *ngFor="let item of requesterList" [disabled]="isBackFillSelected">{{item.value}}</option>
+        </select>
+      </div>
+      <div class="big-button-bottom d-block d-md-none d-flex justify-content-center">
+        <ul>
+          <li><button (click)="gotoNextPage(1)">NEXT</button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-------------- first screen ends --------------------->
+
+<!---------------------- step1 starts ------------------>
+<div class="" [ngClass]="{'hide-2nd-page': !showSecondPage, 'show-2nd-page': showSecondPage}">
+  <div class="container-fluid">
+    <div class="add-edit-role-wrap adding-margin-to-table">
+      <span class="steps d-block d-md-none d-flex justify-content-end">Step 1/3</span>
+      <div class="back-btn">
+        <a (click)="showSecondPage = false; showFirstPage = true;"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+            height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+          </svg>BACK</a>
+      </div>
+      <div class="add-edit-head">
+        <h1>{{resourceAction}} Resource Request</h1>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid ">
+    <div class="row mt-2 mt-md-5">
+      <div class="col-lg-8">
+        <button class="project-role banner-anchor p-0 p-md-4">Project & Role Details</button>
+        <div class="col-12 work-border p-0 p-md-4">
+          <div class="row mt-md-2 mt-1">
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label for="forRoleNameSection" class="form-label">Work Location</label><span> *</span>
+              <select class="form-select project-detail" formControlName="workLocation">
+                <option selected>Select</option>
+                <option *ngFor="let item of workLocationList">{{item.value}}</option>
+              </select>
+            </div>
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label for="forRoleNameSection" class="form-label  mt-md-2 mt-lg-0">Job Title</label><span> *</span>
+              <select class="form-select project-detail" formControlName="jobTitle">
+                <option selected>Select</option>
+                <option *ngFor="let item of jobTitleList">{{item.value}}</option>
+              </select>
+            </div>
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label for="forRoleNameSection" class="form-label">No of positions/RRs</label><span> *</span>
+              <input type="number" id="lname" name="lname" class="project-detail no-field type-fild"
+                placeholder="No of positions/RRs" formControlName="noOfPosition" />
+            </div>
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label class="form-label"> SOW Signed/ LOI</label><span> *</span>
+              <div class="check-fill">
+                <div class="form-check" *ngFor="let item of yesNoValues">
+                  <input class="form-check-input" type="radio" name="sowSigned1" id="sowSigned"
+                    formControlName="sowSigned" [value]="item.Value" />
+                  <label class="form-check-label" for="sowSigned">
+                    {{item.Name}}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-md-2 mt-1">
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label for="forRoleNameSection" class="form-label">Min Experience(years)<span> *</span></label>
+              <select class="form-select project-detail" formControlName="minExperience">
+                <option selected>Select</option>
+                <option *ngFor="let item of experienceList">{{item.value}}</option>
+              </select>
+            </div>
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label for="forRoleNameSection" class="form-label">Budgeted Cost/Solid Cost</label>
+              <input type="number" id="lname" name="lname" class="project-detail no-field type-fild"
+                formControlName="budgetedCost" placeholder="Budgeted Cost" />
+            </div>
+            <hr class="small-size-line d-md-none d-sm-block my-3">
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label for="forRoleNameSection" class="form-label">Service Type</label><span> *</span>
+              <select class="form-select project-detail" formControlName="serviceType">
+                <option selected>Select</option>
+                <option *ngFor="let item of serviceTypeList" [value]="item.Id">{{item.Name}}</option>
+              </select>
+            </div>
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label for="forRoleNameSection" class="form-label">COE</label><span> *</span>
+              <select class="form-select project-detail" formControlName="coe">
+                <option selected>Select</option>
+                <option *ngFor="let item of COEList" [value]="item.id">{{item.value}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mt-md-2 mt-1">
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label for="forRoleNameSection" class="form-label">Project Name</label><span> *</span>
+              <select class="form-select project-detail" formControlName="projectName">
+                <option selected>Select</option>
+                <option *ngFor="let item of projectList" [value]="item.id">{{item.value}}</option>
+              </select>
+            </div>
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label for="forRoleNameSection" class="form-label">Proficiency</label><span> *</span>
+              <select class="form-select project-detail" formControlName="proficiency">
+                <option selected>Select</option>
+                <option *ngFor="let item of proficiencyList" [value]="item.id">{{item.value}}</option>
+              </select>
+            </div>
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label for="forRoleNameSection" class="form-label">Employment Type</label><span> *</span>
+              <select class="form-select project-detail" formControlName="employmentType">
+                <option selected>Select</option>
+                <option *ngFor="let item of employmentTypeList" [value]="item.Name">{{item.Name}}</option>
+              </select>
+            </div>
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label for="forRoleNameSection" class="form-label">Employment Payment</label><span> *</span>
+              <select class="form-select project-detail" formControlName="employmentPayment">
+                <option selected>Select</option>
+                <option *ngFor="let item of paymentTypeList" [value]="item.Name">{{item.Name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mt-md-2 mt-1">
+
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label for="forRoleNameSection" class="form-label role-input">Customer commit Date<span> *</span></label>
+              <input type="text" placeholder="dd-mm-yyyy" id="lname" name="lname" class="project-detail"
+                formControlName="commitDate" style="height: 50%;" />
+            </div>
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label for="forRoleNameSection" class="form-label">Account Name</label><span> *</span>
+              <select class="form-select project-detail" formControlName="accountName">
+                <option selected>Select</option>
+                <option *ngFor="let item of accountList" [value]="item.id">{{item.value}}</option>
+              </select>
+            </div>
+            <div class="col-lg-6 col-12 my-2 role-input ">
+
+              <label for="forRoleName" class="form-label">Role Duration On Project</label><span> *</span>
+
+              <div class="check-fill d-flex">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="roleDuration1" id="roleDuration"
+                    formControlName="projectEndDate" (change)="onSelectEndDate($event)" [checked]="projectEndDate" />
+                  <label class="form-check-label" for="roleDuration">
+                    Project End Date
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
+                    [checked]="durationDate" (change)="onSelectDuration($event)" />
+                  <input type="text" placeholder="dd-mm-yyyy" id="lname" name="lname" class="project-detail"
+                    formControlName="roleDuration" style="height: 120%;" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row my-4">
+            <div class="col-lg-3 col-6 my-2 role-input">
+              <label for="forRoleNameSection" class="form-label">Technology</label>
+              <select class="form-select project-detail" formControlName="technology">
+                <option selected>Select</option>
+                <option *ngFor="let item of technologyList">{{item.value}}</option>
+              </select>
+            </div>
+            <div class="col-lg-3 col-6 role-input my-2">
+              <label for="forRoleNameSection" class="form-label">RLS Code</label>
+              <input type="text" id="lname" name="lname" class="project-detail no-field type-fild"
+                placeholder="RLS Code" formControlName="rlsCode" />
+            </div>
+
+          </div>
+          <div class="row mb-0 mb-md-4">
+            <div class="col-lg-6 col-md-6 role-input1">
+              <label class="main-heading1 form-label">Role & Responsibilities</label><span> *</span>
+              <textarea id="w3review" name="w3review" rows="1" cols="50" formControlName="rolesResponsibilities"
+                placeholder="Enter Role & Responsibilities">
+                </textarea>
+            </div>
+            <div class="col-lg-6 col-md-6 role-input1">
+              <label class="main-heading1 form-label">Role Overview</label><span> *</span>
+              <textarea id="w3review" name="w3review" rows="1" cols="50" formControlName="roleOverview"
+                placeholder="Enter Role Overview">
+
+              </textarea>
+            </div>
+          </div>
+          <div class="row mb-0 mb-md-5">
+            <div class="col-lg-6 col-md-6">
+              <label class="main-heading1 form-label">Project Overview</label>
+              <textarea id="w3review" name="w3review" rows="1" cols="50" formControlName="projectOverview"
+                placeholder="Project Overview">
+              </textarea>
+            </div>
+            <div class="col-lg-6 col-md-6">
+              <label class="main-heading1 form-label">Any Other Comments</label>
+              <textarea id="w3review" name="w3review" rows="1" cols="50" formControlName="comments"
+                placeholder="Any Other Comments">
+
+              </textarea>
+            </div>
+          </div>
+          <div class="big-button-bottom d-block d-md-none d-flex justify-content-center">
+            <ul>
+              <li><button (click)="showSecondPage = false; showFirstPage = true; ">BACK</button></li>
+              <li><button (click)="gotoNextPage(2)">NEXT</button></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!---------------------- step1 ends ------------------>
+
+<!---------------------- step2 starts ------------------>
+<div class="" [ngClass]="{'hide-3rd-page': !showThirdPage, 'show-3rd-page': showThirdPage}">
+  <div class="container-fluid ">
+    <div class="add-edit-role-wrap adding-margin-to-table">
+      <span class="steps d-block d-md-none d-flex justify-content-end">Step 2/3</span>
+      <div class="back-btn">
+        <a (click)="showSecondPage = true; showThirdPage = false;"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+            height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+          </svg>BACK</a>
+      </div>
+      <div class="add-edit-head">
+        <h1>{{resourceAction}} Resource Request</h1>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row mt-2 mt-md-5">
+      <div class="col-lg-4 mt-2 mt-md-4">
+        <button class="project-role banner-anchor p-0 p-md-4">Skills & Interviewer Details</button>
+        <div class="col-12 work-border p-1 p-md-4">
+          <div class="row pt-md-4 pt-2">
+            <div class="prefered role-input">
+              <p><a>Prefered Skills</a> (Minimum 5 Skills are Mandatory)<span> *</span></p>
+            </div>
+            <div class=" col-lg-12 ">
+              <div class="ScrollStyle col-lg-12 ">
+                <div class="row my-3">
+                  <div class="col-lg-1 col-1 skill-enter">1.</div>
+                  <div class="col-lg-5 col-5 d-flex m-1 form-label role-input">
+                    <input type="text" id="lname" name="lname" class="project-detail" placeholder="Enter Skill" /><span>
+                      *</span>
+                  </div>
+                  <div class="col-lg-5 col-5 m-1 form-label">
+                    <select class="form-select project-detail">
+                      <option>Must Have</option>
+                      <option *ngFor="let item of preferredSkillsList">{{item.value}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row my-3">
+                  <div class="col-lg-1 col-1 skill-enter">2.</div>
+                  <div class="col-lg-5 col-5 d-flex m-1 form-label role-input">
+                    <input type="text" id="lname" name="lname" class="project-detail" placeholder="Enter Skill" /><span>
+                      *</span>
+                  </div>
+                  <div class="col-lg-5 col-5 m-1 form-label">
+                    <select class="form-select project-detail">
+                      <option>Must Have</option>
+                      <option>Admin 1</option>
+                      <option>Admin 2</option>
+                      <option>Admin 3</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center">
+                <button class="text-center add-btn mt-2" (click)="addSkillOption(1)">+ ADD</button>
+              </div>
+              <div class="row">
+                <div class="col-lg-7 col-md-8 col-8 my-3 role-input">
+                  <label for="forRoleNameSection" class="form-label">Reporting Manager</label>
+                  <select class="form-select project-detail" formControlName="reportingManager">
+                    <option selected>Select</option>
+                    <option *ngFor="let item of reportingManagerList">{{item.value}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="prefered mt-3">
+                  <p><a>Interview</a> (Client)</p>
+                </div>
+                <div class="check-fill">
+                  <div class="form-check" *ngFor="let item of yesNoValues">
+                    <input class="form-check-input" type="radio" name="client1" id="client" [value]="item.Value"
+                      formControlName="client" />
+                    <label class="form-check-label" for="client">
+                      {{item.Name}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row pt-md-4 pt-2 mb-0 mb-md-5">
+              <div class="col-md-12">
+                <label class="main-heading1 form-label">Recommended Internal Interviewers</label>
+                <select class="form-select" formControlName="internalInterviewers">
+                  <option selected>Select</option>
+                  <option *ngFor="let item of requesterList">{{item.value}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="big-button-bottom d-block d-md-none d-flex justify-content-center">
+              <ul>
+                <li><button (click)="showSecondPage = true; showThirdPage = false; ">BACK</button></li>
+                <li><button (click)="gotoNextPage(3)">NEXT</button></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!---------------------- step2 ends ------------------>
+
+<!---------------------- step3 starts ------------------>
+<div class="" [ngClass]="{'hide-4th-page': !showFourthPage, 'show-4th-page': showFourthPage}">
+  <div class="container-fluid ">
+    <div class="add-edit-role-wrap adding-margin-to-table">
+      <span class="steps d-block d-md-none d-flex justify-content-end">Step 3/3</span>
+      <div class="back-btn">
+        <a (click)="showFourthPage = false; showThirdPage = true;"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+            height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+          </svg>BACK</a>
+      </div>
+      <div class="add-edit-head">
+        <h1>{{resourceAction}} Resource Request</h1>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mt-2 mt-md-4">
+        <button class="project-role banner-anchor mt-2 mt-md-0 p-0 p-md-4">Billing & Travel Details</button>
+        <div class="col-lg-2 role-input my-2 my-md-3">
+          <label for="forRoleNameSection" class="form-label main-heading">Billing Type</label><span> *</span>
+          <div class="check-fill">
+            <div class="form-check" *ngFor="let item of billingTypeList">
+              <input class="form-check-input" type="radio" name="billingType1" id="billingType"
+                formControlName="billingType" [value]="item.Value" (change)="onSelectBillingType($event)" />
+              <label class="form-check-label" for="billingType">
+                {{item.Name}}
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 role-input  my-2 my-md-0" [ngClass]="{'disable': !isBillable}">
+          <!-- <p class="main-heading">Billing Frequency & Bill Rate</p> -->
+          <label for="forRoleNameSection" class="form-label main-heading">Billing Frequency & Bill Rate</label>
+          <div class="check-fill">
+            <div class="form-check" *ngFor="let item of billingFrequencyList">
+              <input [disabled]="!isBillable" class="form-check-input" type="radio" name="billingFrequency1"
+                id="billingFrequency" formControlName="billingFrequency" [value]="item.Name" />
+              <label class="form-check-label" for="billingFrequency">
+                {{item.Name}}
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 role-input mt-0 mt-md-4" [ngClass]="{'disable': !isBillable}">
+          <div class="row">
+            <div class="col-lg-5 col-md-6 role-input  my-2 my-md-0">
+              <select class="form-select" formControlName="billingCurrency">
+                <option selected>Select</option>
+                <option [disabled]="!isBillable" *ngFor="let item of currencyList"> {{item.Name}}</option>
+              </select>
+            </div>
+            <div class="col-lg-5 col-md-6 role-input main-heading form-label mt-2 mt-lg-0  my-2 my-md-0">
+              <input type="number" [disabled]="!isBillable" placeholder="Bill Rate" id="lname" name="lname"
+                class="project-detail" formControlName="billRate" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-lg-3 col-md-6 role-input my-2 my-md-0" [ngClass]="{'disable': !isBillable}">
+        <label for="forRoleNameSection" class="form-label main-heading">Work Authorization Status</label>
+        <select class="form-select project-detail" formControlName="workAuthorizationStatus">
+          <option selected>Select</option>
+          <option [disabled]="!isBillable" *ngFor="let item of authorizationStatus">{{item.Name}}</option>
+        </select>
+      </div>
+      <div class="col-lg-2 col-md-6 role-input my-2 my-md-3">
+        <!-- <p class="main-heading">Remote Working Option Available</p> -->
+        <label for="forRoleNameSection" class="form-label main-heading">Remote Working Option Available<span>
+            *</span></label>
+        <div class="check-fill">
+          <div class="form-check" *ngFor="let item of yesNoValues">
+            <input class="form-check-input" type="radio" name="remoteWork1" id="remoteWork" formControlName="remoteWork"
+              [value]="item.Value" />
+            <label class="form-check-label" for="remoteWork">
+              {{item.Name}}
+            </label>
+          </div>
+        </div>
+      </div>
+      <!-- -------------------------------------- -->
+      <div class="col-lg-2 role-input my-2 my-md-3" [ngClass]="{'disable': !isBillable}">
+        <!-- <p class="main-heading">Any Travel Involved</p> -->
+        <label for="forRoleNameSection" class="form-label main-heading">Any Travel Involved<span> *</span></label>
+        <div class="check-fill">
+          <div class="form-check" *ngFor="let item of yesNoValues">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+            <label class="form-check-label" for="flexRadioDefault1">
+              {{item.Name}}
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 role-input mt-0 mt-md-1 my-2 my-md-3 mt-lg-1" [ngClass]="{'disable': !isBillable}">
+        <div class="row">
+          <div class="col-lg-5 col-md-6 role-input">
+            <label for="forRoleNameSection" class="form-label main-heading">If Yes, % Of Travel </label>
+            <input [disabled]="!isBillable" type="number" id="lname" name="lname"
+              class="type-fild project-detail no-field" formControlName="travelValue" placeholder="% Of Travel">
+          </div>
+          <div class="col-lg-6 role-input">
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 role-input my-2 my-md-3" [ngClass]="{'disable': !isBillable}">
+        <label for="forRoleNameSection" class="form-label main-heading">Minimum Education Requirement</label>
+        <select class="form-select project-detail" formControlName="minimumEducation">
+          <option selected>Select</option>
+          <option [disabled]="!isBillable" *ngFor="let item of educationTypeList">{{item.Name}}</option>
+        </select>
+      </div>
+      <!-- -------------------------------------------- -->
+    </div>
+    <div class="big-button-bottom d-block d-md-none d-flex justify-content-center">
+      <ul>
+        <li class="savebutton" (click)="onSubmitRRForm()"><button>SUBMIT</button></li>
+        <li><button [routerLink]="'/request-resource'">CANCEL</button></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!---------------------- step3 ends ------------------>
+
+<!-- </form> -->

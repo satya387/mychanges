@@ -1,0 +1,215 @@
+.chart-and-buttons {
+    position: relative;
+    margin-top: 15px;
+}
+
+.bottom-button-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 10px; 
+}
+.bottom-button-container button {
+    margin: 0 10px;
+}
+#direct-margin-chart{
+    display: block;
+    border: 1px solid #D3D3D3;
+    border-bottom: none;
+    // box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+.direct-margin-container{
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  position: relative;
+}
+.ytd-card {
+    width: 135px;
+    height: 92px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px 10px 0 10px;
+    box-sizing: border-box;
+  }
+  
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+  
+  .card-heading {
+    font-size: 16px;
+    margin: 0;
+    text-align: center;
+  }
+  
+  .card-value {
+    font-size: 18px;
+    text-align: right;
+    margin: 0;
+  }
+  .button-container {
+    width: 100%;
+    margin-top: 0;
+    display: flex;
+    justify-content: space-between;border: 1px solid #D3D3D3;
+    // position: relative;
+    background-color: white; /* Set the background color to match the card */
+    padding: 10px; /* Add padding to create space between cards and chart */
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top: none;
+    //box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow to the entire container */
+    z-index: 1; /* Ensure the cards appear on top of the chart */
+  }
+  .container {
+    padding-right: 0;
+    margin-top: 20px;
+  }
+  
+  // .content {
+  //   // padding: 10px;
+  //   width: 47vw;
+  //   margin-left: 20px;
+  // }
+  // .button-container{
+  //   width: 47vw;
+  //   // margin-top: 20px;
+  //   display: flex;
+  //   justify-content: space-between;
+  // }
+  .value-with-image {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .value-with-indicator {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+  }
+  
+  .circular-indicator-cy {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .circular-indicator-off {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .circular-indicator-on {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .circular-indicator-near {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .circular-border-cy {
+    width: 100%;
+    height: 100%;
+    border: 2px solid #f0f0f0;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .circular-border-off {
+    width: 100%;
+    height: 100%;
+    border: 2px solid #f0f0f0;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+  }
+  .circular-border-on {
+    width: 100%;
+    height: 100%;
+    border: 2px solid #f0f0f0;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+  }
+  .circular-border-near {
+    width: 100%;
+    height: 100%;
+    border: 2px solid #f0f0f0;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .circular-fill-cy{
+    width: 100%;
+    height: 100%;
+    background-image: conic-gradient(from 0deg, #6A5ACD 0deg);
+    border-radius: 50%;
+    position: absolute;
+  }
+  
+  .circular-fill-off{
+    width: 100%;
+    height: 100%;
+    background-image: conic-gradient(from 0deg, #6A5ACD 0deg);
+    border-radius: 50%;
+    position: absolute;
+  }
+  .circular-fill-on{
+    width: 100%;
+    height: 100%;
+    background-image: conic-gradient(from 0deg, #6A5ACD 0deg);
+    border-radius: 50%;
+    position: absolute;
+  }
+  .circular-fill-near{
+    width: 100%;
+    height: 100%;
+    background-image: conic-gradient(from 0deg, #6A5ACD 0deg);
+    border-radius: 50%;
+    position: absolute;
+  }
+  @media (max-width: 480px) {
+    .button-container {
+      display: none;
+    }
+  }
+
+  .tooltipImage{
+    width: 17px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: inherit;
+    margin-left: 2px;
+    }

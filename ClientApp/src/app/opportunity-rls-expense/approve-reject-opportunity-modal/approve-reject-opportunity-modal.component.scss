@@ -1,0 +1,30 @@
+.full-width {
+    width: 100%;
+}
+
+.approve, .reject {
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    background-color: #0fe4bd;
+    color: white !important;
+    border: none;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.btn {
+    padding: 5px 20px;
+}
+
+.cancel {
+    color: #0d0359 !important;
+    border: none;
+}
+
+.mat-dialog-title {
+    text-align: center;
+}

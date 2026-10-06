@@ -1,0 +1,51 @@
+<div class="commission-report-container mat-elevation-z8">
+    <table class="commission-report" mat-table [dataSource]="dataSource">
+
+        <!-- Client Partner Column -->
+        <ng-container matColumnDef="clientPartner">
+            <th mat-header-cell *matHeaderCellDef> Client Partner </th>
+            <td mat-cell *matCellDef="let element"> {{element.clientPartner}} </td>
+        </ng-container>
+
+        <!-- Commission Earned Column -->
+        <ng-container matColumnDef="commissionEarned">
+            <th mat-header-cell *matHeaderCellDef> Commission Earned ($) </th>
+            <td mat-cell *matCellDef="let element"> {{convertToUSFormat(element.commissionEarned)}} </td>
+        </ng-container>
+
+        <!-- Commission Paid Column -->
+        <ng-container matColumnDef="commissionPaid">
+            <th mat-header-cell *matHeaderCellDef> Commission Paid ($) </th>
+            <td mat-cell *matCellDef="let element"> {{convertToUSFormat(element.commissionPaid)}} </td>
+        </ng-container>
+
+        <!-- Balance Column -->
+        <ng-container matColumnDef="balance">
+            <th mat-header-cell *matHeaderCellDef> Balance ($) </th>
+            <td mat-cell *matCellDef="let element"> {{convertToUSFormat(element.balance)}} </td>
+        </ng-container>
+
+        <!-- Edit Column -->
+        <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td mat-cell *matCellDef="let element"> 
+                <button mat-icon-button [hidden]="!userAccess" color="primary" (click)="navigateToEdit(element)" title="Edit">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 24 24" fill="rgb(119, 228, 208)">
+                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm18.71-11.04c.39-.39.39-1.02 0-1.41l-2.54-2.54a.996.996 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                </svg>
+                </button> 
+                <button mat-icon-button color="primary" (click)="navigateToDrillDown(element)" title="View">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#0d0359" class="bi bi-list-ul" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+                      </svg>
+                </button> 
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [length]="dataSource.data.length" [pageSize]="8" [pageSizeOptions]="[5, 8, 10, 20]" showFirstLastButtons aria-label="Select page of dataSource">
+    </mat-paginator>
+</div>

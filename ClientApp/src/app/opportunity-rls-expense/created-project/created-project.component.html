@@ -1,0 +1,93 @@
+<div class="container-fluid table-responsive mt-3 ">
+  <div class="back-button">
+    <span class="back-button-child" (click)="goBack()" title="Back" data-toggle="tooltip">
+      <svg width="35px" height="35px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" fill="#0fe4bd" stroke="#0fe4bd" stroke-width="0.6719999999999999">
+        <g id="SVGRepo_bgCarrier" stroke-width="0" />
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+        <g id="SVGRepo_iconCarrier">
+          <g id="icomoon-ignore"></g>
+          <path
+            d="M14.389 7.956v4.374l1.056 0.010c7.335 0.071 11.466 3.333 12.543 9.944-4.029-4.661-8.675-4.663-12.532-4.664h-1.067v4.337l-9.884-7.001 9.884-7zM15.456 5.893l-12.795 9.063 12.795 9.063v-5.332c5.121 0.002 9.869 0.26 13.884 7.42 0-4.547-0.751-14.706-13.884-14.833v-5.381z"
+            fill="#0fe4bd"></path>
+        </g>
+      </svg>
+    </span>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <ng-select class="project-detail custom-ng-select"
+      [items]="projectList"
+      bindValue="projectId"
+      bindLabel="projectName"
+      [clearable]="true"
+      [searchable]="true"
+      placeholder="Select Project"
+      (clear)="onClearProject()"
+      (change)="onSelectProject($event)">
+      <ng-template ng-option-tmp let-item="item">
+          <span [title]="item.projectName">
+              {{ item.projectName }}
+          </span>
+      </ng-template>
+      <ng-template ng-label-tmp let-item="item">
+          <span [title]="item.projectName">
+              {{ item.projectName }}
+          </span>
+      </ng-template>
+  
+  </ng-select>
+    </div>
+  </div>
+  <div class="row">
+      <div class="col-12 role-input">
+          <div class="check-fill">
+            <div class="container-fluid">
+              <div class="table-responsive mt-1 mt-md-4">
+                <table class="pr-table">
+                  <thead>
+                    <tr>
+                      <th class="search-bar mrgn" style="width:20rem;">Opportunity Number</th>
+                      <th class="search-bar mrgn" style="width:20rem;">Parent Opportunity Number</th>
+                      <th class="search-bar mrgn" style="width:30rem;">Project</th>
+                      <th class="search-bar mrgn" style="width:15rem;">Project Id</th>
+                      <th class="pr-actions">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let list of createdProjects | paginate : { itemsPerPage: limit, currentPage: page, totalItems: totalRecord }; let i = index">
+                      <td>{{list.opportunityId || '-'}}</td>
+                      <td style="color: black; cursor:auto ; padding-left: 8px !important;">
+                        {{list.parentOpportunityId || '-'}}</td>
+                      <td>{{list.projectName || '-'}}</td>
+                      <td>
+                          {{list.projectId || '-'}}
+                      </td>
+                      <td class="edit-delete-rr text-center" >
+                        <a class="edit" title="Click To Download The File" data-toggle="tooltip" (click)="openuploadDocumnet(list)" style="margin-left: -10px;" [ngClass]="{'disable': list.IsFileAvailable}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                <path d="M.5 9.9a.5.5 0 0 1 .5-.4h4V1.5a.5.5 0 0 1 1 0v8h4a.5.5 0 0 1 .354.854l-4.5 4.5a.5.5 0 0 1-.708 0l-4.5-4.5A.5.5 0 0 1 .5 9.9zm15 4.6a.5.5 0 0 1-.5.5h-14a.5.5 0 0 1 0-1h14a.5.5 0 0 1 .5.5z"/>
+                            </svg>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="container" style="background-color: #F8F9FA;">
+                  <span *ngIf="createdProjects?.length === 0">
+                    <p class="text-center no-data">
+                      No Data Found!
+                    </p>
+                  </span>
+                </div>
+              </div>
+              <br>
+              <div class="clearfix pagination-wrap">
+                <pagination-controls previousLabel="" nextLabel="" (pageChange)="onTableDataChange($event)">
+                </pagination-controls>
+              </div>
+            </div>
+          </div>
+      </div>
+  </div>
+</div>

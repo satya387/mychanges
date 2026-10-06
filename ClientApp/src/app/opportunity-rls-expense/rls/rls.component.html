@@ -1,0 +1,215 @@
+<div class="role-section">
+  <div class="role-header">
+    <h2>Roles</h2>
+    <span *ngIf ="isEditable"
+      class="add-role"
+      (click)="isEditable && openRolePopup()"
+      title="Add Role"
+    >
+      <svg
+        width="22px"
+        height="26px"
+        viewBox="0 0 24.00 24.00"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        stroke="#ffffff"
+        transform="rotate(0)"
+        stroke-width="1.56"
+      >
+        <g id="SVGRepo_bgCarrier" stroke-width="0" />
+        <g
+          id="SVGRepo_tracerCarrier"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke="#CCCCCC"
+          stroke-width="0.096"
+        />
+        <g id="SVGRepo_iconCarrier">
+          <path
+            opacity="0.5"
+            d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z"
+            fill="#0d0357"
+          />
+          <path
+            d="M12.75 9C12.75 8.58579 12.4142 8.25 12 8.25C11.5858 8.25 11.25 8.58579 11.25 9L11.25 11.25H9C8.58579 11.25 8.25 11.5858 8.25 12C8.25 12.4142 8.58579 12.75 9 12.75H11.25V15C11.25 15.4142 11.5858 15.75 12 15.75C12.4142 15.75 12.75 15.4142 12.75 15L12.75 12.75H15C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25H12.75V9Z"
+            fill="#0d0357"
+          />
+        </g>
+      </svg>
+    </span>
+    <span *ngIf ="isEditable"
+      title="Upload RLS Sheet"
+      class="upload"
+      (click)="isEditable && openUploadDialog()" >
+      <svg
+        width="22px"
+        height="26px"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        stroke="#ffffff"
+      >
+        <g id="SVGRepo_bgCarrier" stroke-width="0" />
+        <g
+          id="SVGRepo_tracerCarrier"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <g id="SVGRepo_iconCarrier">
+          <path
+            d="M12 17L12 10M12 10L15 13M12 10L9 13"
+            stroke="#ffffff"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M16 7H12H8"
+            stroke="#ffffff"
+            stroke-width="1.5"
+            stroke-linecap="round"
+          />
+          <path
+            d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z"
+            stroke="#ffffff"
+            stroke-width="1.5"
+          />
+        </g>
+      </svg>
+    </span>
+  </div>
+  <div class="roles-table-container" *ngIf="showRolesTable">
+    <table class="roles-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th style="max-width: 170px;">Role</th>
+          <th>Location</th>
+          <th style="max-width: 170px;">Primary Skill</th>
+          <th>Experience</th>
+          <th>Resource Type</th>
+          <th>Bill Rate($)</th>
+          <th style="width: 160px;">Deviation In Rate(%)</th>
+          <th>Cost($)</th>
+          <th style="width: 160px;">Deviation In Cost(%)</th>
+          <th>Margin(%)</th>
+          <th>Role Start Date</th>
+          <th>Role End Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let role of roles; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td style="text-overflow: ellipsis;">{{ role.role }}</td>
+          <td>{{ role.location }}</td>
+          <td style="text-overflow: ellipsis;">{{ role.primarySkill }}</td>
+          <td>{{ role.experience }}</td>
+          <td>{{ role.resourceType }}</td>
+          <td>{{ role.eff_MonthlyRateWithAllowance | number : "1.0-0" }}</td>
+          <td>{{ role.rateDeviation }} </td>
+          <td>{{ role.eff_MonthlyCostWithAllowance | number : "1.0-0" }}</td>
+          <td>{{ role.costDeviation }} </td>
+          <td>{{ role.margin }}</td>
+          <td>{{ role.roleStartDate | date: "d-MMM-yyyy" | uppercase }}</td>
+          <td>{{ role.roleEndDate | date: "d-MMM-yyyy" | uppercase }}</td>
+          <td class="action-icons">
+            <span
+            [ngClass]="isEditable ? 'edit-role' : 'edit-role'"
+            (click)="openRolePopup(role); $event.stopPropagation()"
+            title="Edit Role"
+            >
+            <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-pencil"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"
+            />
+          </svg>
+            </span>
+            <span
+            [hidden]="!isEditable"
+            class="delete-role"
+            (click)="deleteRole(role); $event.stopPropagation()"
+            title="Delete Role"
+            >
+            <svg
+            width="16px"
+            height="16px"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0" />
+
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M10 12V17"
+                stroke="#BC194D"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M14 12V17"
+                stroke="#BC194D"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M4 7H20"
+                stroke="#BC194D"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M6 10V18C6 19.6569 7.34315 21 9 21H15C16.6569 21 18 19.6569 18 18V10"
+                stroke="#BC194D"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z"
+                stroke="#BC194D"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </g>
+          </svg>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="!showRolesTable">
+    <p style="padding: 15px;">No data to display</p>
+  </div>
+
+  
+</div>
+<div class="modal" id="confirmDeleteModal" [hidden]="!showDeleteConfirm">
+  <div class="modal-content">
+    <h3>Confirm Delete</h3>
+    <p>Are you sure you want to delete this role?</p>
+    <div class="modal-actions">
+      <button class="btn confirm-btn" (click)="confirmDelete()">Confirm</button>
+      <button class="btn cancel-btn" (click)="cancelDelete()">Cancel</button>
+    </div>
+  </div>
+</div>

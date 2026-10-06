@@ -1,0 +1,41 @@
+<div class="popup-container">
+    <div class="header">
+      <h6 class="upload-text" id="Title">Download Template</h6>
+      <button class="cancel-button" (click)="onCloseClick()">&#10005;</button>
+    </div>
+  
+    <div class="popup">
+      <form  [formGroup]="downloadTemplateForm" style="   margin-left: 31px;margin-right: 20px;">
+        <div class="container-fluid" style="margin-top: 24px;margin-bottom: 54px">
+          <div class="row">
+            <div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1" class="required">Cycle <span class="text-danger">*</span></label>
+                    <select class="form-select project-detail" formControlName="cycleName" (change)="onSelect($event)">
+                      <option [ngValue]="null" selected>Select</option>
+                      <option *ngFor="let item of cycleData" [value]="item.cycleName">{{ item.cycleName }}</option> 
+                    </select>
+                    <!-- Validation error message -->
+                     <span
+                      *ngIf="(downloadTemplateForm.controls['cycleName'].invalid && (downloadTemplateForm.controls['cycleName'].dirty || downloadTemplateForm.controls['cycleName'].touched || formSubmitted))">
+                      <span
+                  *ngIf="downloadTemplateForm.controls['cycleName'].invalid && (downloadTemplateForm.controls['cycleName'].dirty || downloadTemplateForm.controls['cycleName'].touched || 
+                  formSubmitted)"
+                  class="text-danger"
+                >
+                        Please Select Cycle </span>
+                    </span>
+                    <br />
+                  </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary" (click)="onDownloadTemplate()" style="background-color: #0D0357;"
+                 title="Download CSAT Template">Download Template</button>
+                <br />
+              </div>
+            </div>
+            <br />
+          </div>
+          
+        </div>
+      </form>
+    </div>

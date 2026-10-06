@@ -1,0 +1,398 @@
+<div class="container-fluid edit-rr-desktop1" style="margin-top:20px; padding-bottom: 20px;">
+    <!-- <app-back-button [routerPath]="'/purchase-order'"></app-back-button> -->
+  
+    <div class="add-edit-role-wrap adding-margin-to-table" style="margin-top:-40px;">
+      <span class="steps d-block d-md-none d-flex justify-content-end">Step 1/3</span>
+      <div class="add-edit-head">
+        <h3 style="margin-top:36px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="5" fill="currentColor" class="bi bi-stack"
+               viewBox="0 0 16 16">
+            <path d="m14.12 10.163 1.715.858c.22.11.22.424 0 .534L8.267 15.34a.598.598 0 0 1-.534 0L.165 11.555a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.66zM7.733.063a.598.598 0 0 1 .534 0l7.568 3.784a.3.3 0 0 1 0 .535L8.267 8.165a.598.598 0 0 1-.534 0L.165 4.382a.299.299 0 0 1 0-.535L7.733.063z" />
+            <path d="m14.12 6.576 1.715.858c.22.11.22.424 0 .534l-7.568 3.784a.598.598 0 0 1-.534 0L.165 7.968a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.659z" />
+          </svg>
+          {{ isAddMode ? 'Add Asset' : 'Edit Asset' }}
+        </h3>
+  
+      </div>
+    </div>
+    <form [formGroup]="assetForm" (keydown.enter)="$event.preventDefault()" (ngSubmit)="onSave()">
+    <div class="container-fluid edit-rr-desktop" style="margin-top: -22px;">
+        <div class="row role-input1" style="margin-left: 57px;">
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="assetNumber" class="form-label main-heading">Asset Number</label><span> *</span>
+                <input id="assetNumber" formControlName="assetNumber" type="text" placeholder="Asset Number" class="project-detail1 no-field" style="padding:6px;" />
+                <span *ngIf="serverErrorMessage" class="text-danger">
+                  {{ serverErrorMessage }}
+                </span>
+                <span *ngIf="assetForm.controls['assetNumber'].invalid && (assetForm.controls['assetNumber'].touched)">
+                    <span *ngIf="assetForm.controls['assetNumber'].errors?.required" class="text-danger">
+                      Please enter Asset Number
+                    </span>
+                    <span *ngIf="assetForm.controls['assetNumber'].errors?.pattern" class="text-danger">
+                      Asset Number cannot be empty or just spaces
+                    </span>
+                    <span *ngIf="assetForm.controls['assetNumber'].errors?.maxlength" class="text-danger">
+                      Asset Number cannot exceed 30 characters
+                    </span>
+                  </span>
+            </div>
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="assetName" class="form-label main-heading">Asset Name</label><span> *</span>
+                <input id="assetName" formControlName="assetName" type="text" placeholder="Asset Name" class="project-detail1 no-field" style="padding:6px;" /> 
+                <span *ngIf="assetForm.controls['assetName'].invalid && (assetForm.controls['assetName'].touched)">
+                    <span *ngIf="assetForm.controls['assetName'].errors?.required" class="text-danger">
+                      Please enter Asset Name
+                    </span>
+                    <span *ngIf="assetForm.controls['assetName'].errors?.pattern" class="text-danger">
+                      Asset Name cannot be empty or just spaces
+                    </span>
+                    <span *ngIf="assetForm.controls['assetName'].errors?.maxlength" class="text-danger">
+                      Asset Name cannot exceed 40 characters
+                    </span>
+                  </span>
+            </div>
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="assetType" class="form-label main-heading">Type</label><span> *</span>
+                <input id="assetType" formControlName="assetType" type="text" placeholder="Asset Type" class="project-detail1 no-field" style="padding:6px;" /> 
+                <span *ngIf="assetForm.controls['assetType'].invalid && (assetForm.controls['assetType'].touched)">
+                    <span *ngIf="assetForm.controls['assetType'].errors?.required" class="text-danger">
+                      Please enter Type
+                    </span>
+                    <span *ngIf="assetForm.controls['assetType'].errors?.pattern" class="text-danger">
+                      Type cannot be empty or just spaces
+                    </span>
+                    <span *ngIf="assetForm.controls['assetType'].errors?.maxlength" class="text-danger">
+                      Type cannot exceed 40 characters
+                    </span>
+                  </span>
+            </div>
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="assetCategory" class="form-label main-heading">Category</label><span> *</span>
+                <input id="assetCategory" formControlName="assetCategory" type="text" placeholder="Category" class="project-detail1 no-field" style="padding:6px;" /> 
+                <span *ngIf="assetForm.controls['assetCategory'].invalid && (assetForm.controls['assetCategory'].touched)">
+                    <span *ngIf="assetForm.controls['assetCategory'].errors?.required" class="text-danger">
+                      Please enter Category
+                    </span>
+                    <span *ngIf="assetForm.controls['assetCategory'].errors?.pattern" class="text-danger">
+                      Category cannot be empty or just spaces
+                    </span>
+                    <span *ngIf="assetForm.controls['assetCategory'].errors?.maxlength" class="text-danger">
+                      Device name cannot exceed 40 characters
+                    </span>
+                </span>
+                
+            </div>
+        </div>
+        <div class="row role-input1" style="margin-left: 57px;">        
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="assetSubCategory" class="form-label main-heading">Sub Category</label><span> *</span>
+                <input type="assetSubCategory" formControlName="assetSubCategory" placeholder="Sub Category" class="project-detail1 no-field" style="padding:6px;" /> 
+                <span *ngIf="assetForm.controls['assetSubCategory'].invalid && (assetForm.controls['assetSubCategory'].touched)">
+                    <span *ngIf="assetForm.controls['assetSubCategory'].errors?.required" class="text-danger">
+                      Please enter Sub Category
+                    </span>
+                    <span *ngIf="assetForm.controls['assetSubCategory'].errors?.pattern" class="text-danger">
+                      Sub Category cannot be empty or just spaces
+                    </span>
+                    <span *ngIf="assetForm.controls['assetSubCategory'].errors?.maxlength" class="text-danger">
+                      Sub Category cannot exceed 40 characters
+                    </span>
+                  </span>
+            </div>
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="assetLocation" class="form-label main-heading">Location</label><span> *</span>
+                <input type="assetLocation" formControlName="assetLocation" placeholder="Location" class="project-detail1 no-field" style="padding:6px;" /> 
+                <span *ngIf="assetForm.controls['assetLocation'].invalid && (assetForm.controls['assetLocation'].touched)">
+                    <span *ngIf="assetForm.controls['assetLocation'].errors?.required" class="text-danger">
+                      Please enter Location
+                    </span>
+                    <span *ngIf="assetForm.controls['assetLocation'].errors?.pattern" class="text-danger">
+                      Location cannot be empty or just spaces
+                    </span>
+                  </span>
+            </div>
+            <div *ngIf="!isAddMode && assetForm.get('assetStatus')?.value !== 'Inuse'" class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="assetStatus" class="form-label main-heading">Status</label><span> *</span>
+                <select id="assetStatus" formControlName="assetStatus" class="form-select">
+                  <option [ngValue]="null" selected>Select Status</option>
+                  <option value="Active">Active</option>
+                  <option value="Damaged">Damaged</option>
+                  <option value="InActive">InActive</option>
+              </select>
+              <span *ngIf="assetForm.controls['assetStatus'].invalid && (assetForm.controls['assetStatus'].touched)">
+                  <span *ngIf="assetForm.controls['assetStatus'].errors?.required" class="text-danger">
+                      Please select a Asset Status
+                  </span>
+                  <span *ngIf="assetForm.controls['assetStatus'].errors?.pattern" class="text-danger">
+                      Invalid assetStatus selection
+                  </span>
+              </span>
+            </div> 
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="description" class="form-label main-heading">Description</label><span> *</span>
+                <textarea id="description" formControlName="description" class="small-textarea" rows="2" cols="30" placeholder="Description" > </textarea>
+                <span *ngIf="assetForm.controls['description'].invalid && (assetForm.controls['description'].touched)">
+                    <span *ngIf="assetForm.controls['description'].errors?.required" class="text-danger">
+                      Please enter Description
+                    </span>
+                    <span *ngIf="assetForm.controls['description'].errors?.pattern" class="text-danger">
+                      Description cannot be empty or just spaces
+                    </span>
+                  </span>
+            </div>    
+        </div>
+        <div  class="row role-input1" style="margin-left: 57px;">
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <h6 style="color: #f72265;">Product Specifications</h6>
+            </div>
+           
+          </div>
+        <div class="row mb-0 role-input1" style="margin-left: 57px;">
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="manufacturer" class="form-label main-heading">Manufacturer</label>
+                <input id="manufacturer" formControlName="manufacturer" type="text" placeholder="Manufacturer" class="project-detail1 no-field" style="padding:6px;" /> 
+            </div>
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="modelNumber" class="form-label main-heading">Model Number</label>
+                <input id="modelNumber" formControlName="modelNumber" type="text" placeholder="Model Number" class="project-detail1 no-field" style="padding:6px;" /> 
+            </div>
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="serialNumber" class="form-label main-heading">Serial Number</label>
+                <input id="serialNumber" formControlName="serialNumber" type="text" placeholder="Serial Number" class="project-detail1 no-field" style="padding:6px;" /> 
+            </div>
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="modelDetails" class="form-label main-heading">Model Details</label>
+                <textarea id="modelDetails" formControlName="modelDetails" class="small-textarea" rows="2" cols="30" placeholder="Model Details" > </textarea>
+            </div>     
+        </div>
+        <div  class="row role-input1" style="margin-left: 57px;">
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <h6 style="color: #f72265;">Asset Details</h6>
+            </div>
+           
+          </div>
+        <div class="row mb-0 role-input1" style="margin-left: 57px;">
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="ownerName" class="form-label main-heading">Owner Name</label><span> *</span>
+                <input id="ownerName" formControlName="ownerName" type="text" placeholder="Owner Name" class="project-detail1 no-field"style="padding:6px;" /> 
+                <span *ngIf="assetForm.controls['ownerName'].invalid && (assetForm.controls['ownerName'].touched)">
+                    <span *ngIf="assetForm.controls['ownerName'].errors?.required" class="text-danger">
+                      Please enter Owner Name
+                    </span>
+                    <span *ngIf="assetForm.controls['ownerName'].errors?.pattern" class="text-danger">
+                      Owner Name cannot be empty or just spaces
+                    </span>
+                    <span *ngIf="assetForm.controls['ownerName'].errors?.maxlength" class="text-danger">
+                      Owner Name cannot exceed 30 characters
+                    </span>
+                  </span>
+                  
+            </div>
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="ownerEmail" class="form-label main-heading">Owner Email</label><span> *</span>
+                <input id="ownerEmail" formControlName="ownerEmail" type="text" placeholder="Owner Email" class="project-detail1 no-field"style="padding:6px;" /> 
+                <span *ngIf="assetForm.controls['ownerEmail'].invalid && (assetForm.controls['ownerEmail'].touched)">
+                    <span *ngIf="assetForm.controls['ownerEmail'].errors?.required" class="text-danger">
+                      Please enter Owner Email
+                    </span>
+                    <span *ngIf="assetForm.controls['ownerEmail'].errors?.pattern" class="text-danger">
+                      Owner Email cannot be empty or just spaces
+                    </span>
+                  </span>
+                 
+            </div>
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="assetTag" class="form-label main-heading">Asset Tag</label><span> *</span>
+                <input id="assetTag" formControlName="assetTag" type="text" placeholder="Asset Tag" class="project-detail1 no-field"style="padding:6px;" /> 
+                <span *ngIf="assetForm.controls['assetTag'].invalid && (assetForm.controls['assetTag'].touched)">
+                    <span *ngIf="assetForm.controls['assetTag'].errors?.required" class="text-danger">
+                      Please enter Asset Tag
+                    </span>
+                    <span *ngIf="assetForm.controls['assetTag'].errors?.pattern" class="text-danger">
+                      Asset Tag cannot be empty or just spaces
+                    </span>
+                  </span>
+                
+            </div>
+                       
+        </div>
+        <div  class="row role-input1" style="margin-left: 57px;">
+          <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+            <label for="macAddress" class="form-label main-heading">MAC Address</label><span> </span>
+            <input id="macAddress" formControlName="macAddress" type="text" placeholder="MAC Address" class="project-detail1 no-field"style="padding:6px;" /> 
+             
+        </div>     
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="ipAddress" class="form-label main-heading">IP Address</label><span> </span>
+                <input id="ipAddress" formControlName="ipAddress" type="text" placeholder="IP Address" class="project-detail1 no-field"style="padding:6px;" />           
+            </div> 
+        </div>
+        <div  class="row role-input1" style="margin-left: 57px; ">
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <h6 style="color: #f72265;">Software Information</h6>
+            </div>
+           
+        </div>
+        <div class="row mb-0 role-input1" style="margin-left: 57px;">
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="softwareName" class="form-label main-heading">Software Name</label><span> </span>
+                <input id="softwareName" formControlName="softwareName" type="text" placeholder="Software Name" class="project-detail1 no-field"style="padding:6px;" /> 
+                 
+            </div>
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="osName" class="form-label main-heading">OS Name</label><span> </span>
+                <input id="osName" formControlName="osName" type="text" placeholder="OS Name" class="project-detail1 no-field"style="padding:6px;" /> 
+                
+            </div>
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="softwareDetails" class="form-label main-heading">Software Details</label><span> </span>
+                <textarea id="softwareDetails" formControlName="softwareDetails" class="small-textarea" rows="2" cols="30" placeholder="Software Details" > </textarea>
+                 
+            </div>
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="softwareVersion" class="form-label main-heading">Software Version</label><span> </span>
+                <input id="softwareVersion" formControlName="softwareVersion" type="text" placeholder="Software Version" class="project-detail1 no-field"style="padding:6px;" /> 
+                  
+            </div>
+          
+        </div>
+        <div class="row mb-0 role-input1" style="margin-left: 57px;">
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="licenseType" class="form-label main-heading">License Type</label><span> </span>
+                <input id="licenseType" formControlName="licenseType" type="text" placeholder="License Type" class="project-detail1 no-field"style="padding:6px;" /> 
+                 
+            </div>
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="licenseKey" class="form-label main-heading">License Key</label><span> </span>
+                <input id="licenseKey" formControlName="licenseKey" type="text" placeholder="License Key" class="project-detail1 no-field"style="padding:6px;" /> 
+                
+            </div>
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="licenseCount" class="form-label main-heading">License Count</label><span> </span>
+                <input id="licenseCount" formControlName="licenseCount" type="text" placeholder="License Count" class="project-detail1 no-field"style="padding:6px;" /> 
+                 
+            </div>        
+        </div>
+        <div  class="row role-input1" style="margin-left: 57px; ">
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <h6 style="color: #f72265;">Asset Acquisition</h6>
+            </div>
+           
+        </div>
+        <div class="row mb-0 role-input1" style="margin-left: 57px;">
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="purchaseDate" class="form-label main-heading">Purchase Date</label><span> </span>
+                <input id="purchaseDate" formControlName="purchaseDate" type="text" placeholder="MM/DD/YYYY" class="form-control" bsDatepicker
+                [bsConfig]="{ isAnimated: true, dateInputFormat: 'MM/DD/YYYY', showWeekNumbers: false }">
+                  
+            </div>
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="purchaseCost" class="form-label main-heading">Purchase Cost</label><span> </span>
+                <input id="purchaseCost" formControlName="purchaseCost" type="text" placeholder="Purchase Cost" class="project-detail1 no-field"style="padding:6px;" /> 
+                 
+            </div>
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="installationDate" class="form-label main-heading">Installation Date</label><span> </span>
+                <input id="installationDate" formControlName="installationDate" type="text" placeholder="MM/DD/YYYY" class="form-control" bsDatepicker
+                [bsConfig]="{ isAnimated: true, dateInputFormat: 'MM/DD/YYYY', showWeekNumbers: false }">
+            </div>
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="expirationDate" class="form-label main-heading">Expiration Date</label><span> </span>
+                <input id="expirationDate" formControlName="expirationDate" type="text" placeholder="MM/DD/YYYY" class="form-control" bsDatepicker
+                [bsConfig]="{ isAnimated: true, dateInputFormat: 'MM/DD/YYYY', showWeekNumbers: false }">
+            </div>
+        </div>
+        <div class="row mb-0 role-input1" style="margin-left: 57px;">
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="depreciationDetails" class="form-label main-heading">Depreciation Details</label><span> </span>
+                <textarea id="depreciationDetails" formControlName="depreciationDetails" class="small-textarea" rows="2" cols="30" placeholder="Depreciation Details" > </textarea>
+                  
+            </div>
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="warrantyInformation" class="form-label main-heading">Warranty Information</label><span> </span>
+                <textarea id="warrantyInformation" formControlName="warrantyInformation" class="small-textarea" rows="2" cols="30" placeholder="Warranty Information" > </textarea>
+                 
+            </div>
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="retirementDisposalInformation" class="form-label main-heading">Retirement / Disposal Information</label><span> </span>
+                <textarea id="retirementDisposalInformation" formControlName="retirementDisposalInformation" class="small-textarea" rows="2" cols="30" placeholder="Retirement / Disposal Information" > </textarea>
+                
+            </div>
+        </div>
+        <div  class="row role-input1" style="margin-left: 57px; ">
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <h6 style="color: #f72265;">Vendor Details</h6>
+            </div>
+           
+        </div>
+        <div class="row mb-0 role-input1" style="margin-left: 57px;">
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="vendorName" class="form-label main-heading">Vendor Name</label><span> *</span>
+                <input id="vendorName" formControlName="vendorName" type="text" placeholder="Vendor Name" class="project-detail1 no-field"style="padding:6px;" /> 
+                <span *ngIf="assetForm.controls['vendorName'].invalid && (assetForm.controls['vendorName'].touched)">
+                    <span *ngIf="assetForm.controls['vendorName'].errors?.required" class="text-danger">
+                      Please enter Vendor Name
+                    </span>
+                    <span *ngIf="assetForm.controls['vendorName'].errors?.pattern" class="text-danger">
+                      Vendor Name cannot be empty or just spaces
+                    </span>
+                  </span>
+                 
+            </div>
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="vendorAddress" class="form-label main-heading">Vendor Address</label><span> *</span>
+                <input id="vendorAddress" formControlName="vendorAddress" type="text" placeholder="Vendor Address" class="project-detail1 no-field"style="padding:6px;" /> 
+                <span *ngIf="assetForm.controls['vendorAddress'].invalid && (assetForm.controls['vendorAddress'].touched)">
+                    <span *ngIf="assetForm.controls['vendorAddress'].errors?.required" class="text-danger">
+                      Please enter Vendor Address
+                    </span>
+                    <span *ngIf="assetForm.controls['vendorAddress'].errors?.pattern" class="text-danger">
+                      Vendor Address cannot be empty or just spaces
+                    </span>
+                  </span>
+            </div>
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="vendorEmailAddress" class="form-label main-heading">Vendor EmailAddress</label><span> *</span>
+                <input id="vendorEmailAddress" formControlName="vendorEmailAddress" type="text" placeholder="Vendor EmailAddress" class="project-detail1 no-field"style="padding:6px;" /> 
+                <span *ngIf="assetForm.controls['vendorEmailAddress'].invalid && (assetForm.controls['vendorEmailAddress'].touched)">
+                    <span *ngIf="assetForm.controls['vendorEmailAddress'].errors?.required" class="text-danger">
+                      Please enter Vendor EmailAddress
+                    </span>
+                    <span *ngIf="assetForm.controls['vendorEmailAddress'].errors?.pattern" class="text-danger">
+                      Vendor EmailAddress cannot be empty or just spaces
+                    </span>
+                  </span>
+            </div>
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="vendorPhoneNumber" class="form-label main-heading">Vendor PhoneNumber</label><span> *</span>
+                <input id="vendorPhoneNumber" formControlName="vendorPhoneNumber" type="text" placeholder="Vendor PhoneNumber" class="project-detail1 no-field"style="padding:6px;" /> 
+                <span *ngIf="assetForm.controls['vendorPhoneNumber'].invalid && (assetForm.controls['vendorPhoneNumber'].touched)">
+                    <span *ngIf="assetForm.controls['vendorPhoneNumber'].errors?.required" class="text-danger">
+                      Please enter Vendor PhoneNumber
+                    </span>
+                    <span *ngIf="assetForm.controls['vendorPhoneNumber'].errors?.pattern" class="text-danger">
+                      Vendor PhoneNumber cannot be empty or just spaces
+                    </span>
+                  </span>
+            </div>
+            
+        </div>
+        <div  class="row role-input1" style="margin-left: 57px;">
+          <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+            <label for="comments" class="form-label main-heading">Comments</label><span> </span>
+            <textarea id="comments" formControlName="comments" class="small-textarea" rows="2" cols="30" placeholder="Comments" > </textarea>
+             
+        </div>
+        </div>
+        <div class="big-button-bottom" style="float: right;
+         margin-right: 103px;margin-top:-54px;">
+          <ul>
+            <li><button style="font-size:16px;"  type="submit" [disabled]="!assetForm.valid">Save</button></li>
+            <li><button [routerLink]="'/asset-management'">CANCEL</button></li>
+           
+          </ul>
+        </div>
+    </div>
+ </form>
+</div>
+  

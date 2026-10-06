@@ -1,0 +1,16 @@
+<div [ngClass]="headerFooterHide() ? 'header-footer-none' : ''">
+  <app-header></app-header>
+</div>
+
+<div class="main">
+  <router-outlet></router-outlet>
+</div>
+
+<div [ngClass]="headerFooterHide() ? 'header-footer-none' : ''">
+  <app-footer></app-footer>
+</div>
+<!--<div class="eva-chatbox">
+  <img src="./../../assets/images/eva-chatbox.png" />
+</div>-->
+<ng-http-loader [backgroundColor]="'#0d0359'" [debounceDelay]="100" [extraDuration]="300" [minDuration]="300"
+  opacity=".6" [spinner]="spinnerStyle.skCubeGrid"></ng-http-loader>

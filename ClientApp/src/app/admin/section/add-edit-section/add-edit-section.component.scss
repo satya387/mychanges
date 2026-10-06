@@ -1,0 +1,83 @@
+.role-input input {
+  border: 1px solid #0d0359;
+  font-weight: 500;
+  //border-radius: 5px;
+  box-shadow: none;
+}
+#forRoleNameSection,
+#forRoleName {
+  border-radius: 2px;
+}
+#forRoleName:focus,
+#forRoleNameSection:focus {
+  box-shadow: none;
+}
+.add-section-wrap {
+  border: 1px solid #e2dddd;
+  margin-top: 20px;
+}
+.selected-sec-wrap {
+  margin-top: 30px;
+}
+
+.selected-sec-wrap strong,
+.selected-sec-add strong {
+  font-weight: 500;
+}
+// .add-edit-head h1 {
+//   font-size: 35px;
+//   margin-top: 20px;
+//   font-weight: 600;
+// }
+.last-text-click p {
+  margin: 0;
+  font-size: 14px;
+}
+.last-text-click p a {
+  color: #f72265;
+  text-decoration: none;
+}
+.last-text-click p a:hover {
+  text-decoration: underline;
+ }
+
+.form-check:nth-child(2) {
+  padding-left: 2.5em;
+}
+.form-check-input[type=radio] {
+  border: 1px solid #0D0359;
+}
+.form-check-input:checked {
+  background-color: #0D0359;
+}
+/* ------------------------------------ new page style ----------------------------------------------*/
+
+.rag-drop-folder {
+  min-width: 200px;
+  min-height: 60px;
+}
+.drag-drop-folder {
+  width: 50%;
+}
+
+.drag-drop-folder span {
+  font-size: 14px;
+  color: #848484;
+  font-weight: 400;
+}
+.or-space {
+  margin: 0px 20px;
+}
+.role-input {
+  margin-bottom: 10px;
+}
+
+
+/* ------------------- create-edit-content-style ----------------- */
+.editor-tool-wrap {
+  width: 100%;
+  max-width: 1000px;
+  height: 300px;
+  border: 1px solid #e2dddd;
+  overflow-y: scroll;
+}

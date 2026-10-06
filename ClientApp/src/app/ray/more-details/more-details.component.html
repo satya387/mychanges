@@ -1,0 +1,17 @@
+<div class="popup-container" *ngIf="job">
+    <div class="popup">
+      <div class="header">
+        <h2 class="add-text" id="Title">Job Details</h2>
+        <button type="button" class="close" (click)="close()">✕</button> <!-- X symbol for Cancel -->
+      </div>
+      <div class="modal-body">
+        <h4>{{ job.title }}</h4>
+        <p>{{ job.location.name }}</p>
+        <div [innerHTML]="jobDetailsContent"></div>
+      </div>
+      <div class="modal-footer">
+        <a href="https://emids.greenhouse.io/dashboard" target="_blank" class="btn btn-primary ml-2">Refer</a>
+      </div>
+    </div>
+  </div>
+  

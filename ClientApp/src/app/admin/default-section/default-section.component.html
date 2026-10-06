@@ -1,0 +1,147 @@
+<div class="container table-responsive  mt-3 ">
+  <div class="functionality-wrap mb-0">
+    <ul class="mb-0">
+      <li>
+        <i _ngcontent-ng-cli-universal-c135="" class="ri-profile-fill"></i>
+      </li>
+      <li>
+        <strong>Default Sections</strong>
+      </li>
+      <li>
+        <span (click)="navigateTo()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+            <path
+              d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z" />
+          </svg>Add Sections</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="description">
+    <p>Below Sections Are Assigned To All The Users And Roles.</p>
+  </div>
+  <p class="total-roles" *ngIf="sectionList?.length">Total Default Sections ({{totalRecord}})</p>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr style="background-color: #F8F9FA;">
+          <th class="search-bar">
+            Section Name
+          </th>
+          <th style="width: 15%;" class="search-bar">Tiles Assigned</th>
+          <th class="search-bar">Created Date</th>
+          <th style="width: 20%;" class="search-bar">Created By</th>
+          <th class="search-bar">Status</th>
+          <th class="action-field">Action</th>
+        </tr>
+        <tr class="search-row-th">
+          <!-- section name -->
+          <th>
+            <div class="general-search">
+              <div class="row height">
+                <div class="col-lg-10">
+                  <div class="form-search">
+                    <input type="text" class="form-control form-input" [(ngModel)]="sectionName"  placeholder="Section" (keydown.enter)="configureRequest('moduleName', undefined, sectionName)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-search" viewBox="0 0 16 16"  (click)="configureRequest('moduleName', undefined, sectionName)">
+                      <path
+                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </th>
+          <th>
+          </th>
+          <!-- Created Date -->
+          <th>
+            <div class="general-search">
+              <div class="row height">
+                <div class="col-lg-10">
+                  <div class="form-search">
+                    <input type="text" class="form-control form-input" [(ngModel)]="publishedDate" placeholder="MM/DD/YYYY" (keydown.enter)="configureRequest('createdDate', undefined, publishedDate)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-search" viewBox="0 0 16 16"  (click)="configureRequest('createdDate', undefined, publishedDate)">
+                      <path
+                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </th>
+          <!-- Created By -->
+          <th>
+            <div class="general-search">
+              <div class="row height">
+                <div class="col-lg-10">
+                  <div class="form-search">
+                    <input type="text" class="form-control form-input"  [(ngModel)]="publishedBy" placeholder="Created By" (keydown.enter)="configureRequest('createdBy', undefined, publishedBy)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-search" viewBox="0 0 16 16" (click)="configureRequest('createdBy', undefined, publishedBy)">
+                      <path
+                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <!-- ############################  body of table is start here ###########################################-->
+      <tbody>
+        <tr *ngFor="let list of sectionList | paginate  : {
+        itemsPerPage: limit,
+        currentPage: page,
+        totalItems: totalRecord };  let i = index">
+          <td>{{list.moduleName}}</td>
+          <td> <a (click)="redirectToTilesAssigned(list)"> {{list.tilesCount}} </a> </td>
+          <td>{{list.createdDate | date: 'MM/dd/yyyy' }}</td>
+          <td>{{list.createdBy || '-'}}</td>
+          <td class="active-switch-wrap ">
+            <ul>
+              <!-- <li>
+                {{list.isActive ? 'Active' : 'Inactive'}}
+              </li> -->
+              <li *ngIf="list.isActive" class="activeswitch">Active</li>
+              <li *ngIf="!list.isActive" class="inactiveswitch">Inactive</li>
+              <li>
+                <label class="switch">
+                  <input type="checkbox" checked [(ngModel)]="list.isActive">
+                  <span class="swtch-toggle round" (click)="statusToggle(list)"></span>
+                </label>
+              </li>
+            </ul>
+          </td>
+          <td class="edit-delete ">
+            <a (click)="deleteSection(list)" class="delete " title="Delete " data-toggle="tooltip "><svg
+                xmlns="http://www.w3.org/2000/svg " width="18 " height="18 " fill="currentColor "
+                class="bi bi-trash-fill " viewBox="0 0 16 16 ">
+                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5
+                    0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z " />
+              </svg></a>
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+    <div class="container"  style="background-color: #F8F9FA;">
+      <span *ngIf="sectionList?.length === 0">
+        <p class="text-center no-data">
+          No Data Found!
+        </p>
+      </span>
+     </div>
+  </div>
+  <!-- ##################  pagination section start here #################### -->
+  <div class="clearfix pagination-wrap">
+    <pagination-controls previousLabel="" nextLabel="" (pageChange)="onTableDataChange($event)">
+    </pagination-controls>
+  </div>
+  <!-- #######################  pagination section end here ##################### -->
+</div>

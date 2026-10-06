@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="modal-header">
+    <h2>Expense Details</h2>
+    <button class="modal-close-btn" (click)="cancel()">✕</button>
+  </div>
+
+  <div class="expense-input-form modal-body">
+    <div class="popup-container">
+      <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
+        <div class="form-grid">
+          <label class="expense-labels" for="expenseType">Expense:<span style="color: red;">*</span></label>
+          <select
+            id="expenseType"
+            formControlName="expenseType"
+            (change)="onexpenseTypeChange($event)"
+          >
+            <option value="">Select</option>
+            <option *ngFor="let expense of expenseType" [value]="expense.value">
+              {{ expense.value }}
+            </option>
+          </select>
+
+          <label class="expense-labels" for="billType">Bill Type:<span style="color: red;">*</span></label>
+          <select
+            id="billType"
+            formControlName="billType"
+            (change)="onBillTypeChange($event)"
+          >
+            <option value="">Select</option>
+            <option value="1">Billable</option>
+            <option value="0">Non-Billable</option>
+          </select>
+          <label class="expense-labels" for="location">Location:<span style="color: red;">*</span></label>
+          <select
+            id="location"
+            formControlName="location"
+            (change)="onLocationChange($event)"
+          >
+            <option value="">Select</option>
+            <option
+              *ngFor="let location of locationType"
+              [value]="location.value"
+            >
+              {{ location.value }}
+            </option>
+          </select>
+        </div>
+      </form>
+
+      <div class="resource-counts" [hidden]="!resourcesAvailable">
+        <h3 *ngIf="isBillable">Billable Expense($)</h3>
+        <h3 *ngIf="!isBillable">Non-Billable Expense($)</h3>
+        <div id="dynamic-inputs-section" class="dynamic-inputs"></div>
+
+        <h3 style="margin-top: 15px;" [hidden]="!isBillable">Actual Expense($)</h3>
+        <div id="dynamic-actual-inputs-section" [hidden]="!isBillable" class="dynamic-inputs"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <div class="cancel-button">
+    <button type="button" (click)="cancel()">Cancel</button>
+  </div>
+  <div [ngClass]="isAlreadyExistExpense ? 'submit-button-disabled': 'submit-button'" [hidden]="!resourcesAvailable">
+    <button type="button" [disabled] ='isAlreadyExistExpense || isExpenseEdit' [ngClass]="{ 'disabled-btn': isExpenseEdit }" (click)="onSubmit()">Save</button>
+  </div>
+</div>

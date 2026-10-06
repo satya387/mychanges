@@ -1,0 +1,86 @@
+.no-data{
+    font-size: larger;
+    display: flex;
+    justify-content: space-evenly;
+    font-weight: 400;
+    color: red;
+    margin-top: 20px;
+  }
+
+  /* Ensure table layout is fixed */
+.cr-table {
+    display: inline-block;
+    
+    border: 1px solid #ccc; /* Border around the entire table */
+    font-size: 13px; /* Set the font size for both header and body */
+    width: 100%; /* Ensure the table takes up full available width */
+    table-layout: fixed; /* Makes columns equally sized */
+    border-collapse: collapse; /* Ensure borders collapse together */
+  }
+  
+  /* Header and body cells should have the same padding, border, and font size */
+  .cr-table th,
+  .cr-table td {
+    padding: 8px; /* Uniform padding for both header and body */
+    border: 1px solid #dcdcdc; /* Border between cells */
+    font-size: 13px; /* Consistent font size */
+    text-align: left; /* Align text to the left */
+  }
+  
+  /* Style for table header */
+  .cr-table th {
+    background-color: #f4f4f4; /* Light gray background for header */
+    font-weight: bold; /* Make header text bold */
+  }
+  
+  /* Optional: Add a hover effect on rows (for better user experience) */
+  .cr-table tbody tr:hover {
+    background-color: #f0f0f0; /* Light gray background on hover */
+  }
+  
+  /* Optional: Align cells in a specific way if needed */
+  .cr-table td {
+    vertical-align: middle; /* Align content vertically in the middle */
+  }
+  
+  /* Optional: Ensuring no extra spacing between rows */
+  .cr-table tr {
+    height: 40px; /* Adjust this value if row height is inconsistent */
+  }
+  
+  /* Make the table scrollable */
+  .cr-table .p-treetable {
+    max-height: 50vh;
+    overflow: auto;
+  }
+  
+  /* Optional: Adjust width of the last column or any specific column */
+  .cr-table th:last-child, .cr-table td:last-child {
+    width: 150px; /* Adjust the width of the last column if needed */
+  }
+
+
+  .back-button {
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // background-color: whitesmoke;
+    margin-right: 10px;
+    border-radius: 20px;
+  }
+  
+  .back-button:hover svg {
+    fill: #00d1a5;
+    transform: scale(1.1);
+  }
+  
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Aligns items horizontally */
+    margin: 0px;
+  }

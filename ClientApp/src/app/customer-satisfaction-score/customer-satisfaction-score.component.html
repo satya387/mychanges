@@ -1,0 +1,89 @@
+<div class="headpart empMHead col-md-12">
+  <div class="filter-container row-md-9">
+    <div class="filter-group row-md-3">
+      <label for="buDropdown" style="margin-top: -6px;">BU:</label>
+      <select class="form-select project-detail" id="buDropdown" (change)="onSelectDropdown($event,'BUName')" style="margin-bottom: 8px;">
+        <option value="-1" selected>ALL</option>
+        <option *ngFor="let item of BUList" [value]="item.name">{{item.name}}</option>
+      </select>
+    </div>
+
+    <div class="filter-group row-md-3" style="margin-left: 26px">
+      <label for="accountDropdown" style="margin-top: -6px;">Account:</label>
+      <select class="form-select project-detail" id="accountDropdown" style="margin-bottom: 8px;"
+        (change)="onSelectDropdown($event, 'AccountName')">
+        <option value="-1" selected>ALL</option>
+        <option *ngFor="let item of accountList" [value]="item.mastcustName">{{item.mastcustName}}</option>
+      </select>
+
+    </div>
+
+    <div class="filter-group row-md-3" style="margin-left: 26px">
+      <label for="projectDropdown" style="margin-top: -6px;">Project:</label>
+      <select class="form-select project-detail" id="projectDropdown" (change)="onSelectDropdown($event,'ProjectName')" style="margin-bottom: 8px;">
+        <option value="-1" selected>ALL</option>
+        <option *ngFor="let item of projectDropdownList" [value]="item.projectName">{{item.projectName}}</option>
+      </select>
+    </div>
+    <!-- <div class="filter-group row-md-3 header-btn">
+      <button class="add-button row-md-2" (click)="openAddClientRespondentDialog()"
+        title="Add Client Respondent Details" style="height: 25px; width:60px;margin-left: 8px !important;">Add</button>
+    </div> -->
+    <div class="filter-group row-md-3 header-btn" style=" margin-left: 59px;">
+      <button class="add-button row-md-2" (click)="openViewRespondentDialog()"
+        title="View Client Respondent Details">Respondents</button>
+    </div>
+    <div class="filter-group row-md-3 header-btn"   [hidden]="!isAdmin">
+      <button class="add-button row-md-2" (click)="openDownloadTemplateDialog()"
+      title="Download CSAT Template" style="height: 25px; width:100px">Download</button>
+    </div>
+    <div class="filter-group row-md-3 header-btn"   [hidden]="!isAdmin">
+      <button class="add-button row-md-2"  (click)="openUploadDialog()">Upload</button>
+    </div>
+    <div  class="filter-group row-md-1 filter-group row-md-3 header-download-btn" title="Download Customer Satisfaction Score Template"
+    style="margin-left: 1px;margin-top: -2px"
+     (click)="GetDownloadData()" title="Download Data" *ngIf="UploadedData && UploadedData.length > 0">
+      <img src="../../assets/images/CSAT-download-icon.png" x="0px" y="0px" width="25" height="25" viewBox="0,0,256,256" alt="DownloadIcon">
+    </div>
+  </div>
+</div>
+
+<div *ngIf="UploadedData && UploadedData.length > 0">
+  <table class="custom-table">
+    <thead>
+      <tr>
+        <th>Cycle</th>
+        <th>Account Name</th>
+        <th>BU</th>
+        <th>Program / Project Name</th>       
+         <th>Managing Partner</th>
+         <th>Client Partner / Account Manager</th>
+         <th>Delivery Head</th>
+         <th>Delivery Manager</th>
+         <th>View more details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of UploadedData | paginate  : {
+        itemsPerPage: limit,
+        currentPage: page,
+        totalItems: totalRecord }; ">
+        <td>{{ item.cycle }}</td>
+        <td>{{ item.accountName }}</td>
+        <td>{{ item.bu }}</td>
+        <td>{{ item.programProjectName }}</td>
+        <td>{{ formatWithSpaces(item.buHead) }}</td>
+        <td class="wrap-text">{{ formatWithSpaces(item.clientPartnerAccountManager) }}</td>
+        <td class="wrap-text">{{ formatWithSpaces(item.deliveryHead) }}</td> 
+        <td class="wrap-text">{{ formatWithSpaces(item.deliveryManager)}}</td>
+        <td class="center-button"><button class="add-button row-md-2" style="width: 80px; align-content: center; margin-right: 24px;"
+          (click)="openViewDialog(item)">View</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="UploadedData && UploadedData.length > 0" class="clearfix pagination-wrap" style="margin-top: 20px !important; margin-right: 40px !important;">
+  <pagination-controls previousLabel="" nextLabel="" (pageChange)="onTableDataChange($event)">
+  </pagination-controls>
+</div>

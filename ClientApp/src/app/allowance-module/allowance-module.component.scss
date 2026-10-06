@@ -1,0 +1,210 @@
+﻿.btn-new-purchase-request {
+    background: #888; /* Color of the scrollbar handle */
+    background-color: #0fe4bd;
+    color: white !important;
+    // text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+    padding-bottom: 0px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    
+  }
+  
+  .btn-new-purchase-request > svg {
+    fill:  white !important; /* Use the button's text color */
+    margin-right: 4px; /* Add some space between the icon and text */
+  }
+  .selected-tab {
+    color: white;
+    background-color: #0d0357;
+    border-radius: 4px;
+    min-width: 154px;
+    height: 42px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+  .btn-new-purchase-request > p {
+    margin-bottom: 8px;
+    cursor: pointer;
+  }
+  
+  .btn-redirect-purchase-order {
+  background: #888; /* Color of the scrollbar handle */
+  background-color:#0fe4bd;
+  color: white !important;
+  // text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+  padding-bottom: 0px;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  
+  }
+  
+  .btn-redirect-purchase-order > svg {
+  fill:  white !important; /* Use the button's text color */
+  margin-right: 4px; /* Add some space between the icon and text */
+  }
+  
+  .btn-redirect-purchase-order > p {
+  margin-bottom: 8px;
+  cursor: pointer;
+  }
+  
+  .btn-search-purchase-request {
+  background: #888; /* Color of the scrollbar handle */
+  background-color:#0fe4bd;
+  color: white !important;
+  // text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+  padding-bottom: 0px;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  
+  }
+  
+  .btn-search-purchase-request > svg {
+  fill:  white !important; /* Use the button's text color */
+  margin-right: 4px; /* Add some space between the icon and text */
+  }
+  
+  .btn-search-purchase-request > p {
+  margin-bottom: 8px;
+  cursor: pointer;
+  }
+  
+  .pr-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+  }
+  
+  .pr-table th,
+  .pr-table td {
+    padding: 8px;
+    border-bottom: 1px solid #dddddd;
+    text-align: left;
+  }
+  
+  .pr-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .pr-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  .pr-table tbody tr td:nth-child(2){
+    color:black !important;
+  }
+  
+  .pr-table tbody tr:hover {
+    background-color: #e9e9e9;
+  }
+  
+  .pr-table tbody tr:last-child {
+    border-bottom: none;
+  }
+  
+  .approve{
+    color: #0d0357;
+    cursor: pointer;
+  }
+  
+  .new-purchase-order{
+    color: #0d0357;
+    cursor: pointer;
+  }
+  
+  .PRText {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px; /* Adjust as needed */
+  }
+  
+  .PRText:hover {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: initial;
+  }
+  // .add-button{
+  //   float: right;
+  //   margin-top: 21px;
+  //   margin-right: 13px;
+  // }
+  /* styles.css */
+  .search-container {
+    position: relative;
+    width: 300px;
+    margin-left: 65px;
+    margin-top: 29px; /* Adjust width as needed */
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: 10px; /* Adjust position from the left */
+    top: 50%;
+    transform: translateY(-50%);
+    fill: #aaa; /* Adjust icon color */
+    width: 24px; /* Adjust icon size */
+    height: 24px; /* Adjust icon size */
+  }
+  
+  input[type="text"] {
+    padding: 12px 20px;
+    padding-left: 40px;
+    width: calc(100% - -1px);
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    font-size: 16px;
+    height: 37px;
+  }
+  
+  @media screen and (min-width: 300px) and (max-width: 1200px) {
+    .role-input{
+      width: 100%;
+    }
+    .search-container{
+      width: 100%;
+      margin-left: 0;
+      margin-top: 10px;
+    }
+    .pr-button{
+      float: left !important;
+      margin-right: 0 !important;
+    }
+    .action{
+      width: 7rem;
+    }
+   }
+   @media screen and (min-width: 1022px) and (max-width: 1026px) {
+    .btn-redirect-purchase-order{
+      width: 240px;
+    }
+   }
+  
+   @media screen and (min-width: 300px) and (max-width: 350px) {
+    .po-pr-button{
+     display: flex;
+    }
+   }
+   @media screen and (min-width: 10) and (max-width: 350px) {
+    .po-pr-button{
+     display: flex;
+    }
+   }

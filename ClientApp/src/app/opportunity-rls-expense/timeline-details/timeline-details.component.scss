@@ -1,0 +1,347 @@
+/* ===========================
+   timeline.component.css
+   Compact timeline + form row
+   =========================== */
+
+/* Wrapper */
+.timeline-wrapper {
+    position: relative;
+    padding: 15px 10px;
+    max-width: 900px;
+    margin: auto;
+    font-family: Arial, sans-serif;
+}
+
+/* Vertical line */
+.timeline-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 140px;
+    width: 3px;
+    background-color: #0a8d68;
+    border-radius: 6px;
+}
+
+/* Timeline item */
+.timeline-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 25px;
+    opacity: 0;
+    transform: translateY(8px);
+    animation: rowFade 0.5s ease-out forwards;
+}
+
+/* Date container */
+.timeline-date {
+    width: 130px;
+    padding-right: 10px;
+    text-align: right;
+    box-sizing: border-box;
+}
+
+.timeline-date .date {
+    font-weight: bold;
+    font-size: 14px;
+    color: #0a8d68;
+    line-height: 1.2;
+}
+
+.timeline-date .time {
+    font-size: 11px;
+    color: #555;
+    margin-top: 2px;
+}
+
+/* Dot */
+.timeline-dot {
+    width: 12px;
+    height: 12px;
+    background-color: #0a8d68;
+    border-radius: 50%;
+    margin-top: 6px;
+    margin-left: -6px;
+    box-shadow: 0 0 0 2px #e5f6f1;
+    z-index: 2;
+    flex-shrink: 0;
+    transition: all 0.25s ease;
+}
+
+/* Content box */
+.timeline-content {
+    background-color: #f9fffc;
+    padding: 10px 12px;
+    margin-left: 15px;
+    border-left: 3px solid #0a8d68;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.08);
+    max-width: calc(100% - 150px - 15px);
+    opacity: 0;
+    transform: translateY(6px);
+    animation: contentFade 0.35s ease-out forwards;
+    word-break: break-all;
+}
+
+.timeline-content h3 {
+    margin: 0 0 4px;
+    font-size: 14px;
+    color: #0a8d68;
+    line-height: 1.8;
+}
+
+.timeline-content p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.8;
+    color: #333;
+}
+
+/* Animations */
+@keyframes rowFade {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes contentFade {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hover effects */
+.timeline-item:hover .timeline-content,
+.timeline-item:hover .timeline-date {
+    transform: scale(1.02);
+    background: #ffffff;
+    border-radius: 8px;
+}
+
+.timeline-dot:hover {
+    transform: scale(1.3);
+    background: #005eff;
+    box-shadow: 0 0 10px rgba(0,94,255,0.7);
+}
+
+.timeline-dot:hover ~ .timeline-content,
+.timeline-dot:hover ~ .timeline-date {
+    transform: scale(1.03);
+    background: #eef5ff;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+}
+
+/* ==================================================
+   FORM ROW — RESPONSIVE + CLEAN ALIGNMENT
+   ================================================== */
+
+.form-row {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+/* Keep alignment with timeline */
+.form-row .timeline-date {
+    width: 130px;
+    padding-right: 10px;
+    text-align: right;
+    box-sizing: border-box;
+}
+
+/* Hide date text but keep spacing */
+.form-row .timeline-date .date,
+.form-row .timeline-date .time {
+    visibility: hidden;
+    height: 0;
+}
+
+/* Invisible dot keeps alignment */
+.form-row .timeline-dot {
+    visibility: hidden;
+}
+
+/* Form content wrapper */
+.form-row .timeline-content {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 8px 10px;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 40px;
+}
+
+/* Textarea */
+.form-textarea {
+    flex: 1 1 120px;
+    padding: 6px 8px;
+    font-size: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    min-height: 25px;
+    max-height: 40px;
+    box-sizing: border-box;
+}
+
+/* Checkbox label */
+.form-checkbox-label {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    gap: 6px;
+    margin-top: 6px;
+    flex: 0 1 auto;
+    white-space: nowrap;
+}
+
+/* Checkbox */
+.form-checkbox {
+    width: 14px;
+    height: 14px;
+}
+
+/* Button */
+.form-button {
+    padding: 6px 12px;
+    font-size: 12px;
+    color: #fff;
+    background-color: #0a8d68;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    align-self: flex-start;
+    flex: 0 1 auto;
+    white-space: nowrap;
+}
+
+.form-button:hover {
+    background-color: #07664f;
+}
+
+/* ==================================================
+   MOBILE RESPONSIVE
+   ================================================== */
+@media (max-width: 700px) {
+    .timeline-wrapper {
+        padding: 10px 8px;
+    }
+
+    .timeline-line {
+        left: 63px;
+        width: 2px;
+    }
+
+    .timeline-date {
+        width: 55px;
+        padding-right: 8px;
+    }
+
+    .timeline-date .date { font-size: 12px; }
+    .timeline-date .time { font-size: 10px; }
+
+    .timeline-dot {
+        width: 10px;
+        height: 10px;
+        margin-left: -5px;
+        margin-top: 5px;
+    }
+
+    .timeline-content {
+        margin-left: 12px;
+        padding: 8px 10px;
+        max-width: calc(100% - 70px - 12px);
+    }
+
+    /* ✔ FIX: ensure alignment for form row in mobile */
+    .form-row .timeline-date {
+        width: 55px;
+        padding-right: 8px;
+    }
+
+    .form-row .timeline-content {
+        gap: 6px;
+        padding: 6px 8px;
+        flex-wrap: wrap;
+    }
+
+    .form-textarea {
+        flex: 1 1 100%;
+        font-size: 11px;
+        min-height: 30px;
+    }
+
+    .form-checkbox-label {
+        font-size: 11px;
+        gap: 4px;
+        margin-top: 4px;
+    }
+
+    .form-checkbox {
+        width: 12px;
+        height: 12px;
+    }
+
+    .form-button {
+        font-size: 11px;
+        padding: 5px 10px;
+    }
+}
+p.tooltip {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  p.tooltip:hover::after {
+    content: attr(data-fulltext);
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background: #333;
+    color: #fff;
+    padding: 8px 10px;
+    border-radius: 5px;
+    white-space: normal;
+    width: 250px;
+    z-index: 10;
+  }
+  .strong {
+    color: #0D0659; 
+     font-family:Segoe UI, Roboto, sans-serif;
+  }
+  .priority-low {
+    color: #07664f; 
+  }
+  
+  .priority-medium {
+    color: rgb(194, 194, 47); 
+  }
+  
+  .priority-high {
+    color:orange; 
+  }
+  
+  .priority-critical {
+    color: #ea0e0e; 
+  }
+  .fontsetting{
+    font-family: Segoe UI, Roboto, sans-serif !important;
+  }
+  .char-count {
+    font-size: 12px;
+    color: #666;
+    text-align: right;
+    margin-top: 4px;
+    margin-right: 4px;
+  }
+  .is-invalid {
+    border: 1.5px solid #dc3545 !important;
+    box-shadow: 0 0 0 0.1rem rgba(220, 53, 69, 0.25);
+  }
+  .titlecolor {
+    color: orange !important;
+  }
+  .back-button{
+    margin-left: 30px;
+    margin-top: 15px;
+  }
+ 

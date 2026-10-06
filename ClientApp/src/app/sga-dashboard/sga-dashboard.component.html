@@ -1,0 +1,53 @@
+<div class="container">
+  <!-- Function Dropdown -->
+  <div class="col-4">
+  <ng-select id="reportFilter" [(ngModel)]="selectedFunction" (change)="onFunctionChange()" (clear)="onFunctionChange()"
+    [items]="accountList" bindLabel="label" placeholder="Select Function" [searchable]="true" [clearable]="true"
+    [virtualScroll]="true">
+  </ng-select>
+  <span *ngIf="!selectedFunction" class="error-message">
+    Please select function
+  </span>
+</div>
+  
+
+  <!-- Year Dropdown -->
+  <div class="col-2">
+  <ng-select id="yearFilter" [(ngModel)]="selectedYear" (change)="onYearChange()" [items]="yearList"
+    placeholder="Select Year" [searchable]="false" [clearable]="true">
+  </ng-select>
+  <span *ngIf="!selectedYear" class="error-message">
+    Please select year
+  </span>
+</div>
+
+<div class="col-5" style="display: flex; gap: 10px;">
+  <div class="col" style="display: flex; align-items: center; gap: 10px;">
+    <label class="switch bookmark-label" style="width: 50px; display: flex; align-items: center;">
+      <input type="checkbox" style="width: 43px;" (change)="onQuarterChange()" [(ngModel)]="quarterlyChecked" [checked]="quarterlyChecked">
+      <span class="swtch-toggle round" style="width: 40px;"></span>
+    </label>
+    <span class="bookmark-label-text">Quarterly</span>
+  </div>
+  
+  <div class="col" style="display: flex; align-items: center; gap: 10px;">
+    <label class="switch bookmark-label" style="width: 50px; display: flex; align-items: center;">
+      <input type="checkbox" style="width: 43px;" (change)="onAddBackChange()" [(ngModel)]="addBackChecked" [checked]="addBackChecked">
+      <span class="swtch-toggle round" style="width: 40px;"></span>
+    </label>
+    <span class="bookmark-label-text">With Add Back</span>
+  </div>
+</div>
+
+
+  <div class="col-1" style="display: flex; justify-content: space-around;">
+    <mat-label style="cursor: pointer;" (click)="onReportChange()" matTooltip="SGA Dashboard Report">
+      <img src="../../../assets/images/excelImage.png" style="width: 30px;height: 30px;margin-top: 4px;"
+        alt="Download Excel">
+    </mat-label>
+  </div>
+</div>
+
+<app-sga-data-table [_employeeData]="employeeData" [_groupData]="groupData" [_overAllData]="overAllData"
+  [dataForGraph]="dataForGraph" [overAllDataForGraph]="overAllDataForGraph"
+  [dataGroupLevelForGraph]="dataGroupLevelForGraph" [quarterlyChecked]="quarterlyChecked"></app-sga-data-table>

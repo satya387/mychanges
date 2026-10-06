@@ -1,0 +1,236 @@
+<!-- <div class="container-fluid table-responsive mt-3 ">
+
+    <div class="functionality-wrap mb-0">
+        <div style="float: left; color: #f72265;;">
+            <h3>
+                Purchase Requests
+            </h3>
+        </div>
+
+
+    </div>
+</div> -->
+
+
+<form class="common-form-field-box edit-pr-desktop" [formGroup]="searchForm">
+    <div class="container-fluid table-responsive mt-3 ">
+        <div class="row">
+            <div class="col-2 role-input startDate input-container">
+                <!-- <label for="forRoleNameSection" class="form-label">From Date</label> -->
+                <input class="form-control " style="height: 100%;" type="text" id="sdate" name="sdate"
+                    placeholder="From Date" formControlName="startDate" bsDatepicker [bsValue]="startDate"
+                    [bsConfig]="{ isAnimated: true, dateInputFormat: 'MM/DD/YYYY', showWeekNumbers: false }" />
+
+                <button type="button" class="clear-button" (click)="clearStartDate()"
+                    *ngIf="searchForm.controls['startDate'].value !== ''">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="col-2 role-input input-container">
+                <!-- <label for="forRoleNameSection" class="form-label">To Date</label> -->
+                <input class="form-control" style="height: 100%;" type="text" id="edate" name="edate"
+                    placeholder="To Date" formControlName="endDate" bsDatepicker [bsValue]="endDate"
+                    [bsConfig]="{ isAnimated: true, dateInputFormat: 'MM/DD/YYYY', showWeekNumbers: false }" />
+
+                <button type="button" class="clear-button" (click)="clearEndDate()"
+                    *ngIf="searchForm.controls['endDate'].value !== ''">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="col-2 role-input">
+                <button class="btn btn-search-purchase-request" (click)="onSubmitSearch()">
+                    SEARCH &nbsp;
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
+                        class="bi bi-search" viewBox="0 0 16 16">
+                        <path
+                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                    </svg>
+                    <!-- <p> New Purchase Request</p> -->
+                </button>
+            </div>
+
+            <div class="col-3 space"></div>
+            <div class="col-1" style="display: flex; justify-content: space-around;">
+              <mat-label style="cursor: pointer;" (click)="ExcelDump()" matTooltip="PR Details Report">
+                <img src="../../../assets/images/excelImage.png" style="width: 30px;height: 30px;margin-top: 4px;" alt="Download Excel">
+              </mat-label>
+<!-- <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
+
+<path fill="#4CAF50" d="M41,10H25v28h16c0.553,0,1-0.447,1-1V11C42,10.447,41.553,10,41,10z"></path><path fill="#FFF" d="M32 15H39V18H32zM32 25H39V28H32zM32 30H39V33H32zM32 20H39V23H32zM25 15H30V18H25zM25 25H30V28H25zM25 30H30V33H25zM25 20H30V23H25z"></path><path fill="#2E7D32" d="M27 42L6 38 6 10 27 6z"></path><path fill="#FFF" d="M19.129,31l-2.411-4.561c-0.092-0.171-0.186-0.483-0.284-0.938h-0.037c-0.046,0.215-0.154,0.541-0.324,0.979L13.652,31H9.895l4.462-7.001L10.274,17h3.837l2.001,4.196c0.156,0.331,0.296,0.725,0.42,1.179h0.04c0.078-0.271,0.224-0.68,0.439-1.22L19.237,17h3.515l-4.199,6.939l4.316,7.059h-3.74V31z"></path>
+
+</svg> -->
+ 
+            </div>
+
+            
+            
+            <div class="col-2 role-input">
+
+                <!-- <div style="float: right; ">
+                    <button class="btn btn-redirect-purchase-order" (click)="navigateToPurchaseOrder()">
+                        Purchase Order &nbsp;
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-box-arrow-in-up-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M6.364 13.5a.5.5 0 0 0 .5.5H13.5a1.5 1.5 0 0 0 1.5-1.5v-10A1.5 1.5 0 0 0 13.5 1h-10A1.5 1.5 0 0 0 2 2.5v6.636a.5.5 0 1 0 1 0V2.5a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v10a.5.5 0 0 1-.5.5H6.864a.5.5 0 0 0-.5.5" />
+                            <path fill-rule="evenodd"
+                                d="M11 5.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793l-8.147 8.146a.5.5 0 0 0 .708.708L10 6.707V10.5a.5.5 0 0 0 1 0z" />
+                        </svg>
+                    </button>
+                </div> -->
+
+                <div style="float: right; margin-right: 12px;">
+                    <button class="btn btn-new-purchase-request" (click)="navigateTo()">
+                        PURCHASE REQUEST &nbsp;
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-pencil-square" viewBox="0 0 16 16">
+                            <path
+                                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                            <path fill-rule="evenodd"
+                                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                        </svg>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 role-input">
+                <!-- <label for="forRoleNameSection" class="form-label">By Status</label> -->
+                <!-- <select class="form-select" formControlName="prStatus" (change)="onSubmitSearch()">
+                    <option value="-1" selected>All</option>
+                    <option *ngFor="let item of PRStatusList" [value]="item.id">{{item.value}}</option>
+                </select> -->
+                <div class="check-fill" style="margin-top: 6px;">
+                    <div *ngIf="(asyncTabs | async) === null">
+                        Loading tabs...
+                      </div>
+                      
+                      <mat-tab-group id="status-tab" [(selectedIndex)]="selectedTabIndex" (selectedTabChange)="onSelectStatus('Status',$event)">
+                        <mat-tab *ngFor="let tab of asyncTabs | async; let i = index" >
+                          <ng-template  mat-tab-label>  <span [ngClass]="{'selected-tab': selectedTabIndex === i}">{{ tab.label }}</span></ng-template>
+                       
+                            <div class="container-fluid">
+                              <div class="table-responsive mt-1 mt-md-4">
+                                <table class="pr-table">
+                                  <thead>
+                                    <tr>
+                                      <th class="search-bar mrgn" style="width:9rem;">PR Number</th>
+                                      <th class="search-bar mrgn" style="width:9rem;">Date of Request</th>
+                                      <th class="search-bar mrgn" style="width:15rem;">Project</th>
+                                      <th class="search-bar mrgn" style="width:15rem;">Item Description</th>
+                                      <th class="search-bar mrgn" style="width:8rem;">Country</th>
+                                      <th class="search-bar mrgn" style="width:8rem;">Total Value</th>
+                                      <th class="search-bar mrgn" style="width:5rem;">Currency</th>
+                                      <th class="search-bar mrgn" style="width:9rem;">Budget Category</th>
+                                      <th class="search-bar mrgn1" style="width:10rem;">Status</th>
+                                      <th class="pr-actions">Actions</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr *ngFor="let list of PRList | paginate : { itemsPerPage: limit, currentPage: page, totalItems: totalRecord }; let i = index">
+                                      <td>{{list.prNumber || '-'}}</td>
+                                      <td style="color: black; cursor: vertical-text; padding-left: 8px !important;">
+                                        {{list.pR_Date | date:'MM/dd/yyyy' || '-'}}</td>
+                                      <td>{{list.projectName || '-'}}</td>
+                                      <td>
+                                        <div class="PRText">
+                                          {{list.pR_For || '-'}}
+                                        </div>
+                                      </td>
+                                      <td>{{list.prLocationName || '-'}}</td>
+                                      <td>{{list.totalPrice || '-'}}</td>
+                                      <td>{{list.currencyType || '-'}}</td>
+                                      <td>{{list.budgetCategory || '-'}}</td>
+                                      <td>{{list.pR_Status || '-'}}</td>
+                                      <td class="edit-delete-rr text-center" >
+                                        <a class="edit" title="Edit" data-toggle="tooltip" (click)="navigateTo(list,1)" [hidden]="!list.isPREditable" style="margin-left: -10px;" [ngClass]="{'disable': list.isPORaised}">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                            <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325" />
+                                          </svg>
+                                        </a>
+                                        &nbsp; &nbsp;
+                                        <a class="approve" title="Approve" data-toggle="tooltip" (click)="approvePR(list)" [hidden]="!list.isApprover" [ngClass]="{'disable': list.isPORaised}">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                            <path d="m10.97 4.97-.02.022-3.473 4.425-2.093-2.094a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05"/>
+                                          </svg>
+                                        </a>
+                                        &nbsp; &nbsp;
+                                        <a class="reject" title="Reject" data-toggle="tooltip" (click)="rejectPR(list)" [hidden]="!list.isApprover" [ngClass]="{'disable': list.isPORaised}">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                          </svg>
+                                        </a>
+                                        &nbsp; &nbsp;
+                                        <a *ngIf="list.isPORaised || !list.isPREditable" class="new-purchase-order" title="Details" data-toggle="tooltip">
+                                          <svg fill="#0D0359" height="16px" width="16px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                               viewBox="0 0 42 42" enable-background="new 0 0 42 42" xml:space="preserve" (click)="navigateTo(list,0)">
+                                            <title>View Details</title>
+                                            <path d="M15.3,20.1c0,3.1,2.6,5.7,5.7,5.7s5.7-2.6,5.7-5.7s-2.6-5.7-5.7-5.7S15.3,17,15.3,20.1z M23.4,32.4
+                                              C30.1,30.9,40.5,22,40.5,22s-7.7-12-18-13.3c-0.6-0.1-2.6-0.1-3-0.1c-10,1-18,13.7-18,13.7s8.7,8.6,17,9.9
+                                              C19.4,32.6,22.4,32.6,23.4,32.4z M11.1,20.7c0-5.2,4.4-9.4,9.9-9.4s9.9,4.2,9.9,9.4S26.5,30,21,30S11.1,25.8,11.1,20.7z"/>
+                                          </svg>
+                                        </a>
+                                        &nbsp; &nbsp;
+                                        <a class="new-purchase-order" title="Create Purchase Order" data-toggle="tooltip" (click)="createPO(list)" [hidden]="!list.isAdmin" [ngClass]="{'disable': list.isPORaised}">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-up-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M6.364 13.5a.5.5 0 0 0 .5.5H13.5a1.5 1.5 0 0 0 1.5-1.5v-10A1.5 1.5 0 0 0 13.5 1h-10A1.5 1.5 0 0 0 2 2.5v6.636a.5.5 0 1 0 1 0V2.5a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v10a.5.5 0 0 1-.5.5H6.864a.5.5 0 0 0-.5.5"/>
+                                            <path fill-rule="evenodd" d="M11 5.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793l-8.147 8.146a.5.5 0 0 0 .708.708L10 6.707V10.5a.5.5 0 0 0 1 0z"/>
+                                          </svg>
+                                        </a>
+                                       
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <div class="container" style="background-color: #F8F9FA;">
+                                  <span *ngIf="PRList?.length === 0">
+                                    <p class="text-center no-data">
+                                      No Data Found!
+                                    </p>
+                                  </span>
+                                </div>
+                              </div>
+                              <br>
+                              <div class="clearfix pagination-wrap">
+                                <pagination-controls previousLabel="" nextLabel="" (pageChange)="onTableDataChange($event)">
+                                </pagination-controls>
+                              </div>
+                            </div>
+                          <!-- </div> -->
+                        </mat-tab>
+                      </mat-tab-group>
+                      
+                    <!-- <div *ngIf="(asyncTabs | async) === null">
+                        Loading tabs...
+                      </div>
+                      
+                      <mat-tab-group (selectedTabChange)="onTabChange($event)">
+                        <mat-tab *ngFor="let tab of asyncTabs | async;">
+                          <ng-template mat-tab-label>{{ tab.label }}</ng-template>
+                          {{ tab.content }}
+                        </mat-tab>
+                      </mat-tab-group> -->
+                      
+                    <!-- <div class="form-check" *ngFor="let item of gridType">
+                        <input class="form-check-input" type="radio" id="prStatus" formControlName="prStatusFilter"
+                            [value]="item.Value" (change)="onSelectStatus('Status', $event)" />
+                        <label class="form-check-label" for="prStatus">
+                            {{item.Name}}
+                        </label>
+                    </div> -->
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>

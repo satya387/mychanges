@@ -1,0 +1,32 @@
+<div id="arc-slide" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div *ngFor="let img of contentData.contentData; let i = index">
+        <img [src]="img.landscapeImg" *ngIf="img.orientation === 'Tablet (Landscape)'" class="banner-landscape" />
+
+        <img [src]="img.portraitImg" *ngIf="img.orientation === 'Tablet (Portrait)'" class="banner-potrait" />
+
+        <img [src]="img.mobileImg" *ngIf="img.orientation === 'Mobile'" class="banner-mobile" />
+        <img [src]="img.desktopImg" *ngIf="img.orientation === 'Desktop'" class="banner-desktop" />
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-lg-12 p-2 content-title">
+      <div class="moredetail1">
+        <a href="" class="banner-anchor"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+            fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+          </svg><span>Back to Home</span></a>
+      </div>
+      <!-- <h5>Title of the Content</h5> -->
+      <h5 class="side-heaidng">{{ contentData.name }}</h5>
+      <!-- <ckeditor  #editor [(ngModel)]="contentData.content" readonly></ckeditor> -->
+      <ckeditor [editor]="Editor" [(ngModel)]="contentData.content" [disabled]="true"></ckeditor>
+      <!-- <div [innerHTML]="contentData.content" mediaEmbed.previewsInData="true" ></div> -->
+    </div>
+  </div>
+</div>

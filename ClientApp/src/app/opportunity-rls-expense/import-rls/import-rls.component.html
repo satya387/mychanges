@@ -1,0 +1,48 @@
+<div class="popup-container">
+  <div class="header">
+    <h6 class="upload-text" id="Title">Upload</h6>
+    <button class="cancel-button" (click)="onCloseClick()">&#10005;</button>
+  </div>
+
+  <div class="popup">
+    <form [formGroup]="uploadRLSForm" style="margin: 15px;">
+      <div class="container-fluid" style="margin-top: 24px;">
+        <div class="row">
+
+          <div>
+            <div class="form-group">
+              <label>Upload File <span class="text-danger">*</span></label>
+              <input type="file" class="form-control" (change)="uploadedFile($event)" placeholder="Upload file"
+                formControlName="uploadFileName" accept=".xlsx">
+              <!-- Validation error message for file upload -->
+              <span *ngIf="(!fileUploaded && formSubmitted) || (fileUploaded && !isValidFileType())"
+                class="text-danger">
+                Please upload a valid .xlsx file.
+              </span>
+            </div>
+          </div>
+          <br />
+          <button type="submit" class="btn btn-primary" (click)="onUpload()" [disabled]="isSubmitDisabled"
+            style="margin-top: 17px; margin-left: 12px; background-color: #0D0357; width: 106px; margin-bottom: 5px; display: block;">
+            Submit
+          </button>
+          <div *ngIf="isSubmitDisabled" style="margin-top: 10px; color: #0d0357;">
+            Loading... Please wait.
+          </div>
+        </div>
+
+
+        <span *ngIf="Id != 0" style="font-size: 15px;">
+          <b>NOTE: </b>Uploading this file will overwrite existing roles with those in the file.
+        </span>
+        <div *ngIf="validationErrorMessages.length > 0" class="alert alert-danger alert-dismissible fade show"
+          role="alert" style="margin-top: 20px; max-height: 200px; overflow-y: auto;">
+          <ul>
+            <li *ngFor="let errorMessage of validationErrorMessages">{{ errorMessage }}</li>
+          </ul>
+          <button type="button" class="btn-close" aria-label="Close" (click)="closeAlert()"></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

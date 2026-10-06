@@ -1,0 +1,60 @@
+<div class="container">
+ 
+  <div class="add-edit-role-wrap adding-margin-to-table">
+    <app-back-button [routerPath]="'/tiles'"></app-back-button>
+    
+    <div class="add-edit-head">
+      <h1><i class="ri-layout-masonry-fill"></i> {{tileAction}} Tile</h1>
+    </div><div class="ScrollStyle">
+    
+    <form class="common-form-field-box" [formGroup]="addTileForm" novalidate>
+      
+      <div class="mt-4 col-lg-6 col-md-12 role-input">
+        
+        <label for="forRoleName" class="form-label">Tile Name</label> <span> *</span>
+        <input type="text" class="form-control" id="forTileName" placeholder="Enter Tile Name" required
+          formControlName="tileName" [minlength]="minLength">
+        <span
+          *ngIf="(addTileForm.controls['tileName'].invalid && (addTileForm.controls['tileName'].dirty || addTileForm.controls['tileName'].touched))">
+          <span *ngIf="addTileForm.controls['tileName'].errors.required"> Please enter tile name </span>
+          <span *ngIf="addTileForm.controls['tileName'].errors?.minlength"> Tile name must be at least
+            {{minLength}} characters long </span>
+          <span *ngIf="addTileForm.controls['tileName'].errors?.maxlength"> Tile name cannot exceed
+            {{maxLength}} characters </span>
+
+        </span>
+      </div>
+
+      <app-image-upload [label]="''" [addIcon]="true" (onSelectImage)="getSelectedImage($event)"
+         [sectionIconImg]="tileDetail?.iconUrlName" (downloadImage)="downloadTileIcon()">
+      </app-image-upload>
+
+      <app-image-upload [label]="'Tile'" (onSelectImage)="getSelectedImage($event)" [addIcon]="false"
+        [sectionImage]="tileDetail.TileImageUrl" (downloadImage)="downloadSectionImage()">
+      </app-image-upload>
+
+      <div class="mt-4 col-lg-6 col-md-12 role-input">
+        <label for="forRoleName" class="form-label">Display Text</label>
+        <input type="text" class="form-control" id="forRoleDisplay" placeholder="Enter Display Text"
+          formControlName="DisplayText">
+      </div>
+
+      <div class="mt-4 col-lg-12 col-md-12 role-input">
+        <label for="forRoleName" class="form-label">Tile Link</label>
+        <input type="text" class="form-control tile-link" id="forRoleLink" placeholder="Enter Tile Link" formControlName="tileLink">
+        <span
+          *ngIf="(addTileForm.controls['tileLink'].invalid && (addTileForm.controls['tileLink'].dirty || addTileForm.controls['tileLink'].touched))">
+          <span *ngIf="addTileForm.controls['tileLink'].errors.pattern">
+            Please enter valid URL </span>
+        </span>
+      </div>
+    </form>
+
+  </div></div>
+  <div class="big-button-bottom">
+    <ul>
+      <li (click)="createTile()"><button [disabled]="!addTileForm.valid">SAVE</button></li>
+      <li [routerLink]="'/tiles'"><button>CANCEL</button></li>
+    </ul>
+  </div>
+</div>

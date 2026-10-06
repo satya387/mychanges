@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="add-edit-role-wrap adding-margin-to-table">
+    <app-back-button [routerPath]="'/users'"></app-back-button>
+
+    <div class="add-edit-head">
+      <h1>User Sections</h1>
+    </div>
+    <div class="ScrollStyle">
+    <div class="my-4 col-lg-4 col-md-12 role-input">
+      <label for="forRoleName" class="form-label">User Name</label>
+      <input type="text" class="form-control" required id="forUserName" readonly [value]="userName">
+      <!-- <select class="form-select">
+        <option selected>{{userName}}</option>
+      </select> -->
+    </div>
+  
+
+  <nav id="user-role-tile">
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <a class="nav-link" [ngClass]="selectedTab === 'role' ? 'active' : ''" id="nav-role-tab" data-bs-toggle="tab"
+        href="#nav-role" role="tab" aria-controls="nav-role" aria-selected="true" (click)="selectedTab = 'role'">Role</a>
+
+      <a class="nav-link" [ngClass]="selectedTab === 'section' ? 'active' : ''" id="nav-sections-tab" (click)="selectedTab = 'section'"
+        data-bs-toggle="tab" href="#nav-sections" role="tab" aria-controls="nav-sections" aria-selected="false">
+        Sections</a>
+
+      <a class="nav-link" id="nav-tiles-tab" data-bs-toggle="tab" href="#nav-tiles" role="tab" aria-controls="nav-tiles"
+        aria-selected="false" (click)="selectedTab = 'tile'">Tiles</a>
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+
+    <!-- 1st tab section -->
+    <div *ngIf="selectedTab === 'role'" class="tab-pane fade" [ngClass]="selectedTab === 'role' ? 'active show' : ''" id="nav-role" role="tabpanel"
+      aria-labelledby="nav-role-tab">
+      <app-user-role> </app-user-role>
+    </div>
+
+    <!-- Second tab section -->
+
+    <div *ngIf="selectedTab === 'section'" class="tab-pane fade" [ngClass]="selectedTab === 'section' ? 'active show' : ''" id="nav-sections"
+      role="tabpanel" aria-labelledby="nav-sections-tab">
+      <app-user-section [label]="'user'" > </app-user-section>
+    </div>
+
+    <!-- ---------------------- Third tab section ------------------- -->
+
+    <div *ngIf="selectedTab === 'tile'" class="tab-pane fade" [ngClass]="selectedTab === 'tile' ? 'active show' : ''"  id="nav-tiles" role="tabpanel" aria-labelledby="nav-tile-tab">
+      <div class="tab-pane fade show active" id="nav-role" role="tabpanel" aria-labelledby="nav-role-tab">
+        <app-user-tile></app-user-tile>
+      </div>
+    </div>
+  </div>
+  </div>
+
+</div>

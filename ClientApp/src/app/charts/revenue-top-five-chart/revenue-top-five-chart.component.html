@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="row">
+        <div class="column col-8">
+            <b style="font-size: x-large;">Revenue (in $)</b>
+          <!--  <img src="../../../assets/images/tooltip.png" alt="Tooltip Icon" class="tooltipImage" title="List of top 5 accounts based on Revenue.">-->
+            <div class="button-container">
+                <div class="ytd-card">
+                    <div class="card-content">
+
+                        <div class="value-with-image">
+                            <img src="../../../assets/images/ytdTarget.png" alt="Image" class="card-image">
+                            <h2 class="card-heading">YTD Target</h2>
+
+                            <p class="card-value">${{ytdTarget}}</p>
+                        </div>
+                        <div class="blue-border"></div>
+                    </div>
+                </div>
+
+                <div class="ytd-card">
+                    <div class="card-content">
+
+                        <div class="value-with-image">
+                            <img src="../../../assets/images/ytdActual.png" alt="Image" class="card-image">
+
+                            <h2 class="card-heading">YTD Actuals</h2>
+                            <p class="card-value">${{ytdActuals}}</p>
+                        </div>
+                        <div class="blue-border"></div>
+                    </div>
+                </div>
+
+                <div class="ytd-card">
+                    <div class="card-content">
+
+                        <div class="value-with-image">
+                            <img src="../../../assets/images/ytdVariance.png" alt="Image" class="card-image">
+
+                            <h2 class="card-heading">YTD Variance</h2>
+                            <p class="card-value">${{ytdVariance}}</p>
+                        </div>
+                        <div class="blue-border"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="line-chart" *ngIf="options && top_five_chart_options">
+                <ag-charts-angular id="line-chart" [options]="options"></ag-charts-angular>
+            </div>
+        </div>
+        <div class="column col-4">
+            <b style="font-size: x-large;">Top 5 Accounts</b>
+            <img src="../../../assets/images/tooltip.png" alt="Tooltip Icon" class="tooltipImage" title="List of top 5 accounts based on Revenue.">
+            <div class="top-five-chart" *ngIf="options && top_five_chart_options">
+                <ag-charts-angular id="top-five-chart" [options]="top_five_chart_options"></ag-charts-angular>
+            </div>
+        </div>
+    </div>
+</div>

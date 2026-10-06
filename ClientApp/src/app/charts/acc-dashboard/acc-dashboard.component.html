@@ -1,0 +1,251 @@
+<div class="charts-container">
+  <div class="dropdown-container">
+
+    <div class="row" style="margin: 0;">
+      <mat-form-field class="custom-dropdown column col-2">
+        <mat-label style="color: black; font-size: 18px; font-weight: 600;">BU</mat-label>
+        <input #buInput matInput [formControl]="buFormControl" [matAutocomplete]="buAuto" (focus)=" onBuInputFocus()"
+          (blur)="onBuInputBlur()">
+        <button class="clear-input" mat-button *ngIf="buFormControl.value && !isBuInputFocused" matSuffix mat-icon-button aria-label="Clear"
+          (click)="clearBuInput()">
+          &#10006;
+        </button>
+        <mat-autocomplete #buAuto="matAutocomplete" (optionSelected)="onSelectionChange('BU')">
+          <mat-option *ngFor="let bu of filteredBuList | async" [value]="bu.bu">{{ bu.bu }}</mat-option>
+        </mat-autocomplete>
+
+      </mat-form-field>
+
+      <mat-form-field class="custom-dropdown column col-2">
+        <mat-label style="color: black; font-size: 18px; font-weight: 600;">Location</mat-label>
+        <input #locationInput matInput [formControl]="locationFormControl" [matAutocomplete]="locationAuto"
+          (blur)="onLocationInputBlur()" style="caret-color: transparent;" (keydown)="disableInput($event)">
+        <mat-autocomplete #locationAuto="matAutocomplete" (optionSelected)="onSelectionChange('Location')">
+          <mat-option value="All">All</mat-option>
+          <mat-option value="On Shore">On Shore</mat-option>
+          <mat-option value="Off Shore">Off Shore</mat-option>
+          <mat-option value="Near Shore">Near Shore</mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field class="custom-dropdown column col-2">
+        <mat-label style="color: black; font-size: 18px; font-weight: 600;">Account</mat-label>
+        <input #accountInput matInput [formControl]="accountFormControl" [matAutocomplete]="accountAuto" (focus)="onAccountInputFocus()"
+          (blur)="onAccountInputBlur()">
+        <button class="clear-input" mat-button *ngIf="accountFormControl.value && !isAccountInputFocused" matSuffix mat-icon-button
+          aria-label="Clear" (click)="clearAccountInput()">
+          &#10006;
+        </button>
+        <mat-autocomplete #accountAuto="matAutocomplete" (optionSelected)="onSelectionChange('Account')">
+          <mat-option *ngFor="let account of filteredAccountList | async" [value]="account.mastcustName" matTooltip="{{ account.mastcustName }}">{{
+            account.mastcustName }}</mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field class="custom-dropdown column col-2">
+        <mat-label style="color: black; font-size: 18px; font-weight: 600;">Project</mat-label>
+        <input #projectInput matInput [formControl]="projectFormControl" [matAutocomplete]="projectAuto" (focus)="onProjectInputFocus()"
+          (blur)="onProjectInputBlur()">
+        <button class="clear-input" mat-button *ngIf="projectFormControl.value && !isProjectInputFocused" matSuffix mat-icon-button
+          aria-label="Clear" (click)="clearProjectInput()">
+          &#10006;
+        </button>
+        <mat-autocomplete #projectAuto="matAutocomplete" (optionSelected)="onSelectionChange('Project')">
+          <mat-option *ngFor="let project of filteredProjectList | async" [value]="project.projName" matTooltip="{{ project.projName }}">{{
+            project.projName }}</mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field class="custom-dropdown column col-2">
+        <mat-label style="color: black; font-size: 18px; font-weight: 600;">Practice Area</mat-label>
+        <input #practiceAreaInput matInput [formControl]="practiceAreaFormControl" [matAutocomplete]="practiceAreaAuto" (focus)="onPracticeAreaInputFocus()"
+         (blur)="onPracticeAreaInputBlur()">
+        <button class="clear-input" mat-button *ngIf="practiceAreaFormControl.value && !isPracticeInputFocused" matSuffix mat-icon-button
+          aria-label="Clear" (click)="clearPracticeAreaInput()">
+          &#10006;
+        </button>
+        <mat-autocomplete #practiceAreaAuto="matAutocomplete" (optionSelected)="onSelectionChange('PracticeArea')">
+          <mat-option *ngFor="let practiceArea of filteredPracticeAreaList | async" [value]="practiceArea.practiceArea" matTooltip="{{ practiceArea.practiceArea }}">{{
+            practiceArea.practiceArea }}</mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field class="custom-dropdown column col-2" style="width: fit-content;">
+        <mat-label style="color: black; font-size: 18px; font-weight: 600;">Year</mat-label>
+        <input #yearInput matInput [formControl]="yearFormControl" [matAutocomplete]="yearAuto"
+          (focus)="onYearInputFocus()" (blur)="onYearInputBlur()" (keydown)="disableInput($event)" style="caret-color: transparent;">
+        <mat-autocomplete #yearAuto="matAutocomplete" (optionSelected)="onSelectionChange('Year')">
+          <mat-option *ngFor="let year of filteredYearOptions | async" [value]="year.label">
+            {{ year.label }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <!-- <mat-form-field class="custom-dropdown column col-2">
+        <mat-label style="color: black; font-size: 18px; font-weight: 600;">Studio</mat-label>
+        <input #studioInput matInput [formControl]="studioFormControl" [matAutocomplete]="studioAuto"
+          (blur)="onStudioInputBlur()">
+        <mat-autocomplete #studioAuto="matAutocomplete" (optionSelected)="onSelectionChange('Studio')">
+          <mat-option value="All">All</mat-option>
+          <mat-option value="Design">Design</mat-option>
+          <mat-option value="Connect">Connect</mat-option>
+          <mat-option value="Build">Build</mat-option>
+        </mat-autocomplete>
+      </mat-form-field> -->
+
+      <!-- <div class="custom-radio column col-2">
+        <mat-slide-toggle [(ngModel)]="isMacadamian" [disabled]="true" (change)="onSelectionChange()">
+          <span class="radio-label">Include CDR</span>
+        </mat-slide-toggle>
+      </div> -->
+
+      <!--<div class="custom-radio column col-2">
+        <mat-slide-toggle [(ngModel)]="isRevenueOnHold" (change)="onSelectionChange()">
+          <span class="radio-label" matTooltip="Include Revenue on Hold">Include Revenue on Hold</span>
+        </mat-slide-toggle>
+      </div>-->
+
+      <div class="column col-1" style="display: flex; justify-content: space-around;">
+        <mat-label style="cursor: pointer;" (click)="deliveryDashboardExcelDump()" matTooltip="Download Excel Report">
+          <img src="../../../assets/images/excelImage.png" style="width: 25px; height: 25px;" alt="Download Excel">
+        </mat-label>
+      </div>
+    </div>
+    <!-- <div class="row" style="margin: 0;">
+      <mat-form-field class="custom-dropdown column col-2">
+        <mat-label>Studio</mat-label>
+        <input matInput [formControl]="studioFormControl" [matAutocomplete]="studioAuto">
+        <mat-autocomplete #studioAuto="matAutocomplete" (optionSelected)="onSelectionChange()">
+          <mat-option value="All">All</mat-option>
+          <mat-option value="Design">Design</mat-option>
+          <mat-option value="Connect">Connect</mat-option>
+          <mat-option value="Build">Build</mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <div class="column col-2">
+        <mat-label style="cursor: pointer;" (click)="downloadExcel()">Download Excel</mat-label>
+      </div>
+    
+      <div class="column col-8">
+       
+      </div>
+
+    </div> -->
+  </div>
+  <div class="row" style="margin-left: 0px;">
+    <div class="col-6">
+      Note: CDR accounts are excluded
+    </div>
+    <div class="col-6" style="text-align-last: right; padding-right: 150px;">
+      <label class="switch bookmark-label" style="width: 50px;">
+        <input type="checkbox" [formControl]="Quarterlycontrol" style="width: 43px;" (change)="onSelectionChange()" [checked]="Quarterlycontrol.value">
+        <span class="swtch-toggle round" style="width: 40px;" ></span>
+        <span class="bookmark-label-text">Quarterly</span>
+      </label>
+    </div>
+  </div>
+
+  <div *ngIf="graphsToLoad >= 2" class="revenue-top-five-chart">
+    <app-revenue-top-five-chart [revenueData]="revenueData"></app-revenue-top-five-chart>
+  </div>
+
+  <div *ngIf="IsEbitdaVisible && graphsToLoad >= 2" class="shared-cost-chart-container row" style="width: 100%;">
+    <div class="shared-cost-chart-DSC column col-4" style="padding-right: 0;">
+      <app-shared-cost-chart [sharedCostsData]="sharedCostsData" [selectedOption]="1"></app-shared-cost-chart>
+    </div>
+    <div class="shared-cost-chart column col-4" >
+      <app-shared-cost-chart [sharedCostsData]="sharedCostsData" [selectedOption]="2"></app-shared-cost-chart>
+    </div>
+    <div class="shared-cost-chart column col-4">
+      <app-shared-cost-chart [sharedCostsData]="sharedCostsData" [selectedOption]="3"></app-shared-cost-chart>
+    </div>
+  </div>
+  
+
+  <div *ngIf="IsEbitdaVisible && graphsToLoad >= 4" class="ebidta-chart-container row" style="width: 100%;">
+    <div class="ebitda-chart-dollar column col-6">
+      <app-ebitda-chart (addBackCheckboxChange)="onCheckboxChange($event)" [ebitdaData]="ebitdaData" [selectedOption]="1"></app-ebitda-chart>
+    </div>
+    <div class="ebitda-chart-percent column col-6">
+      <app-ebitda-chart [ebitdaData]="ebitdaData" [selectedOption]="2"></app-ebitda-chart>
+    </div>
+  </div>
+  <!-- <div class="ebitda-container row" style="width: 100%;" *ngIf="IsEbitdaVisible">
+    <div class="shared-cost-chart column col-6" style="padding-right: 0;">
+      <app-shared-cost-chart [sharedCostsData]="sharedCostsData"></app-shared-cost-chart>
+    </div>
+    
+    <div class="ebitda-chart column col-6">
+      <app-ebitda-chart [ebitdaData]="ebitdaData"></app-ebitda-chart>
+    </div>
+  </div> -->
+  <div *ngIf="graphsToLoad >= 4" class="margin-container row" style="width: 100%;">
+    <div class="account-margin-chart column col-6" style="padding-right: 0;">
+      <app-acc-margin-chart [accMarginData]="accMarginData"></app-acc-margin-chart>
+    </div>
+    <div class="direct-margin-chart column col-6">
+      <app-direct-margin-chart [directMarginData]="directMarginData"></app-direct-margin-chart>
+    </div>
+  </div>
+  <div *ngIf="graphsToLoad >= 6" class="pie-bar-chart-container row" style="width: 100%;">
+    <div class="pie-chart column col-4" style="padding-right: 0;">
+      <app-head-count-chart [selectedOptionLocation]="selectedOptionLocationForBarGraphOnShore"
+        [headCountData]="headCountData"></app-head-count-chart>
+    </div>
+    <div class="bar-chart column col-4">
+      <app-head-count-chart [selectedOptionLocation]="selectedOptionLocationForBarGraphOffShore"
+        [headCountData]="headCountData"></app-head-count-chart>
+    </div>
+    <div class="bar-chart column col-4">
+      <app-head-count-chart [selectedOptionLocation]="selectedOptionLocationForBarGraphNearShore"
+        [headCountData]="headCountData"></app-head-count-chart>
+    </div>
+  </div>
+  <!-- <div class="margin-container row" style="width: 100%;">
+    <div class="account-margin-chart column col-6" style="padding-right: 0;">
+      <app-acc-margin-chart [accMarginData]="accMarginData"></app-acc-margin-chart>
+    </div>
+    <div class="direct-margin-chart column col-6">
+      <app-direct-margin-chart [directMarginData]="directMarginData"></app-direct-margin-chart>
+    </div>
+  </div> -->
+  <div *ngIf="graphsToLoad >= 6" class="utilization-bookToBill-container row" style="width: 100%;">
+    <div class="utilization-chart column col-4">
+      <app-utilization-chart [selectedOptionLocation]="selectedOptionLocationForBarGraphOnShore"
+        [utilizationData]="utilizationData"></app-utilization-chart>
+    </div>
+    <div class="utilization-chart column col-4">
+      <app-utilization-chart [selectedOptionLocation]="selectedOptionLocationForBarGraphOffShore"
+        [utilizationData]="utilizationData"></app-utilization-chart>
+    </div>
+    <div class="utilization-chart column col-4">
+      <app-utilization-chart [selectedOptionLocation]="selectedOptionLocationForBarGraphNearShore"
+        [utilizationData]="utilizationData"></app-utilization-chart>
+    </div>
+    <!-- <div class="qualityDashboard-chart column col-6">
+      <app-quality-dashboard></app-quality-dashboard>
+    </div>  -->
+    <!-- <div class="bookToBill-chart column col-6">
+      <app-book-to-bill [bookToBillData]="bookToBillData"></app-book-to-bill>
+    </div> -->
+  </div>
+
+  <!-- <div class="quality-accRisk-container row" style="width: 100%;">
+    <div class="qualityDashboard-chart column col-6">
+      <app-quality-dashboard></app-quality-dashboard>
+    </div> 
+    <div class="accRisk-chart column col-6">
+      <app-account-risk [accRisksData]="accRisksData"></app-account-risk>
+    </div>
+  </div> -->
+
+  <div *ngIf="graphsToLoad >= 6" class="pyramid-container row" style="width: 100%;">
+    <div class="pyramid-chart column col-6">
+      <app-pyramid-chart></app-pyramid-chart>
+    </div>
+    <div class="qualityDashboard-chart column col-6">
+      <app-quality-dashboard></app-quality-dashboard>
+    </div>
+  </div>
+
+</div>

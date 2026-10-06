@@ -1,0 +1,19 @@
+#utilization-chart {
+  margin-top: 15px;
+  display: block;
+  // height: 400px;
+  border: 1px solid #D3D3D3;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+.container {
+  margin-top: 20px;
+  padding-right: 0;
+}
+
+.tooltipImage {
+  width: 17px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: inherit;
+  margin-left: 2px;
+}

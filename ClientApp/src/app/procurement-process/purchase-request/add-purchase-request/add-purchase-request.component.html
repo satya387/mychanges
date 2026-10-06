@@ -1,0 +1,801 @@
+<div class="container-fluid edit-rr-desktop" style="margin-top:30px;margin-left: 0px;">
+
+    <div class="add-edit-role-wrap adding-margin-to-table" style="margin-top:-40px;margin-left: 30px !important;">
+        <span class="steps d-block d-md-none d-flex justify-content-end">Step 1/3</span>
+        <div class="add-edit-head">
+            <h1 style="margin-top:36px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    fill="currentColor" class="bi bi-stack" viewBox="0 0 16 16">
+                    <path
+                        d="m14.12 10.163 1.715.858c.22.11.22.424 0 .534L8.267 15.34a.598.598 0 0 1-.534 0L.165 11.555a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.66zM7.733.063a.598.598 0 0 1 .534 0l7.568 3.784a.3.3 0 0 1 0 .535L8.267 8.165a.598.598 0 0 1-.534 0L.165 4.382a.299.299 0 0 1 0-.535L7.733.063z" />
+                    <path
+                        d="m14.12 6.576 1.715.858c.22.11.22.424 0 .534l-7.568 3.784a.598.598 0 0 1-.534 0L.165 7.968a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.659z" />
+                </svg>
+                {{resourceAction}} Purchase Request</h1>
+
+        </div>
+    </div>
+
+    <form class="common-form-field-box edit-pr-desktop" [formGroup]="addPRForm">
+
+        <div class="container-fluid edit-pr-desktop">
+            <div class="col-12 p-0 p-md-4 pt-md-2">
+                
+                <div class="row">
+
+                    <div [hidden]="hiddenField">
+                        <input type="text" name="prId">
+                    </div>
+
+                    <div [hidden]="hiddenField">
+                        <input type="text" name="accessType">
+                    </div>
+
+                    <div [hidden]="hiddenField">
+                        <input type="text" name="deliveryHeadId">
+                    </div>
+
+                    <div class="col-md-3 role-input">
+                        <label for="forRoleNameSection" class="form-label role-input main-heading">Date Of Request
+                        </label>
+                        <div class="col-xs-12 col-12 col-md-4 form-group" style="width:100%;">
+                            <input type="text" placeholder="MM/DD/YYYY" class="form-control" formControlName="prDate">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 role-input">
+                        <label for="forRoleNameSection" class="form-label main-heading">Project</label><span>
+                            *</span>
+                        <!-- <select class="form-select project-detail" formControlName="projectName"
+                            (change)="onSelectProject($event)">
+                            <option value="null" selected>Select</option>
+                            <option *ngFor="let item of projectList" [value]="item.id">{{item.value}}</option>
+                        </select> -->
+                        <ng-select class="project-detail custom-ng-select" formControlName="projectName"
+                            [items]="projectList" bindValue='id' bindLabel="value" placeholder="Select"
+                            [searchable]="true" (change)="onSelectProject($event)">
+                        </ng-select>
+                        <span
+                            *ngIf="(addPRForm.controls['projectName'].invalid && (addPRForm.controls['projectName'].dirty || addPRForm.controls['projectName'].touched))">
+                            <span
+                                *ngIf="addPRForm.controls['projectName'].errors.required || !addPRForm.controls['projectName'].value">
+                                Please Select Project </span>
+                        </span>
+                    </div>
+
+                    <div class="col-md-3 role-input">
+                        <label for="forRoleNameSection" class="form-label main-heading">Account </label>
+                        <input type="text" id="accountName" name="accountName" placeholder="Account Name"
+                            class="project-detail1 no-field" formControlName="accountName" style="padding:6px;" />
+                    </div>
+
+                    <div class="col-md-3 role-input">
+                        <label for="forRoleNameSection" class="form-label main-heading">Delivery Head </label>
+                        <input type="text" id="deliveryHeadName" name="deliveryHeadName" placeholder="Delivery Head"
+                            class="project-detail1 no-field" formControlName="deliveryHeadName"
+                            style="padding:6px;" />
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-3 role-input1">
+                        <label for="forRoleNameSection" class="form-label main-heading"> Country </label><span>
+                            *</span>
+                        <select class="form-select project-detail" formControlName="prLocation"
+                            (change)="onSelectLocation($event)">
+                            <option value="null" selected>Select</option>
+                            <option *ngFor="let item of  PRLocation" [value]="item.id">{{item.value}}</option>
+                        </select>
+                        <span
+                            *ngIf="(addPRForm.controls['prLocation'].invalid && (addPRForm.controls['prLocation'].dirty || addPRForm.controls['prLocation'].touched))">
+                            <span
+                                *ngIf="addPRForm.controls['prLocation'].errors.required || !addPRForm.controls['prLocation'].value">
+                                Please Select Country </span>
+                        </span>
+                    </div>
+
+                    <div class="col-md-3 role-input1">
+                        <label for="forRoleNameSection" class="form-label main-heading">City</label><span>
+                            *</span>
+                        <select class="form-select project-detail" formControlName="prCity" >
+                            <option value="null" selected>Select</option>
+                            <option *ngFor="let item of  CityList" [value]="item.value">{{item.value}}</option>
+                        </select>
+                        <span
+                            *ngIf="(addPRForm.controls['prCity'].invalid && (addPRForm.controls['prCity'].dirty || addPRForm.controls['prCity'].touched))">
+                            <span
+                                *ngIf="addPRForm.controls['prCity'].errors.required || !addPRForm.controls['prCity'].value">
+                                Please Select City </span>
+                        </span>
+                    </div>
+                    <div class="col-md-3 role-input1">
+                        <label for="forRoleNameSection" class="form-label main-heading">Buyer</label><span>
+                            *</span>
+                        <select class="form-select project-detail" formControlName="prBuyer" >
+                            <option value="null" selected>Select</option>
+                            <option *ngFor="let item of  BuyersList" [value]="item.value">{{item.value}}</option>
+                        </select>
+                        <span
+                            *ngIf="(addPRForm.controls['prBuyer'].invalid && (addPRForm.controls['prBuyer'].dirty || addPRForm.controls['prBuyer'].touched))">
+                            <span
+                                *ngIf="addPRForm.controls['prBuyer'].errors.required || !addPRForm.controls['prBuyer'].value">
+                                Please Select Buyer </span>
+                        </span>
+                    </div>
+
+                    <div class="col-md-3 role-input1 ">
+                        <label for="forRoleNameSection" class="form-label main-heading">Request Delivery Date<span>
+                                *</span></label>
+                        <div class="col-xs-12 col-12 col-md-4 form-group request-Delivery-Date" style="width:100%;">
+                            <input type="text" placeholder="MM/DD/YYYY" class="form-control" bsDatepicker
+                                formControlName="prDeliveryDate" [bsValue]="requestDeliveryDate" [minDate]="today"
+                                [bsConfig]="{ isAnimated: true, dateInputFormat: 'MM/DD/YYYY', showWeekNumbers: false,returnFocusToInput:true }">
+                            <span
+                                *ngIf="(addPRForm.controls['prDeliveryDate'].invalid && (addPRForm.controls['prDeliveryDate'].dirty || addPRForm.controls['prDeliveryDate'].touched))">
+                                <span *ngIf="addPRForm.controls['prDeliveryDate'].errors.required">
+                                    Please Select Request Delivery Date
+                                </span> </span>
+                        </div>
+                    </div>
+
+                  
+
+                </div>
+                 
+                <div class="row">
+                   
+                    <div class="col-md-3 role-input">
+                        <label class="main-heading form-label">Is Billable To Client</label>
+                        <span>*</span>
+                        <div class="check-fill d-flex">
+                            <div class="form-check me-3" *ngFor="let item of yesNoValues">
+                                <input class="form-check-input" type="radio" id="isBillableToClient"
+                                    formControlName="isBillableToClient" [value]="item.Value" />
+                                <label class="form-check-label" for="isBillableToClient">
+                                    {{ item.Name }}
+                                </label>
+                     </div>
+                    
+                 
+                            <div class="form-check" style="margin-left: -5px; margin-top: -31px;">
+                                <label class="main-heading form-label">Included in RLS</label>
+                                <span>*</span>
+                                <div class="check-fill d-flex">
+                                    <div class="form-check" *ngFor="let item of yesNoValues">
+                                        <input class="form-check-input" type="radio" id="IncludedinRLS"
+                                            formControlName="IncludedinRLS" [value]="item.Value" />
+                                        <label class="form-check-label" for="IncludedinRLS">
+                                            {{ item.Name }}
+                                        </label>
+                                    </div>
+                                </div>
+                                <span *ngIf="(addPRForm.controls['IncludedinRLS'].invalid && 
+                                (addPRForm.controls['IncludedinRLS'].dirty || 
+                                 addPRForm.controls['IncludedinRLS'].touched))">
+                     <span *ngIf="addPRForm.controls['IncludedinRLS'].errors.required">
+                         Please Select Included in RLS
+                     </span>
+                 </span>
+                            </div>
+                        </div>
+                        <span *ngIf="(addPRForm.controls['isBillableToClient'].invalid && 
+                        (addPRForm.controls['isBillableToClient'].dirty || 
+                         addPRForm.controls['isBillableToClient'].touched))">
+             <span *ngIf="addPRForm.controls['isBillableToClient'].errors.required">
+                 Please Select Is Billable To Client
+             </span>
+         </span>
+                       
+                    
+                      
+                    </div>
+                    
+                    <div class="col-md-3 role-input">
+                        <label class="main-heading form-label">Is Budgeted</label>
+                        <span>*</span>
+                        <div class="check-fill d-flex">
+                            <div class="form-check me-3" *ngFor="let item of yesNoValues">
+                                <input class="form-check-input" type="radio" id="isBudgeted"
+                                    formControlName="isBudgeted" [value]="item.Value" />
+                                <label class="form-check-label" for="isBudgeted">
+                                    {{ item.Name }}
+                                </label>
+                            </div>
+                            <span *ngIf="(addPRForm.controls['isBudgeted'].invalid && 
+                            (addPRForm.controls['isBudgeted'].dirty || 
+                             addPRForm.controls['isBudgeted'].touched))">
+                 <span *ngIf="addPRForm.controls['isBudgeted'].errors.required">
+                     Please Select Is Budgeted
+                 </span>
+             </span>
+                            <div class="form-check" style="margin-left: -5px; margin-top: -31px;">
+                                <label class="main-heading form-label">Has Approved Rate Card</label>
+                                <span>*</span>
+                                <div class="check-fill d-flex">
+                                    <div class="form-check" *ngFor="let item of yesNoValues">
+                                        <input class="form-check-input" type="radio" id="hasApprovedRateCard"
+                                            formControlName="HasApprovedratecard" [value]="item.Value" />
+                                        <label class="form-check-label" for="hasApprovedRateCard">
+                                            {{ item.Name }}
+                                        </label>
+                                    </div>
+                                    
+                                </div>
+                                <span *ngIf="(addPRForm.controls['HasApprovedratecard'].invalid && 
+                                       (addPRForm.controls['HasApprovedratecard'].dirty || 
+                                        addPRForm.controls['HasApprovedratecard'].touched))">
+                            <span *ngIf="addPRForm.controls['HasApprovedratecard'].errors.required">
+                                Please Select Has Approved Rate Card
+                            </span>
+                        </span>
+                            </div>
+                        </div>
+                    
+                        
+                    
+                        
+                    </div>
+                    <div class="col-md-3 role-input1">
+                        <label for="forRoleNameSection" class="form-label main-heading">Requisition Type</label><span>
+                            *</span>
+                        <select class="form-select project-detail" formControlName="requisitionType"
+                            (change)="onSelectRequisition($event)">
+                            <option value="null" selected>Select</option>
+                            <option *ngFor="let item of  RequisitionType" [value]="item.id">{{item.value}}</option>
+                        </select>
+                        <span
+                            *ngIf="(addPRForm.controls['requisitionType'].invalid && (addPRForm.controls['requisitionType'].touched))">
+                            <span
+                                *ngIf="addPRForm.controls['requisitionType'].errors.required || !addPRForm.controls['requisitionType'].value">
+                                Please Select Requisition Type </span>
+                        </span>
+                    </div>
+
+                    <div class="col-md-3 role-input1">
+
+                        <label for="forRoleNameSection" class="form-label main-heading"> Currency </label>
+                        <span>*</span>
+                        <select class="form-select project-detail" formControlName="currencyType">
+                            <option value="null" selected>Select</option>
+                            <option *ngFor="let item of  currencyValues" [value]="item.value">{{item.value}}</option>
+                        </select>
+                        <span
+                            *ngIf="(addPRForm.controls['currencyType'].invalid && (addPRForm.controls['currencyType'].dirty || addPRForm.controls['currencyType'].touched))">
+                            <span
+                                *ngIf="addPRForm.controls['currencyType'].errors.required || !addPRForm.controls['currencyType'].value">
+                                Please Select Currency </span>
+                        </span>
+
+                    </div>
+
+                  
+
+                </div>
+         
+                <div class="row">
+                    <div class="col-md-3 role-input" id="vendor">
+                        <label for="forRoleNameSection" class="form-label main-heading">Recommended Vendor</label>
+                        <input type="text" id="recommendedVendor" name="recommendedVendor"
+                            placeholder="Recommended Vendor" class="project-detail" formControlName="recommendedVendor"
+                            style="padding:6px;" />
+                    </div>
+
+                    <div class="col-md-3 role-input">
+                        <label class="main-heading form-label"> Business Rationale For The Requisition </label><span>
+                            *</span>
+                        <textarea id="w3review" name="w3review" rows="4" cols="50" formControlName="businessRationale"
+                            placeholder="Enter Business Rationale">
+                            </textarea>
+                        <span
+                            *ngIf="(addPRForm.controls['businessRationale'].invalid && (addPRForm.controls['businessRationale'].dirty || addPRForm.controls['businessRationale'].touched))">
+                            <span *ngIf="addPRForm.controls['businessRationale'].errors.required">
+                                Please Enter Business Rationale
+                            </span>
+                            <span *ngIf="addPRForm.controls['businessRationale'].errors?.whitespace">
+                                Please Enter Business Rationale
+                              </span>
+                        </span>
+                    </div>
+
+                    <div class="col-md-3 role-input2">
+                        <label for="forRoleNameSection" class="form-label main-heading">Name Of The Requistioner
+                        </label>
+                        <div class="col-xs-12 col-12 col-md-4 form-group" style="width:100%;">
+                        <input type="text" id="lname" name="lname" placeholder="Requestor"
+                            class="project-detail no-field" formControlName="requestor" style="padding:6px;" />
+                    </div>
+                    </div>
+
+                    <div class="col-md-3 role-input1" [hidden]="!addPRForm.controls['rejectedComments'].value">
+                        <label class="main-heading form-label"> Rejected Comments </label>
+                        <textarea id="w3review" name="w3review" rows="2" cols="50" formControlName="rejectedComments"
+                            placeholder="Rejected Comments">
+                        </textarea>
+                    </div>
+                    <div class="col-md-3 role-input2" style="display: flex; flex-direction: column;">
+                        <label class="main-heading form-label">Upload Documents</label>
+                        <label for="fileUpload" class="" style="padding-top: 6px;">
+                          <span class="upload-label" style="color:black;border: 1px solid black;border-radius: 4px;padding: 4px;">Choose files</span>
+                          <input id="fileUpload" type="file" hidden multiple (change)="onFilesSelected($event)" accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png" formControlName="files" />
+                        </label>
+                        <ul *ngIf="selectedFiles && selectedFiles.length > 0">
+                            <li *ngFor="let file of selectedFiles; let i = index">
+                              <a href="#" (click)="openFile(file)" style="cursor: pointer;text-overflow: ellipsis;width:100px;white-space: nowrap;
+                            overflow: hidden;color:blue;font-size: 12px;font-weight: 500;text-decoration: underline;">{{ truncateFileName(file.name) }}</a>
+                              <button type="button" class="Cancelbutton" (click)="removeFile(i)" title="Cancel">X</button>
+                            </li>
+                          </ul>
+                          <ul *ngIf="savedFiles && savedFiles.length > 0">
+                            <li *ngFor="let file of savedFiles; let i = index">
+                              <a>
+                                <span (click)="openuploadDocumnet(file.name)" style="cursor: pointer;text-overflow: ellipsis; width: 250px;;white-space: nowrap;
+                              overflow: hidden;text-decoration: underline;color: blue;display: inline-block;">{{ file.name }}</span>
+                              </a>
+                              <!-- <label (click)="removeFile(i)"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="65px" height="65px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path fill="#B0BEC5" d="M64,0C28.656,0,0,28.656,0,64s28.656,64,64,64s64-28.656,64-64S99.344,0,64,0z M64,120 C33.125,120,8,94.875,8,64S33.125,8,64,8s56,25.125,56,56S94.875,120,64,120z"></path> </g> </g> <g> <g> <path fill="#F44336" d="M75.313,64l16.969-16.969c3.125-3.125,3.125-8.195,0-11.313c-3.117-3.125-8.188-3.125-11.313,0L64,52.688 L47.031,35.719c-3.125-3.125-8.195-3.125-11.313,0c-3.125,3.117-3.125,8.188,0,11.313L52.688,64L35.719,80.969 c-3.125,3.125-3.125,8.195,0,11.313c3.117,3.125,8.188,3.125,11.313,0L64,75.313l16.969,16.969c3.125,3.125,8.195,3.125,11.313,0 c3.125-3.117,3.125-8.188,0-11.313L75.313,64z"></path> </g> </g> </g></svg></label> -->
+                            </li>
+                          </ul>
+                      </div>
+                      
+              
+                </div>
+
+                
+
+                <div class="row" *ngIf="button == 1">
+
+                    <div class="container-fluid edit-rr-desktop">
+                        <div class="row mt-md-5 mt-0">
+                            <div class="col-lg-12">
+                                <button class="project-role banner-anchor mt-2 mt-md-0 p-0 p-md-4 pb-md-1"
+                                    style="cursor: default;"><b>PR Line Items</b></button>
+                                <div class="col-12 work-border p-0 p-md-4 pt-md-2">
+                                    <!-- Line items section -->
+                                    <div formArrayName="lineItems">
+                                        <div *ngFor="let item of lineItems.controls; let i = index" [formGroupName]="i"
+                                            class="col-12">
+                                            <div class="lineItems d-flex align-items-center">
+
+                                                <div class="col-md-3 role-input1 lineItems1">
+                                                    <label class="main-heading form-label">Item Description</label>
+                                                    <span> * </span>
+
+                                                    <!-- <input type="text" class="project-detail"
+                                                        formControlName="prFor" placeholder="Enter Item Description" /> -->
+
+                                                    <textarea id="w3review" name="w3review" rows="1" cols="50"
+                                                        class="project-detail" formControlName="prFor"
+                                                        placeholder="Enter Item Description">
+                                                    </textarea>
+                                                    <span
+                                                        *ngIf="item.get('prFor').invalid && (item.get('prFor').dirty || item.get('prFor').touched)">
+                                                        <span *ngIf="item.get('prFor').errors.required">
+                                                            Please Enter Item Description
+                                                        </span>
+                                                        <span *ngIf="item.get('prFor').errors?.whitespace">
+                                                            Please Enter Item Description
+                                                          </span>
+                                                    </span>
+                                                </div>
+
+                                                <div
+                                                    class="col-md-1 role-input1 main-heading form-label mt-2 mt-lg-0  my-2 my-md-0 lineItems1">
+                                                    <label for="forRoleNameSection"
+                                                        class="form-label main-heading">Quantity</label> 
+                                                        <!-- {{ isDuration ? 'Quantity':'Duration'  }} -->
+                                                        <span>*</span>
+                                                    <input type="number"  id="lname" name="lname"
+                                                        class="project-detail" required (keydown)="preventKeys($event)"
+                                                        min="0" formControlName="quantity" style="width: 100%;"
+                                                        (input)="onSelectQuantity($event, i)" />
+                                                    <span
+                                                        *ngIf="item.get('quantity').invalid && (item.get('quantity').dirty || item.get('quantity').touched)">
+                                                        <span *ngIf="item.get('quantity').errors.required">
+                                                            Please Enter Quantity
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                                <div
+                                                    class="col-md-1 role-input1 main-heading form-label mt-2 mt-lg-0  my-2 my-md-0 lineItems1">
+                                                    <label for="forRoleNameSection"
+                                                        class="form-label main-heading">Duration</label><span>
+                                                        *</span>
+                                                        <input type="number" id="durationNo" name="durationNo"
+                                                        class="project-detail" required (keydown)="preventKeys($event)"
+                                                         step="0.01" formControlName="durationNo" style="width: 100%;"
+                                                        (input)="onSelectDurationNo($event, i)" />
+                                                    <span
+                                                        *ngIf="item.get('durationNo').invalid && (item.get('durationNo').dirty || item.get('durationNo').touched)">
+                                                        <span *ngIf="item.get('durationNo').errors.required">
+                                                            Please Enter Duration
+                                                        </span>
+                                                    </span>
+                                                </div>
+
+                                                <div class="col-md-2 role-input main-heading form-label mt-2 mt-lg-0  my-2 my-md-0 lineItems1" id="duration">
+                                                  <label class="main-heading form-label">Duration In</label> <span> * </span>
+                                                  <select class="form-select project-detail" formControlName="duration" (change)="updateLabel(i)">
+                                                    <option [ngValue]="null" selected>Select </option>
+                                                    <option value="Days">Days</option>
+                                                    <option value="Months">Months</option>
+                                                    <option value="Years">Years</option>
+                                                  </select>
+                                                  <span *ngIf="item.get('duration').invalid && (item.get('duration').dirty || item.get('duration').touched)">
+                                                    <span *ngIf="item.get('duration').errors.required || !item.get('duration').value">
+                                                      Please Select Duration In
+                                                    </span>
+                                                  </span>
+                                                </div>
+                                                <div
+                                                    class="col-md-2 role-input1 main-heading form-label mt-2 mt-lg-0  my-2 my-md-0 lineItems1">
+                                                    <label for="forRoleNameSection" class="form-label main-heading">
+                                                        {{ getPriceLabel(item.get('duration').value) }} <!-- Dynamic label -->
+                                                    </label>
+                                                    <span> * </span>
+                                                    <input type="number" placeholder="Price Per Unit" id="lname"
+                                                        name="lname" class="project-detail" required
+                                                        (keydown)="preventKeys($event)" min="0"
+                                                        formControlName="pricePerUnit" style="width: 100%;"
+                                                        (input)="onSelectPricePerUnit($event, i)" />
+                                                    <span
+                                                        *ngIf="item.get('pricePerUnit').invalid && (item.get('pricePerUnit').dirty || item.get('pricePerUnit').touched)">
+                                                        <span *ngIf="item.get('pricePerUnit').errors.required">
+                                                            Please Enter Price Per Unit </span>
+
+                                                    </span>
+                                                </div>
+
+
+
+                                                <div
+                                                    class="col-md-2 role-input1 main-heading form-label mt-2 mt-lg-0  my-2 my-md-0">
+                                                    <label for="forRoleNameSection" class="form-label main-heading">
+                                                        Item Value
+                                                    </label>
+                                                    <span> * </span>
+                                                    &nbsp;
+                                                    <button class="info-button"
+                                                        title="INR value is Excluding Tax other values it is Including tax"
+                                                        aria-label="Information">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16"
+                                                            fill="currentColor" class="bi bi-info-circle"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                            <path
+                                                                d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                                                        </svg>
+                                                    </button>
+
+                                                    <input type="number" placeholder="Item Value" id="lname" name="lname"
+                                                        class="project-detail" required (keydown)="preventKeys($event)"
+                                                        style="width: 100%;" min="0" formControlName="prValue"
+                                                        [attr.disabled]='isDisableItemValue' />
+                                                    <span
+                                                        *ngIf="item.get('prValue').invalid && (item.get('prValue').dirty || item.get('prValue').touched)">
+                                                        <span *ngIf="item.get('prValue').errors.required">
+                                                            Please Enter Item Value
+                                                        </span>
+                                                    </span>
+                                                </div>
+
+                                                <div class="col-md-1">
+                                                    <button type="button" class="close-button"
+                                                        (click)="removeLineItem(i)" *ngIf="lineItems.length > 1">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                            fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Add button -->
+                                    <div class="col-12 role-input1">
+                                        <div class="col-md-3 role-input main-heading form-label">
+                                            <label for="forRoleNameSection" class="form-label main-heading">Total
+                                                Value</label>
+                                            <span> *</span>
+                                            &nbsp;
+                                            <button class="info-button"
+                                                title="INR value is Excluding Tax other values it is Including tax"
+                                                aria-label="Information">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16"
+                                                    fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                    <path
+                                                        d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                                                </svg>
+                                            </button>
+
+                                            <input type="number" [disabled]="true" placeholder="Total Value" id="lname"
+                                                name="lname" class="project-detail" required 
+                                                (keydown)="preventKeys($event)" min="0" formControlName="totalValue" />
+
+                                                
+                                            <!-- <span
+                                                *ngIf="!isValidPrice">
+                                                <span>
+                                                   Total Value Is Less Than Sum Of Item Value.  Please Enter Valid Total Value.
+                                                </span>
+                                            </span> -->
+                                        </div>
+
+                                        <div
+                                            class="col-md-3 role-input main-heading form-label mt-2 mt-lg-0  my-2 my-md-0">
+                                            <div>
+                                                <button class="btn btn-add-line-item" (click)="addLineItem()" *ngIf="button == 1"
+                                                    [disabled]="lineItems.length >= 100">ADD LINE ITEM &nbsp;
+
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-plus-circle"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                        <path
+                                                            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                            <div class="role-input1">
+                                                <span *ngIf="lineItems.invalid">
+                                                    <span *ngIf="lineItems.length == 0">
+                                                        Please Add Minimum One Line Item
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row" *ngIf="button == 0">
+
+                    <div class="container-fluid edit-rr-desktop">
+                        <div class="row mt-md-5 mt-0">
+                            <div class="col-lg-12">
+                                <button class="project-role banner-anchor mt-2 mt-md-0 p-0 p-md-4 pb-md-1"
+                                    style="cursor: default;"><b>PR Line Items</b></button>
+                                <div class="col-12 work-border p-0 p-md-4 pt-md-2">
+                                    <!-- Line items section -->
+                                    <div formArrayName="lineItems">
+                                        <div *ngFor="let item of lineItems.controls; let i = index" [formGroupName]="i"
+                                            class="col-12">
+                                            <div class="lineItems d-flex align-items-center">
+
+                                                <div class="col-md-3 role-input1 lineItems1">
+                                                    <label class="main-heading form-label">Item Description</label>
+                                                    <span> * </span>
+
+                                                    <!-- <input type="text" class="project-detail"
+                                                        formControlName="prFor" placeholder="Enter Item Description" /> -->
+
+                                                    <textarea id="w3review" name="w3review" rows="1" cols="50"
+                                                        class="project-detail" formControlName="prFor"
+                                                        placeholder="Enter Item Description" [attr.disabled]='isDisableItemValue' >
+                                                    </textarea>
+                                                    <span
+                                                        *ngIf="item.get('prFor').invalid && (item.get('prFor').dirty || item.get('prFor').touched)">
+                                                        <span *ngIf="item.get('prFor').errors.required">
+                                                            Please Enter Item Description
+                                                        </span>
+                                                        <span *ngIf="item.get('prFor').errors?.whitespace">
+                                                            Please Enter Item Description
+                                                          </span>
+                                                    </span>
+                                                </div>
+
+                                                <div
+                                                    class="col-md-1 role-input1 main-heading form-label mt-2 mt-lg-0  my-2 my-md-0 lineItems1">
+                                                    <label for="forRoleNameSection"
+                                                        class="form-label main-heading">Quantity</label> 
+                                                        <!-- {{ isDuration ? 'Quantity':'Duration'  }} -->
+                                                        <span>*</span>
+                                                    <input type="number"  id="lname" name="lname"
+                                                        class="project-detail" required (keydown)="preventKeys($event)"
+                                                        min="0" formControlName="quantity" style="width: 100%;"
+                                                        (input)="onSelectQuantity($event, i)" [attr.disabled]='isDisableItemValue' />
+                                                    <span
+                                                        *ngIf="item.get('quantity').invalid && (item.get('quantity').dirty || item.get('quantity').touched)">
+                                                        <span *ngIf="item.get('quantity').errors.required">
+                                                            Please Enter Quantity
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                                <div
+                                                    class="col-md-1 role-input1 main-heading form-label mt-2 mt-lg-0  my-2 my-md-0 lineItems1">
+                                                    <label for="forRoleNameSection"
+                                                        class="form-label main-heading">Duration</label><span>
+                                                        *</span>
+                                                    <input type="number"  id="durationNo" name="durationNo"
+                                                        class="project-detail" required (keydown)="preventKeys($event)"
+                                                        min="0"  max="99" maxlength="2" formControlName="durationNo" style="width: 100%;"
+                                                        (input)="onSelectDurationNo($event, i)" [attr.disabled]='isDisableItemValue'  />
+                                                    <span
+                                                        *ngIf="item.get('durationNo').invalid && (item.get('durationNo').dirty || item.get('durationNo').touched)">
+                                                        <span *ngIf="item.get('durationNo').errors.required">
+                                                            Please Enter Duration
+                                                        </span>
+                                                    </span>
+                                                </div>
+
+                                                <div class="col-md-2 role-input main-heading form-label mt-2 mt-lg-0  my-2 my-md-0 lineItems1" id="duration">
+                                                  <label class="main-heading form-label">Duration In</label> <span> * </span>
+                                                  <select class="form-select project-detail" formControlName="duration" [attr.disabled]='isDisableItemValue' (change)="updateLabel(i)">
+                                                    <option [ngValue]="null" selected>Select </option>
+                                                    <option value="Days">Days</option>
+                                                    <option value="Months">Months</option>
+                                                    <option value="Years">Years</option>
+                                                  </select>
+                                                  <span *ngIf="item.get('duration').invalid && (item.get('duration').dirty || item.get('duration').touched)">
+                                                    <span *ngIf="item.get('duration').errors.required || !item.get('duration').value">
+                                                      Please Select Duration In
+                                                    </span>
+                                                  </span>
+                                                </div>
+                                                <div
+                                                    class="col-md-2 role-input1 main-heading form-label mt-2 mt-lg-0  my-2 my-md-0 lineItems1">
+                                                    <label for="forRoleNameSection" class="form-label main-heading">
+                                                        {{ getPriceLabel(item.get('duration').value) }} <!-- Dynamic label -->
+                                                    </label>
+                                                    <span> * </span>
+                                                    <input type="number" placeholder="Price Per Unit" id="lname"
+                                                        name="lname" class="project-detail" required
+                                                        (keydown)="preventKeys($event)" min="0"
+                                                        formControlName="pricePerUnit" style="width: 100%;"
+                                                        (input)="onSelectPricePerUnit($event, i)" [attr.disabled]='isDisableItemValue'/>
+                                                    <span
+                                                        *ngIf="item.get('pricePerUnit').invalid && (item.get('pricePerUnit').dirty || item.get('pricePerUnit').touched)">
+                                                        <span *ngIf="item.get('pricePerUnit').errors.required">
+                                                            Please Enter Price Per Unit </span>
+
+                                                    </span>
+                                                </div>
+
+
+
+                                                <div
+                                                    class="col-md-2 role-input1 main-heading form-label mt-2 mt-lg-0  my-2 my-md-0">
+                                                    <label for="forRoleNameSection" class="form-label main-heading">
+                                                        Item Value
+                                                    </label>
+                                                    <span> * </span>
+                                                    &nbsp;
+                                                    <button class="info-button"
+                                                        title="INR value is Excluding Tax other values it is Including tax"
+                                                        aria-label="Information">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16"
+                                                            fill="currentColor" class="bi bi-info-circle"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                            <path
+                                                                d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                                                        </svg>
+                                                    </button>
+
+                                                    <input type="number" placeholder="Item Value" id="lname" name="lname"
+                                                        class="project-detail" required (keydown)="preventKeys($event)"
+                                                        style="width: 100%;" min="0" formControlName="prValue"
+                                                        [attr.disabled]='isDisableItemValue' />
+                                                    <span
+                                                        *ngIf="item.get('prValue').invalid && (item.get('prValue').dirty || item.get('prValue').touched)">
+                                                        <span *ngIf="item.get('prValue').errors.required">
+                                                            Please Enter Item Value
+                                                        </span>
+                                                    </span>
+                                                </div>
+
+                                                <div class="col-md-1">
+                                                    <button type="button" class="close-button"
+                                                        (click)="removeLineItem(i)" *ngIf="lineItems.length > 1">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                            fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Add button -->
+                                    <div class="col-12 role-input1">
+                                        <div class="col-md-3 role-input main-heading form-label">
+                                            <label for="forRoleNameSection" class="form-label main-heading">Total
+                                                Value</label>
+                                            <span> *</span>
+                                            &nbsp;
+                                            <button class="info-button"
+                                                title="INR value is Excluding Tax other values it is Including tax"
+                                                aria-label="Information">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16"
+                                                    fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                    <path
+                                                        d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                                                </svg>
+                                            </button>
+
+                                            <input type="number" [disabled]="true" placeholder="Total Value" id="lname"
+                                                name="lname" class="project-detail" required 
+                                                (keydown)="preventKeys($event)" min="0" formControlName="totalValue" />
+
+                                                
+                                            <!-- <span
+                                                *ngIf="!isValidPrice">
+                                                <span>
+                                                   Total Value Is Less Than Sum Of Item Value.  Please Enter Valid Total Value.
+                                                </span>
+                                            </span> -->
+                                        </div>
+
+                                        <div
+                                            class="col-md-3 role-input main-heading form-label mt-2 mt-lg-0  my-2 my-md-0">
+                                            <div>
+                                                <button class="btn btn-add-line-item" (click)="addLineItem()" *ngIf="button == 1"
+                                                    [disabled]="lineItems.length >= 100">ADD LINE ITEM &nbsp;
+
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-plus-circle"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                        <path
+                                                            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                            <div class="role-input1">
+                                                <span *ngIf="lineItems.invalid">
+                                                    <span *ngIf="lineItems.length == 0">
+                                                        Please Add Minimum One Line Item
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+</div>
+
+
+
+<div class="container-fluid sub-cancel-eva edit-rr-desktop" *ngIf="button == 1">
+    <div class="big-button-bottom d-md-block">
+        <ul class="d-flex">
+            <li class="savebutton" (click)="onSubmitPRForm()"><button>SUBMIT</button></li>
+            <li><button [routerLink]="'/purchase-request'">CANCEL</button></li>
+        </ul>
+    </div>
+</div>
+<div class="container-fluid sub-cancel-eva edit-rr-desktop" *ngIf="button == 0">
+    <div class="big-button-bottom d-md-block">
+        <ul>
+            <li><button [routerLink]="'/purchase-request'">Close</button></li>
+          </ul>
+    </div>
+</div>

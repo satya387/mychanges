@@ -1,0 +1,16 @@
+<!-- Modal and overlay container with ngIf directive -->
+<div class="modal-container" *ngIf="modalOpened">
+    <div class="modal-body">
+        <p>Are you sure, you want to approve <b> {{ message }} </b> ?</p>
+        <div class="big-button-bottom">
+            <ul class="text-center" style="margin:5px;">
+                <li> <button type="button" (click)="onSave()">{{ btnOkText }}</button></li>
+                <li><button type="button" (click)="onCancel()">{{ btnCancelText }}</button></li>
+            </ul>
+        </div>
+    </div>
+    <!-- Overlay to create the masking effect -->
+  <div class="modal-overlay"></div>
+</div>
+
+

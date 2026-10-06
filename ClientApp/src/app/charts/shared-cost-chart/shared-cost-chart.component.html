@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="content" *ngIf="optionsDSC && selectedOption === 1">
+    <div class="header">
+      <b class="left-text">DSC</b>
+      <div class="ytd-card">
+        <div class="card-content">
+          <div class="value-with-image">
+            <img src="../../../assets/images/ytdSharedCost.png" alt="Image" class="card-image" />
+            <h2 class="card-heading">&nbsp; YTD &nbsp;</h2>
+            <p class="card-value">${{ ytdDSC }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ag-charts-angular id="shared-cost-chart" style="height: 100%" [options]="optionsDSC"></ag-charts-angular>
+  </div>
+  
+  <div class="content" *ngIf="optionsBuCost && selectedOption === 2">
+    <div class="header">
+      <b class="left-text">BuCost</b>
+      <div class="ytd-card">
+        <div class="card-content">
+          <div class="value-with-image">
+            <img src="../../../assets/images/ytdSharedCost.png" alt="Image" class="card-image" />
+            <h2 class="card-heading">&nbsp; YTD &nbsp;</h2>
+            <p class="card-value">${{ ytdBuCost }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ag-charts-angular id="shared-cost-chart" style="height: 100%" [options]="optionsBuCost"></ag-charts-angular>
+  </div>
+  
+  <div class="content" *ngIf="optionsSGA && selectedOption === 3">
+    <div class="header">
+      <b class="left-text">SGA</b>
+      <div class="ytd-card">
+        <div class="card-content">
+          <div class="value-with-image">
+            <img src="../../../assets/images/ytdSharedCost.png" alt="Image" class="card-image" />
+            <h2 class="card-heading">&nbsp; YTD &nbsp;</h2>
+            <p class="card-value">${{ ytdSGA }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ag-charts-angular id="shared-cost-chart" style="height: 100%" [options]="optionsSGA"></ag-charts-angular>
+  </div>
+</div>

@@ -1,0 +1,208 @@
+.container {
+    margin-top: 20px;
+  }
+  
+  .d-flex {
+    display: flex;
+  }
+  
+  .justify-content-between {
+    justify-content: space-between;
+  }
+  
+  .align-items-center {
+    align-items: center;
+  }
+  
+  .align-items-center {
+    align-items: center;
+  }
+  
+  .header-text {
+    align-items: center !important;
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    text-align: center;
+    color: black;
+  }
+  .col-md-8 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 66.666667%;
+    flex: 0 0 46%;
+  }
+  
+  
+  
+  .card {
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+    border-color: #0BAB8E;
+  }
+  
+  .card-body {
+    flex-grow: 1;
+  }
+  
+  .card-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #0d0359;
+  }
+  
+  .card-text {
+    color: black;
+  }
+  
+  .btn-primary {
+    background-color: #C3E4DE;
+    border: none;
+    color: #0d0359;
+    border-radius: 5px; /* Reduced from 10px */
+    padding: 5px 10px; /* Reduced from 10px 20px */
+    text-align: center;
+    font-size: medium; /* Reduced from medium */
+    font-weight: 600;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0BAB8E;
+    color: #0d0359;
+  }
+  
+  .card-footer {
+    padding: 1rem;
+    border-top: none;
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    gap: 1rem;
+  }
+  
+  
+  .flex-fill {
+    flex: 1;
+  }
+  
+  .mr-2 {
+    margin-right: 0.5rem;
+  }
+  
+  .ml-2 {
+    margin-left: 0.5rem;
+  }
+  .filte {
+    text-align: end;
+    border: 2px solid #0BAB8E;
+    width: auto;
+    height: 35px;
+    padding-top: 5px;
+    color: #fff;
+    border-radius: 3px; 
+  }
+  
+  .custom-select {
+    position: relative;
+    display: inline-block;
+    color: #0d0359; 
+  }
+  
+  .dropdown-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #0d0359; 
+  }
+  
+  .start-icon {
+    left: 10px; 
+  }
+  
+  .end-icon {
+    right: 10px;
+  }
+  
+  select {
+    width: 100%; 
+    padding-left: 40px; 
+    padding-right: 27px; 
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent; 
+    color: #0d0359; 
+    font-weight: 500;
+    cursor: pointer; 
+  }
+  
+  select option {
+    background-color: #fff; 
+    color: #0d0359;
+    cursor: pointer; 
+  }
+  
+  select:focus {
+    outline: none;
+  }
+  
+  .custom-select:hover select {
+    cursor: pointer; 
+  }
+  .scroll-top {
+    position: fixed;
+    bottom: 20px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    background-color: #0d0359; /* Background color of the button */
+    color: #0BAB8E; /* Color of the arrow icon */
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000; /* Ensure it appears above other elements */
+    opacity: 0;
+    transition: opacity 0.3, background-color 0.3s;
+  }
+  .scroll-top:hover{
+    background-color: #C3E4DE; /* Background color of the button */
+    color: #0d0359;
+  }
+  .scroll-top svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s;
+  }
+  .scroll-top:hover svg {
+    transform: translateY(-3px); 
+  }
+  .scroll-top.show {
+    opacity: 1;
+  }
+  .margi p, .margi button{
+    margin: 0.2rem;
+    padding: 0;
+  }
+  .headv {
+    font-size: x-large;
+    font-weight: 600;
+    padding-bottom: 8px;
+    padding-top: 10px;
+    color: #0d0359;
+  }
+  .serach {
+    width: 400px;
+    height: 35px;
+  }
+  
+  
+  
+  

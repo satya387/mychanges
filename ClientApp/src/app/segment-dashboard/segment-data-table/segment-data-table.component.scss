@@ -1,0 +1,103 @@
+// /* Add borders for rows and columns */
+// .segment-table table {
+//     border-collapse: collapse; /* Ensure no gaps between borders */
+//     display: table;
+//     width: 100%;
+//     table-layout: fixed; 
+//   }
+  
+.segment-table td,
+.segment-table th {
+  font-size: 13px; 
+  padding: 8px; /* Optional: Add padding for better spacing */
+}
+
+/* Optional: Add a border for the table itself */
+.segment-table {
+  display: inline-block;
+  margin: 20px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+}
+
+/* Optional: Style table header */
+.segment-table th {
+  background-color: #f4f4f4; /* Light gray background */
+  font-weight: bold;
+  text-align: left;
+}
+
+.no-data{
+  font-size: larger;
+  display: flex;
+  justify-content: space-evenly;
+  font-weight: 400;
+  color: red;
+  margin-top: 20px;
+}
+
+//  ::ng-deep .sga-table th:nth-child(1), 
+// .sga-table td:nth-child(1) { 
+//     width: 105px; /* Adjust as needed */
+//     // padding: 8px !important;
+// }
+
+// ::ng-deep .sga-table th:nth-child(2), 
+// .sga-table td:nth-child(2) { 
+//     width: 40px; 
+//     // padding: 8px !important;
+// }
+
+// ::ng-deep .sga-table th:nth-child(3), 
+// .sga-table td:nth-child(3) { 
+//     width: 100px;
+//     // padding: 8px !important; 
+// }
+
+// ::ng-deep .sga-table th:nth-child(5), 
+// .sga-table td:nth-child(5),
+// .sga-table th:nth-child(6), 
+// .sga-table td:nth-child(6),
+// .sga-table th:nth-child(7), 
+// .sga-table td:nth-child(7),
+// .sga-table th:nth-child(8), 
+// .sga-table td:nth-child(8 ) { 
+//     width: 30px; 
+//     // padding: 8px !important;
+// }
+
+.individual-charts {
+width: 50%;
+margin: 20px auto;
+display: flex;
+justify-content: center;
+}
+
+#line-bar-chart {
+width: 100%;
+max-width: 800px;
+height: 400px;
+}
+
+
+.bordered-container {
+border: 2px solid #000;
+border-radius: 8px; 
+padding: 10px;
+margin: 10px 15px;
+}
+
+.chart-container {
+display: flex;
+justify-content: space-between;
+}
+
+#line-bar-chart-1, #line-bar-chart-2 {
+width: 48%; /* Adjust the width as needed */
+height: 400px; /* Adjust height if necessary */
+}
+
+#line-bar-chart-3 {
+width: 100%;
+height: 400px; /* Adjust height if necessary */
+}

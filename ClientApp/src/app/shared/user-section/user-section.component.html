@@ -1,0 +1,17 @@
+<div class="tab-pane fade show active" id="nav-role" role="tabpanel" aria-labelledby="nav-role-tab">
+  <div class="add-section-wrap p-2">
+    <div class="inner-wrap-pad p-0 p-md-4">
+
+      <app-assign-control [autoCompleteList]="sectionList" [labelName]="'Sections'" [validateSectionRemove]="true"
+        [selectedList]="selectedSectionList" [placeholderText]="sectionPlaceHolderText"
+        (onSelectData)="onSelectItem($event)"></app-assign-control>
+
+      <div class="big-button-bottom">
+        <ul>
+          <li><button [disabled]="!isSectionSelected && selectedSectionList?.length === 0"  (click)="saveSections()">SAVE</button></li>
+          <li><button [routerLink]="'/users'">CANCEL</button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

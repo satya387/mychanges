@@ -1,0 +1,145 @@
+<div class="popup-container">
+    <div class="header">
+      <h2 class="upload-text" id="Title">Add Client Respondent Details</h2>
+      <button class="cancel-button" (click)="onCloseClick()">&#10005;</button>
+    </div>
+  
+    <div class="popup">
+      <form [formGroup]="addClientRespondentForm" style="margin-left: 31px; margin-right: 20px;">
+        <div class="container-fluid" style="margin-top: 24px; margin-bottom: 54px;">
+          <div class="row">
+            <div>
+              <div class="form-group">
+                <label for="cycleDropdown" class="required">Cycle <span class="text-danger">*</span></label>
+                <select
+                  class="form-select project-detail"
+                  formControlName="cycleName"
+                  id="cycleDropdown"
+                  (change)="onSelectDropdown($event, 'CycleName')"
+                >
+                  <option [ngValue]="null" selected>Select</option>
+                  <option *ngFor="let item of cycleData" [value]="item.cycleName">{{ item.cycleName }}</option>
+                </select>
+                <span
+                  *ngIf="addClientRespondentForm.controls['cycleName'].invalid && (addClientRespondentForm.controls['cycleName'].dirty || addClientRespondentForm.controls['cycleName'].touched)"
+                  class="text-danger"
+                >
+                  Please select a cycle
+                </span>
+              </div>
+              <div class="form-group">
+                <label for="projectDropdown" class="required">Project <span class="text-danger">*</span></label>
+                <select
+                  class="form-select project-detail"
+                  formControlName="ProjectName"
+                  id="projectDropdown"
+                  (change)="onSelectDropdown($event, 'ProjectName')"
+                >
+                  <option [ngValue]="null" selected>Select</option>
+                  <option *ngFor="let item of projectData" [value]="item.projectName">{{ item.projectName }}</option>
+                </select>
+                <span
+                  *ngIf="addClientRespondentForm.controls['ProjectName'].invalid && (addClientRespondentForm.controls['ProjectName'].dirty || addClientRespondentForm.controls['ProjectName'].touched)"
+                  class="text-danger"
+                >
+                  Please select a project
+                </span>
+              </div>
+              <div class="form-group">
+                <label for="exampleClientRespondent" class="required">Client Respondent <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="exampleClientRespondent"
+                  formControlName="clientRespondent"
+                />
+                <span
+                  *ngIf="addClientRespondentForm.controls['clientRespondent'].invalid && (addClientRespondentForm.controls['clientRespondent'].dirty || addClientRespondentForm.controls['clientRespondent'].touched)"
+                  class="text-danger"
+                >
+                  Please enter the client respondent
+                </span>
+              </div>
+            </div>
+            <div>
+              <div class="form-group">
+                <label for="exampleClientRespondentEmail" class="required">Client Respondent Email <span class="text-danger">*</span></label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="exampleClientRespondentEmail"
+                  formControlName="clientRespondentEmail"
+                />
+                <span
+                  *ngIf="addClientRespondentForm.controls['clientRespondentEmail'].invalid && (addClientRespondentForm.controls['clientRespondentEmail'].dirty || addClientRespondentForm.controls['clientRespondentEmail'].touched)"
+                  class="text-danger"
+                >
+                  <span *ngIf="addClientRespondentForm.controls['clientRespondentEmail'].errors?.required">
+                    Please enter the client respondent email 
+                  </span>
+                  <span *ngIf="addClientRespondentForm.controls['clientRespondentEmail'].errors?.email">
+                    Please enter a valid email
+                  </span>
+                </span>
+              </div>
+              <div class="form-group">
+                <label for="exampleClientRespondent" class="required">Customer Project name <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="CustomerProjectname"
+                  formControlName="CustomerProjectName"
+                />
+                <span
+                  *ngIf="addClientRespondentForm.controls['CustomerProjectName'].invalid && (addClientRespondentForm.controls['CustomerProjectName'].dirty || addClientRespondentForm.controls['CustomerProjectName'].touched)"
+                  class="text-danger"
+                >
+                  Please enter the Customer Project name
+                </span>
+              </div>
+              <div class="form-group">
+                <label for="exampleClientRespondent" class="required">Client Designation <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="ClientDesignation"
+                  formControlName="ClientDesignation"
+                />
+                <span
+                  *ngIf="addClientRespondentForm.controls['ClientDesignation'].invalid && (addClientRespondentForm.controls['ClientDesignation'].dirty || addClientRespondentForm.controls['ClientDesignation'].touched)"
+                  class="text-danger"
+                >
+                  Please enter the Client Designation
+                </span>
+              </div>
+              <div class="form-group">
+                <label for="managementLevelDropdown" class="required">Management Level<span class="text-danger">*</span></label>
+                <select
+                  class="form-select project-detail"
+                  formControlName="OperationalName"
+                  id="managementLevelDropdown"
+                  (change)="onSelectDropdown($event, 'Level')"
+                >
+                  <option [ngValue]="null" selected>Select</option>
+                  <option *ngFor="let item of MangerLevelList" [value]="item.level">{{ item.level }}</option>
+                </select>
+                <span
+                  *ngIf="addClientRespondentForm.controls['OperationalName'].invalid && (addClientRespondentForm.controls['OperationalName'].dirty || addClientRespondentForm.controls['OperationalName'].touched)"
+                  class="text-danger">
+                  Please select a management Level
+                </span>
+              </div>
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            (click)="AddClientRespondentDeatils()"           
+            style="margin-top: 17px; margin-left: 12px;background-color: #0D0357;width: 90px;float: right;">
+            {{ isUpdating ? 'Update' : 'Add' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

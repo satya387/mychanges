@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="add-edit-role-wrap adding-margin-to-table">
+    <app-back-button [routerPath]="'/roles'"></app-back-button>
+
+    <div class="add-edit-head">
+      <h1> <i class="ri-user-star-fill"></i> {{roleAction}} Role</h1>
+    </div>
+
+    <form class="common-form-field-box" [formGroup]="addRoleForm" novalidate>
+      <div class="my-4 col-lg-4 col-md-12 role-input">
+        <label for="forRoleName" class="form-label">Role Name</label> <span> *</span>
+        <input type="text" class="form-control" required id="forRoleName" placeholder="Enter Role Name"
+          [minlength]="minLength" [readonly]="roleAction === 'Edit ' && addRoleForm.controls['roleName'].value === designation"
+          formControlName="roleName">
+        <span
+          *ngIf="(addRoleForm.controls['roleName'].invalid && (addRoleForm.controls['roleName'].dirty || addRoleForm.controls['roleName'].touched))">
+          <span *ngIf="addRoleForm.controls['roleName'].errors.required"> Please enter role name </span>
+          <span *ngIf="addRoleForm.controls['roleName'].errors?.minlength"> Role name must be at least {{minLength}}
+            characters long </span>
+          <span *ngIf="addRoleForm.controls['roleName'].errors?.maxlength"> Role name cannot exceed {{maxLength}}
+            characters </span>
+
+        </span>
+      </div>
+
+      <div class="add-section-wrap p-2 p-md-4 ScrollStyle1">
+        <div class="inner-wrap-pad p-0 p-md-4">
+          <app-assign-control [autoCompleteList]="sectionList" [labelName]="'Sections'"
+            [selectedList]="selectedSectionList" [placeholderText]="placeHolderText"
+            (onSelectData)="onSelectItem($event)"></app-assign-control>
+          <p class="add-removetile">Do you want to Add/Remove tiles from the sections?<span class="click"
+              (click)="redirectTo()">Click
+              here</span></p>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="big-button-bottom">
+    <ul>
+      <li><button (click)="createRole()"
+          [disabled]="!addRoleForm.valid || selectedSectionList.length === 0">SAVE</button></li>
+      <li><button [routerLink]="'/roles'">CANCEL</button></li>
+    </ul>
+  </div>
+</div>

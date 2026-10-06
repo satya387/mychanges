@@ -1,0 +1,116 @@
+.filter-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;        /* space between Year & Month dropdown */
+    margin-bottom: 0px;
+    margin-top:40px;
+    margin-left: 35px;
+  }
+  
+  .filter-item {
+    display: flex;
+    align-items: center;
+  }
+  
+  .filter-label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .filter-dropdown {
+    font-size: 14px;
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 5px 10px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .filter-dropdown:hover,
+  .filter-dropdown:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Adjust to your layout needs */
+    background-color: #0D0357;
+    .cancel-button {
+        /* No need for float:right; in flexbox */
+        margin-left: auto; /* Push to the right side */
+    }
+    
+    .upload-text {
+        /* No need for float:left; in flexbox */
+        margin-right: 50px; /* Adjust the margin as needed */
+        color: white;
+        margin-top: 10px;
+    }
+    margin: 0;
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  
+  .cancel-button {
+    background-color: transparent;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    margin-right: 18px;
+  }
+  
+  .upload-text{
+    margin-left: 36px;
+    font-size: 23px; 
+    margin-top: 2px;
+  }
+  
+  .popup-container {
+    width: 600px !important;
+    margin-left: -24px;
+    margin-right: -24px;
+    margin-top: -24px;
+  }
+  
+  label {
+    font-weight: 600;
+    font-size: 15px;
+  }
+  
+  .mat-dialog-container {
+    overflow-x: hidden !important;
+    width: 600px !important;
+  }
+  .mat-dialog-container::-webkit-scrollbar-track-horizontal {
+  background-color: white; /* Set background color to white */
+  }
+  
+  .mat-dialog-container::-webkit-scrollbar-thumb-horizontal {
+  background-color: white; /* Set thumb color to white */
+  }
+  
+  .mat-dialog-container::-webkit-scrollbar-corner {
+  background-color: white; /* Set corner color to white */
+  }
+  
+  .validation-dialog-popup-container .mat-dialog-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    /* Fix dialog width styling */
+    width: auto !important;     
+    max-width: auto !important;
+  
+    border-radius: 8px;
+    padding: 20px;
+  }

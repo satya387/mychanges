@@ -1,0 +1,38 @@
+<form class="common-form-field-box" [formGroup]="assignControlForm">
+  <div class="selected-sec-add role-input">
+    <label for="forRoleNameSection" class="form-label"><strong>Add {{labelName}}</strong></label> <span> *</span>
+    <input type="text" class="form-control" id="forRoleNameSection" list="datalistOptions"
+      [placeholder]="placeholderText" formControlName="currentItem"
+      (change)="onSelectItem(assignControlForm.controls['currentItem'].value)" required>
+    <!-- <span>
+      <span
+        *ngIf="(assignControlForm.controls['currentItem'].invalid)"> -->
+    <span
+      *ngIf="assignControlForm.controls['currentItem'].invalid && selectedDataList?.length === 0  && (assignControlForm.controls['currentItem'].dirty || assignControlForm.controls['currentItem'].touched)">
+      Please Select {{labelName}} name
+    </span>
+    <span
+      *ngIf="!selectedObject && selectedDataList?.length > 0  && (assignControlForm.controls['currentItem'].dirty || assignControlForm.controls['currentItem'].touched)">
+      Please Select {{labelName}} name
+    </span>
+    <!-- </span>
+    </span> -->
+    <datalist id="datalistOptions">
+      <option [value]="list.name" *ngFor="let list of dataList">
+    </datalist>
+  </div>
+</form>
+<div class="selected-sec-wrap" *ngIf="selectedDataList?.length">
+  <label for="forRoleNameList" class="form-label"><strong>Selected {{labelName}}</strong></label>
+  <div class="role-list1">
+    <ul>
+      <li *ngFor="let item of selectedDataList;  let i = index">
+        <p>{{item.name}}<span (click)="removeItem(i, item)">x</span></p>
+        <p><span *ngIf="item.tilesCount > 0" class="tiles-assign"> {{item.tilesCount}} Tiles assigned </span></p>
+      </li>
+    </ul>
+  </div>
+</div>
+<div *ngIf="!selectedDataList?.length" class="mb-3 mt-3 tiles-assign">
+  No selected items!
+</div>

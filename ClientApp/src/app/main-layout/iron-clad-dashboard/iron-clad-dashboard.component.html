@@ -1,0 +1,174 @@
+<!-- Dashboard Page -->
+
+<div class="dashboard-container">
+ <!-- Search -->
+  <div class="search-filter-section">
+
+    <div class="search-box">
+
+      <span class="search-icon">⌕</span>
+<input
+  type="text"
+  placeholder="Ask or search anything"
+  [(ngModel)]="searchText"
+  (input)="onSearch()"
+/>
+      
+
+      <span class="close-icon" (click)="clearSearch()">✕</span>
+
+    </div>
+
+    <div class="top-actions" *ngIf="AccessTypeId === 1" >
+
+    <!-- *ngIf="AccessTypeId === 1"> -->
+
+      <!-- New Button -->
+      <button class="new-btn" (click)="AddContractPage()">
+        <span>New</span>
+      </button>
+
+    </div>
+
+  </div> 
+
+  <!-- Table -->
+   <div class="table-section">
+     <div *ngIf="loading" class="loading">Loading...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+<table *ngIf="!loading" class="styled-table">
+   <thead class="table-header-container">
+  <tr class="header-row" style="color: aliceblue;">
+    <th>Contract Id</th>
+    <th>CounterParty Name</th>  
+    <th>Document Type</th>  
+    <!-- <th>Start Date</th>
+    <th>End Date</th>
+    <th>Mail</th> -->
+    <th>Entity</th>
+    <th>Account</th>
+    <th>Project</th>
+    <th>Stage</th>
+    <th>Status</th>
+    <th class="action-col">Actions</th>
+  </tr>
+</thead>
+    <tbody>
+    <tr *ngFor="let item of records;let i = index" >
+   
+<td class="bold id-column" (click)="goToDetails(item)">
+  <span
+    (click)="goToDetails(item)"
+    style="cursor:pointer;text-decoration:underline;"
+    [title]="item.displayId">
+    {{ item.displayId || '-' }}
+  </span>
+</td>
+<td><span class="ellipsis-cell"
+        [attr.title]="item.contractName || item.ContractName"  (click)="goToDetails(item)">{{ item.contractName || item.ContractName || '-' }}</span></td>
+        <td>{{item.documentName || '-'}}</td>
+    <td class="d-none">{{ (item.startDate || item.StartDate) | date:'shortDate' }}</td>
+    <td class="d-none">{{ (item.endDate || item.EndDate) | date:'shortDate' }}</td>
+    <td class="ellipsis d-none">{{ item.groupMailId || '-' }}</td>
+    <td><span class="ellipsis-cell"
+        [attr.title]="item.entityName || getEntityName(item.entityId)">
+    {{ item.entityName || getEntityName(item.entityId) }}
+  </span> </td>
+
+<td><span class="ellipsis-cell"
+        [attr.title]="item.accountName || getAccountName(item.accountId)">
+    {{ item.accountName || getAccountName(item.accountId) }}
+  </span></td>
+ <td>
+  <span class="ellipsis-cell"
+        [attr.title]="item.projectName || getProjectName(item.projectId)">
+        {{ item.projectName || '-' }}
+  </span>
+</td>
+  <td>{{item.contractStatusName || '-'}}</td>
+  <td>
+      <span class="status"
+            [ngClass]="item?.isActive ? 'active' : 'closed'">
+        {{ item?.isActive ? 'Active' : 'Closed' }}
+      </span>
+    </td>
+ <td class="actions">
+  <div class="action-wrapper">
+    <button class="dots-btn" (click)="toggleMenu(item.contractId)">
+      ⋮
+    </button>
+    <div class="action-menu" *ngIf="activeMenuId === item.contractId">
+      <button class="menu-item edit"(click)="goToDetails(item)">
+        <span>✏️</span>
+        </button>
+<button
+  *ngIf="canShowDelete(item) && (item?.isCreator)"
+  class="menu-item delete"
+  (click)="openDelete(item)">
+  <span style="font-size: 25px; color: orange;">🗑</span>
+</button>
+<!-- <button class="menu-item delete" (click)="openDelete(item)">
+  <span style="font-size: 25px; color: orange;">🗑</span>
+</button> -->
+    </div>
+  </div>
+</td> 
+  </tr>
+
+  <!-- ✅ If NO DATA -->
+  <tr *ngIf="records.length === 0">
+    <td colspan="16" style="text-align:center; padding: 20px; color:#888;">
+      No records found
+    </td>
+  </tr>
+
+</tbody>
+
+  </table>
+ <button
+  (click)="previousPage()"
+  [disabled]="pageNumber === 1">
+  Previous
+</button>
+
+<span>
+  Page {{ pageNumber }} of {{ totalPages }}
+</span>
+
+<button
+  (click)="nextPage()"
+  [disabled]="pageNumber >= totalPages">
+  Next
+</button>
+</div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- Modal Content Template -->
+<!-- ========================================= -->
+<div class="custom-modal-backdrop"
+     *ngIf="showDeleteModal"
+     (click)="cancelDelete()">
+
+  <div class="custom-modal"
+       (click)="$event.stopPropagation()">
+
+    <div class="modal-header">
+      <span>Confirm Delete</span>
+      <span class="close-btn" (click)="cancelDelete()">✕</span>
+    </div>
+
+    <div class="modal-body">
+      Are you sure you want to delete
+      <b>{{ selectedItem?.displayId || selectedItem?.contractId || selectedItem?.ContractId }}</b>?
+    </div>
+
+    <div class="modal-footer">
+      <button class="cancel-btn" (click)="cancelDelete()">Cancel</button>
+      <button class="delete-btn" (click)="confirmDelete()">Delete</button>
+    </div>
+
+  </div>
+</div>

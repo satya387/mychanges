@@ -1,0 +1,172 @@
+
+
+<div *ngIf="treeData" class="bordered-container">
+
+  <div *ngIf="treeData">
+  
+  <!-- Over all level Segment Dashboard Data -->
+    <!-- <p-treeTable class="segment-table" [value]="overAllData" [columns]="[]" [scrollable]=true scrollHeight="50vh"
+      [tableStyle]="{'min-width': '70rem'}" styleClass="p-treetable-gridlines"> -->
+      <!-- Define the column headers -->
+      <!-- <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th rowspan="3">Category</th>
+          <th rowspan="3">Customer</th>
+          <th rowspan="3">Project</th> -->
+          <!-- <ng-container *ngFor="let bu of buGroups">
+            <th [attr.colspan]="bu.colspan">{{ bu.name }}</th>
+          </ng-container> -->
+          <!-- <th rowspan="3">Org Total</th>
+        </tr> -->
+        <!-- <tr>
+          <ng-container *ngFor="let bu of buGroups">
+            <ng-container *ngFor="let segment of bu.segments">
+              <th [attr.colspan]="segment.qtrs.length">{{ segment.name }}</th>
+            </ng-container>
+          </ng-container>
+        </tr>
+        <tr>
+          <ng-container *ngFor="let bu of buGroups">
+            <ng-container *ngFor="let segment of bu.segments">
+              <ng-container *ngFor="let q of segment.qtrs">
+                <th>Q{{ q }}</th>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </tr> -->
+      <!-- </ng-template> -->
+      
+ 
+      <!-- Define the rows -->
+      <!-- <ng-template pTemplate="body" let-rowNode let-rowData="rowData"> -->
+        <!-- <tr *ngIf="rowNode">
+          <td>{{ rowNode.label }}</td>
+          <td *ngIf="rowNode.children"></td>
+          <td *ngIf="rowNode.children?.[0]?.children"></td>
+          <ng-container *ngIf="rowNode.data">
+            <ng-container *ngFor="let col of flatColumns">
+              <td>
+                {{ rowNode.data.columns.find(c =>
+                  c.bU_Desc === col.bU_Desc &&
+                  c.segment === col.segment &&
+                  c.qtr === col.qtr)?.value || 0 }}
+              </td>
+            </ng-container>
+            <td>{{ rowNode.data.orgTotal }}</td>
+          </ng-container>
+        </tr> -->
+        <!-- <tr [ttRow]="rowNode"> 
+          <td>
+            <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+            {{ rowData.categoryName || '' }}
+          </td>
+          <td>{{ rowData.customerName || '' }}</td>
+          <td>{{ rowData.projectName || '' }}</td>
+          <td>{{ rowData.employeeName || '' }}</td> 
+          <ng-container *ngIf="quarterlyChecked; else monthlyData">
+            <td>{{ rowData.q1 | number:'1.2-2' }}</td>
+            <td>{{ rowData.q2 | number:'1.2-2' }}</td>
+            <td>{{ rowData.q3 | number:'1.2-2' }}</td>
+            <td>{{ rowData.q4 | number:'1.2-2' }}</td>
+          </ng-container>
+    
+          <ng-template #monthlyData>
+            <td>{{ rowData.jan | number:'1.2-2' }}</td>
+            <td>{{ rowData.feb | number:'1.2-2' }}</td>
+            <td>{{ rowData.mar | number:'1.2-2' }}</td>
+            <td>{{ rowData.apr | number:'1.2-2' }}</td>
+            <td>{{ rowData.may | number:'1.2-2' }}</td>
+            <td>{{ rowData.jun | number:'1.2-2' }}</td>
+            <td>{{ rowData.jul | number:'1.2-2' }}</td>
+            <td>{{ rowData.aug | number:'1.2-2' }}</td>
+            <td>{{ rowData.sep | number:'1.2-2' }}</td>
+            <td>{{ rowData.oct | number:'1.2-2' }}</td>
+            <td>{{ rowData.nov | number:'1.2-2' }}</td>
+            <td>{{ rowData.dec | number:'1.2-2' }}</td>
+          </ng-template>
+        </tr> 
+       </ng-template> 
+  
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="8" style="text-align: center; color: #888;">
+            No data to display
+          </td>
+        </tr>
+      </ng-template>
+    </p-treeTable> -->
+
+    <p-treeTable [value]="treeData" [columns]="pivotColumns" tableStyleClass="p-datatable-sm">
+      <!-- Hierarchical Row Template -->
+      <ng-template *ngIf="buGroups; else noBuGroups" pTemplate="header" let-columns>
+        <tr>
+          <th rowspan="3">Category</th>
+          <th rowspan="3">Customer</th>
+          <th rowspan="3">Project Name</th>
+    
+          <ng-container *ngFor="let bu of buGroups">
+            <th [attr.colspan]="getBUColSpan(bu)">{{ bu.name }}</th>
+          </ng-container>
+    
+          <th rowspan="3">Org Total</th>
+        </tr>
+    
+        <!-- Segment Headers -->
+        <!-- <tr>
+          <ng-container *ngFor="let segment of buSegments">
+            <th [attr.colspan]="getSegmentColSpan(segment)">{{ segment.name }}</th>
+          </ng-container>
+        </tr> -->
+    
+        <!-- Quarter Headers -->
+        <tr>
+          <ng-container *ngFor="let col of pivotColumns">
+            <th>{{ col.header }}</th>
+          </ng-container>
+        </tr>
+      </ng-template>
+      <ng-template #noBuGroups>
+        <tr>
+          <th rowspan="3">Category</th>
+          <th rowspan="3">Customer</th>
+          <th rowspan="3">Project Name</th>
+          <th rowspan="3">Org Total</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowNode let-columns="columns">
+        <!-- <pre>{{ rowNode | json }}</pre> -->
+        <!-- <pre>{{ rowNode.node | json }}</pre> -->
+        <tr>
+          <td>
+            <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+            {{ getCategory(rowNode) }}
+          </td>
+          <td>
+            {{ getCustomer(rowNode)  }}
+          </td>
+          <td>
+            {{ getProject(rowNode) }}
+          </td>
+        
+          <ng-container *ngFor="let col of columns">
+            <td>{{ getBUValue(rowNode, col.field) }}</td>
+          </ng-container>
+        
+          <td>{{ getOrgTotal(rowNode) }}</td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="4" style="text-align: center; color: #888;">
+            No data to display
+          </td>
+        </tr>
+      </ng-template>
+    </p-treeTable>
+    
+  </div>
+  </div>
+  
+
+  

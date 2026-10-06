@@ -1,0 +1,244 @@
+<div class="container">
+    <div class="back-button" title="Back" data-toggle="tooltip">
+      <span (click)="goBack()">
+        <svg width="35px" height="35px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink" fill="#0fe4bd" stroke="#0fe4bd" stroke-width="0.6719999999999999">
+          <g id="SVGRepo_bgCarrier" stroke-width="0" />
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+          <g id="SVGRepo_iconCarrier">
+            <g id="icomoon-ignore"></g>
+            <path
+              d="M14.389 7.956v4.374l1.056 0.010c7.335 0.071 11.466 3.333 12.543 9.944-4.029-4.661-8.675-4.663-12.532-4.664h-1.067v4.337l-9.884-7.001 9.884-7zM15.456 5.893l-12.795 9.063 12.795 9.063v-5.332c5.121 0.002 9.869 0.26 13.884 7.42 0-4.547-0.751-14.706-13.884-14.833v-5.381z"
+              fill="#0fe4bd"></path>
+          </g>
+        </svg>
+      </span>
+    </div>
+    <div class="parent-container">
+
+        <div class="filter-group">
+            <label for="account-Name-Filter">Account Name</label>
+            <ng-select id="account-Name-Filter" class="filter-field" [(ngModel)]="selectedAccountName" (change)="onAccountNameChange()" (clear)="onAccountNameChange()"
+                [items]="distinctAccountNames" bindLabel="label" placeholder="Select an Account Name" [searchable]="true" [clearable]="true"
+                [virtualScroll]="true" [title]="selectedAccountName ? selectedAccountName : 'Select an Account Name'">
+            </ng-select>
+        </div>
+    
+        <div class="filter-group">
+            <label for="project-Name-Filter">Project Name</label>
+            <ng-select id="project-Name-Filter" class="filter-field" [(ngModel)]="selectedProjectName" (change)="onProjectNameChange()" (clear)="onProjectNameChange()"
+                [items]="filteredProjectNames" bindLabel="label" placeholder="Select a Project Name" [searchable]="true" [clearable]="true"
+                [disabled]="!selectedAccountName" [virtualScroll]="true"
+                [title]="selectedProjectName ? selectedProjectName : 'Select a Project Name'">
+            </ng-select>
+        </div>
+    
+        <div class="filter-group">
+            <label for="year-Name-Filter">Year</label>
+            <ng-select id="year-Name-Filter" class="filter-field" [(ngModel)]="selectedIncentiveYear" (change)="onIncentiveYearChange()" (clear)="onIncentiveYearChange()"
+                [items]="filteredIncentiveYears" bindLabel="label" placeholder="Select a Year Name" [searchable]="true" [clearable]="true"
+                [disabled]="!selectedProjectName" [virtualScroll]="true"
+                [title]="selectedIncentiveYear ? selectedIncentiveYear : 'Select a Year'">
+            </ng-select>
+        </div>
+    
+        <div class="filter-group">
+            <label for="month-Name-Filter">Month</label>
+            <ng-select id="month-Name-Filter" class="filter-field" [(ngModel)]="selectedIncentiveMonth" (change)="onIncentiveMonthChange()" (clear)="onIncentiveMonthChange()"
+                [items]="filteredIncentiveMonths" bindLabel="label" placeholder="Select a Month Name" [searchable]="true" [clearable]="true"
+                [disabled]="!selectedIncentiveYear" [virtualScroll]="true"
+                [title]="selectedIncentiveMonth ? selectedIncentiveMonth : 'Select a Month'">
+            </ng-select>
+        </div>
+
+        <div class="filter-group">
+            <button mat-icon-button (click)="clearFilters()" title="Clear Filter"
+                style="min-width: 0px !important; padding: 2px 8px !important;">
+                <svg fill="#0d0359" viewBox="0 0 32 32" id="icon" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M22.5,9A7.4522,7.4522,0,0,0,16,12.792V8H14v8h8V14H17.6167A5.4941,5.4941,0,1,1,22.5,22H22v2h.5a7.5,7.5,0,0,0,0-15Z">
+                    </path>
+                    <path
+                        d="M26,6H4V9.171l7.4142,7.4143L12,17.171V26h4V24h2v2a2,2,0,0,1-2,2H12a2,2,0,0,1-2-2V18L2.5858,10.5853A2,2,0,0,1,2,9.171V6A2,2,0,0,1,4,4H26Z">
+                    </path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- <mat-form-field class="filter-field">
+            <mat-label>Account Name</mat-label>
+            <mat-select class="client-data-filter" [(ngModel)]="selectedAccountName" (ngModelChange)="onAccountNameChange()"
+                placeholder="Select Account Name">
+                <mat-option *ngFor="let account of distinctAccountNames" [value]="account">{{ account }}</mat-option>
+            </mat-select>
+        </mat-form-field> -->
+        <!-- &nbsp; &nbsp;
+    
+        <mat-form-field class="filter-field">
+            <mat-label>Project Name</mat-label>
+            <mat-select class="client-data-filter" [(ngModel)]="selectedProjectName" (ngModelChange)="onProjectNameChange()"
+                [disabled]="!selectedAccountName" placeholder="Select Project Name">
+                <mat-option *ngFor="let project of filteredProjectNames" [value]="project">{{ project }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        &nbsp; &nbsp;
+    
+        <mat-form-field class="filter-field">
+            <mat-label>Year</mat-label>
+            <mat-select class="client-data-filter" [(ngModel)]="selectedIncentiveYear" (ngModelChange)="onIncentiveYearChange()"
+                [disabled]="!selectedProjectName" placeholder="Select Year">
+                <mat-option *ngFor="let year of filteredIncentiveYears" [value]="year">{{ year }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        &nbsp; &nbsp;
+    
+        <mat-form-field class="filter-field">
+            <mat-label>Month</mat-label>
+            <mat-select class="client-data-filter" [(ngModel)]="selectedIncentiveMonth" (ngModelChange)="onIncentiveMonthChange()"
+                [disabled]="!selectedIncentiveYear" placeholder="Select Month">
+                <mat-option *ngFor="let month of filteredIncentiveMonths" [value]="month">{{ month }}</mat-option>
+            </mat-select>
+        </mat-form-field> -->
+
+        <!-- <button mat-icon-button (click)="clearFilters()" title="Clear Filter" style="min-width: 0px !important; padding: 0px 10px !important;">
+            <svg fill="#0d0359" viewBox="0 0 32 32" id="icon" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <defs>
+                        <style>
+                            .cls-1 {
+                                fill: none;
+                            }
+                        </style>
+                    </defs>
+                    <path
+                        d="M22.5,9A7.4522,7.4522,0,0,0,16,12.792V8H14v8h8V14H17.6167A5.4941,5.4941,0,1,1,22.5,22H22v2h.5a7.5,7.5,0,0,0,0-15Z">
+                    </path>
+                    <path
+                        d="M26,6H4V9.171l7.4142,7.4143L12,17.171V26h4V24h2v2a2,2,0,0,1-2,2H12a2,2,0,0,1-2-2V18L2.5858,10.5853A2,2,0,0,1,2,9.171V6A2,2,0,0,1,4,4H26Z">
+                    </path>
+                    <rect id="_Transparent_Rectangle_" data-name="<Transparent Rectangle>" class="cls-1" width="32" height="32">
+                    </rect>
+                </g>
+            </svg>
+        </button> -->
+        
+    </div>
+</div>
+
+<div class="commission-report-container mat-elevation-z8">
+    
+
+    <table class="commission-report" mat-table [dataSource]="dataSource">
+
+        <!-- Client Partner Column -->
+        <ng-container matColumnDef="clientPartner">
+            <th mat-header-cell *matHeaderCellDef> Client Partner </th>
+            <td mat-cell *matCellDef="let element"> {{element.clientPartner}} </td>
+        </ng-container>
+
+        <!-- Account Name Column -->
+        <ng-container matColumnDef="accountName">
+            <th mat-header-cell *matHeaderCellDef> Account Name </th>
+            <td mat-cell *matCellDef="let element" class="overme"> {{element.accountName}} </td>
+        </ng-container>
+
+        <!-- Project Name Column -->
+        <ng-container matColumnDef="projectName">
+            <th mat-header-cell *matHeaderCellDef> Project Name </th>
+            <td mat-cell *matCellDef="let element" class="overme"> {{element.projectName}} </td>
+        </ng-container>
+
+        <!-- Account Type Column -->
+        <ng-container matColumnDef="accountType">
+            <th mat-header-cell *matHeaderCellDef> Account Type </th>
+            <td mat-cell *matCellDef="let element"> {{element.accountType}} </td>
+        </ng-container>
+
+        <!-- Type Column -->
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef> Type </th>
+            <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+        </ng-container>
+
+
+        <!-- Year Column -->
+        <ng-container matColumnDef="incentiveYear">
+            <th mat-header-cell *matHeaderCellDef> Year </th>
+            <td mat-cell *matCellDef="let element"> {{element.incentiveYear}} </td>
+        </ng-container>
+
+        <!-- Month Column -->
+        <ng-container matColumnDef="incentiveMonth">
+            <th mat-header-cell *matHeaderCellDef> Month </th>
+            <td mat-cell *matCellDef="let element"> {{element.incentiveMonth}} </td>
+        </ng-container>
+
+        <!-- Billed Column -->
+        <ng-container matColumnDef="billed">
+            <th mat-header-cell *matHeaderCellDef> Billed ($) </th>
+            <td mat-cell *matCellDef="let element" class="mat-cell-right-align"> {{convertToUSFormat(element.billed)}} </td>
+        </ng-container>
+
+        <!-- collected Column -->
+        <ng-container matColumnDef="collected">
+            <th mat-header-cell *matHeaderCellDef> Collected ($) </th>
+            <td mat-cell *matCellDef="let element" class="mat-cell-right-align"> {{convertToUSFormat(element.collected)}} </td>
+        </ng-container>
+
+        <!-- Incentive Earned Column -->
+        <ng-container matColumnDef="incentiveEarned">
+            <th mat-header-cell *matHeaderCellDef> Incentive Earned ($) </th>
+            <td mat-cell *matCellDef="let element" class="mat-cell-right-align"> {{convertToUSFormat(element.incentiveEarned)}} </td>
+        </ng-container>
+
+        <!-- Applicable Percentage Column -->
+        <ng-container matColumnDef="applicablePercentage">
+            <th mat-header-cell *matHeaderCellDef> Applicable % </th>
+            <td mat-cell *matCellDef="let element" class="small-row-width"> {{element.applicablePercentage}} </td>
+        </ng-container>
+
+        <!-- Incentive Percentage As Per Policy Column -->
+        <ng-container matColumnDef="incentivePercentageAsPerPolicy">
+            <th mat-header-cell *matHeaderCellDef> % As Per Policy </th>
+            <td mat-cell *matCellDef="let element" class="small-row-width">
+                 <input matInput type="number" [(ngModel)]="element.incentivePercentageAsPerPolicy" step="0.01" min="0"  
+                 (input)="onPercentageChange($event)" /> 
+            </td>
+        </ng-container>
+
+        <!-- Comments Column -->
+        <ng-container matColumnDef="comments">
+            <th mat-header-cell *matHeaderCellDef> Comments </th>
+            <td mat-cell *matCellDef="let element">
+                <textarea matInput [(ngModel)]="element.comments" rows="1" cols="20" > </textarea>
+            </td>
+        </ng-container>
+
+
+        <!-- Edit Column -->
+        <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td mat-cell *matCellDef="let element" class="action-column-width"> 
+                <button mat-icon-button id="save-btn-{{element.incentiveEarnedId}}"  (click)="saveChanges(element.incentiveEarnedId)" title="Save" style="min-width: 0px !important; padding: 0px 10px !important;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0d0359" class="bi bi-floppy" viewBox="0 0 16 16">
+                        <path d="M11 2H9v3h2z"/>
+                        <path d="M1.5 0h11.586a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 14.5v-13A1.5 1.5 0 0 1 1.5 0M1 1.5v13a.5.5 0 0 0 .5.5H2v-4.5A1.5 1.5 0 0 1 3.5 9h9a1.5 1.5 0 0 1 1.5 1.5V15h.5a.5.5 0 0 0 .5-.5V2.914a.5.5 0 0 0-.146-.353l-1.415-1.415A.5.5 0 0 0 13.086 1H13v4.5A1.5 1.5 0 0 1 11.5 7h-7A1.5 1.5 0 0 1 3 5.5V1H1.5a.5.5 0 0 0-.5.5m3 4a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5V1H4zM3 15h10v-4.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5z"/>
+                      </svg>
+                </button>
+                <button mat-icon-button id="cancel-btn-{{element.incentiveEarnedId}}" (click)="cancelChanges(element.incentiveEarnedId)" title="Cancel" style="min-width: 0px !important; padding: 0px 6px !important;">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 24 24" fill="red">
+                        <path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95 1.414-1.414L12 10.586z"/>
+                      </svg>
+                </button> 
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" ></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [length]="dataSource.data.length" [pageSize]="10" [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons aria-label="Select page of dataSource">
+    </mat-paginator>
+</div>

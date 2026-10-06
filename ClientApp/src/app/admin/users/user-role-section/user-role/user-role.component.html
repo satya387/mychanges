@@ -1,0 +1,19 @@
+<div class="add-section-wrap p-2">
+  <div class="inner-wrap-pad p-0 p-md-4">
+
+    <app-assign-control [autoCompleteList]="rolesList" [labelName]="'Roles'" [selectedList]="selectedRolesList"
+      [placeholderText]="rolePlaceHolderText" (onSelectData)="onSelectItem($event)"></app-assign-control>
+
+    <div class="last-text-click">
+      <p>Do you want to Add/Remove Sections from Roles?<span class="click" (click)="redirectTo()">Click
+          here</span></p>
+    </div>
+
+    <div class="big-button-bottom">
+      <ul>
+        <li><button [disabled]="!isRoleSelected && selectedRolesList?.length === 0" (click)="saveRole()">SAVE</button></li>
+        <li><button [routerLink]="'/users'">CANCEL</button></li>
+      </ul>
+    </div>
+  </div>
+</div>

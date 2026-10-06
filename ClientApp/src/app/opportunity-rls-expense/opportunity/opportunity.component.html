@@ -1,0 +1,277 @@
+<div class="opportunity-section">
+  <div class="row opportunityWisebusiness" *ngIf="selectedOpportunity">
+    <div class="col-md-3 widget">
+      <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+          <path
+            d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zm1 17v2h-2v-2a4 4 0 0 1-3-3.87h2a2 2 0 0 0 2 2v-3h-1a4 4 0 0 1 0-8V3h2v2a4 4 0 0 1 3 3.87h-2a2 2 0 0 0-2-2v3h1a4 4 0 0 1 0 8z" />
+        </svg>
+      </div>
+      <div class="widget-content-twoinone">
+        <div>
+          <strong>Revenue:</strong> ${{ opportunityWiseBusiness.revenue }}
+        </div>
+        <div *ngIf="isDiscountAvailable"><strong>Discounted Revenue:</strong>
+          ${{ opportunityWiseBusiness.discountedRevenue }}</div>
+      </div>
+    </div>
+
+    <div class="col-md-3 widget">
+      <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+          <path
+            d="M21 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H1v14h22V7h-2zM5 5h14v2H5V5zm16 14H3V9h18v10zm-4-4h2v2h-2v-2z" />
+        </svg>
+      </div>
+      <div class="widget-content">
+        <strong>Expense:</strong> ${{ opportunityWiseBusiness.expense }}
+      </div>
+    </div>
+
+    <div class="col-md-3 widget">
+      <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+          <path
+            d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 14h-3v-3h3v3zm0-5h-3V9h3v3zm-5 5H9v-5h3v5zm0-7H9V9h3v3zm-5 7H5v-9h3v9z" />
+        </svg>
+      </div>
+      <div class="widget-content-twoinone">
+        <div>
+          <strong>Margin:</strong> ${{ opportunityWiseBusiness.margin }}
+        </div>
+        <div *ngIf="isDiscountAvailable"><strong>Discounted Margin:</strong>
+          ${{ opportunityWiseBusiness.discountedMargin }}</div>
+      </div>
+    </div>
+
+    <div class="col-md-3 widget">
+      <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+          <path
+            d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 14h-3v-3h3v3zm0-5h-3V9h3v3zm-5 5H9v-5h3v5zm0-7H9V9h3v3zm-5 7H5v-9h3v9z" />
+        </svg>
+      </div>
+      <div class="widget-content-twoinone">
+        <div>
+          <strong>Margin%:</strong> {{ opportunityWiseBusiness.marginPercentage }}
+        </div>
+        <div *ngIf="isDiscountAvailable">
+          <strong>Discounted Margin%:</strong>
+          {{ opportunityWiseBusiness.discountedMarginPercentage }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="opportunity-header">
+    <h2>Opportunity</h2>
+    <!-- <div class="row opportunityWisebusiness" *ngIf="selectedOpportunity">
+    <div class="col-md-3"><strong>Revenue:</strong> ${{opportunityWiseBusiness.revenue}}</div>
+    <div class="col-md-3"><strong>Expense:</strong> ${{opportunityWiseBusiness.expense}}</div>
+    <div class="col-md-3"><strong>Margin:</strong> ${{opportunityWiseBusiness.margin}}</div>
+    <div class="col-md-3"><strong>Margin%:</strong> {{opportunityWiseBusiness.marginPercentage}}</div>
+  </div> -->
+  </div>
+  <div class="form-group inline-form-group">
+    <label for="opportunity"><b>Opportunity:</b></label>
+    <ng-select class="dropdown" [items]="opportunities" bindLabel="displayLabel" bindValue="id"
+      [(ngModel)]="selectedOpportunity" [searchable]="true" [compareWith]="compareOpportunities.bind(this)"
+      placeholder="Search Opportunity" (change)="onSelect($event)" [disabled]="isDisabled">
+      <ng-template ng-option-tmp let-item="item">
+        <span [title]="item.displayLabel">{{ item.displayLabel }}</span>
+      </ng-template>
+    </ng-select>
+
+    <label style="margin-left: 50px; width: 360px;" *ngIf="versionName != ''"><b>Version Name: </b> {{ versionName }}</label>
+<label style="margin-left: 50px;" *ngIf="versionName != ''">
+  <b>Ironclad Id: </b>
+
+  <ng-container>
+    <input
+      class="text"
+      type="text"
+      [(ngModel)]="opportunityData.ironcladId"
+      (ngModelChange)="updateIronclad($event)"
+    />
+  </ng-container>
+
+  <ng-template #readOnly>
+    {{ opportunityData?.ironcladId }}
+  </ng-template>
+</label>
+  </div>
+
+  <div *ngIf="selectedOpportunity" class="opportunity-data">
+    
+    <!-- Row 1 Starts-->
+    <div class="opportunity-row" title="{{ opportunityData.opportunityId }}">
+      <strong>Opportunity Id:</strong> {{ opportunityData.opportunityId }}
+    </div>
+
+    <div class="opportunity-row" title="{{ opportunityData.projectType }}">
+      <strong>Project Type:</strong> {{ opportunityData.projectType }}
+    </div>
+    
+    <div class="opportunity-row" title="{{ opportunityData.entity }}">
+      <strong>Entity:</strong> {{ opportunityData.entity }}
+    </div>
+
+    <div class="opportunity-row" title="{{ opportunityData.practice }}">
+      <strong>Practice:</strong> {{ opportunityData.practice }}
+    </div>
+
+    <!-- Row 1 Ends-->
+
+    <!-- Row 2 Starts-->
+
+    <div class="opportunity-row" title="{{ opportunityData.parentOpportunityId }}">
+      <strong>Parent Opportunity Id:</strong>
+      {{ opportunityData.parentOpportunityId }}
+    </div>
+
+    <div class="opportunity-row" title="{{ opportunityData.pricingMethodology }}">
+      <strong>Pricing Methodology:</strong>
+      {{ opportunityData.pricingMethodology }}
+    </div>
+    
+    <div class="opportunity-row" title="{{ opportunityData.thisYearACV }}">
+      <strong>This Year ACV:</strong>
+      {{ opportunityData.thisYearACV | number : "1.0-0" }}
+    </div>
+
+    <div class="opportunity-row" title="{{ opportunityData.nextYearACV }}">
+      <strong>Next Year ACV:</strong>
+      {{ opportunityData.nextYearACV | number : "1.0-0" }}
+    </div>
+
+    <!-- Row 2 Ends-->
+
+    <!-- Row 3 Starts-->
+
+    <div class="opportunity-row" title="{{ opportunityData.CP }}">
+      <strong>CP:</strong> {{ opportunityData.CP }}
+    </div>
+
+    <div class="opportunity-row" title="{{ opportunityData.projectStart | date : 'd-MMM-yyyy' | uppercase }}">
+      <strong>Project Start Date:</strong>
+      {{ opportunityData.projectStart | date: "d-MMM-yyyy" | uppercase }}
+    </div>
+
+    <div class="opportunity-row" title="{{ opportunityData.nextYearWACV }}">
+      <strong>Next Year WACV:</strong> {{ opportunityData.nextYearWACV }}
+    </div>
+    
+    <div class="opportunity-row" title="{{ opportunityData.revisedStartDate | date : 'd-MMM-yyyy' | uppercase }}">
+      <strong>Revised Start Date:</strong>
+      {{ opportunityData.revisedStartDate | date: "d-MMM-yyyy" | uppercase }}
+    </div>
+
+    <!-- Row 3 Ends-->
+
+    <!-- Row 4 Starts-->
+
+    <div class="opportunity-row" title="{{ opportunityData.BU }}">
+      <strong>BU:</strong> {{ opportunityData.BU }}
+    </div>
+
+    <div class="opportunity-row" title="{{ opportunityData.projectEnd | date : 'd-MMM-yyyy' | uppercase }}">
+      <strong>Project End Date:</strong>
+      {{ opportunityData.projectEnd | date: "d-MMM-yyyy" | uppercase }}
+    </div>
+
+    <div class="opportunity-row" title="{{ opportunityData.DP }}">
+      <strong>DH/DP:</strong> {{ opportunityData.DP }}
+    </div>
+    
+    <div class="opportunity-row" title="{{ opportunityData.opportunityStage }}">
+      <strong>Opportunity Stage:</strong> {{ opportunityData.opportunityStage }}
+    </div>
+
+    <!-- Row 4 Ends-->
+
+    <!-- Row 5 Starts-->
+
+    <div class="opportunity-row" title="{{ opportunityData.clientName }}">
+      <strong>Client Name:</strong> {{ opportunityData.clientName }}
+    </div>
+
+    <div class="opportunity-row" title="{{ opportunityData.termInMonths }}">
+      <strong>Term in Months:</strong> {{ opportunityData.termInMonths }}
+    </div>
+    
+    <div class="opportunity-row" title="{{ opportunityData.thisYearWacv }}">
+      <strong>This Year WACV:</strong>
+      {{ opportunityData.thisYearWacv | number : "1.0-0" }}
+    </div>
+    
+    <div class="opportunity-row" title="{{ opportunityData.amountTCV }}">
+      <strong>Amount TCV:</strong>
+      {{ opportunityData.amountTCV | number : "1.0-0" }}
+    </div>
+
+    <!-- Row 5 Ends-->
+
+    <!-- Row 6 Starts-->
+
+    <div class="opportunity-row" title="{{ opportunityData.projectName }}">
+      <strong>Project Name:</strong> {{ opportunityData.projectName }}
+    </div>
+    
+    <div class="opportunity-row" title="{{ opportunityData.creditRating }}">
+      <strong>Credit Rating:</strong> {{ opportunityData.creditRating }}
+    </div>
+
+    <div class="opportunity-row" title="{{ opportunityData.revisedTCV }}">
+      <strong>Revised TCV:</strong>
+      {{ opportunityData.revisedTCV | number : "1.0-0" }}
+    </div>
+
+    <div class="opportunity-row" title="{{ opportunityData.probability }}">
+      <strong>Probability:</strong> {{ opportunityData.probability }}
+    </div>
+
+    <!-- Row 6 Ends-->
+
+    <!-- Row 7 Starts-->
+
+    <div class="opportunity-row" title="{{ opportunityData.engagementType }}">
+      <strong>Engagement Type:</strong> {{ opportunityData.engagementType }}
+    </div>
+    
+    <div class="opportunity-row" title="{{ opportunityData.confidenceLevel }}">
+      <strong>Confidence Level:</strong> {{ opportunityData.confidenceLevel }}
+    </div>
+
+    <div class="opportunity-row" title="{{ isDisabled == true ? (opportunityData.IsBillable ? 'No' : 'Yes') : '' }}">
+      <strong>Has Non-Billable:</strong> {{ isDisabled == true  ? (opportunityData.IsBillable ? 'No' : 'Yes') : '' }}
+    </div>
+
+    <div class="opportunity-row" title="{{ isDisabled == true ? (opportunityData.IsPartialAllocation ? 'Yes' : 'No') : '' }}">
+      <strong>Has Partial Allocation:</strong> {{ isDisabled == true ? (opportunityData.IsPartialAllocation ? 'Yes' : 'No') : '' }}
+    </div>
+    
+    <!-- Row 7 Ends-->
+
+    <!-- <div class="opportunity-row discount"><label>
+    
+      <strong> Click here to apply discount</strong>
+      <a class="openDiscountModal" (click)="openDiscountModal()">
+        <svg fill="#0d0357" width="18px" height="18px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+          <g id="SVGRepo_iconCarrier"> <title>popout</title> <path d="M15.694 13.541l2.666 2.665 5.016-5.017 2.59 2.59 0.004-7.734-7.785-0.046 2.526 2.525-5.017 5.017zM25.926 16.945l-1.92-1.947 0.035 9.007-16.015 0.009 0.016-15.973 8.958-0.040-2-2h-7c-1.104 0-2 0.896-2 2v16c0 1.104 0.896 2 2 2h16c1.104 0 2-0.896 2-2l-0.074-7.056z"/> </g>
+          </svg>
+      </a>
+      
+    </label>
+    </div> -->
+
+    <!-- <div class="opportunity-row" title="{{ opportunityData.DPMailId }}"><strong>DP MailId:</strong> {{ opportunityData.DPMailId }}</div>
+    <div class="opportunity-row" title="{{ opportunityData.CPMailId }}"><strong>CP MailId:</strong> {{ opportunityData.CPMailId }}</div> -->
+
+    <!-- <div class="opportunity-row"><strong>Client FY'22 Plan Margin:</strong> {{ opportunityData.clientMarginPlan }}</div> -->
+
+    <!-- <div class="opportunity-row"><strong>Status:</strong> {{ opportunityData.status == 2? 'Submitted':
+      opportunityData.status ==3? 'Approved': opportunityData.status ==4? 'Rejected' : 'Draft' }}</div> -->
+  </div>
+</div>

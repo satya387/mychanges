@@ -1,0 +1,224 @@
+<div class="container-fluid edit-rr-desktop1" style="margin-top:20px; padding-bottom: 20px;">
+    <!-- <app-back-button [routerPath]="'/purchase-order'"></app-back-button> -->
+  
+    <div class="add-edit-role-wrap adding-margin-to-table" style="margin-top:-40px;">
+      <span class="steps d-block d-md-none d-flex justify-content-end">Step 1/3</span>
+      <div class="add-edit-head">
+        <h3 style="margin-top:36px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="5" fill="currentColor" class="bi bi-stack"
+               viewBox="0 0 16 16">
+            <path d="m14.12 10.163 1.715.858c.22.11.22.424 0 .534L8.267 15.34a.598.598 0 0 1-.534 0L.165 11.555a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.66zM7.733.063a.598.598 0 0 1 .534 0l7.568 3.784a.3.3 0 0 1 0 .535L8.267 8.165a.598.598 0 0 1-.534 0L.165 4.382a.299.299 0 0 1 0-.535L7.733.063z" />
+            <path d="m14.12 6.576 1.715.858c.22.11.22.424 0 .534l-7.568 3.784a.598.598 0 0 1-.534 0L.165 7.968a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.659z" />
+          </svg>
+          {{ isAddMode ? 'Add Asset' : 'Edit Asset' }}
+        </h3>
+  
+      </div>
+    </div>
+    <form [formGroup]="assetForm" (keydown.enter)="$event.preventDefault()" (ngSubmit)="onSave()">
+      <!-- <app-employee-dropdown [employeeNameControl]="assetForm.get('employeeName')"></app-employee-dropdown> -->
+      <div class="container-fluid edit-rr-desktop" style="margin-top: -22px;">
+          <div class="row role-input1" style="margin-left: 57px;">
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+              <label for="employeeName" class="form-label main-heading">Employee Name</label><span> *</span>
+             
+                <input type="text" 
+                       matInput 
+                       placeholder="Employee Name" 
+                       class="form-control"
+                       [formControl]="employeeNameControl" 
+                       [matAutocomplete]="auto" 
+                       (focus)="onFocus()">
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onEmployeeSelect($event.option.value)">
+                  <mat-option *ngFor="let employee of employeeList" [value]="employee">
+                    {{ employee.value }}
+                  </mat-option>
+                </mat-autocomplete>
+              
+              <div *ngIf="isLoading" class="isLoading">Loading...</div>
+              <span *ngIf="assetForm.controls['employeeName'].invalid && (assetForm.controls['employeeName'].touched)">
+                <span *ngIf="assetForm.controls['employeeName'].errors?.required" class="text-danger">
+                  Please enter Employee name
+                </span>
+                <span *ngIf="assetForm.controls['employeeName'].errors?.pattern" class="text-danger">
+                  Employee name cannot be empty or just spaces
+                </span>
+              </span>
+              
+            </div>
+            
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+              <label for="employeeId" class="form-label main-heading">Employee Id </label><span> *</span>
+              <input id="employeeId" 
+              formControlName="employeeId" 
+              type="text" 
+             class="form-control" 
+             placeholder="Employee Id" 
+             readonly
+             />
+             <span *ngIf="assetForm.controls['employeeId'].invalid && (assetForm.controls['employeeId'].touched)">
+              <span *ngIf="assetForm.controls['employeeId'].errors?.required" class="text-danger">
+                Please enter Type
+              </span>
+              <span *ngIf="assetForm.controls['employeeId'].errors?.pattern" class="text-danger">
+                Type cannot be empty or just spaces
+              </span>
+            </span>
+         
+            </div>
+            <div *ngIf="!isAddMode" class="my-2 col-lg-3 col-md-3 col-3 role-input">
+              <label for="deviceType" class="form-label main-heading">Device Type</label><span> *</span>
+              <input id="deviceType" formControlName="deviceType" type="text" placeholder="Device Type" class="project-detail1 no-field"style="padding:6px;" /> 
+              <span *ngIf="assetForm.controls['deviceType'].invalid && (assetForm.controls['deviceType'].touched)">
+                  <span *ngIf="assetForm.controls['deviceType'].errors?.required" class="text-danger">
+                    Please enter Device Type
+                  </span> 
+                </span>
+                
+             </div>
+            <div *ngIf="isAddMode" class="my-2 col-lg-3 col-md-3 col-3 role-input">
+              <label for="deviceType" class="form-label main-heading">Device Type</label><span> *</span>
+              <select class="form-select project-detail" formControlName="deviceType" (change)="onSelect($event)">
+                <option [ngValue]="null" selected>Select</option>
+                <option *ngFor="let item of TypeList" [value]="item.value">{{ item.value }}</option>
+              </select>
+              <span *ngIf="(assetForm.controls['deviceType'].invalid && (assetForm.controls['deviceType'].dirty || assetForm.controls['deviceType'].touched))">
+                <span *ngIf="assetForm.controls['deviceType'].errors.required || !assetForm.controls['deviceType'].value" class="text-danger">
+                  Please select a Device Type
+                </span>
+              </span>
+            </div>
+            <div *ngIf="!isAddMode" class="my-2 col-lg-3 col-md-3 col-3 role-input">
+              <label for="assetName" class="form-label main-heading">Asset Name</label><span> *</span>
+              <input id="assetName" formControlName="assetName" type="text" placeholder="Asset Name" class="project-detail1 no-field"style="padding:6px;" /> 
+              <span *ngIf="assetForm.controls['assetName'].invalid && (assetForm.controls['assetName'].touched)">
+                  <span *ngIf="assetForm.controls['assetName'].errors?.required" class="text-danger">
+                    Please enter Asset Name
+                  </span> 
+                </span>
+                
+             </div>
+            <div *ngIf="isAddMode" class="my-2 col-lg-3 col-md-3 col-3 role-input">
+              <label for="assetName" class="form-label main-heading">Asset Name</label><span> *</span>
+              <select class="form-select project-detail" formControlName="assetName" (change)="onSelec($event)" >
+                <option [ngValue]="null" selected>Select</option>
+                <option *ngFor="let item of ANameList" [value]="item.value">{{ item.value }}</option>
+              </select>
+              <span *ngIf="(assetForm.controls['assetName'].invalid && (assetForm.controls['assetName'].dirty || assetForm.controls['assetName'].touched))">
+                <span *ngIf="assetForm.controls['assetName'].errors.required || !assetForm.controls['assetName'].value" class="text-danger">
+                  Please select an Asset Name
+                </span>
+              </span>
+            </div>
+              
+          </div>
+          <div  class="row role-input1" style="margin-left: 57px;">
+            <div *ngIf="!isAddMode" class="my-2 col-lg-3 col-md-3 col-3 role-input">
+              <label for="assetNumber" class="form-label main-heading">Asset Number</label><span> *</span>
+              <input id="assetNumber" formControlName="assetNumber" type="text" placeholder="sset Number" class="project-detail1 no-field"style="padding:6px;" /> 
+              <span *ngIf="assetForm.controls['assetNumber'].invalid && (assetForm.controls['assetNumber'].touched)">
+                  <span *ngIf="assetForm.controls['assetNumber'].errors?.required" class="text-danger">
+                    Please enter sset Number
+                  </span> 
+                </span>
+                
+             </div>
+            <div *ngIf="isAddMode" class="my-2 col-lg-3 col-md-3 col-3 role-input">
+              <label for="assetNumber" class="form-label main-heading">Asset Number</label><span> *</span>
+              <select class="form-select project-detail" formControlName="assetNumber">
+                <option [ngValue]="null" selected>Select</option>
+                <option *ngFor="let item of ANList" [value]="item.value">{{ item.value }}</option>
+              </select>
+              <span *ngIf="(assetForm.controls['assetNumber'].invalid && (assetForm.controls['assetNumber'].dirty || assetForm.controls['assetNumber'].touched))">
+                <span *ngIf="assetForm.controls['assetNumber'].errors.required || !assetForm.controls['assetNumber'].value" class="text-danger">
+                  Please select an Asset Number
+                </span>
+              </span>
+            </div>
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+              <label for="deviceName" class="form-label main-heading">User / Device Name</label><span> *</span>
+              <input id="deviceName" formControlName="deviceName" type="text" placeholder="Device Name" class="project-detail1 no-field" style="padding:6px;" /> 
+              <span *ngIf="serverErrorMessage" class="text-danger">
+                {{ serverErrorMessage }}
+              </span>
+              <span *ngIf="assetForm.controls['deviceName'].invalid && (assetForm.controls['deviceName'].touched || assetForm.controls['deviceName'].dirty)">
+                <span *ngIf="assetForm.controls['deviceName'].errors?.required" class="text-danger">
+                    Please enter User / Device Name
+                  </span>
+                  <span *ngIf="assetForm.controls['deviceName'].errors?.pattern" class="text-danger">
+                    Type cannot be empty or just spaces
+                  </span>
+                  <span *ngIf="assetForm.controls['deviceName'].errors?.maxlength" class="text-danger">
+                    Owner Name cannot exceed 30 characters
+                  </span>
+                </span>
+            </div>  
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+              <label for="assignedDate" class="form-label main-heading">Assigned Date</label><span>* </span>
+              <input id="assignedDate" formControlName="assignedDate" type="text" placeholder="MM/DD/YYYY" class="form-control" bsDatepicker
+              [bsConfig]="{ isAnimated: true, dateInputFormat: 'MM/DD/YYYY', showWeekNumbers: false }">
+              <span *ngIf="assetForm.controls['assignedDate'].invalid && (assetForm.controls['assignedDate'].touched)">
+                <span *ngIf="assetForm.controls['assignedDate'].errors?.required" class="text-danger">
+                    Please select a Assigned Date
+                </span>
+            </span>
+            </div>   
+            <div *ngIf="!isAddMode && IniatialStatus !== 'Returned' "  class="my-2 col-lg-3 col-md-3 col-3 role-input">
+              <label for="status" class="form-label main-heading">Status</label><span> *</span>
+              <select id="status" formControlName="status" (change)="handleStatusChange($event)" class="form-select">
+                  <option [ngValue]="null" selected>Select Status</option>
+                  <option value="Inuse">Inuse</option>
+                  <option value="Returned">Returned</option>
+              </select>
+              <span *ngIf="(assetForm.controls['status'].invalid && (assetForm.controls['status'].dirty || assetForm.controls['status'].touched))">
+                <span *ngIf="assetForm.controls['status'].errors.required || !assetForm.controls['status'].value" class="text-danger">
+                      Please select a status
+                  </span>
+              </span>
+            </div> 
+             
+            
+          </div>
+          <div class="row mb-0 role-input1" style="margin-left: 57px;">
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+              <label for="comments" class="form-label main-heading">Comments</label><span> </span>
+              <textarea id="comments" formControlName="comments" class="small-textarea" rows="2" cols="30" placeholder="Comments" > </textarea>
+            </div>   
+            <div *ngIf="assetForm.get('status')?.value === 'Returned'" class="my-2 col-lg-3 col-md-3 col-3 role-input">
+              <label for="returnDate" class="form-label main-heading">Return Date</label><span>*</span>
+              <input id="returnDate" formControlName="returnDate" type="text" placeholder="MM/DD/YYYY" class="form-control" bsDatepicker
+              [bsConfig]="{ isAnimated: true, dateInputFormat: 'MM/DD/YYYY', showWeekNumbers: false }">
+              <span *ngIf="assetForm.controls['returnDate'].invalid && (assetForm.controls['returnDate'].touched)">
+                <span *ngIf="assetForm.controls['returnDate'].errors?.required" class="text-danger">
+                    Please select a Return Date
+                </span>
+            </span>
+            </div>   
+            
+            <div *ngIf="assetForm.get('status')?.value === 'Returned' && IniatialStatus !== 'Returned'" class="my-2 col-lg-3 col-md-3 col-3 role-input">
+              <label for="assetStatus" class="form-label main-heading">Asset Status</label><span> *</span>
+              <select id="assetStatus" formControlName="assetStatus" class="form-select project-detail1" style="padding:6px;">
+                <option [ngValue]="null" value="null" selected>Select Asset Status</option>
+                <option value="Active">Active</option>
+                <option value="Damaged">Damaged</option>
+            </select>
+                <span *ngIf="(assetForm.controls['assetStatus'].invalid && (assetForm.controls['assetStatus'].dirty || assetForm.controls['assetStatus'].touched))">
+                  <span *ngIf="assetForm.controls['assetStatus'].errors.required || !assetForm.controls['assetStatus'].value" class="text-danger">
+                  Please select an Asset status
+              </span>
+            </span>
+            
+            </div>    
+          </div>
+          <div class="big-button-bottom" style="float: right;
+           margin-right: 103px;margin-top:-54px;">
+            <ul>
+              <li><button style="font-size:16px;"  type="submit" (click)="onSave()" [disabled]="!assetForm.valid">Save</button></li>
+              <li><button [routerLink]="'/asset-assignment'">CANCEL</button></li>
+             
+            </ul>
+          </div>
+      </div>
+   </form>
+</div>
+  

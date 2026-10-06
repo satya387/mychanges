@@ -1,0 +1,45 @@
+<form>
+  <div style="margin:25px;">
+    <div>
+      <span><strong>Payroll Upload</strong></span>
+    </div>
+    <div class="row">
+      <div class="col-md-5">
+
+            <mat-label>Month and Year</mat-label>
+            <input matInput [matDatepicker]="dp" [formControl]="uploaddate">
+            <!-- <mat-hint>MM/YYYY</mat-hint> -->
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp
+                            startView="multi-year"
+                            (monthSelected)="setMonthAndYear($event, dp)"
+                            panelClass="example-month-picker">
+            </mat-datepicker>
+
+      </div>
+      </div>
+    <div class="row">
+      <div class="col-md-8 form-group">
+        <input type="file" class="form-control" (change)="uploadedFile($event)" placeholder="Upload file" accept=".xlsx">
+        <!-- <button type="button" class="btn btn-info" (click)="exportAsXLSX()" style="float:right;">Download</button> -->
+      </div>
+      <div class="col-md-4 form-group">
+        <div class="dropdown col-md-4 form-group" style="float: right;">
+          <button class="dropbtn" >Download</button>
+          <div class="dropdown-content">
+            <a  (click)="exportAsXLSX('INDIA')">INDIA</a>
+            <a  (click)="exportAsXLSX('USA')">USA</a>
+          </div>
+        </div>
+        <!-- <button type="button" (click)="exportAsXLSX()" class="btn btn-info" style="float: right;">Download</button> -->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-7 form-group"></div>
+      <div class="col-md-5 form-group" style="margin-top: 5px;">
+        <button type="button" class="btn btn-info" (click)="readAsJson()">Upload</button>
+        <button type="reset" id="btnReset" class="btn btn-warning" style="margin-left: 3px;">Clear</button>
+      </div>
+    </div>
+  </div>
+</form>

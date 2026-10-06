@@ -1,0 +1,133 @@
+<div class="alert-container">
+    <!-- Header Section (unchanged) -->
+    <!-- <div class="header-bar">
+        <div class="left-section">
+            <h2 class="module-title">🔔 View Alert</h2>
+
+            <div class="form-row">
+                <ng-select
+                    [items]="AccountList"
+                    bindLabel="AccountName"
+                    bindValue="AccountId"
+                    placeholder="Select Account"
+                    [searchable]="true"
+                    [clearable]="true"
+                    [hideSelected]="true"
+                    [formControl]="accountControl"
+                    (change)="onSelectAccountProject($event)"
+                    (search)="onAccountSearch($event.term)"
+                    (clear)="onAccountClear()"
+                    (open)="onAccountOpen()"
+                    (close)="onAccountClose()"  
+                >
+                </ng-select>
+            </div>
+
+            <div class="form-row">
+                <ng-select
+                    [items]="ProjectList"
+                    bindLabel="ProjectName"
+                    bindValue="ProjectId"
+                    placeholder="Select Project"
+                    [searchable]="true"
+                    [clearable]="true"
+                    [hideSelected]="true"
+                    [formControl]="projectControl"
+                    (change)="onProjectSelect($event)"
+                    [searchFn]="projectSearchFn"
+                    (open)="onProjectOpen()"
+                >
+                </ng-select>
+            </div>
+
+            <button
+                class="clear-btn"
+                [class.active-clear]="isClearEnabled"
+                [disabled]="!isClearEnabled"
+                (click)="Clear()"
+            >
+                Clear
+            </button>
+        </div>
+
+        <div class="right-section">
+            <button class="add-btn" (click)="navigateTo()">+ Add New</button>
+        </div>
+    </div> -->
+
+    <div class="header-bar">
+    <div class="left-section">
+      <h2 class="module-title">🔔 View Alert</h2>
+    </div>
+    <div class="right-section">
+      <span class="filter-img-text" data-tooltip="Apply Filter" (click)="openFilterPopup()"> 
+        <img src="../../../assets/images/filter.png" >        
+      </span>
+      <span class="filter-img-text" data-tooltip="Create New Alert" (click)="navigateTo()">
+        <img src="../../../assets/images/create-new.png" >        
+      </span>      
+        <!-- <button class="add-btn" (click)="navigateTo()">+ Add New</button> -->
+    </div>
+  </div>
+
+    <!-- Table Container -->
+    <div class="table-container">
+        <table id="vacancyTable" #vacancyTable class="display" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>Account</th>
+                    <th>Project</th>
+                    <!-- <th>Title</th> -->
+                    <th>Alert Description</th>
+                    <th>Alert Type</th>
+                    <!-- <th>Category</th> -->
+                    <th>Priority</th>
+                    <th>Escalated By</th>
+                    <th>Alert Created On</th>
+                    <th>Escalation Date</th>
+                    <th>Target Resolution Date</th>
+                    <th>Status</th>
+                    <th>Action Owner</th>
+                    <th> <a href="#" class="disabled-link"><img src="../../../assets/images/CSAT-download-icon.png" width="30px" height="30px" alt="Attachments"></a></th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <!-- EMPTY BODY: DataTables will render rows here -->
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- Delete Confirmation Modal (Bootstrap 5) -->
+<!-- DELETE CONFIRM MODAL (PUT THIS AT TOP-LEVEL: e.g. app.component.html bottom) -->
+<div id="deleteConfirmModal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #0d0359; color: #fff">
+                <h5 class="modal-title">Confirm delete</h5>
+                <button type="button" style="color: white" class="btn" (click)="cancelDeletePrompt()">X</button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Are you sure you want to delete
+                    <strong>{{ toDeleteItem?.Title || toDeleteItem?.EscalationManagementId }} </strong> Escalation ?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="confirmDelete()" [disabled]="isDeleting">
+                    <span
+                        *ngIf="isDeleting"
+                        class="spinner-border spinner-border-sm"
+                        role="status"
+                        aria-hidden="true"
+                    ></span>
+                    Yes, delete
+                </button>
+                <button type="button" class="btn btn-secondary" (click)="cancelDeletePrompt()" [disabled]="isDeleting">
+                    No
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<!--<table  align="center" class="table table" style="margin-top:50px ;position:center; font-size:30px">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Path</th>
+        <th scope="col">Last Modified Time</th>
+        <th scope="col">Hit Highlighted Summary<th>
+</tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let n of searchlist">
+        <td>{{n.title}}</td>
+        <td>{{n.path}}</td>
+        <td>{{n.lastModifiedTime}}</td>
+        <td>{{n.hitHighlightedSummary}}</td>
+</tbody>
+  </table>-->
+<!--<app-header [searchEvent]="searchresults($event)"></app-header>-->
+<div class="header" style="margin-top:10px">
+
+  <div class="col-9" *ngFor="let n of searchlist" style="margin-top:26px;margin-left:50px;">
+    <h5 class="result__title">
+      <!--<div>
+        <a class="search-url" href="{{n.path}}" target="_blank">{{n.path}}</a>
+      </div>-->
+      <a class="result__a" href="{{n.path}}" target="_blank">{{n.title}}</a>
+    </h5>
+    <div class="result__snippet js-result-snippet" style=" margin-left: 3px; margin-top: -6px;">
+      {{n.hitHighlightedSummary}}
+    </div>
+
+  </div>
+</div>
+
+
+<!--<div class="clearfix pagination-wrap">
+  <pagination-controls previousLabel="" nextLabel="" (pageChange)="onTableDataChange($event)">
+  </pagination-controls>
+</div>-->

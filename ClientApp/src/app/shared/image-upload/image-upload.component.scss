@@ -1,0 +1,126 @@
+.role-input input {
+  border: 1px solid #e2dddd;
+  border-radius: 0px;
+  font-weight: 500;
+}
+#forRoleNameSection,
+#forRoleName {
+  border-radius: 2px;
+}
+#forRoleName:focus,
+#forRoleNameSection:focus {
+  box-shadow: none;
+}
+.add-section-wrap {
+  border: 1px solid #e2dddd;
+  margin-top: 20px;
+}
+.selected-sec-wrap {
+  margin-top: 30px;
+}
+
+.selected-sec-wrap strong,
+.selected-sec-add strong {
+  font-weight: 500;
+}
+.back-btn a svg {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+.drag-drop-folder-box{
+  border: 1px solid #ced4da;
+  margin:8px 4px;
+  padding: 0px 2px;
+}
+// .add-edit-head h1 {
+//   font-size: 24px;
+//   margin-top: 20px;
+//   font-weight: 700;
+// }
+.last-text-click p {
+  margin: 0;
+  font-size: 14px;
+}
+.last-text-click p a {
+  color: #f72265;
+  text-decoration: none;
+}
+.last-text-click p a:hover {
+  text-decoration: underline;
+}
+// .big-button-bottom ul {
+//   padding: 0;
+//   list-style: none;
+//   display: flex;
+//   margin-top: 30px;
+// }
+// .big-button-bottom ul li:first-child {
+//   padding: 8px 30px;
+//   background-color: #0fe4bd;
+//   margin-right: 20px;
+// }
+// .big-button-bottom ul li {
+//   padding: 0;
+//   list-style: none;
+//   display: flex;
+//   padding: 5px 20px;
+//   align-items: center;
+// }
+// .big-button-bottom ul li:first-child a {
+//   color: #0d0359;
+//   font-weight: 600;
+//   font-size: 14px;
+// }
+// .big-button-bottom ul li a {
+//   font-weight: 600;
+//   font-size: 14px;
+//   text-decoration: none;
+//   color: #0d0359;
+// }
+// .big-button-bottom ul li a:hover {
+//   text-decoration: underline;
+// }
+
+/* ------------------------------------ new page style ----------------------------------------------*/
+
+// .add-edit-head svg {
+//   margin-right: 20px;
+//   width: 30px;
+//   height: 30px;
+// }
+
+.rag-drop-folder {
+  min-width: 200px;
+  min-height: 60px;
+}
+.drag-drop-folder {
+  width: 50%;
+}
+.drag-drop {
+  border: none;
+  background: none;
+  height: 50px;
+}
+
+.drag-drop-folder span {
+  font-size: 14px;
+  color: #848484;
+  font-weight: 400;
+}
+.or-space {
+  margin: 0px 20px;
+}
+// .role-input {
+//   margin-bottom: 30px;
+// }
+
+
+/* ------------------- create-edit-content-style ----------------- */
+.editor-tool-wrap {
+  width: 100%;
+  max-width: 1000px;
+  height: 300px;
+  border: 1px solid #e2dddd;
+  overflow-y: scroll;
+}

@@ -1,0 +1,289 @@
+
+body {
+  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  background-color: #fff;
+  color: black;
+}
+
+.headpart {
+  background-color: #0D0357;
+  color: #fff;
+  border-radius: 8px;
+  padding: 4px 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px auto;
+  width: 99%;
+}
+
+.filter-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+
+.filter-group label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #C3E4DE;
+}
+
+
+.form-select {
+  padding: 2px 12px;
+  border-radius: 6px;
+  border: 1px solid #C3E4DE;
+  background-color: #0D0357;
+  color: #fff;
+  font-size: 14px;
+  width: 250px;
+  transition: all 0.3s ease;
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M287%20146.2l-145%20145.5-145-145.5h290z%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 10px;
+}
+
+.form-select:hover,
+.form-select:focus {
+  border-color: #0BAB8E;
+  box-shadow: 0 0 0 2px rgba(11, 171, 142, 0.2);
+  outline: none;
+}
+
+.add-button {
+  background-color: #0BAB8E;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 3px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-end; 
+}
+
+.add-button:hover {
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #0D0357;
+}
+
+.highlight {
+  background-color: #C3E4DE;
+  color: #0D0357;
+  box-shadow: 0 0 8px rgba(195, 228, 222, 0.8);
+}
+
+.tabbed-tables-container {
+  padding: 1px;
+  background-color: #fff;
+}
+::ng-deep .p-tabview .p-tabview-nav {
+  display: flex; 
+  justify-content: space-between; 
+  width: 100%; 
+}
+::ng-deep .p-tabview .p-tabview-nav li {
+  flex-grow: 1;
+  text-align: center;
+}
+::ng-deep .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  background-color: #C3E4DE;
+  color: #0D0357;
+  border-color: #0BAB8E;
+  font-weight: bold;
+}
+::ng-deep .p-tabview .p-tabview-nav-container {
+  width: 100%;
+}
+::ng-deep .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  display: block;
+  padding: 11px; 
+}
+
+::ng-deep .p-datatable {
+  border: 1px solid #C3E4DE;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 0.5rem 1rem;
+}
+
+::ng-deep .p-datatable .p-datatable-thead > tr > th {
+  background-color: #C3E4DE;
+  color: #0D0357;
+  font-weight: 600;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 14px; 
+}
+
+::ng-deep .p-datatable .p-datatable-tbody > tr:hover {
+  background-color: #f0f8f5;
+  cursor: pointer;
+}
+
+::ng-deep .p-datatable .p-datatable-tbody > tr {
+  color: black;
+}
+
+::ng-deep .p-dropdown-label {
+  font-size: 12px;
+  padding: 0.2rem 0.75rem;
+}
+
+::ng-deep .p-dropdown-item {
+  font-size: 12px;
+  padding: 0.2rem 0.75rem;
+}
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  display: inline-block;
+  text-align: center;
+}
+
+.status-1 { 
+  background-color: #0BAB8E;
+}
+
+.status-0 { 
+  background-color: black;
+}
+
+.status--1 { 
+  background-color: #C3E4DE;
+  color: black;
+}
+
+
+a[data-toggle="tooltip"] svg {
+  vertical-align: middle;
+  margin-right: 5px;
+  color: black;
+}
+
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 0;
+}
+
+.add-button {
+  background-color: #0BAB8E;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 3px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-end;
+}
+
+.add-button:hover {
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.add-button:disabled {
+  background-color: #C3E4DE;
+  color: #0D0357;
+  cursor: not-allowed;
+}
+
+.highlight {
+  background-color: #C3E4DE;
+  color: #0D0357;
+  box-shadow: 0 0 8px rgba(195, 228, 222, 0.8);
+}
+
+.footer-buttons-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  gap: 20px; 
+  padding: 20px 0;
+}
+
+
+.info-icon {
+  font-size: 1.5rem; 
+  color: #0BAB8E; 
+  vertical-align: middle;
+  cursor: pointer;
+  margin-right: 15px; 
+  transition: transform 0.2s ease;
+}
+
+.info-icon:hover {
+  transform: scale(1.2); 
+}
+ td .info-icon {
+    margin-right: 15px; 
+  }
+::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+  text-align: left;
+  border-style: solid;
+  border-color: rgb(233, 236, 239);
+  border-width: 0px 0px 1px;
+  padding: 0.25rem; 
+  font-size: 12px;
+}
+::ng-deep .p-dropdown {
+  height: 25px; 
+  min-width: 10px;
+}
+
+::ng-deep .p-dropdown-label {
+  font-size: 12px;
+  padding: 0.2rem 0.75rem; 
+}
+
+::ng-deep .p-dropdown-trigger {
+  width: 25px; 
+}
+
+::ng-deep .p-dropdown-items-wrapper .p-dropdown-item {
+  font-size: 12px;
+  padding: 0.2rem 0.75rem;
+}
+::ng-deep .p-tabview .p-tabview-panels {
+  color: rgb(73, 80, 87);
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  background: rgb(255, 255, 255);
+  padding: 0.25rem !important;
+  border-width: 0px;
+  border-style: none;
+  border-color: initial;
+  border-image: initial;
+}
+
+::ng-deep .p-tooltip .p-tooltip-text {  
+  font-size: 14px;
+  background-color:rgb(73, 80, 87);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 6px;
+  max-width: 650px;
+  white-space: normal;
+  word-wrap: break-word;
+  width: 600px;
+}

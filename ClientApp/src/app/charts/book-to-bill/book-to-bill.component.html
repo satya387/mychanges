@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="content" *ngIf="options">
+    <b class="heading" style="font-size: x-large;">Book To Bill</b>
+    <img src="../../../assets/images/tooltip.png" alt="Tooltip Icon" class="tooltipImage" title="Confirmed order as per role & rate configured in SOW module.">
+    <ag-charts-angular id="bookToBill-chart" style="height: 100%" [options]="options"></ag-charts-angular>
+  </div>
+
+
+<!-- <div class="container">
+    <div class="content">
+      <b style="font-size: x-large;">Book To Bill</b>
+      <div class="bookToBill-chart">
+        <div class="image-container">
+          <img src="../../../assets/images/wipfinal.png" alt="Image" class="wip-image">
+        </div>
+        <p class="work-in-progress">Work in Progress</p>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- app.component.html -->
+
+<!-- <div class="info">
+  <div data-jsref="control-bar" class="control-bar">
+    <div>
+      <span>Bar Type: &nbsp;</span>
+      <select data-jsref="type" [(ngModel)]="type.value">
+        <option value="vbar">Vertical (Column)</option>
+        <option value="hbar">Horizontal (Bar)</option>
+        <option value="vbar3d">3D (Vertical)</option>
+        <option value="hbar3d">3D (Horizontal)</option>
+      </select>
+    </div>
+    <div>
+      <span>with a &nbsp;</span>
+      <select data-jsref="aspect" [(ngModel)]="aspect.value">
+        <option value="bar">rectangular</option>
+        <option value="cone">conical</option>
+        <option value="cylinder">cylindrical (3D only)</option>
+        <option value="pyramid">pyramidal (3D only)</option>
+        <option value="histogram">histogram</option>
+      </select>
+      <span>aspect and </span>
+    </div>
+    <div>
+      <select data-jsref="stacked" [(ngModel)]="stacked.value">
+        <option value="false">no</option>
+        <option value="normal">normal</option>
+        <option value="100%">100%</option>
+      </select>
+      <span>stacking </span>
+    </div>
+    <button (click)="updateChart()">Render</button>
+  </div>
+
+  <div [id]="chartId">
+    <a href="https://www.zingchart.com/" rel="noopener" class="zc-ref">Powered by ZingChart</a>
+  </div>
+</div> -->
+
+  
+   <!-- <ejs-accumulationchart>
+    <e-accumulationseriescollection>
+      <e-accumulationseries [dataSource]='data' xName='x' yName='y' type='Cylinder'>
+        <e-dataLabel [visible]='true' position='Top'></e-dataLabel>
+      </e-accumulationseries>
+    </e-accumulationseriescollection>
+  </ejs-accumulationchart> -->

@@ -1,0 +1,27 @@
+#accRisk-chart {
+  border: 1px solid #D3D3D3;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  display: block;
+  margin-top: 15px;
+}
+.container {
+  margin-top: 20px;
+  padding-right: 0;
+}
+.accRisk-chart {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 302px;
+  border: 1px solid #D3D3D3;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+.tooltipImage{
+  width: 17px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: inherit;
+  margin-left: 2px;
+  }

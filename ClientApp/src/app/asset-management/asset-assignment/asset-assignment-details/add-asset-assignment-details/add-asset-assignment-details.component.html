@@ -1,0 +1,106 @@
+<div class="container-fluid edit-rr-desktop1" style="margin-top:20px; padding-bottom: 20px;">
+    <!-- <app-back-button [routerPath]="'/purchase-order'"></app-back-button> -->
+  
+    <div class="add-edit-role-wrap adding-margin-to-table" style="margin-top:-40px;">
+      <span class="steps d-block d-md-none d-flex justify-content-end">Step 1/3</span>
+      <div class="add-edit-head">
+        <h3 *ngIf="softwareType === 'Software'" style="margin-top:36px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="5" fill="currentColor" class="bi bi-stack"
+               viewBox="0 0 16 16">
+            <path d="m14.12 10.163 1.715.858c.22.11.22.424 0 .534L8.267 15.34a.598.598 0 0 1-.534 0L.165 11.555a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.66zM7.733.063a.598.598 0 0 1 .534 0l7.568 3.784a.3.3 0 0 1 0 .535L8.267 8.165a.598.598 0 0 1-.534 0L.165 4.382a.299.299 0 0 1 0-.535L7.733.063z" />
+            <path d="m14.12 6.576 1.715.858c.22.11.22.424 0 .534l-7.568 3.784a.598.598 0 0 1-.534 0L.165 7.968a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.659z" />
+          </svg>
+          {{ isAddMode ? 'Add Software Details' : 'Edit Software Details' }}
+        </h3>
+        <h3 *ngIf="softwareType === 'Hardware'" style="margin-top:36px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="5" fill="currentColor" class="bi bi-stack"
+               viewBox="0 0 16 16">
+            <path d="m14.12 10.163 1.715.858c.22.11.22.424 0 .534L8.267 15.34a.598.598 0 0 1-.534 0L.165 11.555a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.66zM7.733.063a.598.598 0 0 1 .534 0l7.568 3.784a.3.3 0 0 1 0 .535L8.267 8.165a.598.598 0 0 1-.534 0L.165 4.382a.299.299 0 0 1 0-.535L7.733.063z" />
+            <path d="m14.12 6.576 1.715.858c.22.11.22.424 0 .534l-7.568 3.784a.598.598 0 0 1-.534 0L.165 7.968a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.659z" />
+          </svg>
+          {{ isAddMode ? 'Add Hardware Details' : 'Edit Hardware Details' }}
+        </h3>
+      </div>
+  </div>
+</div>
+    <div *ngIf="softwareType === 'Software'">
+      <form [formGroup]="softwareForm" (keydown.enter)="$event.preventDefault()" (ngSubmit)="onSaveSoftwareDetails()">
+        <div class="container-fluid edit-rr-desktop" style="margin-top: -22px;">      
+            <div class="row role-input1" style="margin-left: 57px;">
+              <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label  for="name" class="form-label main-heading">Software Name</label>
+                <input id="name"  formControlName="name" type="text" placeholder="Software Name" class="project-detail1 no-field" style="padding:6px;" /> 
+              </div>  
+              <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label  for="vendor" class="form-label main-heading">Vendor</label>
+                <input id="vendor" type="text" placeholder="vendor" 
+                       class="project-detail1 no-field" style="padding:6px;" formControlName="vendor"/>
+              </div>            
+                <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                  <label for="version"  class="form-label main-heading">Version</label>
+                  <input id="version"  formControlName="version" type="text" placeholder="Version" class="project-detail1 no-field" style="padding:6px;" /> 
+                </div> 
+                <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                  <label for="device_Name" class="form-label main-heading">Device Name</label>
+                  <input id="device_Name"  formControlName="device_Name" type="text" placeholder="deviceName" class="project-detail1 no-field" style="padding:6px;" readonly/> 
+                </div> 
+                
+            </div>
+          <div class="big-button-bottom" style="float: right;
+           margin-right: 103px;">
+            <ul>
+              <li><button style="font-size:16px;"  type="submit"  >Save</button></li>
+              <li><button [routerLink]="['/asset-assignment-details']" [queryParams]="{ deviceName: deviceName }">CANCEL</button></li>
+             
+            </ul>
+          </div>
+      
+        </div>
+      </form>
+    </div>
+    <div *ngIf="softwareType === 'Hardware'">
+      <form [formGroup]="hardwareForm" (keydown.enter)="$event.preventDefault()" (ngSubmit)="onSaveHardwareDetails()">
+        <div class="container-fluid edit-rr-desktop" style="margin-top: -22px;">
+          <div class="row role-input1" style="margin-left: 57px;">
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+              <label for="component" class="form-label main-heading">Component </label>
+              <input id="component"  type="text" placeholder="Component"
+                     class="project-detail1 no-field"  formControlName="component" style="padding:6px;"/>
+            </div>      
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+              <label for="name" class="form-label main-heading">Name</label>
+              <input id="name" type="text" placeholder="Name" 
+                     class="project-detail1 no-field"  formControlName="name" style="padding:6px;" />
+            </div>            
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="detail1" class="form-label main-heading">Details1</label>
+                <input id="detail1"  type="text"  formControlName="detail1" placeholder="Details1" class="project-detail1 no-field" style="padding:6px;" /> 
+              </div>  
+              <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+                <label for="detail2" class="form-label main-heading">Details2</label>
+                <input id="detail2"  type="text"  formControlName="detail2" placeholder="Details2" class="project-detail1 no-field" style="padding:6px;" /> 
+              </div> 
+          </div>
+          <div class="row role-input1" style="margin-left: 57px;">
+            <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+              <label for="deviceName" class="form-label main-heading">Device Name</label>
+              <input id="deviceName"  formControlName="deviceName" type="text" placeholder="deviceName" class="project-detail1 no-field" style="padding:6px;" readonly/> 
+            </div> 
+                
+          </div>
+          <div class="big-button-bottom" style="float: right;
+           margin-right: 103px;">
+            <ul>
+              <li><button style="font-size:16px;"  type="submit"  >Save</button></li>
+              <li><button [routerLink]="['/asset-assignment-details']" [queryParams]="{ deviceName: deviceName }">CANCEL</button></li>
+             
+            </ul>
+          </div>
+
+        </div>
+      </form>
+    </div>
+    
+
+
+  

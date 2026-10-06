@@ -1,0 +1,134 @@
+.role-input input{
+	border: 1px solid #E2DDDD;
+	border-radius: 0px;
+	font-weight: 500;
+}
+#forRoleNameSection, #forRoleName{
+	border-radius: 2px;
+}
+#forRoleName:focus, #forRoleNameSection:focus{
+box-shadow: none;
+}
+.add-section-wrap{
+	border: 1px solid #E2DDDD;
+	border-top: 0px;
+}
+.selected-sec-wrap{
+	margin-top: 30px;
+}
+
+.selected-sec-wrap strong, .selected-sec-add strong{
+	font-weight: 500;
+	font-size: 14px !important;
+}
+
+.back-btn a svg{
+	width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+// .add-edit-head h1
+// {
+// 	font-size: 24px;
+//     margin-top: 20px;
+//     font-weight: 700;
+// }
+.last-text-click p{
+	margin: 0;
+    font-size: 14px;
+}
+.last-text-click p a{
+color: #F72265;
+text-decoration: none;
+}
+.last-text-click p a:hover{
+	text-decoration: underline;
+}
+// .big-button-bottom ul{
+// 	padding: 0;
+//     list-style: none;
+//     display: flex;
+//     margin-top: 30px
+// }
+// .big-button-bottom ul li:first-child{
+//     padding: 8px 30px;
+//     background-color: #F72265;
+//     margin-right: 20px;
+// }
+// .big-button-bottom ul li
+// {
+// 	padding: 0;
+//     list-style: none;
+//     display: flex;
+//     padding: 5px 20px;
+//     align-items: center;
+// }
+// .big-button-bottom ul li:first-child a{
+// 	color: #fff;
+//     font-weight: 400;
+//     font-size: 14px;
+// }
+// .big-button-bottom ul li a{
+// 	font-weight: 400;
+// 	font-size: 14px;
+// 	text-decoration: none;
+// 	color: #F72265;
+// }
+// .big-button-bottom ul li a:hover{
+// 	text-decoration: underline;
+// }
+
+
+
+/* ------------------- user role sec tile css ---------------------------------------*/
+#user-role-tile .nav-tabs .nav-link.active
+{
+	padding: 20px;
+    font-weight: 600;
+    color: #F72265 !important;
+    border-radius: 0;
+}
+#user-role-tile .nav-tabs .nav-link{
+	padding: 20px;
+	color: #000;
+	font-weight: 600;
+}
+.nav-tabs{
+padding-left: 0px;
+}
+#forRoleNameSection{
+max-width: 600px;
+}
+.selected-sec-add{
+	margin-bottom: 30px;
+}
+
+.selected-sec-add:last-child{
+	margin-bottom: 0;
+}
+.role-input select{
+	border-radius: 0;
+	font-weight: 500;
+}
+.Section-name-select{
+	max-width: 40%;
+    font-weight: 500 !important;
+    border-radius: 0px !important;
+}
+.Section-name-select:focus, .role-input select:focus{
+	box-shadow: none !important;
+}
+.ScrollStyle{
+
+	max-height: 400px;
+  
+	  overflow-y: scroll;
+  
+	  overflow-x: hidden;
+  
+	
+  
+  }
+  .adding-margin-to-table {
+    margin-top: 52px;
+}

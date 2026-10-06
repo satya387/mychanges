@@ -1,0 +1,75 @@
+<div class="back-button" title="Back" data-toggle="tooltip">
+  <span (click)="goBack()">
+    <svg width="35px" height="35px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink" fill="#0fe4bd" stroke="#0fe4bd" stroke-width="0.6719999999999999">
+      <g id="SVGRepo_bgCarrier" stroke-width="0" />
+      <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+      <g id="SVGRepo_iconCarrier">
+        <g id="icomoon-ignore"></g>
+        <path
+          d="M14.389 7.956v4.374l1.056 0.010c7.335 0.071 11.466 3.333 12.543 9.944-4.029-4.661-8.675-4.663-12.532-4.664h-1.067v4.337l-9.884-7.001 9.884-7zM15.456 5.893l-12.795 9.063 12.795 9.063v-5.332c5.121 0.002 9.869 0.26 13.884 7.42 0-4.547-0.751-14.706-13.884-14.833v-5.381z"
+          fill="#0fe4bd"></path>
+      </g>
+    </svg>
+  </span>
+</div>
+<div class="timeline-wrapper">
+  <div class="timeline-line"></div>
+
+  <div
+    class="timeline-item"
+    *ngFor="let item of arr; let i = index"
+    [style.animationDelay]="(i * 0.18) + 's'">
+
+    <div class="timeline-date">
+      <div class="date">{{ item.createdDate | date:'yyyy-MM-dd' }}</div>
+      <div class="time hide">{{ item.createdDate | date:'hh:mm a' }}</div>
+    </div>
+
+    <div class="timeline-dot"></div>
+
+    <!-- SINGLE CONTENT -->
+    <div class="timeline-content"
+         [style.animationDelay]="(i * 0.18 + 0.14) + 's'">
+
+      <!-- Main Title -->
+      <h3>{{ item.title }}</h3>
+
+      <!-- Pending / next stage (show below title) -->
+      <div class="timeline-details">
+
+        <p *ngIf="item.comments && item.comments.trim() != ''">
+          <span class="strong">Comments :</span>
+          {{ item.comments }}
+        </p>
+
+        <p class="fontsetting">
+
+          <span class="strong" *ngIf="item.title == 'Created Opportunity'">
+            Created By:
+          </span>
+
+          <span class="strong" *ngIf="item.title == 'Submitted'">
+            Submitted By:
+          </span>
+
+          <span class="strong"
+                *ngIf="item.title == 'DH Approved' 
+                || item.title == 'CDO Approved' 
+                || item.title == 'BFM Approved'">
+            Approved By:
+          </span>
+
+          <span class="strong" *ngIf="item.title == 'Rejected Opportunity'">
+            Rejected By:
+          </span>
+
+          {{ item.createdBy }}
+
+        </p>
+
+      </div>
+    </div>
+  </div>
+</div>
+  

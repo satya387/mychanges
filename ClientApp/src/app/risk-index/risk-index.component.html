@@ -1,0 +1,283 @@
+
+<div class="headpart empMHead col-md-12">
+  <div class="filter-container row-md-12">
+    <div class="filter-group">
+      <label for="accountDropdown">Account</label>
+      <select class="form-select project-detail" id="accountDropdown" (change)="onSelectDropdown($event, 'AccountId')">
+        <option *ngFor="let item of accountList" [value]="item.mastCustID">{{item.mastcustName}}</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="projectDropdown">Project</label>
+      <select class="form-select project-detail" id="projectDropdown" (change)="onSelectProject($event,'ProjectId')">
+        <option *ngFor="let item of ProjectList" [value]="item.projectId">{{item.projectName}}</option>
+      </select>
+    </div> 
+    <button class="add-button" [class.highlight]="showSearchButtonHighlight" (click)="searchData()">Search</button>
+  </div>
+</div>
+<div class="tabbed-tables-container">
+  <p-tabView [(activeIndex)]="activeIndex" (onChange)="scrollToTop()">
+    
+    <p-tabPanel header="Contract" leftIcon="pi pi-list">
+      <p-table 
+        [value]="tab1Data" 
+        [rows]="30"
+        [responsive]="true"
+        selectionMode="single"
+        styleClass="p-datatable-striped">
+        
+        <ng-template pTemplate="header">
+          <tr>
+            <th width="58%">Parameters</th>
+            <th>Options</th>
+            <th>Score</th>
+          </tr>
+        </ng-template>
+        
+        <ng-template pTemplate="body" let-item>
+          <tr [pSelectableRow]="item">
+            <td>
+              <a [pTooltip]="item.parameterExplanation" tooltipPosition="right" tooltipEvent="hover">
+                <i class="pi pi-info-circle info-icon"></i>
+              </a>
+              {{item.params}}</td>
+            <td>
+              <p-dropdown 
+                [options]="applicabilitydropDown" 
+                [(ngModel)]="item.Applicability"
+                (onChange)="onDropdownChange(item)"  
+                optionValue="value"
+                optionLabel="label">
+              </p-dropdown>
+            </td>
+            <td>
+              <span [class]="'status-badge status-' + item.score">
+                {{item.score}}
+              </span>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-tabPanel>
+
+    <p-tabPanel header="Scope and Requirements" leftIcon="pi pi-list">
+      <p-table 
+        [value]="tab2Data" 
+        [rows]="30"
+        [responsive]="true"
+        selectionMode="single"      
+        styleClass="p-datatable-striped">
+        
+        <ng-template pTemplate="header">
+          <tr>
+            <th width="58%">Parameters</th>
+            <th>Options</th>
+            <th>Score</th>
+          </tr>
+        </ng-template>
+        
+        <ng-template pTemplate="body" let-item>
+          <tr [pSelectableRow]="item">
+            <td>
+              <a [pTooltip]="item.parameterExplanation" tooltipPosition="right" tooltipEvent="hover">
+                <i class="pi pi-info-circle info-icon"></i>
+              </a>
+              {{item.params}}</td>
+            <td>
+              <p-dropdown 
+                [options]="applicabilitydropDown" 
+                [(ngModel)]="item.Applicability"
+                (onChange)="onDropdownChange(item)"  
+                optionValue="value"
+                optionLabel="label"> 
+              </p-dropdown>
+            </td>
+            <td>
+              <span [class]="'status-badge status-' + item.score">
+                {{item.score}}
+              </span>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-tabPanel>
+    
+    <p-tabPanel header="Complexity" leftIcon="pi pi-list">
+      <p-table 
+        [value]="tab3Data" 
+        [rows]="30"
+        [responsive]="true"
+        selectionMode="single"
+        styleClass="p-datatable-striped">
+        
+        <ng-template pTemplate="header">
+          <tr>
+           <th width="58%">Parameters</th>
+            <th>Options</th>
+            <th>Score</th>
+          </tr>
+        </ng-template>
+        
+        <ng-template pTemplate="body" let-item>
+          <tr [pSelectableRow]="item">
+            <td>
+              <a [pTooltip]="item.parameterExplanation" tooltipPosition="right" tooltipEvent="hover">
+                <i class="pi pi-info-circle info-icon"></i>
+              </a>
+              {{item.params}}</td>
+            <td>
+              <p-dropdown 
+                [options]="applicabilitydropDown" 
+                [(ngModel)]="item.Applicability"
+                (onChange)="onDropdownChange(item)"  
+                optionValue="value"
+                optionLabel="label"> 
+              </p-dropdown>
+            </td>
+            <td>
+              <span [class]="'status-badge status-' + item.score">
+                {{item.score}}
+              </span>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-tabPanel>
+
+    <p-tabPanel header="Capacity" leftIcon="pi pi-list">
+      <p-table 
+        [value]="tab4Data" 
+        [rows]="30"
+        [responsive]="true"
+        selectionMode="single"
+        styleClass="p-datatable-striped">
+        
+        <ng-template pTemplate="header">
+          <tr>
+            <th width="58%">Parameters</th>
+            <th>Options</th>
+            <th>Score</th>
+          </tr>
+        </ng-template>
+        
+        <ng-template pTemplate="body" let-item>
+          <tr [pSelectableRow]="item">
+            <td>
+              <a [pTooltip]="item.parameterExplanation" tooltipPosition="right" tooltipEvent="hover">
+                <i class="pi pi-info-circle info-icon"></i>
+              </a>
+              {{item.params}}</td>
+            <td>
+              <p-dropdown 
+                [options]="applicabilitydropDown" 
+                [(ngModel)]="item.Applicability"
+                (onChange)="onDropdownChange(item)"  
+                optionValue="value"
+                optionLabel="label"> 
+              </p-dropdown>
+            </td>
+            <td>
+              <span [class]="'status-badge status-' + item.score">
+                {{item.score}}
+              </span>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-tabPanel>
+
+    <p-tabPanel header="Customer" leftIcon="pi pi-list">
+      <p-table 
+        [value]="tab5Data" 
+        [rows]="30"
+        [responsive]="true"
+        selectionMode="single"
+        styleClass="p-datatable-striped">
+        
+        <ng-template pTemplate="header">
+          <tr>
+            <th width="58%">Parameters</th>
+            <th>Options</th>
+            <th>Score</th>
+          </tr>
+        </ng-template>
+        
+        <ng-template pTemplate="body" let-item>
+          <tr [pSelectableRow]="item">
+            <td>
+              <a [pTooltip]="item.parameterExplanation" tooltipPosition="right" tooltipEvent="hover">
+                <i class="pi pi-info-circle info-icon"></i>
+              </a>
+              {{item.params}}</td>
+            <td>
+              <p-dropdown 
+                [options]="applicabilitydropDown" 
+                [(ngModel)]="item.Applicability" 
+                (onChange)="onDropdownChange(item)" 
+                optionValue="value"
+                optionLabel="label"> 
+              </p-dropdown>
+            </td>
+            <td>
+              <span [class]="'status-badge status-' + item.score">
+                {{item.score}}
+              </span>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-tabPanel>
+
+    <p-tabPanel header="Delivery Process" leftIcon="pi pi-list">
+      <p-table 
+        [value]="tab6Data" 
+        [rows]="30"
+        [responsive]="true"
+        selectionMode="single"
+        styleClass="p-datatable-striped">
+        
+        <ng-template pTemplate="header">
+          <tr>
+            <th width="58%">Parameters</th>
+            <th>Options</th>
+            <th>Score</th>
+          </tr>
+        </ng-template>
+        
+        <ng-template pTemplate="body" let-item>
+          <tr [pSelectableRow]="item">
+            <td>
+              <a [pTooltip]="item.parameterExplanation" tooltipPosition="right" tooltipEvent="hover">
+                <i class="pi pi-info-circle info-icon"></i>
+              </a>
+              {{item.params}}</td>
+            <td>
+              <p-dropdown 
+                [options]="applicabilitydropDown" 
+                [(ngModel)]="item.Applicability"
+                (onChange)="onDropdownChange(item)" 
+                optionValue="value"
+                optionLabel="label"> 
+              </p-dropdown>
+            </td>
+            <td>
+              <span [class]="'status-badge status-' + item.score">
+                {{item.score}}
+              </span>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-tabPanel>
+  </p-tabView>
+</div>
+
+<div class="footer-buttons-container">
+  <button class="add-button" [disabled]="isBackDisabled()" (click)="prevTab()">Back</button>
+  <button class="add-button" [disabled]="isNextDisabled()" (click)="nextTab()">Next</button>
+  <ng-container *ngIf="activeIndex === 5">
+    <button class="add-button" (click)="submitData()">Submit</button>
+</ng-container>
+</div>

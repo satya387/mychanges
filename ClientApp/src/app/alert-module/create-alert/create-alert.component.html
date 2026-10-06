@@ -1,0 +1,295 @@
+<div class="header-bar" style="padding-left: 29px; padding-top: 10px;">
+  <div class="left-section">
+    <h1 class="module-title" style="color: #4a90e2;font-size: 17px; font-weight: 600;">🔔 {{Action}}</h1>
+  </div>
+  <!-- <div class="right-section" style="padding-right: 1%;">
+    <button id="btnCancelResourceRequest" class="mainbttuns primary-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm3-8.707L9.707 8 11 9.293 9.293 11 8 9.707 6.707 11 5.293 9.707 6.586 8 5.293 6.707 6.707 5.293 8 6.586 9.293 5.293 11 6.707z"/>
+      </svg>
+      Cancel
+    </button>
+  </div> -->
+  
+  <div style="position: relative;">
+  <svg
+    id="btnCancelAlert"
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    fill="currentColor"
+    viewBox="0 0 16 16"
+    role="button"
+    tabindex="0"
+    aria-label="Cancel"
+    (click)="goBack()"
+    style="
+      position: absolute;
+      top: 0px;
+      right: 10px;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      padding: 5px;
+      box-sizing: content-box;
+    "
+    onmouseover="this.style.color='#007bff';"
+    onmouseout="this.style.color='currentColor';"
+  >
+    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+  </svg>
+</div>
+
+
+</div>
+<form class="container" [formGroup]="dataForm" (ngSubmit)="onSave()">
+  <div class="form-section">
+    <fieldset>
+      <legend>Project Info</legend>
+      <div class="form-row">
+        <label for="forRoleNameSection" class="form-label main-heading">Account<span class="spanRed"> *</span></label>
+        <ng-select
+        formControlName="AccountId"
+        [items]="AccountList"
+        bindLabel="AccountName"
+        bindValue="AccountId"
+        placeholder="Select Account"
+        [searchable]="true"
+        [clearable]="true"
+        [hideSelected]="true"
+        (change)="onSelect($event)"
+        (blur)="dataForm.get('AccountId')?.markAsTouched()"
+        class="select"
+        [ngClass]="{ 'is-invalid': isInvalid('AccountId') }"
+        >
+      </ng-select>  
+      </div>
+      <div class="form-row">
+        <label for="ProjectName">Project<span class="spanRed"> *</span></label>
+        <ng-select
+        formControlName="ProjectId"
+        [items]="ProjectList"
+        bindLabel="ProjectName"
+        bindValue="ProjectId"
+        placeholder="Select Project"
+        [searchable]="true"
+        [clearable]="true"
+        [hideSelected]="true"
+        (change)="onSelectProj($event)"
+        (blur)="dataForm.get('ProjectId')?.markAsTouched()"
+        [ngClass]="{ 'is-invalid': isInvalid('ProjectId') }"
+        >       
+      </ng-select>
+     
+      </div>
+    </fieldset>
+
+    <!-- Moved outside Project Info fieldset -->
+    <fieldset>
+      <legend>Title & Description</legend>
+      <div class="form-row">
+        <label for="Title">Alert Title<span class="spanRed"> *</span></label>
+        <input type="text" id="Title" formControlName="Title" placeholder="Some title.." [class.is-invalid]="isInvalid('Title')" maxlength="200"/>
+      </div>
+        <div class="char-count">
+          {{ 200 - ((dataForm.get('Title')?.value?.length) || 0) }} characters left
+        </div>   
+      <div class="form-row">
+        <label for="Description">Alert Description<span class="spanRed"> *</span></label>
+        <textarea id="Description" rows="12" formControlName="Description" placeholder="Enter description here..." [class.is-invalid]="isInvalid('Description')" maxlength="5000"></textarea>
+       
+      </div>
+      <div class="char-count">
+        {{ 5000 - ((dataForm.get('Description')?.value?.length) || 0) }} characters left
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Category</legend>
+      <div class="form-row">
+        <label for="EscalationTypeId">Alert Type<span class="spanRed"> *</span></label>
+        <ng-select
+        formControlName="EscalationTypeId"
+        [items]="EscalationTypeList"
+        bindLabel="EscalationType"
+        bindValue="EscalationTypeId"
+        placeholder="Select Type"
+        [clearable]="true"
+        [hideSelected]="true"
+        [ngClass]="{ 'is-invalid': isInvalid('EscalationTypeId') }"
+        >
+        
+      </ng-select>    
+      </div>
+      <div class="form-row">
+        <label for="EscalationCategoryId">Category<span class="spanRed"> *</span></label>
+        <ng-select
+        formControlName="EscalationCategoryId"
+        [items]="EscalationCategoryList"
+        bindLabel="EscalationCategory"
+        bindValue="EscalationCategoryId"
+        placeholder="Select Category"
+        [clearable]="true"
+        [hideSelected]="true"
+        [ngClass]="{ 'is-invalid': isInvalid('EscalationCategoryId') }"
+        >
+      </ng-select>
+     
+      </div>
+    </fieldset>
+    
+  </div>
+
+  <div class="middle-panel">
+    <!-- Moved outside Category & Priority fieldset -->
+    <fieldset>
+      <legend>Priority & Responsibility</legend>
+      <div class="form-row">
+        <label for="EscalationPriority">Priority<span class="spanRed"> *</span></label>
+        <ng-select
+        formControlName="EscalationPriorityId"
+        [items]="PriorityList"
+        bindLabel="EscalationPriority"
+        bindValue="EscalationPriorityId"
+        placeholder="Select Priority"
+        [clearable]="true"
+        [hideSelected]="true"
+        [ngClass]="{ 'is-invalid': isInvalid('EscalationPriorityId') }"
+        >
+      </ng-select>
+      </div>
+      <div class="form-row">
+        <label for="ResponsiblePerson">Action Owner<span class="spanRed"> *</span></label>
+        <ng-select
+        formControlName="ResponsiblePersonId"
+        [items]="ResponsiblePersonList"
+        bindLabel="ResponsiblePerson"
+        bindValue="ResponsiblePersonId"
+        placeholder="Select Action Owner"
+        [searchable]="true"
+        [clearable]="true"
+        [hideSelected]="true"
+        (change)="onResponsibleSelect($event)"
+        (blur)="dataForm.get('ResponsiblePersonId')?.markAsTouched()"
+        [ngClass]="{ 'is-invalid': isInvalid('ResponsiblePersonId') }">
+
+      </ng-select>
+      
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Status & Time Frame</legend>
+      <div class="form-row">
+        <label for="Status">Status<span class="spanRed"> *</span></label>
+        <ng-select
+        formControlName="Status"
+        [items]="StatusList"
+        bindLabel="label"
+        bindValue="value"
+        placeholder="Select Status"
+        [searchable]="true"
+        [clearable]="true"
+        [hideSelected]="true"
+        [ngClass]="{ 'is-invalid': isInvalid('Status') }"
+        >
+      </ng-select>
+     
+      </div>
+      <div class="form-row">
+        <label for="TargetResolutionDate">Target Resolution Date<span class="spanRed"> *</span></label>
+        <input
+          type="text"
+          id="TargetResolutionDate"
+          bsDatepicker
+          formControlName="TargetResolutionDate"
+          [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', showWeekNumbers: false }"
+          [minDate]="minEscalationDate"
+          [maxDate]="maxEscalationDate"
+          [attr.title]="workingDaysTooltip"
+          [class.is-invalid]="isInvalid('TargetResolutionDate')"
+          [readonly]="true"
+          placeholder="{{ 'DD-MM-YYYY' }}"
+        />
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="right-panel">
+    <fieldset>
+      <legend>Escalation Details</legend> 
+       <div class="form-row">
+        <label for="EscalatedBy">Escalated By(Name)<span class="spanRed"> *</span></label>
+        <input type="text" id="EscalatedBy" formControlName="EscalatedBy" placeholder="Escalated By" [class.is-invalid]="isInvalid('EscalatedBy')"/>
+      </div>
+       <div class="form-row">
+        <label for="Designation">Designation<span class="spanRed"> *</span></label>
+        <input type="text" id="DesignationOfThePerson" formControlName="DesignationOfThePerson" placeholder="Designation.." [class.is-invalid]="isInvalid('DesignationOfThePerson')"/>
+      </div>    
+      <div class="form-row">
+        <label for="EscalationDate">Escalation Date<span class="spanRed"> *</span></label>
+        <input
+            type="text"
+            id="EscalationDate"
+            bsDatepicker
+            formControlName="EscalationDate"
+            [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', showWeekNumbers: false }"
+            [maxDate]="maxEscalationDate"
+            [class.is-invalid]="isInvalid('EscalationDate')"
+            placeholder="{{ 'DD-MM-YYYY' }}"
+            />
+
+      </div>
+      <!-- <div class="invalid-feedback" *ngIf="showEscalationDateMessage">
+        {{ showEscalationDateMessage }}
+      </div>       -->
+    </fieldset>
+
+    <fieldset>
+      <legend>Attachment</legend>
+        <div class="form-row file-upload-wrapper">
+        <label for="fileUpload">
+          <span >Upload File</span>
+          <input
+          type="file"
+          id="fileUpload"
+          multiple
+          (change)="onFileSelected($event)"
+          accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png"/>
+        </label>
+        <div class="selected-files" *ngIf="(existingAttachments?.length || selectedFiles?.length)">
+          <!-- Existing files from server -->
+          <!-- inside existingAttachments *ngFor -->
+<!-- inside existingAttachments *ngFor -->
+<div class="file-item" *ngFor="let f of existingAttachments; let idx = index">
+  <div class="file-meta">
+    <span class="file-name existing"
+      (click)="openExistingFile(f.name, f.url)"
+      [title]="f.name">
+  {{ f.name | slice:0:15 }}{{ f.name.length > 15 ? '...' : '' }}
+</span>
+    <a type="button" class="small-remove-btn" (click)="removeExistingAttachment(f.name)" title="Remove"> x</a>
+  </div>
+</div>
+
+
+          <!-- Newly selected files (client-side) -->
+          <div class="file-item" *ngFor="let f of selectedFiles; let i = index">
+            <div class="file-meta">
+              <span class="file-name"
+              (click)="openFile(f)"
+              [title]="f.name">
+          {{ f.name | slice:0:15 }}{{ f.name.length > 15 ? '...' : '' }}
+        </span>
+              <a type="button" class="small-remove-btn" (click)="removeFile(i)" title="Remove"> x</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="no-file" *ngIf="(!existingAttachments || existingAttachments.length === 0) && (!selectedFiles || selectedFiles.length === 0)">
+          No file chosen
+        </div>
+        </div>
+    </fieldset>
+    <button type="submit" *ngIf="Action === 'Raise Alert'">Save</button>
+      <button type="submit" *ngIf="Action === 'Edit Alert'">Update</button>
+  </div>
+</form>

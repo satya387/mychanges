@@ -1,0 +1,17 @@
+<form [formGroup]="PORejectShowform">
+  <div>
+  <label for="Reason" class="form-label main-heading" style="color:Red;font-size:16px">Reason *</label>
+</div>
+<div>
+  <textarea id="Reason" 
+            rows="4" 
+            cols="65" 
+            formControlName="Reason" 
+            placeholder="Reason For Reject" >
+  </textarea>
+</div>
+<div mat-dialog-actions style="float:right;">
+  <!-- <button mat-button color="primary" (click)="onYesClick()" style="margin-right: 17px;width: 53px;color: white;background: #0D0357;border: #0D0357;border-radius: 4px;">Yes</button> -->
+  <button mat-button (click)="onNoClick()" style="width: 53px;color: white;background: #0D0357;border: #0D0357;border-radius: 4px;">Cancel</button>
+</div>
+</form>

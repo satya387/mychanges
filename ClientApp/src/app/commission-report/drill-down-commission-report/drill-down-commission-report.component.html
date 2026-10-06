@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="back-button" title="Back" data-toggle="tooltip">
+    <span (click)="goBack()">
+      <svg width="35px" height="35px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" fill="#0fe4bd" stroke="#0fe4bd" stroke-width="0.6719999999999999">
+        <g id="SVGRepo_bgCarrier" stroke-width="0" />
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+        <g id="SVGRepo_iconCarrier">
+          <g id="icomoon-ignore"></g>
+          <path
+            d="M14.389 7.956v4.374l1.056 0.010c7.335 0.071 11.466 3.333 12.543 9.944-4.029-4.661-8.675-4.663-12.532-4.664h-1.067v4.337l-9.884-7.001 9.884-7zM15.456 5.893l-12.795 9.063 12.795 9.063v-5.332c5.121 0.002 9.869 0.26 13.884 7.42 0-4.547-0.751-14.706-13.884-14.833v-5.381z"
+            fill="#0fe4bd"></path>
+        </g>
+      </svg>
+    </span>
+  </div>
+</div>
+
+<div *ngIf="commssionDataList">
+    <p-treeTable class="cr-table custom-treetable" [value]="commssionDataList" [resizableColumns]="true" columnResizeMode="expand" [scrollable]="true" scrollHeight="72vh"
+      [tableStyle]="{'min-width': '50rem'}" styleClass="p-treetable-gridlines">
+      
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Client Partner</th>
+          <th>Account</th>
+          <th>Project</th>
+          <th>Type</th>
+          <th>Year</th>
+          <th>Month</th>
+          <th>Account Type</th>
+          <th>Billed</th>
+          <th>Collected</th>
+          <th>Applicable %</th>
+          <th>% As Per Policy</th>
+          <th>Incentive Earned</th>
+          <th>Comments</th>
+        </tr>
+      </ng-template>
+  
+      <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+        <tr [ttRow]="rowNode">
+          <td><p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler> {{ rowData.clientPartner || '' }}</td>
+          <td>{{ rowData.accountName || '' }}</td>
+          <td>{{ rowData.projectName || '' }}</td>
+          <td>{{ rowData.type || '' }}</td>
+          <td>{{ rowData.incentiveYear || '' }}</td>
+          <td>{{ rowData.incentiveMonth || '' }}</td>
+          <td>{{ rowData.accountType || '' }}</td>
+          <td>{{ rowData.billed | number:'1.2-2' }}</td>
+          <td>{{ rowData.collected | number:'1.2-2' }}</td>
+          <td>{{ rowData.applicablePercentage | number:'1.2-2' }}</td>
+          <td>{{ rowData.incentivePercentageAsPerPolicy | number:'1.2-2' }}</td>
+          <td>{{ rowData.incentiveEarned | number:'1.2-2' }}</td>
+          <td>{{ rowData.comments || '' }}</td>
+        </tr>
+      </ng-template>
+  
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="8" style="text-align: center; color: #888;">
+            No data to display
+          </td>
+        </tr>
+      </ng-template>
+    </p-treeTable>
+</div>

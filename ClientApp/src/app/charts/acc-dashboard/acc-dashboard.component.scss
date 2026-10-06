@@ -1,0 +1,321 @@
+@import '~@angular/material/theming';
+
+// Define your custom theme
+$custom-primary: mat-palette($mat-indigo);
+$custom-accent: mat-palette($mat-amber, A200, A100, A400);
+$custom-theme: mat-light-theme($custom-primary, $custom-accent);
+
+// Include your custom theme in your application
+@include mat-core();
+@include angular-material-theme($custom-theme);
+
+// .pie-bar-chart-container {
+//     display: flex;
+// }
+// .pie-chart {
+//     flex: 30%;
+// }
+
+.bar-chart {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.shared-cost-chart {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+// .margin-chart-container {
+//   display: flex;
+// }
+
+// .account-margin-chart,
+// .direct-margin-chart {
+//   flex: 50%;
+//   // margin: 10px;
+// }
+
+// .utilization-pyramid-container {
+//   display: flex;
+// }
+
+// .utilization-chart,
+// .pyramid-chart {
+//   flex: 50%;
+// }
+
+// body{
+//     margin: 0;
+//     padding: 0;
+//     background-color: lightgrey !important;
+// }
+// header {
+//     background-color: lightgrey !important;
+// }
+
+// footer {
+//     background-color: lightgrey !important;
+// }
+
+// .widget {
+//     width: 150px;
+//     height: 100px; 
+//     background-color: whitesmoke;
+//     border-radius: 10px;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//     color: black;
+//     font-size: 24px;
+//     margin-top: 20px;
+//     margin-left: 10px;
+// }
+
+// .widget-content {
+//     text-align: center;
+// }
+
+// .digit {
+//     font-weight: bold;
+//     font-size: 20px;
+// }
+
+// .widget-label {
+//     font-size: 18px; 
+//     margin-bottom: 10px;
+// }
+
+// .ytd-card {
+//     width: 200px;
+//     height: 100px;
+//     background-color: white;
+//     border-radius: 10px;
+//     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+//     padding: 10px;
+//     box-sizing: border-box;
+//   }
+
+// .card-content {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   height: 100%;
+// }
+
+// .card-heading {
+//   font-size: 20px;
+//   margin-left: 32px;
+
+// }
+
+// .card-value {
+//   font-size: 24px;
+//   text-align: right;
+//   margin: 0;
+//   color: darkcyan;
+// }
+
+.charts-container {
+  background-color: #f5f5f5;
+  overflow-x: hidden;
+}
+
+.card.mb-3 {
+  margin-bottom: 1.5rem !important
+}
+
+.widget-content {
+  align-items: center;
+  flex-direction: row;
+  padding: 1rem;
+}
+
+.card {
+  border-width: 0;
+  box-shadow: 0 0.46875rem 2.1875rem rgba(8, 10, 37, .03), 0 0.9375rem 1.40625rem rgba(8, 10, 37, .03), 0 0.25rem 0.53125rem rgba(8, 10, 37, .05), 0 0.125rem 0.1875rem rgba(8, 10, 37, .03);
+  transition: all .2s;
+}
+
+.card {
+  word-wrap: break-word;
+  background-clip: initial;
+  background-color: #fff;
+  border: 1px solid rgba(32, 39, 140, .125);
+  border-radius: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  position: relative;
+}
+
+.widget-content .widget-content-outer {
+  display: flex;
+  flex: 1 1;
+  flex-direction: column;
+}
+
+.widget-content .widget-content-left .widget-heading {
+  font-weight: 700;
+  opacity: .8;
+}
+
+// .charts-container{
+//    // overflow-y: hidden !important;
+// }
+
+.dropdown-container {
+  // display: flex;
+  // flex-wrap: wrap;
+  // justify-content: space-around;
+  // gap: 20px;
+  margin-top: 30px;
+  // margin-left: 10px;
+}
+
+.custom-dropdown {
+  // width: 20%;
+  flex: 1;
+  background-color: #f5f5f5;
+  // border-radius: 5px;
+  // padding: 8px; 
+  // box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.mat-select-value {
+  color: #333;
+}
+
+.mat-select-arrow-wrapper {
+  background-color: #007acc;
+  // border-radius: 5px;
+}
+
+.mat-option {
+  color: #007acc;
+  height: 30px !important;
+}
+
+.custom-radio {
+  flex: 1;
+  // width: 20%;
+  background-color: #f5f5f5;
+  // padding: 8px;
+}
+
+.radio-button {
+  color: #007acc;
+  // margin-right: 4px;
+}
+
+.mat-radio-button.mat-accent.mat-checked .mat-radio-outer-circle {
+  background-color: #007acc;
+}
+
+.custom-radio {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.radio-label {
+  margin-bottom: 5px;
+}
+
+.mat-slide-toggle-thumb {
+background-color: #0FE4BD;
+}
+
+.clear-input {
+  background-color: #f5f5f5;
+  border: 0;
+  font-size: x-small;
+}
+
+.qualityDashboard-chart {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.direct-margin-chart{
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.ebitda-chart-percent{
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.accRisk-chart {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+// .account-margin-chart{
+//   padding-left: 0;
+//   padding-right: 0;
+// }
+
+@media (max-width: 480px) {
+
+  .col-2,
+  .col-4,
+  .col-8,
+  .col-6 {
+    width: 100%;
+  }
+
+  .bar-chart {
+    padding-left: 12px;
+    padding-right: 0px
+  }
+
+  .shared-cost-chart {
+    padding-left: 12px;
+    padding-right: 0;
+  }
+  
+  .ebitda-chart-dollar {
+    padding-left: 12px;
+    padding-right: 0;
+  }
+
+  .qualityDashboard-chart {
+    padding-left: 12px;
+    padding-right: 0px
+  }
+
+  .direct-margin-chart{
+    padding-left: 12px;
+    padding-right: 0;
+  }
+  .ebitda-chart-percent {
+    padding-left: 12px;
+    padding-right: 0;
+  }
+  .accRisk-chart {
+    padding-left: 12px;
+    padding-right: 0px
+  }
+
+  .account-margin-chart{
+    padding-left: 12px;
+    padding-right: 0;
+  }
+}
+
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+  background-color: #c8e3de;
+}
+
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+  background-color: #0FE4BD; /* Set your desired color here */
+}
+.bookmark-label-text {
+  white-space: nowrap;position: absolute;top: -4px;
+}

@@ -1,0 +1,87 @@
+<div class="timeline-wrapper">
+  <div class="timeline-line"></div>
+
+  <!-- iterate API timeline -->
+  <div
+    class="timeline-item"
+    *ngFor="let item of TimeLineList; let i = index"
+    [style.animationDelay]="(i * 0.18) + 's'"
+  >
+    <div class="timeline-date">
+      <!-- Prefer TimelineDate, fallback to EventCreatedDate, format with date pipe -->
+      <div class="date">{{ (item.TimelineDate || item.EventCreatedDate) | date:'yyyy-MM-dd' }}</div>
+      <div class="time hide">{{ (item.TimelineDate || item.EventCreatedDate) | date:'hh:mm a' }}</div>
+    </div>
+
+    <div class="timeline-dot"></div>
+
+    <div
+      class="timeline-content"
+      [style.animationDelay]="(i * 0.18 + 0.14) + 's'"
+    >
+    <h3  [ngClass]="{ 'updated-record': item.RecordType === 'Alert Updated' }">{{ item.RecordType }}</h3>
+
+<div *ngIf="item.DisplayDetails === 1" class="timeline-details">
+  <p class="fontsetting">
+    <span class="strong">🧩Type:</span>
+    {{ item.EscalationType }}
+    <span>&nbsp;&nbsp;&nbsp;•&nbsp;</span>
+
+    <span class="strong">🗃️Category:</span>
+    {{ item.EscalationCategory }}
+    <span>&nbsp;&nbsp;&nbsp;•&nbsp;</span>
+
+    <span class="strong">⚡Priority:</span>
+   <span [ngClass]="getPriorityClass(item.EscalationPriorityId)"> {{ item.EscalationPriority  }}</span>
+    <span>&nbsp;&nbsp;&nbsp;•&nbsp;</span>
+
+    <span class="strong">🧑‍💼Escalated By:</span>
+    {{ item.EscalatedBy }}
+  </p>
+</div>
+     <p [title]="item.Description">
+  <span class="strong" *ngIf="item.DisplayDetails === 0">
+    {{ item.ActionTakenBy }} :
+  </span>
+  {{ item.Description }}
+</p>
+    </div>
+  </div>
+  <div class="timeline-item form-row">
+    <div class="timeline-date"></div>
+    <div class="timeline-dot"></div>
+    <div class="timeline-content">
+      <textarea
+      class="form-textarea"
+      rows="2"
+      placeholder="Enter text"
+      [(ngModel)]="commentText"
+      name="commentText"
+      [disabled]="isTimelineClosed"
+      maxlength="5000"
+      (input)="submitting = false"
+      [ngClass]="{ 'is-invalid': isInvalid('commentText') }">
+    </textarea>        
+      <label class="form-checkbox-label">
+        <input
+          type="checkbox"
+          class="form-checkbox"
+          [(ngModel)]="isClosed"
+          name="isClosed"
+          [disabled]="isTimelineClosed"
+        />
+        Mark as closed
+      </label>      
+      <button class="form-button" (click)="submitForm()" [disabled]="isTimelineClosed">
+        {{ submitting ? 'Submitting...' : 'Submit' }}
+      </button>
+      <button class="form-button" (click)="goBack()" type="button">Back</button>
+      <div class="char-count">
+        {{ 5000 - (commentText?.length || 0) }} characters left
+      </div>
+    </div>
+    
+    
+  </div>
+ 
+</div>

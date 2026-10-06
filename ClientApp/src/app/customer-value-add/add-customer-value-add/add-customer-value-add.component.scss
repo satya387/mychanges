@@ -1,0 +1,146 @@
+label {
+    font-weight: 600;
+    font-size: 15px;
+}
+.text-with-bg {
+    background-color: #0D0357; /* Background color */
+    color: white; /* Text color */
+    padding: 10px; /* Adjust padding as needed */
+    width: 900px;
+    margin-left: -26px;
+    height: 60px;
+    margin-top: -20px;/* Include padding and border in width */
+    font: size 20px;
+  }
+  input[type="text"]::placeholder {
+    /* Placeholder font size */
+    font-size: 14px;
+    /* Placeholder color */
+    //color: #666;
+    /* Add other placeholder styles as needed */
+  }
+  .header {
+    background-color: #0D0357;
+    color: white;
+    // padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+ 
+    width: 100%;
+    margin-left: -24px;
+    position: sticky;
+    z-index: 1;
+    height: 36px;
+    margin-left: 3px;
+ 
+}
+
+  /* Button style */
+  .cancel-button {
+    background-color: transparent;
+    color: white;
+    border: none;
+    // padding: 8px 25px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-right: 18px;
+}
+
+  .add-text{
+    margin-left: 36px;
+   font-size: 23px; 
+  margin-top: 2px;
+}
+.mat-form-field {
+  margin-left: 19px;
+}
+.disabled {
+  opacity: 0.1 !important;
+  pointer-events: none !important;
+}
+.form-control:disabled {
+  opacity: 0.5 !important;
+}
+select:disabled {
+  opacity: 0.5 !important;
+}
+::ng-deep .mat-datepicker-content .mat-calendar {
+  width: 242px !important;
+    height: 299px !important;
+  margin-top: -10px;
+}
+#ARC-nav {
+  z-index: -1 !important;
+}
+label.required::after {
+  content: " *";
+  color: red;
+}
+.popup-container {
+  width: 800px;
+  height: 570px;
+  overflow: hidden;
+  margin-left: -27px;
+  margin-right: -25px;
+  margin-top: -24px;
+}
+
+.popup {
+ width: 100%;
+ height: 94%;
+  overflow: auto; /* Allow the popup content to scroll if necessary */
+}
+.row-scroll {
+  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: 100px; /* Set max height for each row */
+  scrollbar-width: thin; /* Hide scrollbar buttons */
+  scrollbar-color: #888 #f1f1f1; /* Set scrollbar color */
+}
+::-webkit-scrollbar {
+  width: 8px; 
+  margin-top: 10px;/* Width of the scrollbar */
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the track */
+}
+::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the scrollbar handle */
+  background-color: #0FE4BD
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color of the scrollbar handle on hover */
+}
+.mat-dialog-container {
+  overflow-x: hidden !important;
+}
+
+.mat-input-element.mat-form-field-autofill-control.mat-datepicker-input.ng-untouched.ng-pristine.ng-invalid.cdk-text-field-autofill-monitored::placeholder {
+  caret-color: transparent !important;
+}
+.mat-input-element.submitted {
+  caret-color: rgb(63, 81, 181);
+}
+::ng-deep .mat-dialog-container {
+  overflow-x: hidden;
+}
+
+.tooltipImage{
+  width: 14px;
+  height: 12px;
+  display: inline-block;
+  vertical-align: inherit;
+  margin-left: 2px;
+  }
+
+  ::ng-deep .cdk-overlay-container, .cdk-global-overlay-wrapper {
+    white-space: pre-line;
+  }
+
+  ::ng-deep .mat-tooltip {
+    max-width: 400px !important;
+    background-color: rgba(0, 0, 0, 0.75);  /* Dark background */
+    color: white;  /* White text */
+    font-size: 14px;  /* Adjust font size */
+    padding: 10px;  /* Padding inside the tooltip */
+  }

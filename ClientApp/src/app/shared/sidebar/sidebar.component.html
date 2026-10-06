@@ -1,0 +1,147 @@
+<nav class="sidebar" [class.collapsed]="isCollapsed">
+
+  <!-- ================= TOP ================= -->
+  <div class="sidebar-top">
+
+    <div class="brand">
+      <span class="brand-icon">
+        <span><button class="toggle-btn" (click)="toggleSidebar()">
+      ☰
+    </button></span>
+        <!-- <span><h6>CCRT</h6></span> -->
+      </span>
+      <span class="brand-text" *ngIf="!isCollapsed">
+      </span>
+    </div>
+
+  </div>
+   
+  <!-- ================= DOCUMENT TYPE ================= -->
+  <div class="sidebar-section">
+
+    <div class="section-label" *ngIf="!isCollapsed">
+      Document Type
+    </div>
+
+    <ul class="sidebar-menu">
+
+      <!-- ✅ ALL (FIXED) -->
+      <li class="menu-item">
+  <a routerLink="/Customer-Contract-Review/dashboard"
+     [queryParams]="{}"
+     routerLinkActive="active"
+     [routerLinkActiveOptions]="{ exact: true }"
+     class="menu-link">
+
+    <i class="icon pi pi-list"></i>
+
+    <span *ngIf="!isCollapsed">
+      All
+    </span>
+
+  </a>
+</li>
+
+      <!-- ✅ ✅ DYNAMIC LIST -->
+      <ng-container *ngFor="let doc of documentList">
+
+        <li class="menu-item" *ngIf="doc.name !== 'Select'">
+
+          <a class="menu-link"
+             [routerLink]="['/Customer-Contract-Review/dashboard']"
+             [queryParams]="{ documentId: doc.id }"
+             routerLinkActive="active">
+
+            <!-- <i class="icon pi pi-file"></i> -->
+<i
+  class="icon"
+  [ngClass]="getDocumentIcon(doc.name)">
+</i>
+            <span *ngIf="!isCollapsed">
+              {{ doc.name }}
+            </span>
+
+          </a>
+
+        </li>
+
+      </ng-container>
+
+    </ul>
+
+  </div>
+
+  <!-- ================= STAGE ================= -->
+  <div class="sidebar-section">
+
+    <div class="section-label" *ngIf="!isCollapsed">
+      Stage
+    </div>
+
+    <ul class="sidebar-menu">
+
+    <li class="menu-item">
+  <a
+    class="menu-link"
+    [routerLink]="['/Customer-Contract-Review/dashboard']"
+    [queryParams]="{ stage: 'All' }"
+    routerLinkActive="active">
+
+    <i class="icon pi pi-list"></i>
+    <span *ngIf="!isCollapsed">All</span>
+  </a>
+</li>
+
+<li class="menu-item">
+  <a
+    class="menu-link"
+    [routerLink]="['/Customer-Contract-Review/dashboard']"
+    [queryParams]="{ stage: 'Review' }"
+    routerLinkActive="active">
+
+    <i class="icon pi pi-eye"></i>
+    <span *ngIf="!isCollapsed">Review</span>
+  </a>
+</li>
+
+<li class="menu-item">
+  <a
+    class="menu-link"
+    [routerLink]="['/Customer-Contract-Review/dashboard']"
+    [queryParams]="{ stage: 'Completed' }"
+    routerLinkActive="active">
+
+    <i class="icon pi pi-check"></i>
+    <span *ngIf="!isCollapsed">Completed</span>
+  </a>
+</li>
+
+<li class="menu-item">
+  <a
+    class="menu-link"
+    [routerLink]="['/Customer-Contract-Review/dashboard']"
+    [queryParams]="{ stage: 'Rejected' }"
+    routerLinkActive="active">
+
+    <i class="icon pi pi-check"></i>
+    <span *ngIf="!isCollapsed">Rejected</span>
+  </a>
+</li>
+
+<li class="menu-item">
+  <a
+    class="menu-link"
+    [routerLink]="['/Customer-Contract-Review/dashboard']"
+    [queryParams]="{ stage: 'Approved for signing' }"
+    routerLinkActive="active">
+
+    <i class="icon pi pi-check"></i>
+    <span *ngIf="!isCollapsed">Approved for signing</span>
+  </a>
+</li>
+
+    </ul>
+
+  </div>
+
+</nav>

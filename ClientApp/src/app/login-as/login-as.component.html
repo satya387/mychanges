@@ -1,0 +1,56 @@
+<form>
+  <!--Html for loginas page-->
+    <div style="margin:25px;">
+      <form [formGroup]="assetForm" (keydown.enter)="$event.preventDefault()">
+        <div class="row">
+          <!-- Employee Name -->
+          <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+            <label for="employeeName" class="form-label main-heading">Employee Name</label><span> *</span>
+            <input 
+              type="text" 
+              matInput 
+              placeholder="Employee Name" 
+              class="form-control"
+              [formControl]="employeeNameControl" 
+              [matAutocomplete]="auto" 
+              (focus)="onFocus()">
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onEmployeeSelect($event.option.value)">
+                <mat-option *ngFor="let employee of employeeList" [value]="employee.value">
+                  {{ employee.value }}
+                </mat-option>
+              </mat-autocomplete>
+            <div *ngIf="assetForm.get('employeeName')?.invalid && (assetForm.get('employeeName')?.touched || assetForm.get('employeeName')?.dirty)">
+              <small class="text-danger">Employee Name is required.</small>
+            </div>
+            <div *ngIf="isLoading" class="isLoading">Loading...</div>
+          </div>
+      
+          <!-- Employee ID -->
+          <div class="my-2 col-lg-3 col-md-3 col-3 role-input">
+            <label for="employeeId" class="form-label main-heading">Employee Id</label><span> *</span>
+            <input id="employeeId" 
+            formControlName="employeeId" 
+            type="text" 
+           class="form-control" 
+           placeholder="Employee Id" 
+           readonly
+           />
+          </div>
+          <div class="col-md-4 form-group" style="padding-top: 32px;">
+            <button type="button" class="btn btn-info" (click)="clearSessionAndGetToken()">Login As</button>
+        </div>
+        </div>
+      </form>
+      
+    </div>
+   
+    <!-- <div class="container">
+    <app-tile [sectionList]="sectionList" [activeSectionList]="activeSectionList"
+		[isPersonalized]="isPersonalizedSections" (onChangeStatusAndOrder)="changeSectionStatusOrder($event)" [moduleSearchText]="moduleSearchText" [showOnlyBookmark]="showOnlyBookmark" [showBookmark]="showBookmark"></app-tile>
+    </div> -->
+    <div class="container" *ngIf="sectionList && activeSectionList">
+        <app-tile [sectionList]="sectionList" [activeSectionList]="activeSectionList"></app-tile>
+    </div> 
+
+    <!-- <app-report-viewer></app-report-viewer> -->
+</form>

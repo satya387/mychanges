@@ -1,0 +1,316 @@
+<div class="popup-container">
+  <div class="header">
+    <h2 class="add-text" id="Title">Add </h2>
+    <button class="cancel-button" (click)="onCloseClick()">&#10005;</button> <!-- X symbol for Cancel -->
+  </div>
+
+  <div class="popup">
+    <form [formGroup]="addCVAForm" style="   margin-left: 31px;margin-right: 20px;">
+      <div class="container-fluid" style="margin-top: 24px;margin-bottom: 54px">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="exampleFormControlSelect1" class="required">Account Name</label>
+              <select class="form-select project-detail" formControlName="accountName" (change)="onSelect($event)">
+                <option [ngValue]="null" selected>Select </option>
+                <option *ngFor="let item of accountList" [value]="item.mastCustID">{{item.mastcustName}}</option>
+              </select>
+              <span
+                *ngIf="(addCVAForm.controls['accountName'].invalid && (addCVAForm.controls['accountName'].dirty || addCVAForm.controls['accountName'].touched))">
+                <span
+                  *ngIf="addCVAForm.controls['accountName'].errors.required || !addCVAForm.controls['accountName'].value"
+                  class="text-danger"> Please
+                  Select Account </span>
+              </span>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="exampleFormControlSelect2" class="required">Project Name</label>
+              <select class="form-select project-detail" formControlName="projectName">
+                <option [ngValue]="null" selected>Select </option>
+                <option *ngFor="let item of ProjectList" [value]="item.projectId">{{item.projectName}}</option>
+              </select>
+              <span
+                *ngIf="(addCVAForm.controls['projectName'].invalid && (addCVAForm.controls['projectName'].dirty || addCVAForm.controls['projectName'].touched))">
+                <span
+                  *ngIf="addCVAForm.controls['projectName'].errors.required || !addCVAForm.controls['projectName'].value"
+                  class="text-danger"> Please
+                  Select Project </span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="exampleFormControlSelect2" class="required">Idea Title
+                <img src="../../../assets/images/tooltip.png" alt="Tooltip Icon" class="tooltipImage"
+                  #tooltip="matTooltip"
+                  [matTooltip]="ideaTitleTooltipText"
+                  matTooltipClass="mat-tooltip"
+                  matTooltipPosition="right">
+              </label>
+              <input type="text" class="form-control" id="exampleInputWebsite" formControlName="ideaTitle">
+              <span
+                *ngIf="(addCVAForm.controls['ideaTitle'].invalid && (addCVAForm.controls['ideaTitle'].dirty || addCVAForm.controls['ideaTitle'].touched))">
+                <span
+                  *ngIf="addCVAForm.controls['ideaTitle'].errors.required || !addCVAForm.controls['ideaTitle'].value"
+                  class="text-danger"> Please Enter Idea Title </span>
+              </span>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="exampleFormControlSelect1" class="required">CVA Category</label>
+              <select class="form-select project-detail" formControlName="cvaCategory">
+                <option [ngValue]="null" selected>Select </option>
+                <option *ngFor="let item of CategoryList" [value]="item.id">{{item.value}}</option>
+              </select>
+              <span
+                *ngIf="(addCVAForm.controls['cvaCategory'].invalid && (addCVAForm.controls['cvaCategory'].dirty || addCVAForm.controls['cvaCategory'].touched))">
+                <span
+                  *ngIf="addCVAForm.controls['cvaCategory'].errors.required || !addCVAForm.controls['cvaCategory'].value"
+                  class="text-danger"> Please Select CVA Category </span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1" class="required">Customer Need / Problem Statement
+                <img src="../../../assets/images/tooltip.png" alt="Tooltip Icon" class="tooltipImage"
+                  #tooltip="matTooltip"
+                  [matTooltip]="customerNeedTooltipText"
+                  matTooltipClass="mat-tooltip"
+                  matTooltipPosition="right">
+              </label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" formControlName="ideaDescription"
+                rows="3"></textarea>
+              <span
+                *ngIf="(addCVAForm.controls['ideaDescription'].invalid && (addCVAForm.controls['ideaDescription'].dirty || addCVAForm.controls['ideaDescription'].touched))">
+                <span
+                  *ngIf="addCVAForm.controls['ideaDescription'].errors.required || !addCVAForm.controls['ideaDescription'].value"
+                  class="text-danger"> Please Enter Customer Need / Problem Statement
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1" class="required">Your Idea / Proposed Solution
+                <img src="../../../assets/images/tooltip.png" alt="Tooltip Icon" class="tooltipImage"
+                  #tooltip="matTooltip"
+                  [matTooltip]="yourIdeaTooltipText"
+                  matTooltipClass="mat-tooltip"
+                  matTooltipPosition="right">
+              </label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" formControlName="solution_Proposed"
+                rows="3"></textarea>
+              <span *ngIf="f.solution_Proposed.errors?.required && f.solution_Proposed.touched" class="text-danger">
+                Please Enter Your Idea / Proposed Solution
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1" class="required">Key Benefits To Customer
+                <img src="../../../assets/images/tooltip.png" alt="Tooltip Icon" class="tooltipImage"
+                  #tooltip="matTooltip"
+                  [matTooltip]="keyBenefitsTooltipText"
+                  matTooltipClass="mat-tooltip"
+                  matTooltipPosition="right">
+              </label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" formControlName="potential_Benefits"
+                rows="3"></textarea>
+              <span
+                *ngIf="(addCVAForm.controls['potential_Benefits'].invalid && (addCVAForm.controls['potential_Benefits'].dirty || addCVAForm.controls['potential_Benefits'].touched))">
+                <span
+                  *ngIf="addCVAForm.controls['potential_Benefits'].errors.required || !addCVAForm.controls['potential_Benefits'].value"
+                  class="text-danger"> Please Enter Key Benefits To Customer
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1" class="required">Alignment With Customer Goals
+                <img src="../../../assets/images/tooltip.png" alt="Tooltip Icon" class="tooltipImage"
+                  #tooltip="matTooltip"
+                  [matTooltip]="alignmentTooltipText"
+                  matTooltipClass="mat-tooltip"
+                  matTooltipPosition="right">
+              </label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" formControlName="customerGoals"
+                rows="3"></textarea>
+              <span
+                *ngIf="(addCVAForm.controls['customerGoals'].invalid && (addCVAForm.controls['customerGoals'].dirty || addCVAForm.controls['customerGoals'].touched))">
+                <span
+                  *ngIf="addCVAForm.controls['customerGoals'].errors.required || !addCVAForm.controls['customerGoals'].value"
+                  class="text-danger"> Please Enter Alignment With Customer Goals
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1" class="required">Success Measures / Metrics 
+                <img src="../../../assets/images/tooltip.png" alt="Tooltip Icon" class="tooltipImage"
+                  #tooltip="matTooltip"
+                  [matTooltip]="successMeasuresTooltipText"
+                  matTooltipClass="mat-tooltip"
+                  matTooltipPosition="right">
+              </label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" formControlName="successMeasures"
+                rows="3"></textarea>
+              <span
+                *ngIf="(addCVAForm.controls['successMeasures'].invalid && (addCVAForm.controls['successMeasures'].dirty || addCVAForm.controls['successMeasures'].touched))">
+                <span
+                  *ngIf="addCVAForm.controls['successMeasures'].errors.required || !addCVAForm.controls['successMeasures'].value"
+                  class="text-danger"> Please Enter Success Measures / Metrics
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1" class="required">Customer Impact 
+                <img src="../../../assets/images/tooltip.png" alt="Tooltip Icon" class="tooltipImage"
+                  #tooltip="matTooltip"
+                  [matTooltip]="customerImpactTooltipText"
+                  matTooltipClass="mat-tooltip"
+                  matTooltipPosition="right">   
+              </label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" formControlName="customerImpact"
+                rows="3"></textarea>
+              <span
+                *ngIf="(addCVAForm.controls['customerImpact'].invalid && (addCVAForm.controls['customerImpact'].dirty || addCVAForm.controls['customerImpact'].touched))">
+                <span
+                  *ngIf="addCVAForm.controls['customerImpact'].errors.required || !addCVAForm.controls['customerImpact'].value"
+                  class="text-danger"> Please Enter Customer Impact
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="exampleInputName">Idea Logged By</label>
+              <input type="text" class="form-control" id="exampleInputWebsite" formControlName="ideaLoggedBy">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="exampleInputState">Implementation Owner</label>
+              <select class="form-select project-detail" formControlName="implemenataion_Owner">
+                <option value="0" selected>Select</option>
+                <option *ngFor="let item of Userlist" [value]="item.empEmidsID">{{item.commonName}}</option>
+              </select>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="exampleInputCity">Planned Completion Date</label>
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker" formControlName="pCD" placeholder="Choose a date"
+                  [formControl]="dateControl" (dateChange)="handleDateSelection($event)">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="exampleInputCity">Actual Completion Date</label>
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker1" formControlName="pACD" placeholder="Choose a date"
+                  [formControl]="dateControl1" (dateChange)="handleActualDateSelection($event)">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+          
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Implementation Plan
+                <img src="../../../assets/images/tooltip.png" alt="Tooltip Icon" class="tooltipImage"
+                  #tooltip="matTooltip"
+                  [matTooltip]="implementationPlanTooltipText"
+                  matTooltipClass="mat-tooltip"
+                  matTooltipPosition="right">
+              </label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" formControlName="actions_implemented"
+                rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="exampleInputPhone">Status</label>
+              <!-- <input type="text" class="form-control" id="exampleInputPhone" formControlName="status" placeholder="Status"> -->
+              <select class="form-select project-detail" formControlName="status">
+                <option *ngFor="let item of StatusList" [value]="item.processStatus">{{item.customerStatus}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="exampleInputWebsite">Savings ($)</label>
+              <input type="text" class="form-control" id="exampleInputWebsite" formControlName="savings"
+                placeholder="Savings ($)" pattern="[0-9]*">
+              <div *ngIf="addCVAForm.get('savings').dirty && addCVAForm.get('savings').invalid">
+                <span *ngIf="addCVAForm.get('savings').errors?.pattern" style="color: red;">Please Enter Numbers
+                  Only</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-top:3px;">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="exampleInputNotes">Customer communication
+                done through
+                QBR/MSR (Y/N)</label>
+              <label style="margin-left:10px;font-weight: 400px;margin-left:7px"><input type="radio"
+                  formControlName="ccD_QBR_MSR" value="yes"> Yes</label>
+              <label style="font-weight: 400px;margin-left:7px"><input type="radio" formControlName="ccD_QBR_MSR"
+                  value="no"> No</label> </div>
+          </div>
+          <div class="col-md-6" style="margin-top:18px;">
+            <div class="form-group">
+              <label for="exampleInputName">Idea Qualified By DH/DM </label>
+              <label style="font-weight: 400px;margin-left:7px"><input type="radio"
+                  formControlName="ideaQualifiedByDH_DM" value="yes"> Yes</label>
+              <label style="font-weight: 400px;margin-left:7px"><input type="radio"
+                  formControlName="ideaQualifiedByDH_DM" value="no"> No</label>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top: 17px;float:right;
+                background-color: #0D0357" (click)="onSubmitCVAForm()">Submit</button>
+        <!-- <button mat-button (click)="onCloseClick()" class="btn btn-primary" style="margin-left:3px">Close</button> -->
+
+      </div>
+    </form>
+  </div>
+</div>
